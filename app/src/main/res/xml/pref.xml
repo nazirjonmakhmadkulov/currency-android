@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:key="auto"
+        android:summary="@string/autoenable"
+        android:title="@string/autoupdate"
+        android:persistent="false"
+        android:disableDependentsState="false">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="update"
+        android:summary="@string/autoenable"
+        android:title="@string/polupdate">
+    </CheckBoxPreference>
+
+    <Preference
+        android:key="sort"
+        android:summary="sort"
+        android:title="Сортировка">
+    </Preference>
+
+    <Preference
+        android:key="checked"
+        android:summary="checked"
+        android:title="Для настройки виджет">
+    </Preference>
+</PreferenceScreen>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:id="@+id/item_dialog"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/img_flag"
+            android:src="@drawable/tajikistan"
+            android:layout_weight="0.3"
+            android:padding="15dp"
+            android:layout_width="0dp"
+            android:layout_height="80dp" />
+        <TextView
+            android:id="@+id/name_currency"
+            android:text="Name Currency"
+            android:layout_width="0dp"
+            android:padding="15dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:id="@+id/checbox"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+</LinearLayout>

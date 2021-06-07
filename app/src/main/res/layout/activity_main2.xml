@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/backgrond"
+    android:padding="10dp"
+
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/cpb_white"
+        android:layout_height="140dp">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/linearLayout3">
+        <ImageView
+            android:id="@+id/image1"
+            android:src="@drawable/tajikistan"
+            android:onClick="open_dialog_get"
+            android:layout_height="60dp"
+            android:layout_width="120dp" />
+        <TextView
+            android:text="TJS"
+            android:id="@+id/name1"
+            android:textColor="@color/text"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal|bold" />
+        <EditText
+            android:id="@+id/edit2"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:layout_height="match_parent"
+            android:inputType="number|numberDecimal" />
+        <TextView
+            android:id="@+id/nomin2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true">
+        <ImageView
+            android:id="@+id/image"
+            android:onClick="open_dialog"
+            android:src="@drawable/america"
+            android:layout_height="60dp"
+            android:layout_width="120dp" />
+        <TextView
+            android:text="USD"
+            android:layout_gravity="center"
+            android:id="@+id/name"
+            android:textColor="@color/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:textStyle="normal|bold" />
+        <EditText
+            android:id="@+id/edit1"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number|numberDecimal" />
+        <TextView
+            android:id="@+id/nomin1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/idval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="360dp"
+            android:maxHeight="420dp"
+            android:elevation="8dp"
+            android:id="@+id/barchar">
+        </com.github.mikephil.charting.charts.LineChart>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_gravity="center"
+        android:onClick="pereData"
+        android:layout_marginTop="18dp"
+        android:src="@mipmap/peremestit"
+        android:layout_width="30dp"
+        android:background="@color/btn_change"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/linearLayout3"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/clear"
+        android:layout_gravity="center"
+        android:src="@mipmap/clears"
+        android:background="@color/btn_clean"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_marginTop="24dp" />
+</RelativeLayout>

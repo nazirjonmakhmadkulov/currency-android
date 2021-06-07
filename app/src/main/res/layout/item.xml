@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/linear"
+    android:layout_height="100dp">
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/img"
+        android:foregroundGravity="center"
+        android:src="@drawable/tajikistan"
+        android:layout_width="70dp"
+        android:layout_height="50dp" />
+
+        <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="true"
+            android:id="@+id/linearLayout">
+            <TextView
+                android:id="@+id/pokupat"
+                android:text="Покупка: 932 TJS"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:id="@+id/prodaj"
+                android:textSize="16dp"
+                android:text="Продаж: 938 TJS"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/img"
+        android:layout_toEndOf="@+id/img">
+        <TextView
+            android:id="@+id/name"
+            android:text="TJS"
+            android:textSize="18dp"
+            android:layout_width="100dp"
+            android:gravity="center"
+            android:textColor="@color/text"
+            android:layout_height="wrap_content"
+            android:textStyle="normal|bold"
+            android:textAllCaps="true">
+        </TextView>
+        <TextView
+            android:id="@+id/nameCountry"
+            android:textSize="15dp"
+            android:text="TajikistanTajikistanTajikistan"
+            android:textColor="@color/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

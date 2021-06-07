@@ -1,0 +1,111 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:id="@+id/linearWidget"
+    android:padding="@dimen/widget_margin">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/linearWidgetclick"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/appwidget_image"
+            android:src="@drawable/america"
+            android:layout_width="75dp"
+            android:layout_height="55dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/appwidget_textnominal"
+                android:text="1"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/appwidget_textCode"
+                android:text="1"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/appwidget_imagetj"
+                android:src="@drawable/tajikistan"
+                android:layout_width="75dp"
+                android:layout_height="55dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/appwidget_textnominaltj"
+                    android:text="1"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/appwidget_textnominalCode"
+                    android:text="1"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/datet"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:layout_marginLeft="10dp"
+                android:layout_width="40dp"
+                android:layout_height="36dp"
+                android:id="@+id/updatewidget"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:background="@drawable/refreshs" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

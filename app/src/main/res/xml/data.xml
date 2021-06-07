@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<valcurs Date="2018-06-08" name="Котировки валют устанавливаемые ежедневно">
+    <valute ID="840">
+        <charcode>USD</charcode>
+        <nominal>1</nominal>
+        <name>Доллар США</name>
+        <value>9.0562</value>
+    </valute>
+    <valute ID="978">
+        <charcode>EUR</charcode>
+        <nominal>1</nominal>
+        <name>ЕВРО</name>
+        <value>10.7126</value>
+    </valute>
+    <valute ID="960">
+        <charcode>XDR</charcode>
+        <nominal>1</nominal>
+        <name>СДР</name>
+        <value>12.8621</value>
+    </valute>
+    <valute ID="156">
+        <charcode>CNY</charcode>
+        <nominal>1</nominal>
+        <name>Китайский юань</name>
+        <value>1.4162</value>
+    </valute>
+    <valute ID="756">
+        <charcode>CHF</charcode>
+        <nominal>1</nominal>
+        <name>Швейцарский франк</name>
+        <value>9.2250</value>
+    </valute>
+    <valute ID="810">
+        <charcode>RUB</charcode>
+        <nominal>1</nominal>
+        <name>Российский рубль</name>
+        <value>0.1460</value>
+    </valute>
+    <valute ID="860">
+        <charcode>UZS</charcode>
+        <nominal>100</nominal>
+        <name>Узбекский Сум</name>
+        <value>0.1135</value>
+    </valute>
+    <valute ID="417">
+        <charcode>KGS</charcode>
+        <nominal>10</nominal>
+        <name>Киргизский сом</name>
+        <value>1.3241</value>
+    </valute>
+    <valute ID="398">
+        <charcode>KZT</charcode>
+        <nominal>10</nominal>
+        <name>Казахский тенге</name>
+        <value>0.2719</value>
+    </valute>
+    <valute ID="933">
+        <charcode>BYN</charcode>
+        <nominal>1</nominal>
+        <name>Новый белорусский рубль</name>
+        <value>4.5406</value>
+    </valute>
+    <valute ID="364">
+        <charcode>IRR</charcode>
+        <nominal>1000</nominal>
+        <name>Иранский риал</name>
+        <value>0.2147</value>
+    </valute>
+    <valute ID="971">
+        <charcode>AFN</charcode>
+        <nominal>10</nominal>
+        <name>Афганский афгани</name>
+        <value>1.2578</value>
+    </valute>
+    <valute ID="586">
+        <charcode>PKR</charcode>
+        <nominal>10</nominal>
+        <name>Пакистанская рупия</name>
+        <value>0.7807</value>
+    </valute>
+    <valute ID="949">
+        <charcode>TRY</charcode>
+        <nominal>1</nominal>
+        <name>Турецкая лира</name>
+        <value>2.0231</value>
+    </valute>
+    <valute ID="934">
+        <charcode>TMT</charcode>
+        <nominal>1</nominal>
+        <name>Новый туркменский манат</name>
+        <value>2.5875</value>
+    </valute>
+    <valute ID="826">
+        <charcode>GBP</charcode>
+        <nominal>1</nominal>
+        <name>Английский фунт стерлингов</name>
+        <value>12.1371</value>
+    </valute>
+    <valute ID="36">
+        <charcode>AUD</charcode>
+        <nominal>1</nominal>
+        <name>Австралийский доллар</name>
+        <value>6.9316</value>
+    </valute>
+    <valute ID="208">
+        <charcode>DKK</charcode>
+        <nominal>1</nominal>
+        <name>Датская крона</name>
+        <value>1.4380</value>
+    </valute>
+    <valute ID="352">
+        <charcode>ISK</charcode>
+        <nominal>10</nominal>
+        <name>Исландская крона</name>
+        <value>0.8606</value>
+    </valute>
+    <valute ID="124">
+        <charcode>CAD</charcode>
+        <nominal>1</nominal>
+        <name>Канадский доллар</name>
+        <value>6.9910</value>
+    </valute>
+    <valute ID="414">
+        <charcode>KWD</charcode>
+        <nominal>1</nominal>
+        <name>Кувейтский динар</name>
+        <value>29.9775</value>
+    </valute>
+    <valute ID="578">
+        <charcode>NOK</charcode>
+        <nominal>1</nominal>
+        <name>Норвежская крона</name>
+        <value>1.1272</value>
+    </valute>
+    <valute ID="702">
+        <charcode>SGD</charcode>
+        <nominal>1</nominal>
+        <name>Сингапурский доллар</name>
+        <value>6.7995</value>
+    </valute>
+    <valute ID="752">
+        <charcode>SEK</charcode>
+        <nominal>1</nominal>
+        <name>Шведская крона</name>
+        <value>1.0448</value>
+    </valute>
+    <valute ID="392">
+        <charcode>JPY</charcode>
+        <nominal>10</nominal>
+        <name>Японская йена</name>
+        <value>0.8230</value>
+    </valute>
+    <valute ID="944">
+        <charcode>AZN</charcode>
+        <nominal>1</nominal>
+        <name>Азербайджанский манат</name>
+        <value>5.3272</value>
+    </valute>
+    <valute ID="51">
+        <charcode>AMD</charcode>
+        <nominal>100</nominal>
+        <name>Армянский драм</name>
+        <value>1.8738</value>
+    </valute>
+    <valute ID="981">
+        <charcode>GEL</charcode>
+        <nominal>1</nominal>
+        <name>Грузинский лари</name>
+        <value>3.7018</value>
+    </valute>
+    <valute ID="498">
+        <charcode>MDL</charcode>
+        <nominal>1</nominal>
+        <name>Молдавский лей</name>
+        <value>0.5363</value>
+    </valute>
+    <valute ID="980">
+        <charcode>UAH</charcode>
+        <nominal>1</nominal>
+        <name>Украинская гривна</name>
+        <value>0.3461</value>
+    </valute>
+    <valute ID="784">
+        <charcode>AED</charcode>
+        <nominal>1</nominal>
+        <name>Дирхам  ОАЭ</name>
+        <value>2.4656</value>
+    </valute>
+    <valute ID="682">
+        <charcode>SAR</charcode>
+        <nominal>1</nominal>
+        <name>Риал Саудовской Аравии</name>
+        <value>2.4148</value>
+    </valute>
+    <valute ID="356">
+        <charcode>INR</charcode>
+        <nominal>10</nominal>
+        <name>Индийская рупия</name>
+        <value>1.3493</value>
+    </valute>
+    <valute ID="985">
+        <charcode>PLN</charcode>
+        <nominal>1</nominal>
+        <name>Польский злотый</name>
+        <value>2.5139</value>
+    </valute>
+    <valute ID="458">
+        <charcode>MYR</charcode>
+        <nominal>1</nominal>
+        <name>Малайзийский ринггит</name>
+        <value>2.2766</value>
+    </valute>
+    <valute ID="764">
+        <charcode>THB</charcode>
+        <nominal>1</nominal>
+        <name>Таиландский бат</name>
+        <value>0.2834</value>
+    </valute>
+</valcurs>
