@@ -128,9 +128,6 @@ public class Main2Activity extends AppCompatActivity implements CustomAdapter.Cl
             if (String.valueOf(user.getCharcode()).equals("IRR")) {
                 icon.setImageResource(R.drawable.iran);//not
             }
-            if (String.valueOf(user.getCharcode()).equals("AFN")) {
-                icon.setImageResource(R.drawable.afghanistan);//not
-            }
             if (String.valueOf(user.getCharcode()).equals("PKR")) {
                 icon.setImageResource(R.drawable.pakistan);
             }
@@ -391,9 +388,6 @@ public class Main2Activity extends AppCompatActivity implements CustomAdapter.Cl
             if (charcode.getText().equals("IRR")) {
                 icon.setImageResource(R.drawable.iran);//not
             }
-            if (charcode.getText().equals("AFN")) {
-                icon.setImageResource(R.drawable.afghanistan);//not
-            }
             if (charcode.getText().equals("PKR")) {
                 icon.setImageResource(R.drawable.pakistan);
             }
@@ -503,9 +497,6 @@ public class Main2Activity extends AppCompatActivity implements CustomAdapter.Cl
             }
             if (charcode2.getText().equals("IRR")) {
                 icon2.setImageResource(R.drawable.iran);//not
-            }
-            if (charcode2.getText().equals("AFN")) {
-                icon2.setImageResource(R.drawable.afghanistan);//not
             }
             if (charcode2.getText().equals("PKR")) {
                 icon2.setImageResource(R.drawable.pakistan);
@@ -626,9 +617,6 @@ public class Main2Activity extends AppCompatActivity implements CustomAdapter.Cl
             if (charcode.getText().equals("IRR")) {
                 icon.setImageResource(R.drawable.iran);//not
             }
-            if (charcode.getText().equals("AFN")) {
-                icon.setImageResource(R.drawable.afghanistan);//not
-            }
             if (charcode.getText().equals("PKR")) {
                 icon.setImageResource(R.drawable.pakistan);
             }
@@ -736,9 +724,6 @@ public class Main2Activity extends AppCompatActivity implements CustomAdapter.Cl
             }
             if (charcode2.getText().equals("IRR")) {
                 icon2.setImageResource(R.drawable.iran);//not
-            }
-            if (charcode2.getText().equals("AFN")) {
-                icon2.setImageResource(R.drawable.afghanistan);//not
             }
             if (charcode2.getText().equals("PKR")) {
                 icon2.setImageResource(R.drawable.pakistan);
@@ -863,9 +848,6 @@ public class Main2Activity extends AppCompatActivity implements CustomAdapter.Cl
             if (charcode.getText().equals("IRR")) {
                 icon.setImageResource(R.drawable.iran);//not
             }
-            if (charcode.getText().equals("AFN")) {
-                icon.setImageResource(R.drawable.afghanistan);//not
-            }
             if (charcode.getText().equals("PKR")) {
                 icon.setImageResource(R.drawable.pakistan);
             }
@@ -974,9 +956,6 @@ public class Main2Activity extends AppCompatActivity implements CustomAdapter.Cl
             }
             if (charcode2.getText().equals("IRR")) {
                 icon2.setImageResource(R.drawable.iran);//not
-            }
-            if (charcode2.getText().equals("AFN")) {
-                icon2.setImageResource(R.drawable.afghanistan);//not
             }
             if (charcode2.getText().equals("PKR")) {
                 icon2.setImageResource(R.drawable.pakistan);
@@ -1092,9 +1071,6 @@ public class Main2Activity extends AppCompatActivity implements CustomAdapter.Cl
                 }
                 if (String.valueOf(user.getCharcode()).equals("IRR")) {
                     icon.setImageResource(R.drawable.iran);//not
-                }
-                if (String.valueOf(user.getCharcode()).equals("AFN")) {
-                    icon.setImageResource(R.drawable.afghanistan);//not
                 }
                 if (String.valueOf(user.getCharcode()).equals("PKR")) {
                     icon.setImageResource(R.drawable.pakistan);
@@ -1227,9 +1203,6 @@ public class Main2Activity extends AppCompatActivity implements CustomAdapter.Cl
                 }
                 if (String.valueOf(user.getCharcode()).equals("IRR")) {
                     icon2.setImageResource(R.drawable.iran);//not
-                }
-                if (String.valueOf(user.getCharcode()).equals("AFN")) {
-                    icon2.setImageResource(R.drawable.afghanistan);//not
                 }
                 if (String.valueOf(user.getCharcode()).equals("PKR")) {
                     icon2.setImageResource(R.drawable.pakistan);

@@ -40,8 +40,7 @@ import java.util.Calendar;
 public class SendXmlRequest {
 
     final String CON = "Connection";
-    private String urlServerIn = "";//http://192.168.1.47/iclinic/api/";
-    //private String urlServerIn = "http://localhost/";
+    private String urlServerIn = "";
     Setting setting;
     private boolean Debuger = true;
     Context context;
@@ -115,14 +114,7 @@ public class SendXmlRequest {
         @SuppressLint({"NewApi", "LocalSuppress"}) DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String datef = df.format(Calendar.getInstance().getTime());
         urlServerIn = "http://nbt.tj/ru/kurs/export_xml.php?date=" + datef + "&export=xmlout";
-/*
-        String lang;
-        lang = setting.getLang();
-        if (lang.equals("ru")){
-            urlServerIn = "http://nbt.tj/ru/kurs/export_xml.php?date=" + datef + "&export=xmlout";
-        }else if (lang.equals("en")){
-            urlServerIn = "http://nbt.tj/ru/kurs/export_xml.php?date=" + datef + "&export=xmlout";
-        }*/
+
         String respData = "";
 
         HttpParams httpParameters = new BasicHttpParams();
