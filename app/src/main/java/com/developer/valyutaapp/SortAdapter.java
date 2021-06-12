@@ -90,9 +90,6 @@ public class SortAdapter extends BaseAdapter {
         if (String.valueOf(objects.get(i).getCharcode()).equals("IRR")) {
             icon.setImageResource(R.drawable.iran);//not
         }
-        if (String.valueOf(objects.get(i).getCharcode()).equals("AFN")) {
-            icon.setImageResource(R.drawable.afghanistan);//not
-        }
         if (String.valueOf(objects.get(i).getCharcode()).equals("PKR")) {
             icon.setImageResource(R.drawable.pakistan);
         }
