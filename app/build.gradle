@@ -57,7 +57,6 @@ dependencies {
     //Circle Image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-
     //Widget
     implementation 'io.github.pilgr:paperdb:2.7.1'
 }
