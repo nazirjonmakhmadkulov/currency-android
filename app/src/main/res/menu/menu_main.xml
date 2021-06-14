@@ -15,8 +15,8 @@
         app:showAsAction="always"
         android:icon="@mipmap/setting"/>
 
-    <item android:id="@+id/about"
-        android:title="About"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_about"/>
+<!--    <item android:id="@+id/about"-->
+<!--        android:title="About"-->
+<!--        app:showAsAction="always"-->
+<!--        android:icon="@drawable/ic_about"/>-->
 </menu>

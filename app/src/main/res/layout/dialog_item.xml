@@ -3,38 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:id="@+id/itemCard"
+    android:id="@+id/item_dialog"
+    android:layout_margin="10dp"
     app:cardCornerRadius="8dp"
-    android:layout_margin="8dp"
-    android:background="@color/colorback"
     android:layout_height="wrap_content">
     <LinearLayout
         android:orientation="horizontal"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/iconValute"
+            android:id="@+id/img_flag"
             android:src="@drawable/tajikistan"
             android:layout_weight="0.2"
             android:padding="15dp"
-            android:layout_gravity="center"
             android:layout_width="0dp"
             android:layout_height="80dp" />
         <TextView
-            android:id="@+id/nameValute"
-            android:text="Name Valute"
+            android:id="@+id/name_currency"
+            android:text="Name Currency"
             android:layout_width="0dp"
             android:padding="15dp"
-            android:layout_gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_weight="0.5"
-            android:layout_height="wrap_content" />
-        <CheckBox
-            android:id="@+id/checkSort"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
