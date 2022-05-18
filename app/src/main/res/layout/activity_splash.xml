@@ -10,13 +10,13 @@
     android:background="@color/backgroun"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ui.main.MainActivity">
+
     <ImageView
         android:id="@+id/impl"
-        android:src="@drawable/iconbt"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerInParent="true"
+        android:src="@drawable/iconbt" />
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"

@@ -16,17 +16,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Valyuta">
+        <activity
+            android:name=".ui.splash.SplashScreenActivity"
+            android:exported="false" />
+
         <service
             android:name=".service.widget.WidgetService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity android:name=".ui.widget.WidgetActivity" />
         <activity android:name=".ui.sort.SortActivity" />
         <activity android:name=".ui.valute.ValuteActivity" />
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.setting.SettingActivity" />
-        <activity android:name=".ui.splash.SplashActivity" android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,6 +43,7 @@
 
         <receiver
             android:name=".service.widget.AppWidget"
+            android:exported="true"
             tools:ignore="Instantiatable,MissingClass">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
