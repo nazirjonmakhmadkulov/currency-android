@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.developer.valyutaapp.di.modules.*
-import com.developer.valyutaapp.utils.SharedPreference
+import com.developer.valyutaapp.core.database.SharedPreference
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -23,9 +23,11 @@ class CurrencyApp : Application() {
                     useCasesModule,
                     viewModelModule,
                     connectionInternet,
+                    dispatcherProviders,
+                    remoteDataSources,
                     repositoryModule,
                     netModule,
-                    apiModule,
+                    apiModules,
                     databaseModule,
                     sharedPreference
                 )

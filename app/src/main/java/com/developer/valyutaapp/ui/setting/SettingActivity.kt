@@ -6,7 +6,6 @@ import com.developer.valyutaapp.R
 import android.content.Intent
 import com.developer.valyutaapp.ui.sort.SortActivity
 import com.developer.valyutaapp.ui.widget.WidgetActivity
-import com.developer.valyutaapp.service.auto.AutoService
 import android.widget.LinearLayout
 import android.view.LayoutInflater
 import android.os.Build
@@ -15,7 +14,7 @@ import android.preference.Preference
 import android.preference.SwitchPreference
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import com.developer.valyutaapp.utils.SharedPreference
+import com.developer.valyutaapp.core.database.SharedPreference
 
 class SettingActivity : PreferenceActivity() {
     var autoUpdate: SwitchPreference? = null

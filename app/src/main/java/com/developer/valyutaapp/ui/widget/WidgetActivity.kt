@@ -1,79 +1,58 @@
 package com.developer.valyutaapp.ui.widget
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
-import com.developer.valyutaapp.model.Valute
-import com.developer.valyutaapp.adapter.DialogAdapter
-import butterknife.BindView
+import com.developer.valyutaapp.domain.entities.Valute
+import com.developer.valyutaapp.ui.adapter.DialogAdapter
 import com.developer.valyutaapp.R
 import android.os.Bundle
-import butterknife.ButterKnife
 import android.util.Log
 import com.developer.valyutaapp.utils.ImageResource
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.developer.valyutaapp.databinding.ActivityWidgetBinding
 import com.developer.valyutaapp.utils.Utils
 import io.paperdb.Paper
 import java.text.DecimalFormat
 import java.util.ArrayList
 
-class WidgetActivity : AppCompatActivity(), WidgetViewInterface, DialogAdapter.ClickListener {
+class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewInterface, DialogAdapter.ClickListener {
+
+    private val viewBinding by viewBinding(ActivityWidgetBinding::bind, R.id.container)
+
     var alertdialog: AlertDialog.Builder? = null
     var dialog: AlertDialog? = null
     var valutes: ArrayList<Valute>? = null
     private var valuteId = 840
     var adapter: DialogAdapter? = null
 
-    @BindView(R.id.iconValute1)
-    var iconValute1: ImageView? = null
-
-    @BindView(R.id.iconValute2)
-    var iconValute2: ImageView? = null
-
-    @BindView(R.id.tvNominal)
-    var tvNominal: TextView? = null
-
-    @BindView(R.id.tvValue)
-    var tvValue: TextView? = null
-
-    @BindView(R.id.name1)
-    var code1: TextView? = null
-
-    @BindView(R.id.name2)
-    var code2: TextView? = null
-
-    @BindView(R.id.saveWidget)
-    var saveWidget: Button? = null
-
-    @BindView(R.id.progressBar)
-    var progressBar: ProgressBar? = null
     private var widgetPresenter: WidgetPresenter? = null
     private val TAG = "WidgetPresenter"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_widget)
-        ButterKnife.bind(this)
         valutes = ArrayList()
         setupMVP()
         valuteById
         valuteList
-        saveWidget!!.setOnClickListener {
+        viewBinding.saveWidget.setOnClickListener {
             val val_dec: String
             val decimalFormat = DecimalFormat("#.####")
-            val decimal = decimalFormat.format(tvValue!!.text.toString().toDouble())
-            val_dec = if (tvNominal!!.text.toString().length < 3) {
-                decimalFormat.format(tvNominal!!.text.toString().toDouble())
+            val decimal = decimalFormat.format(viewBinding.tvValue.text.toString().toDouble())
+            val_dec = if (viewBinding.tvNominal.text.toString().length < 3) {
+                decimalFormat.format(viewBinding.tvNominal.text.toString().toDouble())
             } else {
-                tvNominal!!.text.toString()
+                viewBinding.tvNominal.text.toString()
             }
             Paper.init(this@WidgetActivity)
-            Paper.book().write("charcode", code1!!.text)
-            Log.d("widget", " = " + code1!!.text)
-            Paper.book().write("charcode2", code2!!.text)
-            Log.d("widget", " = " + code2!!.text)
+            Paper.book().write("charcode", viewBinding.name1.text)
+            Log.d("widget", " = " + viewBinding.name1.text)
+            Paper.book().write("charcode2", viewBinding.name2.text)
+            Log.d("widget", " = " + viewBinding.name2.text)
             Paper.book().write("nominal", val_dec)
-            Log.d("widget", " = " + tvNominal!!.text)
+            Log.d("widget", " = " + viewBinding.tvNominal.text)
             Paper.book().write("value", decimal.toString())
             Log.d("widget", " = $decimal")
             Paper.book().write("dat", Utils.date)
@@ -90,42 +69,43 @@ class WidgetActivity : AppCompatActivity(), WidgetViewInterface, DialogAdapter.C
     }
 
     private val valuteById: Unit
-        private get() {
+        get() {
             widgetPresenter!!.getValuteById(valuteId)
         }
     private val valuteList: Unit
-        private get() {
+        get() {
             widgetPresenter!!.valutes()
         }
 
-    override fun showToast(str: String) {
-        Toast.makeText(this@WidgetActivity, str, Toast.LENGTH_LONG).show()
+    override fun showToast(s: String) {
+        Toast.makeText(this@WidgetActivity, s, Toast.LENGTH_LONG).show()
     }
 
     override fun showProgressBar() {
-        progressBar!!.visibility = View.VISIBLE
+        viewBinding.progressBar.visibility = View.VISIBLE
     }
 
     override fun hideProgressBar() {
-        progressBar!!.visibility = View.GONE
+        viewBinding.progressBar.visibility = View.GONE
     }
 
+    @SuppressLint("SetTextI18n")
     override fun displayValuteWithId(valute: Valute) {
         val bt = ImageResource.getImageRes(this, valute.charCode.toString())
-        iconValute1!!.setImageBitmap(bt)
-        tvNominal!!.text = java.lang.String.valueOf(valute.nominal)
-        tvValue!!.text = valute.value.toString()
-        code1!!.text = valute.charCode.toString()
-        code2!!.text = "TJS"
-        iconValute2!!.setImageResource(R.drawable.tajikistan)
+        viewBinding.iconValute1.setImageBitmap(bt)
+        viewBinding.tvNominal.text = java.lang.String.valueOf(valute.nominal)
+        viewBinding.tvValue.text = valute.value.toString()
+        viewBinding.name1.text = valute.charCode.toString()
+        viewBinding.name2.text = "TJS"
+        viewBinding.iconValute2.setImageResource(R.drawable.tajikistan)
     }
 
     override fun displayValutes(valute: List<Valute>) {
         valutes!!.addAll(valute)
     }
 
-    override fun displayError(e: String) {
-        showToast(e)
+    override fun displayError(s: String) {
+        showToast(s)
     }
 
     fun dialogValutes(v: View?) {
@@ -143,7 +123,7 @@ class WidgetActivity : AppCompatActivity(), WidgetViewInterface, DialogAdapter.C
     }
 
     override fun itemClicked(item: Valute?, position: Int) {
-        valuteId = item!!.id.toInt()
+        valuteId = item!!.id
         dialog!!.hide()
         valuteById
     }

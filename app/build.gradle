@@ -68,7 +68,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation "com.squareup.moshi:moshi:1.13.0"
     implementation 'com.squareup.retrofit2:converter-simplexml:2.9.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
 
 
     // Koin main features for Android
@@ -89,10 +91,6 @@ dependencies {
     //Rxjava
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
-
-    //Butter Knife
-    implementation 'com.jakewharton:butterknife:10.2.3'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
     //Circle Image
     implementation 'de.hdodenhof:circleimageview:3.1.0'

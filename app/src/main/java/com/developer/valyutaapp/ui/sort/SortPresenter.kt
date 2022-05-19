@@ -1,14 +1,9 @@
 package com.developer.valyutaapp.ui.sort
 
 import android.content.Context
-import com.developer.valyutaapp.ui.sort.SortViewInterface
-import com.developer.valyutaapp.ui.sort.SortPresenterInterface
 import com.developer.valyutaapp.data.local_data_source.repository.ValuteRespository
 import io.reactivex.disposables.CompositeDisposable
-import com.developer.valyutaapp.model.Valute
-import io.reactivex.ObservableOnSubscribe
-import kotlin.Throws
-import io.reactivex.ObservableEmitter
+import com.developer.valyutaapp.domain.entities.Valute
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import android.widget.Toast

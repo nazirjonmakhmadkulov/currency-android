@@ -1,6 +1,6 @@
 package com.developer.valyutaapp.ui.main
 
-import com.developer.valyutaapp.model.Valute
+import com.developer.valyutaapp.domain.entities.Valute
 
 interface MainViewInterface {
     fun showToast(s: String?)

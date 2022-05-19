@@ -2,21 +2,21 @@ package com.developer.valyutaapp.ui.sort
 
 import androidx.appcompat.app.AppCompatActivity
 import com.developer.valyutaapp.R
-import com.developer.valyutaapp.adapter.SortAdapter
-import com.developer.valyutaapp.data.local_data_source.repository.ValuteRespository
+import com.developer.valyutaapp.ui.adapter.SortAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.developer.valyutaapp.data.local_data_source.database.ValuteDatabase
-import com.developer.valyutaapp.data.local_data_source.database.ValuteDataSource
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.developer.valyutaapp.model.Valute
+import com.developer.valyutaapp.domain.entities.Valute
 
 class SortActivity : AppCompatActivity(R.layout.activity_sort), SortViewInterface,
     SortAdapter.ClickListener {
-    private val viewBinding by viewBinding(com.developer.valyutaapp.databinding.ActivitySortBinding::bind, R.id.container)
+    private val viewBinding by viewBinding(
+        com.developer.valyutaapp.databinding.ActivitySortBinding::bind,
+        R.id.container
+    )
     private val TAG = "SortActivity"
     var adapter: SortAdapter? = null
     var sortPresenter: SortPresenter? = null

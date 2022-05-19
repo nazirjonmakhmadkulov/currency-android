@@ -2,15 +2,12 @@ package com.developer.valyutaapp.ui.main
 
 import android.content.Context
 import android.util.Log
-import com.developer.valyutaapp.data.local_data_source.repository.ValuteRespository
 import io.reactivex.disposables.CompositeDisposable
-import com.developer.valyutaapp.model.ValCurs
-import com.developer.valyutaapp.data.remote_data_source.NetworkInterfaces
+import com.developer.valyutaapp.domain.entities.ValCurs
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import android.widget.Toast
-import com.developer.valyutaapp.data.remote_data_source.NetworkClient
 import com.developer.valyutaapp.utils.Utils
 import io.reactivex.Observable
 

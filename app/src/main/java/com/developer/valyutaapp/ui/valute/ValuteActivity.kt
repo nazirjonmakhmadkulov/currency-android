@@ -1,8 +1,8 @@
 package com.developer.valyutaapp.ui.valute
 
 import androidx.appcompat.app.AppCompatActivity
-import com.developer.valyutaapp.model.Valute
-import com.developer.valyutaapp.adapter.DialogAdapter
+import com.developer.valyutaapp.domain.entities.Valute
+import com.developer.valyutaapp.ui.adapter.DialogAdapter
 import android.os.Bundle
 import android.text.TextWatcher
 import android.text.Editable
