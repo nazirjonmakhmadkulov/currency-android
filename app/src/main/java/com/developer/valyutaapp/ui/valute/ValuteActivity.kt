@@ -1,5 +1,6 @@
 package com.developer.valyutaapp.ui.valute
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.adapter.DialogAdapter
@@ -22,15 +23,14 @@ class ValuteActivity : AppCompatActivity(R.layout.activity_valute), ValuteViewIn
 
     private val viewBinding by viewBinding(ActivityValuteBinding::bind, R.id.container)
 
-    private var builder: AlertDialog.Builder? = null
     var dialog: AlertDialog? = null
     var valutes: ArrayList<Valute>? = null
     private var valuteId: Long = 0
     var adapter: DialogAdapter? = null
 
     //LineChart chart;
-    private var valutePresenter: ValutePresenter? = null
-    private val TAG = "ValuteActivity"
+    //private var valutePresenter: ValutePresenter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -73,10 +73,9 @@ class ValuteActivity : AppCompatActivity(R.layout.activity_valute), ValuteViewIn
                     if (editable.isEmpty()) {
                         return
                     } else if (viewBinding.name1.text == "TJS") {
-                        var sum = 0.0
                         nominal = viewBinding.name1.text.toString().toDouble()
-                        sum = Utils.mathNominal(nominal, value)
-                        Log.d("sum", nominal.toString() + "*" + value + " = " + sum)
+                        val sum = Utils.mathNominal(nominal, value)
+                        Log.d("sum", "$nominal*$value = $sum")
                         viewBinding.edit2.setText(sum.toString())
                     }
                 }
@@ -96,11 +95,10 @@ class ValuteActivity : AppCompatActivity(R.layout.activity_valute), ValuteViewIn
                     if (editable.isEmpty()) {
                         return
                     } else if (viewBinding.name2.text == "TJS") {
-                        var sum = 0.0
                         val valueDynamic: Double = viewBinding.name2.text.toString().toDouble()
-                        sum = Utils.mathValue(nominal, value, valueDynamic)
+                        val sum = Utils.mathValue(nominal, value, valueDynamic)
                         Log.d("sum", "$nominal*$value = $sum")
-                        viewBinding.edit1!!.setText(sum.toString())
+                        viewBinding.edit1.setText(sum.toString())
                     }
                 }
             })
@@ -108,20 +106,20 @@ class ValuteActivity : AppCompatActivity(R.layout.activity_valute), ValuteViewIn
     }
 
     private fun setupMVP() {
-        valutePresenter = ValutePresenter(this.applicationContext, this)
+        //valutePresenter = ValutePresenter(this.applicationContext, this)
     }
 
     private val valuteById: Unit
         get() {
-            valutePresenter!!.getValuteById(valuteId.toInt())
+           // valutePresenter!!.getValuteById(valuteId.toInt())
         }
     private val valuteList: Unit
         get() {
-            valutePresenter!!.valutes()
+            //valutePresenter!!.valutes()
         }
 
-    override fun showToast(str: String) {
-        Toast.makeText(this@ValuteActivity, str, Toast.LENGTH_LONG).show()
+    override fun showToast(s: String) {
+        Toast.makeText(this@ValuteActivity, s, Toast.LENGTH_LONG).show()
     }
 
     override fun showProgressBar() {
@@ -132,13 +130,14 @@ class ValuteActivity : AppCompatActivity(R.layout.activity_valute), ValuteViewIn
         viewBinding.progressBar.visibility = View.GONE
     }
 
+    @SuppressLint("SetTextI18n")
     override fun displayValuteWithId(valute: Valute) {
-        val bt = ImageResource.getImageRes(this, valute.charCode.toString())
+        val bt = ImageResource.getImageRes(this, valute.charCode)
         viewBinding.iconValute1.setImageBitmap(bt)
-        value = valute.value!!.toDouble()
+        value = valute.value.toDouble()
         viewBinding.edit1.setText(java.lang.String.valueOf(valute.nominal))
-        viewBinding.edit2.setText(valute.value.toString())
-        viewBinding.name1.text = valute.charCode.toString()
+        viewBinding.edit2.setText(valute.value)
+        viewBinding.name1.text = valute.charCode
         viewBinding.name2.text = "TJS"
         viewBinding.iconValute2.setImageResource(R.drawable.tajikistan)
     }
@@ -147,21 +146,21 @@ class ValuteActivity : AppCompatActivity(R.layout.activity_valute), ValuteViewIn
         valutes!!.addAll(valute)
     }
 
-    override fun displayError(e: String) {
-        showToast(e)
+    override fun displayError(s: String) {
+        showToast(s)
     }
 
     fun dialogValutes(v: View?) {
-        builder = AlertDialog.Builder(this)
-        builder!!.setTitle("Все валюты")
+       val builder = AlertDialog.Builder(this)
+        builder.setTitle("Все валюты")
         val inflater = this.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val row = inflater.inflate(R.layout.row_item, null)
         val listView = row.findViewById<View>(R.id.list_dialog) as ListView
         adapter = DialogAdapter(this, valutes!!)
         adapter!!.setClickListener(this)
         listView.adapter = adapter
-        builder!!.setView(row)
-        dialog = builder!!.create()
+        builder.setView(row)
+        dialog = builder.create()
         dialog!!.show()
     }
 

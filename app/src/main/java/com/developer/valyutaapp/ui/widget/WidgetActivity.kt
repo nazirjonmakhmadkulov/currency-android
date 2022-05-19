@@ -29,7 +29,6 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
     private var valuteId = 840
     var adapter: DialogAdapter? = null
 
-    private var widgetPresenter: WidgetPresenter? = null
     private val TAG = "WidgetPresenter"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,16 +64,16 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
     }
 
     private fun setupMVP() {
-        widgetPresenter = WidgetPresenter(this.applicationContext, this)
+        //widgetPresenter = WidgetPresenter(this.applicationContext, this)
     }
 
     private val valuteById: Unit
         get() {
-            widgetPresenter!!.getValuteById(valuteId)
+            //widgetPresenter!!.getValuteById(valuteId)
         }
     private val valuteList: Unit
         get() {
-            widgetPresenter!!.valutes()
+           // widgetPresenter!!.valutes()
         }
 
     override fun showToast(s: String) {

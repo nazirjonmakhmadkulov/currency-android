@@ -32,12 +32,12 @@ open class AppWidget : AppWidgetProvider() {
         val views = RemoteViews(context.packageName, R.layout.app_widget)
         views.setOnClickPendingIntent(
             R.id.updatewidget,
-            getPendingUpdateIntent(context, ACTION_UPDATE_CLICK)
+            getPendingUpdateIntent(context)
         )
         appWidgetManager.updateAppWidget(appWidgetIds, views)
     }
 
-     private fun getPendingUpdateIntent(context: Context?, action: String?): PendingIntent {
+     private fun getPendingUpdateIntent(context: Context): PendingIntent {
         val intent = Intent(context, javaClass)
         intent.action = ACTION_UPDATE_CLICK
         return PendingIntent.getBroadcast(context, 1, intent, 0)

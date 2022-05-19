@@ -7,9 +7,9 @@ class SharedPreference(context: Context) {
 
     private val PREFS_NAME = "currency"
     private val LANG = "language"
-    private val APP_SHARED_PREFS = "App_Shared"
+    private val BOOL = "bool"
 
-    val sharedPref: SharedPreferences =
+    private val sharedPref: SharedPreferences =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     fun saveLang(lang: String) {
@@ -19,5 +19,14 @@ class SharedPreference(context: Context) {
 
     fun getLang(): String {
         return sharedPref.getString(LANG, "")!!
+    }
+
+    fun saveBool(bool: String) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putString(BOOL, bool).apply()
+    }
+
+    fun getBool(): String {
+        return sharedPref.getString(BOOL, "")!!
     }
 }

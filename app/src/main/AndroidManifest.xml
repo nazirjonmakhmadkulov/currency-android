@@ -17,9 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Valyuta">
-        <activity
-            android:name=".ui.splash.SplashScreenActivity"
-            android:exported="false" />
 
         <service
             android:name=".service.widget.WidgetService"

@@ -11,6 +11,8 @@ import com.developer.valyutaapp.core.dispatcher.DispatcherProvider
 import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import com.developer.valyutaapp.ui.ValuteViewModel
 import com.developer.valyutaapp.core.database.SharedPreference
+import com.developer.valyutaapp.domain.repository.ValuteLocalRepository
+import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -37,16 +39,16 @@ val sharedPreference = module {
 }
 
 val dispatcherProviders = module {
-    factory { CoroutineDispatcherProvider() }
+    //factory { CoroutineDispatcherProvider() }
 
-//    fun provideDispatcherProviders(): CoroutineDispatcherProvider {
-//        return CoroutineDispatcherProvider()
-//    }
-//    factory<CoroutineDispatcherProvider> { provideDispatcherProviders() }
+    fun provideDispatcherProviders(): CoroutineDispatcherProvider {
+        return CoroutineDispatcherProvider()
+    }
+    single<DispatcherProvider> { provideDispatcherProviders() }
 }
 
 val remoteDataSources = module {
-    factory { ValuteRemoteDataSource(get()) }
+    //factory { ValuteRemoteDataSource(get()) }
 }
 
 val apiModules = module {
@@ -102,8 +104,8 @@ val databaseModule = module {
 
     fun provideDatabase(application: Application): AppDatabase {
         return Room.databaseBuilder(application, AppDatabase::class.java, "currency")
-            .fallbackToDestructiveMigration()
-            .allowMainThreadQueries()
+            //.fallbackToDestructiveMigration()
+            //.allowMainThreadQueries()
             .build()
     }
 
@@ -117,6 +119,11 @@ val databaseModule = module {
 
 val repositoryModule = module {
 
+    fun provideValuteRemoteDataSource(api: ValuteService): ValuteRemoteDataSource {
+        return ValuteRemoteDataSource(api)
+    }
+    factory { provideValuteRemoteDataSource(get()) }
+
     fun provideValuteRemoteRepository(
         dispatcherProvider: DispatcherProvider,
         remoteDataSource: ValuteRemoteDataSource,
@@ -124,14 +131,14 @@ val repositoryModule = module {
     ): ValuteRemoteRepositoryImpl {
         return ValuteRemoteRepositoryImpl(dispatcherProvider, remoteDataSource, valuteDao)
     }
-    single { provideValuteRemoteRepository(get(), get(), get()) }
+    factory<ValuteRemoteRepository> { provideValuteRemoteRepository(get(), get(), get()) }
 
     fun provideLocalRepository(valuteDao: ValuteDao): ValuteLocalRepositoryImpl {
         return ValuteLocalRepositoryImpl(valuteDao)
     }
-    factory<ValuteLocalRepositoryImpl> { provideLocalRepository(get()) }
+    factory<ValuteLocalRepository> { provideLocalRepository(get()) }
 }
 
 val useCasesModule = module {
-    single { ValuteUseCase() }
+    factory { ValuteUseCase() }
 }

@@ -19,6 +19,7 @@ import com.developer.valyutaapp.databinding.ActivityMainBinding
 import com.developer.valyutaapp.ui.setting.SettingActivity
 import com.developer.valyutaapp.ui.valute.ValuteActivity
 import com.developer.valyutaapp.core.database.SharedPreference
+import com.developer.valyutaapp.service.auto.AutoService
 import com.developer.valyutaapp.ui.ValuteViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -42,11 +43,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainViewInterfac
         adapter!!.setClickListener(this)
         viewBinding.recyclerValCurs.adapter = adapter
 
-//        if (sheredPreference!!.bool == "1") {
-//            startService(Intent(this, AutoService::class.java))
-//        } else if (sheredPreference!!.bool == "0") {
-//            stopService(Intent(this, AutoService::class.java))
-//        }
+        if (prefs.getBool() == "1") {
+            startService(Intent(this, AutoService::class.java))
+        } else if (prefs.getBool() == "0") {
+            stopService(Intent(this, AutoService::class.java))
+        }
 
         setupViews()
         setupViewModel()
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainViewInterfac
     private fun setupViewModel() {
         lifecycleScope.launchWhenCreated {
             viewModel.getLocalValutes().collect {
-                onGetAllValuteSuccess(it)
+                getAllValuteSuccess(it)
             }
         }
     }
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainViewInterfac
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun onGetAllValuteSuccess(valutes: List<Valute>) {
+    private fun getAllValuteSuccess(valutes: List<Valute>) {
         valuteList.clear()
         valuteList.addAll(valutes)
         adapter?.notifyDataSetChanged()
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainViewInterfac
     }
 
     override fun displayValutes(valutes: List<Valute>?) {
-        valutes?.let { onGetAllValuteSuccess(it) } ?: Log.d("TAG", "valutes response null")
+        valutes?.let { getAllValuteSuccess(it) } ?: Log.d("TAG", "valutes response null")
     }
 
     override fun displayError(e: String?) {

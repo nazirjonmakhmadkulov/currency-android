@@ -19,21 +19,21 @@ class SortActivity : AppCompatActivity(R.layout.activity_sort), SortViewInterfac
     )
     private val TAG = "SortActivity"
     var adapter: SortAdapter? = null
-    var sortPresenter: SortPresenter? = null
-    private var valuteRespository: ValuteRespository? = null
+//    var sortPresenter: SortPresenter? = null
+//    private var valuteRespository: ValuteRespository? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val valuteDatabase = ValuteDatabase.getInstance(this) //create db
-        Log.d("Database ", valuteDatabase.toString())
-        valuteRespository =
-            ValuteRespository.getInstance(ValuteDataSource.getInstance(valuteDatabase.valuteDAO()))
+//        val valuteDatabase = ValuteDatabase.getInstance(this) //create db
+//        Log.d("Database ", valuteDatabase.toString())
+//        valuteRespository =
+//            ValuteRespository.getInstance(ValuteDataSource.getInstance(valuteDatabase.valuteDAO()))
         setupMVP()
         setupViews()
         valuteList
     }
 
     private fun setupMVP() {
-        sortPresenter = SortPresenter(this.applicationContext, this)
+        ///sortPresenter = SortPresenter(this.applicationContext, this)
     }
 
     private fun setupViews() {
@@ -42,7 +42,7 @@ class SortActivity : AppCompatActivity(R.layout.activity_sort), SortViewInterfac
 
     private val valuteList: Unit
         get() {
-            sortPresenter!!.valutes()
+            //sortPresenter!!.valutes()
         }
 
     override fun showToast(str: String) {
