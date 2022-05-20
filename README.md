@@ -1,8 +1,8 @@
 # Курсы валют Таджикистана
-## Java, Android SDK
+## Kotlin, Android SDK
 
-## MVP
-## RxJava
+## MVVM
+## Coroutines
 ## Retrofit
 ## Room
-## Butter Knife
+## Koin
