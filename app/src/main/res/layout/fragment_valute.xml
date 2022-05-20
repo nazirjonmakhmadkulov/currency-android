@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorback"
+    android:orientation="vertical"
     android:padding="10dp"
     tools:context=".ui.valute.ValuteActivity">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp">
@@ -31,6 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -53,8 +55,8 @@
                         android:textColor="@color/text"
                         android:textStyle="normal|bold" />
 
-                    <TextView
-                        android:id="@+id/tvNominal"
+                    <EditText
+                        android:id="@+id/edit1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/rounded_border_edittext"
@@ -89,8 +91,8 @@
                         android:textColor="@color/text"
                         android:textStyle="normal|bold" />
 
-                    <TextView
-                        android:id="@+id/tvValue"
+                    <EditText
+                        android:id="@+id/edit2"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/rounded_border_edittext"
@@ -99,24 +101,49 @@
                         android:textColor="@color/black" />
                 </LinearLayout>
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/change"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@color/btn_change"
+                android:src="@mipmap/peremestit" />
+
+            <ImageView
+                android:id="@+id/clear"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/change"
+                android:layout_alignStart="@+id/change"
+                android:layout_alignLeft="@+id/change"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:background="@color/btn_clean"
+                android:src="@mipmap/clears" />
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center"
         android:visibility="gone" />
 
-    <Button
-        android:id="@+id/saveWidget"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/rounded_border_edittext"
-        android:text="Сохранить" />
-</RelativeLayout>
+        android:layout_gravity="bottom">
+        <!--        <com.github.mikephil.charting.charts.LineChart-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:minHeight="360dp"-->
+        <!--            android:maxHeight="420dp"-->
+        <!--            android:elevation="8dp"-->
+        <!--            android:id="@+id/barchar">-->
+        <!--        </com.github.mikephil.charting.charts.LineChart>-->
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -19,7 +19,7 @@ import io.paperdb.Paper
 import java.text.DecimalFormat
 import java.util.ArrayList
 
-class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewInterface, DialogAdapter.ClickListener {
+class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewInterface {
 
     private val viewBinding by viewBinding(ActivityWidgetBinding::bind, R.id.container)
 
@@ -29,7 +29,6 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
     private var valuteId = 840
     var adapter: DialogAdapter? = null
 
-    private val TAG = "WidgetPresenter"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         valutes = ArrayList()
@@ -54,7 +53,7 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
             Log.d("widget", " = " + viewBinding.tvNominal.text)
             Paper.book().write("value", decimal.toString())
             Log.d("widget", " = $decimal")
-            Paper.book().write("dat", Utils.date)
+            Paper.book().write("dat", Utils.getDate())
             Toast.makeText(
                 this@WidgetActivity,
                 "Через минуту он будет установлен",
@@ -90,11 +89,11 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
 
     @SuppressLint("SetTextI18n")
     override fun displayValuteWithId(valute: Valute) {
-        val bt = ImageResource.getImageRes(this, valute.charCode.toString())
+        val bt = ImageResource.getImageRes(this, valute.charCode)
         viewBinding.iconValute1.setImageBitmap(bt)
         viewBinding.tvNominal.text = java.lang.String.valueOf(valute.nominal)
-        viewBinding.tvValue.text = valute.value.toString()
-        viewBinding.name1.text = valute.charCode.toString()
+        viewBinding.tvValue.text = valute.value
+        viewBinding.name1.text = valute.charCode
         viewBinding.name2.text = "TJS"
         viewBinding.iconValute2.setImageResource(R.drawable.tajikistan)
     }
@@ -107,23 +106,18 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
         showToast(s)
     }
 
-    fun dialogValutes(v: View?) {
+    fun dialogValutes() {
         alertdialog = AlertDialog.Builder(this)
         alertdialog!!.setTitle("Все валюты")
         val inflater = this.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val row = inflater.inflate(R.layout.row_item, null)
         val listView = row.findViewById<View>(R.id.list_dialog) as ListView
-        adapter = DialogAdapter(this, valutes!!)
-        adapter!!.setClickListener(this@WidgetActivity)
+        //adapter = DialogAdapter(this, valutes!!)
         listView.adapter = adapter
         alertdialog!!.setView(row)
         dialog = alertdialog!!.create()
         dialog!!.show()
     }
 
-    override fun itemClicked(item: Valute?, position: Int) {
-        valuteId = item!!.id
-        dialog!!.hide()
-        valuteById
-    }
+
 }

@@ -12,11 +12,13 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
 class CurrencyApp : Application() {
+
     private val prefs: SharedPreference by inject()
+
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            androidContext(this@CurrencyApp)
+            androidContext(this@CurrencyApp.applicationContext)
             androidLogger(Level.DEBUG)
             modules(
                 listOf(

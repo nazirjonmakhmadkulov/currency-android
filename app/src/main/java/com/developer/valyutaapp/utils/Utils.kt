@@ -1,17 +1,21 @@
 package com.developer.valyutaapp.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
-    val date: String
-        get() {
-            val dfDate: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-            return dfDate.format(Calendar.getInstance().time)
-        }
+
+    @SuppressLint("SimpleDateFormat")
+    fun getDate(): String {
+        val dfDate: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+        return dfDate.format(Calendar.getInstance().time)
+    }
 
     fun mathNominal(a: Double, b: Double): Double {
         return a * b
@@ -21,17 +25,23 @@ object Utils {
         return a * c / b
     }
 
-    fun hasConnection(context: Context): Boolean {
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        var wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-        if (wifiInfo != null && wifiInfo.isConnected) {
-            return true
+    fun Context.isNetworkAvailable(): Boolean {
+        val connectivityManager =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            val networkInfo = connectivityManager.activeNetworkInfo
+            return networkInfo != null && networkInfo.isConnected
         }
-        wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
-        if (wifiInfo != null && wifiInfo.isConnected) {
-            return true
+        //Internet connectivity check in Android Q
+        val networks = connectivityManager.allNetworks
+        var hasInternet = false
+        if (networks.isNotEmpty()) {
+            for (network in networks) {
+                val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
+                if (networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true)
+                    hasInternet = true
+            }
         }
-        wifiInfo = cm.activeNetworkInfo
-        return wifiInfo != null && wifiInfo.isConnected
+        return hasInternet
     }
 }

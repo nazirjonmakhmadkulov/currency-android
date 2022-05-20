@@ -6,5 +6,5 @@ import retrofit2.http.Query
 
 interface ValuteService {
     @GET("export_xml.php")
-    fun getRemoteValutes(@Query("date") date: String, @Query("export") exp: String): ValCurs
+   suspend fun getRemoteValutes(@Query("date") date: String, @Query("export") exp: String): ValCurs
 }

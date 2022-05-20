@@ -16,8 +16,8 @@ class ValuteViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
     private val _getRemoteValutes = MutableLiveData<Result<ValCurs>>(Result.Loading)
     val getRemoteValutes: LiveData<Result<ValCurs>> get() = _getRemoteValutes
 
-    fun getRemoteValutes() = viewModelScope.launch {
-        when (val result = valuteUseCase.invokeGetRemoteValutes()) {
+    fun getRemoteValutes(date: String, exp: String) = viewModelScope.launch {
+        when (val result = valuteUseCase.invokeGetRemoteValutes(date, exp)) {
             is Result.Loading -> {}
             is Result.Success -> {
                 _getRemoteValutes.value = Result.Success(result.data)

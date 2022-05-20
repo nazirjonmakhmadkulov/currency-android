@@ -12,12 +12,12 @@ class ValuteRemoteRepositoryImpl(
     private val valuteDao: ValuteDao
 ) : ValuteRemoteRepository {
 
-    override suspend fun getAllValute(): Result<ValCurs> {
+    override suspend fun getAllValute(date: String, exp: String): Result<ValCurs> {
         return when (val result =
-            valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, "")) {
+            valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)) {
             is Result.Loading -> Result.Loading
             is Result.Success -> {
-                valuteDao.insertValute(result.data.valute!!)
+                valuteDao.insertValute(result.data.valute)
                 Result.Success(result.data)
             }
             is Result.Error -> Result.Error(

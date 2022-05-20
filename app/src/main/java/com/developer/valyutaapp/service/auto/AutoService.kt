@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Handler
 import android.os.IBinder
 import com.developer.valyutaapp.utils.Utils
+import com.developer.valyutaapp.utils.Utils.isNetworkAvailable
 import java.lang.Exception
 import java.lang.UnsupportedOperationException
 import java.util.*
@@ -47,7 +48,7 @@ class AutoService : Service() {
             // run on another thread
             mHandler.post {
                 try {
-                    if (Utils.hasConnection(this@AutoService)) {
+                    if (isNetworkAvailable()) {
                         setupMVP()
                         valuteList
                     }

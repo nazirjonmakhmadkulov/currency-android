@@ -29,7 +29,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun fetchValutes() {
-        viewModel.getRemoteValutes()
+        //viewModel.getRemoteValutes()
     }
 
     private fun postDelay() {

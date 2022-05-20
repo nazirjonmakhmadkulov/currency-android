@@ -6,5 +6,5 @@ import com.developer.valyutaapp.domain.entities.Valute
 
 @Database(entities = [Valute::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-    abstract val valuteDao: ValuteDao
+    abstract fun valuteDao(): ValuteDao
 }

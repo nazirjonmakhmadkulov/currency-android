@@ -11,13 +11,13 @@ import androidx.cardview.widget.CardView
 import android.widget.TextView
 import android.view.View
 import android.widget.ImageView
-import android.widget.ListView
 import com.developer.valyutaapp.utils.ImageResource
-import java.util.ArrayList
 
-class DialogAdapter(var context: Context, var valutes: ArrayList<Valute>) : BaseAdapter() {
-
-    private var clickListener: ClickListener? = null
+class DialogAdapter(
+    private val context: Context,
+    private val valutes: MutableList<Valute>,
+    private val onItemValuteClick: (Valute, Int) -> Unit,
+) : BaseAdapter() {
 
     override fun getCount(): Int {
         return valutes.size
@@ -36,25 +36,15 @@ class DialogAdapter(var context: Context, var valutes: ArrayList<Valute>) : Base
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val v = inflater.inflate(R.layout.dialog_item, viewGroup, false)
         val cardView = v.findViewById<View>(R.id.item_dialog) as CardView
-        val listView = v.findViewById<View>(R.id.list_dialog) as ListView
+        //val listView = v.findViewById<View>(R.id.list_dialog) as ListView
         val icon = v.findViewById<View>(R.id.img_flag) as ImageView
         val txName = v.findViewById<View>(R.id.name_currency) as TextView
-        val bt = ImageResource.getImageRes(context, valutes[i].charCode.toString())
+        val bt = ImageResource.getImageRes(context, valutes[i].charCode)
         icon.setImageBitmap(bt)
-        txName.text = valutes[i].name.toString()
+        txName.text = valutes[i].name
         cardView.setOnClickListener {
-            clickListener!!.itemClicked(
-                valutes[i], i
-            )
+            onItemValuteClick(valutes[i], i)
         }
         return v
-    }
-
-    fun setClickListener(clickListener: ClickListener?) {
-        this.clickListener = clickListener
-    }
-
-    interface ClickListener {
-        fun itemClicked(item: Valute?, position: Int)
     }
 }

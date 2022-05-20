@@ -13,7 +13,8 @@ class ValuteUseCase : KoinComponent {
     private val valuteLocalRepository: ValuteLocalRepository by inject()
 
     //remote
-    suspend fun invokeGetRemoteValutes() = valuteRemoteRepository.getAllValute()
+    suspend fun invokeGetRemoteValutes(date: String, exp: String) =
+        valuteRemoteRepository.getAllValute(date, exp)
 
     //local
     fun invokeGetLocalValutes() = valuteLocalRepository.getAllLocalValutes()

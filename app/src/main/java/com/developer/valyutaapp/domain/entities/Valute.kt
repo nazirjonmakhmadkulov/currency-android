@@ -8,28 +8,28 @@ import org.simpleframework.xml.Root
 
 @Entity(tableName = "valute")
 @Root(name = "Valute", strict = false)
-class Valute {
+data class Valute(
 
-    //@param:Attribute(name = "ID", required = false)
-    @get:Attribute(name = "ID", required = false)
+    @field:Attribute(name = "ID")
+    @param:Attribute(name = "ID")
     @PrimaryKey(autoGenerate = false)
-    var id: Int = 0
+    var id: Int = 0,
 
-    //@param:Element(name = "CharCode")
-    @get:Element(name = "CharCode")
-    lateinit var charCode: String
+    @field:Element(name = "CharCode")
+    @param:Element(name = "CharCode")
+    var charCode: String = "",
 
-    //@param:Element(name = "Nominal")
-    @get:Element(name = "Nominal")
-    var nominal: Int = 0
+    @field:Element(name = "Nominal")
+    @param:Element(name = "Nominal")
+    var nominal: Int = 0,
 
-    //@param:Element(name = "Name")
-    @get:Element(name = "Name")
-    var name: String = ""
+    @field:Element(name = "Name")
+    @param:Element(name = "Name")
+    var name: String = "",
 
-   // @param:Element(name = "Value")
-    @get:Element(name = "Value")
-    lateinit var value: String
+    @field:Element(name = "Value")
+    @param:Element(name = "Value")
+    var value: String = "",
 
-    var sortValute: Int = 0
-}
+    var sortValute: Int = 0,
+)

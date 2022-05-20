@@ -1,34 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgrond"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerValCurs"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment_content_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorback"
-        android:padding="5dp" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="visible" />
-    <!--    <com.google.android.gms.ads.AdView-->
-    <!--        android:id="@+id/adView"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        ads:adSize="BANNER"-->
-    <!--        ads:adUnitId="@string/banner_ad_unit_id">-->
-    <!--    </com.google.android.gms.ads.AdView>-->
-</RelativeLayout>
+        android:fitsSystemWindows="true"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main_navigation" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

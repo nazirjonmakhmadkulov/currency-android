@@ -4,100 +4,111 @@
     android:id="@+id/activity_sort"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/white"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".ui.valute.ValuteActivity">
+
     <androidx.appcompat.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="140dp">
-
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="140dp"
+        android:background="@color/white" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
-        android:orientation="vertical"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:id="@+id/linearLayout3">
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp">
+
         <ImageView
             android:id="@+id/image1"
-            android:src="@drawable/tajikistan"
+            android:layout_width="120dp"
             android:layout_height="60dp"
-            android:layout_width="120dp" />
+            android:src="@drawable/tajikistan" />
+
         <TextView
-            android:text="TJS"
             android:id="@+id/name1"
-            android:textSize="18dp"
-            android:textColor="@color/text"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="TJS"
+            android:textColor="@color/text"
+            android:textSize="18dp"
             android:textStyle="normal|bold" />
+
         <TextView
             android:id="@+id/edit2"
             android:layout_width="match_parent"
-            android:textSize="18dp"
-            android:gravity="center"
-            android:textColor="@android:color/black"
             android:layout_height="match_parent"
-            android:inputType="number|numberDecimal" />
+            android:gravity="center"
+            android:inputType="number|numberDecimal"
+            android:textColor="@android:color/black"
+            android:textSize="18dp" />
+
         <TextView
             android:id="@+id/nomin2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2">
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
 
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="wrap_content"
-        android:orientation="vertical"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_alignParentLeft="true"
-        android:id="@+id/linearLayout4">
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
         <ImageView
             android:id="@+id/image"
-            android:src="@drawable/america"
+            android:layout_width="120dp"
             android:layout_height="60dp"
-            android:layout_width="120dp" />
+            android:src="@drawable/america" />
+
         <TextView
-            android:text="USD"
-            android:layout_gravity="center"
             android:id="@+id/name"
-            android:textSize="18dp"
-            android:textColor="@color/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar"
+            android:layout_gravity="center"
+            android:text="USD"
+            android:textColor="@color/text"
+            android:textSize="18dp"
             android:textStyle="normal|bold" />
+
         <TextView
             android:id="@+id/edit1"
-            android:textColor="@android:color/black"
-            android:gravity="center"
-            android:textSize="18dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="number|numberDecimal" />
+            android:gravity="center"
+            android:inputType="number|numberDecimal"
+            android:textColor="@android:color/black"
+            android:textSize="18dp" />
+
         <TextView
             android:id="@+id/nomin1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/idval"
             android:layout_width="wrap_content"
@@ -105,24 +116,24 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_gravity="center"
-        android:src="@mipmap/peremestit"
-        android:layout_width="30dp"
-        android:background="@color/btn_change"
-        android:layout_height="30dp"
         android:id="@+id/change"
-        android:layout_marginTop="37dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignTop="@+id/linearLayout4"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="37dp"
+        android:background="@color/btn_change"
+        android:src="@mipmap/peremestit" />
 
     <Button
         android:id="@+id/saveWidget"
-        android:text="Сохранить"
-        android:layout_marginTop="30dp"
-        android:background="@color/btn_change"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="30dp"
+        android:background="@color/btn_change"
+        android:text="Сохранить" />
 </RelativeLayout>

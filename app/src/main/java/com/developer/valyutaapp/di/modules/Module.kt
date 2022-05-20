@@ -2,29 +2,33 @@ package com.developer.valyutaapp.di.modules
 
 import android.app.Application
 import androidx.room.Room
-import com.developer.valyutaapp.data.repository.*
+import com.developer.valyutaapp.core.common.DB_NAME
+import com.developer.valyutaapp.core.common.SERVER_URL
 import com.developer.valyutaapp.core.database.AppDatabase
-import com.developer.valyutaapp.data.local.ValuteDao
-import com.developer.valyutaapp.data.remote.ValuteService
+import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.core.dispatcher.CoroutineDispatcherProvider
 import com.developer.valyutaapp.core.dispatcher.DispatcherProvider
-import com.developer.valyutaapp.domain.usecases.ValuteUseCase
-import com.developer.valyutaapp.ui.ValuteViewModel
-import com.developer.valyutaapp.core.database.SharedPreference
+import com.developer.valyutaapp.data.local.ValuteDao
+import com.developer.valyutaapp.data.remote.ValuteService
+import com.developer.valyutaapp.data.repository.ValuteLocalRepositoryImpl
+import com.developer.valyutaapp.data.repository.ValuteRemoteDataSource
+import com.developer.valyutaapp.data.repository.ValuteRemoteRepositoryImpl
 import com.developer.valyutaapp.domain.repository.ValuteLocalRepository
 import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
+import com.developer.valyutaapp.domain.usecases.ValuteUseCase
+import com.developer.valyutaapp.ui.ValuteViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
+
 
 val viewModelModule = module {
     factory { ValuteViewModel(get()) }
@@ -39,8 +43,6 @@ val sharedPreference = module {
 }
 
 val dispatcherProviders = module {
-    //factory { CoroutineDispatcherProvider() }
-
     fun provideDispatcherProviders(): CoroutineDispatcherProvider {
         return CoroutineDispatcherProvider()
     }
@@ -48,7 +50,10 @@ val dispatcherProviders = module {
 }
 
 val remoteDataSources = module {
-    //factory { ValuteRemoteDataSource(get()) }
+    fun provideValuteRemoteDataSource(api: ValuteService): ValuteRemoteDataSource {
+        return ValuteRemoteDataSource(api)
+    }
+    factory { provideValuteRemoteDataSource(get()) }
 }
 
 val apiModules = module {
@@ -60,35 +65,34 @@ val apiModules = module {
 
 val netModule = module {
     fun provideCache(application: Application): Cache {
-        val cacheSize = 10 * 1024 * 1024
+        val cacheSize = 10 * 10 * 1024
         return Cache(application.cacheDir, cacheSize.toLong())
     }
 
     fun provideHttpClient(cache: Cache): OkHttpClient {
         val httpInterceptor = HttpLoggingInterceptor()
-        httpInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        httpInterceptor.level = HttpLoggingInterceptor.Level.BODY
         val okHttpClientBuilder = OkHttpClient.Builder()
+            .cache(cache)
+            .addInterceptor(httpInterceptor)
             .apply {
                 readTimeout(20, TimeUnit.SECONDS)
                 writeTimeout(20, TimeUnit.SECONDS)
                 connectTimeout(20, TimeUnit.SECONDS)
             }
-            .cache(cache)
-        return okHttpClientBuilder.addInterceptor(HttpLoggingInterceptor().apply {
-            //  level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-            level = HttpLoggingInterceptor.Level.BODY
-        }).build()
+
+        return okHttpClientBuilder.build()
     }
 
     fun provideGson(): Gson {
         return GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).setLenient().create()
     }
 
-    fun provideRetrofit(factory: Gson, client: OkHttpClient): Retrofit {
+    fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://nbt.tj/ru/kurs/")
-            .addConverterFactory(GsonConverterFactory.create(factory))
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .baseUrl(SERVER_URL)
+            //.addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
+            .addConverterFactory(SimpleXmlConverterFactory.create())
             .client(client)
             .build()
     }
@@ -96,21 +100,21 @@ val netModule = module {
     single { provideCache(androidApplication()) }
     single { provideHttpClient(get()) }
     single { provideGson() }
-    single { provideRetrofit(get(), get()) }
+    single { provideRetrofit(get()) }
 
 }
 
 val databaseModule = module {
 
     fun provideDatabase(application: Application): AppDatabase {
-        return Room.databaseBuilder(application, AppDatabase::class.java, "currency")
+        return Room.databaseBuilder(application, AppDatabase::class.java, DB_NAME)
             //.fallbackToDestructiveMigration()
             //.allowMainThreadQueries()
             .build()
     }
 
     fun provideDao(database: AppDatabase): ValuteDao {
-        return database.valuteDao
+        return database.valuteDao()
     }
 
     single { provideDatabase(androidApplication()) }
@@ -118,12 +122,6 @@ val databaseModule = module {
 }
 
 val repositoryModule = module {
-
-    fun provideValuteRemoteDataSource(api: ValuteService): ValuteRemoteDataSource {
-        return ValuteRemoteDataSource(api)
-    }
-    factory { provideValuteRemoteDataSource(get()) }
-
     fun provideValuteRemoteRepository(
         dispatcherProvider: DispatcherProvider,
         remoteDataSource: ValuteRemoteDataSource,

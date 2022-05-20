@@ -1,110 +1,123 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearWidget"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:id="@+id/linearWidget"
     android:padding="@dimen/widget_margin">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:id="@+id/linearWidgetclick"
-        android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/appwidget_image"
-            android:src="@drawable/america"
-            android:layout_width="75dp"
-            android:layout_height="55dp" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/appwidget_textnominal"
-                android:text="1"
-                android:gravity="center"
-                android:textSize="18dp"
-                android:textColor="@android:color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/appwidget_textCode"
-                android:text="1"
-                android:gravity="center"
-                android:textSize="18dp"
-                android:textColor="@android:color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+        android:orientation="vertical">
 
-    </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:orientation="horizontal"
+            android:id="@+id/linearWidgetclick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/appwidget_imagetj"
-                android:src="@drawable/tajikistan"
-                android:layout_width="75dp"
-                android:layout_height="55dp" />
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/appwidget_textnominaltj"
-                    android:text="1"
-                    android:gravity="center"
-                    android:textSize="18dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/appwidget_image"
+                    android:layout_width="75dp"
+                    android:layout_height="55dp"
+                    android:src="@drawable/america" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/appwidget_textnominalCode"
-                    android:text="1"
-                    android:gravity="center"
-                    android:textSize="18dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/appwidget_textnominal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/appwidget_textCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/appwidget_imagetj"
+                    android:layout_width="75dp"
+                    android:layout_height="55dp"
+                    android:src="@drawable/tajikistan" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/appwidget_textnominaltj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/appwidget_textnominalCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="18dp" />
 
                 </LinearLayout>
 
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/datet"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/datet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/white"
+                android:textSize="20dp" />
 
             <ImageButton
-                android:layout_marginLeft="10dp"
-                android:layout_width="40dp"
-                android:layout_height="36dp"
                 android:id="@+id/updatewidget"
                 style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="40dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/refreshs" />
         </LinearLayout>
     </LinearLayout>

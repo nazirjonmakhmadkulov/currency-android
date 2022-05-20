@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@+id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.developer.valyutaapp.ui.main.HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_valuteFragment"
+            app:destination="@id/valuteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_sortFragment"
+            app:destination="@id/sortFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/valuteFragment"
+        android:name="com.developer.valyutaapp.ui.valute.ValuteFragment"
+        tools:layout="@layout/fragment_valute" />
+
+    <fragment
+        android:id="@+id/sortFragment"
+        android:name="com.developer.valyutaapp.ui.sort.SortFragment"
+        tools:layout="@layout/fragment_sort" />
+
+    <fragment
+        android:id="@+id/widgetFragment"
+        android:name="com.developer.valyutaapp.ui.widget.WidgetFragment"
+        tools:layout="@layout/fragment_widget" />
+
+</navigation>

@@ -1,67 +1,50 @@
 package com.developer.valyutaapp.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.developer.valyutaapp.domain.entities.Valute
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import com.developer.valyutaapp.R
-import android.view.View
-import android.widget.CheckBox
 import com.developer.valyutaapp.utils.ImageResource
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.cardview.widget.CardView
+import com.developer.valyutaapp.databinding.SortItemBinding
 
-class SortAdapter(var valutes: List<Valute>, var context: Context) :
-    RecyclerView.Adapter<SortAdapter.ValutesHolder>() {
+class SortAdapter(
+    private val context: Context, private val valutes: MutableList<Valute>,
+    private val onItemValuteClick: (Valute, Int, Int) -> Unit,
+) :
+    RecyclerView.Adapter<SortAdapter.ValuteHolder>() {
 
-    private var clickListener: ClickListener? = null
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ValutesHolder {
-        val v = LayoutInflater.from(context).inflate(R.layout.sort_item, parent, false)
-        return ValutesHolder(v)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ValuteHolder {
+        val binding = SortItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ValuteHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ValutesHolder, i: Int) {
-        val bt = ImageResource.getImageRes(context, valutes[i].charCode.toString())
-        holder.icon.setImageBitmap(bt)
-        holder.tvName.text = valutes[i].charCode
-        holder.checkSort.isChecked = valutes[i].sortValute == 1
-        holder.checkSort.setOnCheckedChangeListener { compoundButton, b ->
-            if (holder.checkSort.isChecked) {
-                holder.checkSort.isChecked = true
-                clickListener!!.itemClicked(valutes[i], i, 1)
-            } else {
-                holder.checkSort.isChecked = false
-                clickListener!!.itemClicked(valutes[i], i, 0)
-            }
-        }
+    override fun onBindViewHolder(holder: ValuteHolder, i: Int) {
+        (holder as? ValuteHolder)?.bind(valutes[i])
     }
 
     override fun getItemCount(): Int {
         return valutes.size
     }
 
-    inner class ValutesHolder(v: View) : RecyclerView.ViewHolder(v) {
-        var tvName: TextView
-        var icon: ImageView
-        var checkSort: CheckBox
-        var cardView: CardView
-
-        init {
-            icon = v.findViewById<View>(R.id.iconValute) as ImageView
-            cardView = v.findViewById<View>(R.id.itemCard) as CardView
-            tvName = v.findViewById<View>(R.id.nameValute) as TextView
-            checkSort = v.findViewById<View>(R.id.checkSort) as CheckBox
+    inner class ValuteHolder(private val binding: SortItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
+        fun bind(valute: Valute) = with(binding) {
+            val bt = ImageResource.getImageRes(context, valute.charCode)
+            iconValute.setImageBitmap(bt)
+            nameValute.text = valute.charCode
+            checkSort.isChecked = valute.sortValute == 1
+            checkSort.setOnCheckedChangeListener { _, _ ->
+                if (checkSort.isChecked) {
+                    checkSort.isChecked = true
+                    onItemValuteClick(valute, bindingAdapterPosition, 1)
+                } else {
+                    checkSort.isChecked = false
+                    onItemValuteClick(valute, bindingAdapterPosition, 0)
+                }
+            }
         }
-    }
-
-    fun setClickListener(clickListener: ClickListener?) {
-        this.clickListener = clickListener
-    }
-
-    interface ClickListener {
-        fun itemClicked(item: Valute?, position: Int, sortValute: Int)
     }
 }

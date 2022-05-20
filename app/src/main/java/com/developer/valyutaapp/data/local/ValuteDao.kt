@@ -8,23 +8,23 @@ import kotlinx.coroutines.flow.Flow
 interface ValuteDao {
 
     @Query("SELECT * FROM valute WHERE id=:valId")
-    fun getValuteById(valId: Int): Valute
+    suspend fun getValuteById(valId: Int): Valute
 
     @Query("SELECT count(*) FROM valute")
-    fun getValuteCount(): Int
+    suspend fun getValuteCount(): Int
 
     @Query("SELECT * FROM valute ORDER BY sortValute DESC")
     fun getAllValutes(): Flow<List<Valute>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertValute(valutes: List<Valute>)
+    suspend fun insertValute(valutes: List<Valute>)
 
     @Update
-    fun updateValute(valute: Valute)
+    suspend fun updateValute(valute: Valute)
 
     @Delete
-    fun deleteValute(vararg valutes: Valute)
+    suspend fun deleteValute(vararg valutes: Valute)
 
     @Query("DELETE FROM valute")
-    fun deleteAllValutes()
+    suspend fun deleteAllValutes()
 }

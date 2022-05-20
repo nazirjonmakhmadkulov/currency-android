@@ -1,15 +1,6 @@
 package com.developer.valyutaapp.service.auto
 
 import android.content.Context
-import android.util.Log
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
-import com.developer.valyutaapp.domain.entities.ValCurs
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.android.schedulers.AndroidSchedulers
-import android.widget.Toast
-import com.developer.valyutaapp.utils.Utils
-import io.reactivex.Observable
 
 class AutoPresenter(var context: Context) : AutoPresenterInterface {
     private val TAG = "AutoPresenter"
