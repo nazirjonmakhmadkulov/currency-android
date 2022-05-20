@@ -6,8 +6,8 @@ import com.developer.valyutaapp.domain.entities.Valute
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
+import com.developer.valyutaapp.databinding.FavoritesItemBinding
 import com.developer.valyutaapp.utils.ImageResource
-import com.developer.valyutaapp.databinding.SortItemBinding
 
 class SortAdapter(
     private val context: Context, private val valutes: MutableList<Valute>,
@@ -16,7 +16,7 @@ class SortAdapter(
     RecyclerView.Adapter<SortAdapter.ValuteHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ValuteHolder {
-        val binding = SortItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = FavoritesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ValuteHolder(binding)
     }
 
@@ -28,7 +28,7 @@ class SortAdapter(
         return valutes.size
     }
 
-    inner class ValuteHolder(private val binding: SortItemBinding) :
+    inner class ValuteHolder(private val binding: FavoritesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(valute: Valute) = with(binding) {

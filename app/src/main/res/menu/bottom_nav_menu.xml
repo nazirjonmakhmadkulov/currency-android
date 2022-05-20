@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:title="Главная" />
+
+    <item
+        android:id="@+id/navigation_converter"
+        android:icon="@drawable/ic_converter"
+        android:title="Конвертер" />
+
+    <item
+        android:id="@+id/navigation_valutes"
+        android:icon="@drawable/ic_all"
+        android:title="Валюты" />
+
+    <item
+        android:id="@+id/navigation_more"
+        android:icon="@drawable/ic_favorite"
+        android:title="Ещё" />
+</menu>

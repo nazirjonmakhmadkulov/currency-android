@@ -16,7 +16,7 @@ import com.developer.valyutaapp.data.repository.ValuteRemoteRepositoryImpl
 import com.developer.valyutaapp.domain.repository.ValuteLocalRepository
 import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
 import com.developer.valyutaapp.domain.usecases.ValuteUseCase
-import com.developer.valyutaapp.ui.ValuteViewModel
+import com.developer.valyutaapp.ui.MainViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit
 
 
 val viewModelModule = module {
-    factory { ValuteViewModel(get()) }
+    factory { MainViewModel(get()) }
 }
 
 val connectionInternet = module {
@@ -76,9 +76,9 @@ val netModule = module {
             .cache(cache)
             .addInterceptor(httpInterceptor)
             .apply {
-                readTimeout(20, TimeUnit.SECONDS)
-                writeTimeout(20, TimeUnit.SECONDS)
-                connectTimeout(20, TimeUnit.SECONDS)
+                readTimeout(200, TimeUnit.SECONDS)
+                writeTimeout(200, TimeUnit.SECONDS)
+                connectTimeout(200, TimeUnit.SECONDS)
             }
 
         return okHttpClientBuilder.build()

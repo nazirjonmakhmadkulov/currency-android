@@ -1,4 +1,4 @@
-package com.developer.valyutaapp.ui.sort
+package com.developer.valyutaapp.ui.edit
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.R
 import com.developer.valyutaapp.core.database.SharedPreference
-import com.developer.valyutaapp.databinding.FragmentSortBinding
+import com.developer.valyutaapp.databinding.FragmentFavoritesBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.SortAdapter
@@ -17,9 +17,9 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.ArrayList
 
-class SortFragment : Fragment(R.layout.fragment_sort) {
+class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
-    private val viewBinding by viewBinding(FragmentSortBinding::bind)
+    private val viewBinding by viewBinding(FragmentFavoritesBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
 
     private val prefs: SharedPreference by inject()
@@ -59,4 +59,5 @@ class SortFragment : Fragment(R.layout.fragment_sort) {
         item.sortValute = pos
         // sortPresenter.updateValute(item)
     }
+
 }

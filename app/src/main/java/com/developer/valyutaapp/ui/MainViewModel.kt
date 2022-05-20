@@ -11,7 +11,7 @@ import com.developer.valyutaapp.domain.entities.Valute
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class ValuteViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
+class MainViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
 
     private val _getRemoteValutes = MutableLiveData<Result<ValCurs>>(Result.Loading)
     val getRemoteValutes: LiveData<Result<ValCurs>> get() = _getRemoteValutes

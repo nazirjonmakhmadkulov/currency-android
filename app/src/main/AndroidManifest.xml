@@ -26,7 +26,7 @@
         <activity android:name=".ui.widget.WidgetActivity" />
         <activity android:name=".ui.sort.SortActivity" />
         <activity android:name=".ui.valute.ValuteActivity" />
-        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.setting.SettingActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"

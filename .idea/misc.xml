@@ -3,27 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/drawable-v23/splash.xml" value="0.303" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/drawable/splash.xml" value="0.303" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/activity_about.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/activity_main.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/activity_setting.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/activity_sort.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/activity_splash.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/activity_splash_screen.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/activity_valute.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/activity_widget.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/app_widget.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/dialog_item.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/fragment_home.xml" value="0.284375" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/fragment_sort.xml" value="0.2984375" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/fragment_valute.xml" value="0.2984375" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/fragment_widget.xml" value="0.2984375" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/item.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/row_item.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/sort_item.xml" value="0.3625" />
-        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/toolbar.xml" value="0.3625" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.30648148148148147" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/edit_fragment.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/fragment_all_valutes.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/fragment_converter.xml" value="0.340625" />
+        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/fragment_sort.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/fragment_valutes.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/item.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/row_item.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/sort_item.xml" value="0.3546875" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.3546875" />
+        <entry key="app/src/main/res/menu/bottom_navigiation.xml" value="0.3546875" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.30648148148148147" />
       </map>
     </option>
   </component>

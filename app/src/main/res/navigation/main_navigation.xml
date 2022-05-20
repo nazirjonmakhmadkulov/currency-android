@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@+id/homeFragment">
+    app:startDestination="@+id/navigation_home">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.developer.valyutaapp.ui.main.HomeFragment"
+        android:id="@+id/navigation_home"
+        android:name="com.developer.valyutaapp.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_valuteFragment"
@@ -16,6 +16,16 @@
             android:id="@+id/action_homeFragment_to_sortFragment"
             app:destination="@id/sortFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_converter"
+        android:name="com.developer.valyutaapp.ui.converter.ConverterFragment"
+        tools:layout="@layout/fragment_converter" />
+
+    <fragment
+        android:id="@+id/navigation_valutes"
+        android:name="com.developer.valyutaapp.ui.valutes.AllValutesFragment"
+        tools:layout="@layout/fragment_all_valutes" />
 
     <fragment
         android:id="@+id/valuteFragment"

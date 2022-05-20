@@ -17,11 +17,9 @@
 
         <ImageView
             android:id="@+id/iconValute"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_weight="0.2"
-            android:padding="15dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="8dp"
             android:src="@drawable/tajikistan" />
 
         <TextView
@@ -30,7 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:padding="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:singleLine="true"
             android:text="Name Valute"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 

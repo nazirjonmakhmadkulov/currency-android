@@ -30,7 +30,7 @@ class WidgetAdapter(
     @SuppressLint("ViewHolder")
     override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val v = inflater.inflate(R.layout.sort_item, viewGroup, false)
+        val v = inflater.inflate(R.layout.favorites_item, viewGroup, false)
         val linearLayout = v.findViewById<View>(R.id.item_dialog) as LinearLayout
         //val listView = v.findViewById<View>(R.id.list_dialog) as ListView
         val icon = v.findViewById<View>(R.id.img_flag) as ImageView

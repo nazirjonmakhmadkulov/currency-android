@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import com.developer.valyutaapp.ui.ValuteViewModel
-import com.developer.valyutaapp.ui.main.MainActivity
+import com.developer.valyutaapp.ui.MainViewModel
+import com.developer.valyutaapp.ui.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : AppCompatActivity() {
-    private val viewModel by viewModel<ValuteViewModel>()
+    private val viewModel by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
