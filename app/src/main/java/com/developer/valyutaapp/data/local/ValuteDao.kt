@@ -13,11 +13,17 @@ interface ValuteDao {
     @Query("SELECT count(*) FROM valute")
     suspend fun getValuteCount(): Int
 
-    @Query("SELECT * FROM valute ORDER BY sortValute DESC")
+    @Query("SELECT * FROM valute WHERE dates = (SELECT MAX(dates) FROM valute)")
     fun getAllValutes(): Flow<List<Valute>>
 
+    @Query("SELECT * FROM valute WHERE favoritesValute = 1")
+    fun getAllFavoritesValutes(): Flow<List<Valute>>
+
+    @Query("SELECT * FROM valute ORDER BY favoritesConverter DESC")
+    fun getAllConverterValutes(): Flow<List<Valute>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertValute(valutes: List<Valute>)
+    suspend fun insertValute(valute: Valute)
 
     @Update
     suspend fun updateValute(valute: Valute)

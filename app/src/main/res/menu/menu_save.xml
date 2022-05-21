@@ -5,9 +5,9 @@
         tools:context=".MainActivity">
 
     <item
-        android:id="@+id/edit_favorites"
-        android:icon="@drawable/ic_edit"
+        android:id="@+id/save"
+        android:icon="@drawable/ic_save"
         app:showAsAction="always"
-        android:title="Update"/>
+        android:title="Save"/>
 
 </menu>

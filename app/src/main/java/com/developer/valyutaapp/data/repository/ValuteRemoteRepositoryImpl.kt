@@ -5,6 +5,7 @@ import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.core.dispatcher.DispatcherProvider
 import com.developer.valyutaapp.domain.entities.ValCurs
 import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
+import com.developer.valyutaapp.utils.Utils.getDateFormat
 
 class ValuteRemoteRepositoryImpl(
     private val dispatcherProvider: DispatcherProvider,
@@ -17,7 +18,11 @@ class ValuteRemoteRepositoryImpl(
             valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)) {
             is Result.Loading -> Result.Loading
             is Result.Success -> {
-                valuteDao.insertValute(result.data.valute)
+                val valute = result.data.valute
+                valute.forEach {
+                    it.dates = getDateFormat(result.data.dates)
+                    valuteDao.insertValute(it)
+                }
                 Result.Success(result.data)
             }
             is Result.Error -> Result.Error(

@@ -2,14 +2,10 @@ package com.developer.valyutaapp.ui.sort
 
 import androidx.appcompat.app.AppCompatActivity
 import com.developer.valyutaapp.R
-import com.developer.valyutaapp.ui.adapter.SortAdapter
+import com.developer.valyutaapp.ui.adapter.FavoriteAdapter
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.developer.valyutaapp.domain.entities.Valute
 
 class SortActivity : AppCompatActivity(R.layout.activity_sort){
     private val viewBinding by viewBinding(
@@ -17,7 +13,7 @@ class SortActivity : AppCompatActivity(R.layout.activity_sort){
         R.id.container
     )
     private val TAG = "SortActivity"
-    var adapter: SortAdapter? = null
+    var adapter: FavoriteAdapter? = null
 //    var sortPresenter: SortPresenter? = null
 //    private var valuteRespository: ValuteRespository? = null
     override fun onCreate(savedInstanceState: Bundle?) {

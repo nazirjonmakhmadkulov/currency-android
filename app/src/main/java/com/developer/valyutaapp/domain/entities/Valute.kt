@@ -31,5 +31,7 @@ data class Valute(
     @param:Element(name = "Value")
     var value: String = "",
 
-    var sortValute: Int = 0,
+    var dates: String = "",
+    var favoritesValute: Int = 0,
+    var favoritesConverter: Int = 0,
 )

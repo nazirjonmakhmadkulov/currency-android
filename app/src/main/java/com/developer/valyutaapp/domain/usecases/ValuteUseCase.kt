@@ -18,6 +18,7 @@ class ValuteUseCase : KoinComponent {
 
     //local
     fun invokeGetLocalValutes() = valuteLocalRepository.getAllLocalValutes()
+    fun invokeGetFavoriteLocalValutes() = valuteLocalRepository.getAllFavoriteLocalValutes()
     suspend fun invokeGetLocalValuteById(valId: Int) =
         valuteLocalRepository.getLocalValuteById(valId)
 

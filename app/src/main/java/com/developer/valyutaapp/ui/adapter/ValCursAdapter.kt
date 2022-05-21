@@ -6,8 +6,8 @@ import com.developer.valyutaapp.domain.entities.Valute
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import com.developer.valyutaapp.utils.ImageResource
 import com.developer.valyutaapp.databinding.ItemBinding
+import com.developer.valyutaapp.utils.ImageResource
 
 class ValCursAdapter(
     private val context: Context, private val valutes: MutableList<Valute>,
@@ -37,8 +37,9 @@ class ValCursAdapter(
             iconValute.setImageBitmap(bt)
             name.text = valute.charCode
             nameCountry.text = valute.name
-            pokupat.text = "${valute.nominal} ${valute.charCode}"
-            prodaj.text = valute.value + " TJS"
+            date.text = valute.dates
+            value.text = "${valute.nominal} ${valute.charCode}"
+            somon.text = valute.value + " TJS"
             cardId.setOnClickListener {
                 onItemValuteClick(valute, bindingAdapterPosition)
             }

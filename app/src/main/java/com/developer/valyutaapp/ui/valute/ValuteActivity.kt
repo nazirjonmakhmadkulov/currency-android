@@ -3,7 +3,6 @@ package com.developer.valyutaapp.ui.valute
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import com.developer.valyutaapp.domain.entities.Valute
-import com.developer.valyutaapp.ui.adapter.DialogAdapter
 import android.os.Bundle
 import android.text.TextWatcher
 import android.text.Editable
@@ -13,12 +12,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.R
 import com.developer.valyutaapp.utils.Utils
 import com.developer.valyutaapp.databinding.ActivityValuteBinding
-import com.developer.valyutaapp.ui.adapter.SortAdapter
 import java.util.ArrayList
 
 class ValuteActivity : AppCompatActivity(R.layout.activity_valute), ValuteViewInterface {
@@ -146,7 +143,7 @@ class ValuteActivity : AppCompatActivity(R.layout.activity_valute), ValuteViewIn
     }
 
     override fun displayValutes(valute: List<Valute>) {
-        valutes!!.addAll(valute)
+        valutes.addAll(valute)
     }
 
     override fun displayError(s: String) {

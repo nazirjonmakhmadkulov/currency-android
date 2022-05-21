@@ -3,13 +3,19 @@
     <color name="purple_200">#008ae6</color>
     <color name="purple_500">#007acc</color>
     <color name="purple_700">#3F82B6</color>
+
     <color name="teal_200">#D32196F3</color>
     <color name="teal_700">#FF018786</color>
+
     <color name="black">#E8545B61</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="black_second">#B1B1B1</color>
+
     <color name="colorback">#E2CBDCEA</color>
     <color name="backgrond">#ffffff</color>
     <color name="text">#404040</color>
+
     <color name="btn_change">#71358dc4</color>
     <color name="btn_clean">#71c43548</color>
     <color name="btn_nbt">#79121111</color>

@@ -12,7 +12,7 @@ import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.databinding.FragmentSortBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
-import com.developer.valyutaapp.ui.adapter.SortAdapter
+import com.developer.valyutaapp.ui.adapter.FavoriteAdapter
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.ArrayList
@@ -25,7 +25,7 @@ class SortFragment : Fragment(R.layout.fragment_sort) {
     private val prefs: SharedPreference by inject()
 
     private var valuteList: MutableList<Valute> = ArrayList()
-    private val sortAdapter by lazy { SortAdapter(requireContext(), valuteList, ::onItemValute) }
+    private val sortAdapter by lazy { FavoriteAdapter(requireContext(), valuteList, ::onItemValute) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,8 +55,7 @@ class SortFragment : Fragment(R.layout.fragment_sort) {
         sortAdapter.notifyDataSetChanged()
     }
 
-    private fun onItemValute(item: Valute, position: Int, pos: Int) {
-        item.sortValute = pos
+    private fun onItemValute(item: Valute, position: Int) {
         // sortPresenter.updateValute(item)
     }
 }

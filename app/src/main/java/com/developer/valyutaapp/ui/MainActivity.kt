@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.developer.valyutaapp.R
 import android.os.Bundle
 import android.content.Intent
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,6 +15,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.databinding.ActivityMainBinding
 import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.service.auto.AutoService
+import com.developer.valyutaapp.utils.Utils.setStatusBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.android.inject
 
@@ -24,8 +27,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStatusBar(window)
         if (prefs.getBool() == "1") {
             startService(Intent(this, AutoService::class.java))
         } else if (prefs.getBool() == "0") {

@@ -3,6 +3,7 @@ package com.developer.valyutaapp.ui.edit
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.R
@@ -27,11 +28,27 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupToolbar()
         setupTap()
     }
 
+    private fun setupToolbar() {
+        with(viewBinding) {
+            toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
+            toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.save ->
+                        findNavController().popBackStack()
+                }
+                return@setOnMenuItemClickListener true
+            }
+        }
+    }
+
     private fun setupTap() {
-        val tabs = arrayOf("Favorites", "Currency")
+        val tabs = arrayOf("Избранное", "Все")
         pageAdapter = PagerAdapter(requireActivity(), tabs.size)
         viewPager = viewBinding.tabViewpager
         viewPager.adapter = this.pageAdapter
@@ -43,6 +60,4 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
             tab.text = tabs[position]
         }.attach()
     }
-
-
 }

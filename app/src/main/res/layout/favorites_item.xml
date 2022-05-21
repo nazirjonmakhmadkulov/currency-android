@@ -4,7 +4,8 @@
     android:id="@+id/itemCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginTop="2dp"
     android:background="@color/colorback"
     android:orientation="horizontal"
     app:cardCornerRadius="8dp">
@@ -17,9 +18,13 @@
 
         <ImageView
             android:id="@+id/iconValute"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="8dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:padding="2dp"
             android:src="@drawable/tajikistan" />
 
         <TextView
@@ -30,16 +35,18 @@
             android:layout_weight="0.5"
             android:ellipsize="end"
             android:maxLines="1"
-            android:padding="8dp"
+            android:padding="2dp"
             android:singleLine="true"
             android:text="Name Valute"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="16sp" />
 
-        <CheckBox
-            android:id="@+id/checkSort"
+        <ImageView
+            android:id="@+id/favorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_favorite" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

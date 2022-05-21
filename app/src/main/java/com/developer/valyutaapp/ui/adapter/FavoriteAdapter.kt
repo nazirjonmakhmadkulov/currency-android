@@ -6,17 +6,20 @@ import com.developer.valyutaapp.domain.entities.Valute
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
+import android.widget.ImageView
+import com.developer.valyutaapp.R
 import com.developer.valyutaapp.databinding.FavoritesItemBinding
 import com.developer.valyutaapp.utils.ImageResource
 
-class SortAdapter(
+class FavoriteAdapter(
     private val context: Context, private val valutes: MutableList<Valute>,
-    private val onItemValuteClick: (Valute, Int, Int) -> Unit,
+    private val onItemValuteClick: (Valute, Int) -> Unit,
 ) :
-    RecyclerView.Adapter<SortAdapter.ValuteHolder>() {
+    RecyclerView.Adapter<FavoriteAdapter.ValuteHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ValuteHolder {
-        val binding = FavoritesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            FavoritesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ValuteHolder(binding)
     }
 
@@ -34,16 +37,23 @@ class SortAdapter(
         fun bind(valute: Valute) = with(binding) {
             val bt = ImageResource.getImageRes(context, valute.charCode)
             iconValute.setImageBitmap(bt)
-            nameValute.text = valute.charCode
-            checkSort.isChecked = valute.sortValute == 1
-            checkSort.setOnCheckedChangeListener { _, _ ->
-                if (checkSort.isChecked) {
-                    checkSort.isChecked = true
-                    onItemValuteClick(valute, bindingAdapterPosition, 1)
+            nameValute.text = valute.name
+            favorite.setFavorites(valute.favoritesValute)
+            favorite.setOnClickListener {
+                if (valute.favoritesValute == 1) {
+                    valute.favoritesValute = 0
                 } else {
-                    checkSort.isChecked = false
-                    onItemValuteClick(valute, bindingAdapterPosition, 0)
+                    valute.favoritesValute = 1
                 }
+                onItemValuteClick(valute, bindingAdapterPosition)
+            }
+        }
+
+        private fun ImageView.setFavorites(inFavorites: Int?) {
+            if (inFavorites == 1) {
+                setImageResource(R.drawable.ic_favorite)
+            } else {
+                setImageResource(R.drawable.ic_unfavorite)
             }
         }
     }

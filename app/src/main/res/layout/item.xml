@@ -5,93 +5,100 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="10dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:gravity="center_vertical"
         android:padding="6dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iconValute"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
             android:scaleType="centerCrop"
             android:src="@drawable/tajikistan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:strokeColor="@color/purple_500"
             app:strokeWidth="1dp" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <TextView
+            android:id="@+id/date"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="12dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="end|right|top"
+            android:text="1.1.2002"
+            android:textColor="@color/black_second"
+            android:textSize="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/pokupat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end|right"
-                android:text="932 TJS"
-                android:textColor="@color/purple_500"
-                android:textSize="16dp"
-                android:textStyle="normal|bold" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="12dp"
+            android:text="TJS"
+            android:textAllCaps="true"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/somon"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/iconValute"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/prodaj"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end|right"
-                android:text="938 TJS"
-                android:textColor="@color/purple_700"
-                android:textSize="16dp"
-                android:textStyle="normal|bold" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/somon"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_toLeftOf="@+id/linearLayout"
-            android:layout_toRightOf="@+id/iconValute"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:gravity="end|right"
+            android:text="938 TJS"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/name"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TJS"
-                android:textAllCaps="true"
-                android:textColor="@color/text"
-                android:textSize="18dp"
-                android:textStyle="normal|bold" />
+        <TextView
+            android:id="@+id/nameCountry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="12dp"
+            android:text="TJS"
+            android:textColor="@color/black_second"
+            android:textSize="12sp"
+            android:textStyle="normal|bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/value"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/iconValute"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
 
-            <TextView
-                android:id="@+id/nameCountry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TajikistanTajikistanTajikistan"
-                android:textColor="@color/text"
-                android:textSize="15dp" />
-        </LinearLayout>
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:gravity="end|right"
+            android:text="938 TJS"
+            android:textColor="@color/black_second"
+            android:textSize="12sp"
+            android:textStyle="normal|bold"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/somon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

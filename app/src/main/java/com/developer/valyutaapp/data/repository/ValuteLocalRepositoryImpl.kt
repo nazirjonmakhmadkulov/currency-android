@@ -11,6 +11,10 @@ class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalR
         return valuteDao.getAllValutes()
     }
 
+    override fun getAllFavoriteLocalValutes(): Flow<List<Valute>> {
+        return valuteDao.getAllFavoritesValutes()
+    }
+
     override suspend fun getLocalValuteById(valId: Int): Valute {
         return valuteDao.getValuteById(valId)
     }
@@ -19,8 +23,8 @@ class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalR
         return valuteDao.getValuteCount()
     }
 
-    override suspend fun insertLocalValute(valutes: List<Valute>) {
-        return valuteDao.insertValute(valutes)
+    override suspend fun insertLocalValute(valute: Valute) {
+        return valuteDao.insertValute(valute)
     }
 
     override suspend fun updateLocalValute(valute: Valute) {

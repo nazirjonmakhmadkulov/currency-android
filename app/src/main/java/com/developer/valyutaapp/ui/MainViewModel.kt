@@ -30,6 +30,8 @@ class MainViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
     }
 
     fun getLocalValutes(): Flow<List<Valute>> = valuteUseCase.invokeGetLocalValutes()
+    fun getFavoriteLocalValutes(): Flow<List<Valute>> =
+        valuteUseCase.invokeGetFavoriteLocalValutes()
 
     private val _getLocalValuteById = MutableLiveData<Valute>()
     val getLocalValuteById: LiveData<Valute> get() = _getLocalValuteById
