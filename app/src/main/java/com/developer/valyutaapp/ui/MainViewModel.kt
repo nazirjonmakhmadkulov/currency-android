@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import com.developer.valyutaapp.domain.entities.ValCurs
 import  com.developer.valyutaapp.core.common.Result
+import com.developer.valyutaapp.domain.entities.Favorite
 import com.developer.valyutaapp.domain.entities.Valute
+import com.developer.valyutaapp.domain.usecases.FavoriteUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
+class MainViewModel(private val valuteUseCase: ValuteUseCase, private val favoriteUseCase: FavoriteUseCase) : ViewModel() {
 
     private val _getRemoteValutes = MutableLiveData<Result<ValCurs>>(Result.Loading)
     val getRemoteValutes: LiveData<Result<ValCurs>> get() = _getRemoteValutes
@@ -30,8 +32,9 @@ class MainViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
     }
 
     fun getLocalValutes(): Flow<List<Valute>> = valuteUseCase.invokeGetLocalValutes()
-    fun getFavoriteLocalValutes(): Flow<List<Valute>> =
-        valuteUseCase.invokeGetFavoriteLocalValutes()
+
+    fun getFavoriteLocalValutes(favorite: String): Flow<List<Valute>> =
+        valuteUseCase.invokeGetFavoriteLocalValutes(favorite)
 
     private val _getLocalValuteById = MutableLiveData<Valute>()
     val getLocalValuteById: LiveData<Valute> get() = _getLocalValuteById
@@ -58,13 +61,43 @@ class MainViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
     val deleteLocalValute: LiveData<Unit> get() = _deleteLocalValute
 
     fun deleteLocalValute(valute: Valute) = viewModelScope.launch {
-        _deleteLocalValute.value = valuteUseCase.invokeUpdateLocalValute(valute)
+        _deleteLocalValute.value = valuteUseCase.invokeDeleteLocalValute(valute)
     }
 
     private val _deleteAllLocalValute = MutableLiveData<Unit>()
     val deleteAllLocalValute: LiveData<Unit> get() = _deleteAllLocalValute
 
-    fun deleteAllLocalValute(valute: Valute) = viewModelScope.launch {
-        _deleteAllLocalValute.value = valuteUseCase.invokeUpdateLocalValute(valute)
+    fun deleteAllLocalValute() = viewModelScope.launch {
+        _deleteAllLocalValute.value = valuteUseCase.invokeDeleteAllLocalValutes()
+    }
+
+
+    //favorite
+    private val _insertLocalFavorite = MutableLiveData<Unit>()
+    val insertLocalFavorite: LiveData<Unit> get() = _insertLocalFavorite
+
+    fun insertLocalFavorite(favorite: Favorite) = viewModelScope.launch {
+        _insertLocalFavorite.value = favoriteUseCase.invokeInsertLocalFavorite(favorite)
+    }
+
+    private val _updateLocalFavorite = MutableLiveData<Unit>()
+    val updateLocalFavorite: LiveData<Unit> get() = _updateLocalFavorite
+
+    fun updateLocalFavorite(favorite: Favorite) = viewModelScope.launch {
+        _updateLocalFavorite.value = favoriteUseCase.invokeUpdateLocalFavorite(favorite)
+    }
+
+    private val _deleteLocalFavorite = MutableLiveData<Unit>()
+    val deleteLocalFavorite: LiveData<Unit> get() = _deleteLocalFavorite
+
+    fun deleteLocalFavorite(valId: Int) = viewModelScope.launch {
+        _deleteLocalFavorite.value = favoriteUseCase.invokeDeleteLocalFavorite(valId)
+    }
+
+    private val _deleteAllLocalFavorite = MutableLiveData<Unit>()
+    val deleteAllLocalFavorite: LiveData<Unit> get() = _deleteAllLocalFavorite
+
+    fun deleteAllLocalFavorite() = viewModelScope.launch {
+        _deleteAllLocalFavorite.value = favoriteUseCase.invokeDeleteAllLocalFavorites()
     }
 }

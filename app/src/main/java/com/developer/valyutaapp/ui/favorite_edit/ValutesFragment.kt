@@ -1,4 +1,4 @@
-package com.developer.valyutaapp.ui.edit
+package com.developer.valyutaapp.ui.favorite_edit
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,8 +8,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.R
+import com.developer.valyutaapp.core.common.FAVORITE_CONVERTER
 import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.databinding.FragmentValutesBinding
+import com.developer.valyutaapp.domain.entities.Favorite
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.FavoriteAdapter
@@ -25,7 +27,15 @@ class ValutesFragment : Fragment(R.layout.fragment_valutes) {
     private val prefs: SharedPreference by inject()
 
     private var valuteList: MutableList<Valute> = ArrayList()
-    private val sortAdapter by lazy { FavoriteAdapter(requireContext(), valuteList, ::onItemValute) }
+    private val sortAdapter by lazy {
+        FavoriteAdapter(
+            requireContext(),
+            valuteList,
+            ::onItemValute
+        )
+    }
+
+    val favorite = arguments?.getString("favorite")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,6 +66,17 @@ class ValutesFragment : Fragment(R.layout.fragment_valutes) {
     }
 
     private fun onItemValute(item: Valute, position: Int) {
-         viewModel.updateLocalValute(item)
+        // viewModel.updateLocalValute(item)
+        if (item.favoritesValute == 1) {
+            viewModel.insertLocalFavorite(
+                Favorite(
+                    id = item.id,
+                    favorite_converter = item.favoritesValute,
+                    favorite_valute = item.favoritesValute
+                )
+            )
+        } else if (item.favoritesValute == 1) {
+            viewModel.deleteLocalFavorite(item.id)
+        }
     }
 }

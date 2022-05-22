@@ -10,9 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.R
+import com.developer.valyutaapp.core.common.FAVORITE_CONVERTER
+import com.developer.valyutaapp.core.common.FAVORITE_VALUTE
 import com.developer.valyutaapp.core.common.PATH_EXP
 import com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.core.database.SharedPreference
@@ -22,13 +25,14 @@ import com.developer.valyutaapp.domain.entities.ValCurs
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.ValCursAdapter
+import com.developer.valyutaapp.ui.home.HomeFragmentDirections
 import com.developer.valyutaapp.ui.valute.ValuteActivity
 import com.developer.valyutaapp.utils.Utils
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.ArrayList
 
-class ConverterFragment :  Fragment(R.layout.fragment_converter) {
+class ConverterFragment : Fragment(R.layout.fragment_converter) {
 
     private val viewBinding by viewBinding(FragmentConverterBinding::bind)
 
@@ -43,8 +47,26 @@ class ConverterFragment :  Fragment(R.layout.fragment_converter) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupToolbar()
         setupViews()
         setupViewModel()
+    }
+
+    private fun setupToolbar() {
+        with(viewBinding) {
+            toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.edit_favorites -> callFavoriteEdit()
+                }
+                return@setOnMenuItemClickListener true
+            }
+        }
+    }
+
+    private fun callFavoriteEdit() {
+        val action =
+            ConverterFragmentDirections.actionNavigationConverterToEditFragment(FAVORITE_CONVERTER)
+        findNavController().navigate(action)
     }
 
     private fun setupViews() {
@@ -58,22 +80,6 @@ class ConverterFragment :  Fragment(R.layout.fragment_converter) {
         lifecycleScope.launchWhenCreated {
             viewModel.getLocalValutes().collect {
                 getAllValuteSuccess(it)
-            }
-        }
-        viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-        viewModel.getRemoteValutes.observe(viewLifecycleOwner) {
-            subscribeValuteState(it)
-        }
-    }
-
-    private fun subscribeValuteState(it: Result<ValCurs>) {
-        when (it) {
-            is Result.Loading -> {}
-            is Result.Success -> {
-                Log.d("Success ", it.data.valute.toString())
-            }
-            is Result.Error -> {
-                Log.d("Error ", it.code.toString() + " == " + it.errorMessage)
             }
         }
     }

@@ -8,13 +8,17 @@ import com.developer.valyutaapp.core.database.AppDatabase
 import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.core.dispatcher.CoroutineDispatcherProvider
 import com.developer.valyutaapp.core.dispatcher.DispatcherProvider
+import com.developer.valyutaapp.data.local.FavoriteDao
 import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.data.remote.ValuteService
+import com.developer.valyutaapp.data.repository.FavoriteLocalRepositoryImpl
 import com.developer.valyutaapp.data.repository.ValuteLocalRepositoryImpl
 import com.developer.valyutaapp.data.repository.ValuteRemoteDataSource
 import com.developer.valyutaapp.data.repository.ValuteRemoteRepositoryImpl
+import com.developer.valyutaapp.domain.repository.FavoriteLocalRepository
 import com.developer.valyutaapp.domain.repository.ValuteLocalRepository
 import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
+import com.developer.valyutaapp.domain.usecases.FavoriteUseCase
 import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import com.developer.valyutaapp.ui.MainViewModel
 import com.google.gson.FieldNamingPolicy
@@ -31,7 +35,7 @@ import java.util.concurrent.TimeUnit
 
 
 val viewModelModule = module {
-    factory { MainViewModel(get()) }
+    factory { MainViewModel(get(), get()) }
 }
 
 val connectionInternet = module {
@@ -113,12 +117,17 @@ val databaseModule = module {
             .build()
     }
 
-    fun provideDao(database: AppDatabase): ValuteDao {
+    fun provideValuteDao(database: AppDatabase): ValuteDao {
         return database.valuteDao()
     }
 
+    fun provideFavoriteDao(database: AppDatabase): FavoriteDao {
+        return database.favoriteDao()
+    }
+
     single { provideDatabase(androidApplication()) }
-    single { provideDao(get()) }
+    single { provideValuteDao(get()) }
+    single { provideFavoriteDao(get()) }
 }
 
 val repositoryModule = module {
@@ -131,12 +140,18 @@ val repositoryModule = module {
     }
     factory<ValuteRemoteRepository> { provideValuteRemoteRepository(get(), get(), get()) }
 
-    fun provideLocalRepository(valuteDao: ValuteDao): ValuteLocalRepositoryImpl {
+    fun provideValuteLocalRepository(valuteDao: ValuteDao): ValuteLocalRepositoryImpl {
         return ValuteLocalRepositoryImpl(valuteDao)
     }
-    factory<ValuteLocalRepository> { provideLocalRepository(get()) }
+    factory<ValuteLocalRepository> { provideValuteLocalRepository(get()) }
+
+    fun provideFavoriteLocalRepository(favoriteDao: FavoriteDao): FavoriteLocalRepositoryImpl {
+        return FavoriteLocalRepositoryImpl(favoriteDao)
+    }
+    factory<FavoriteLocalRepository> { provideFavoriteLocalRepository(get()) }
 }
 
 val useCasesModule = module {
     factory { ValuteUseCase() }
+    factory { FavoriteUseCase() }
 }

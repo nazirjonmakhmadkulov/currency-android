@@ -8,8 +8,10 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.annotation.RequiresApi
+import com.developer.valyutaapp.core.common.PATH_EXP
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.MainActivity
+import com.developer.valyutaapp.utils.Utils
 import com.developer.valyutaapp.utils.Utils.setStatusBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,7 +35,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun fetchValutes() {
-        //viewModel.getRemoteValutes()
+        //viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
     }
 
     private fun postDelay() {

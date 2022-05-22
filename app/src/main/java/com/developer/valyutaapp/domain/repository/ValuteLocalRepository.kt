@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ValuteLocalRepository {
     fun getAllLocalValutes(): Flow<List<Valute>>
-    fun getAllFavoriteLocalValutes(): Flow<List<Valute>>
+    fun getAllFavoriteLocalValutes(favorite: String): Flow<List<Valute>>
     suspend fun getLocalValuteById(valId: Int): Valute
     suspend fun getLocalValuteCount(): Int
     suspend fun insertLocalValute(valute: Valute)

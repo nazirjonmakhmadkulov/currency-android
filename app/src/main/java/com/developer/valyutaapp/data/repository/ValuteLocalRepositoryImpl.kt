@@ -11,7 +11,7 @@ class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalR
         return valuteDao.getAllValutes()
     }
 
-    override fun getAllFavoriteLocalValutes(): Flow<List<Valute>> {
+    override fun getAllFavoriteLocalValutes(favorite: String): Flow<List<Valute>> {
         return valuteDao.getAllFavoritesValutes()
     }
 

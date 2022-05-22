@@ -23,7 +23,11 @@
     <fragment
         android:id="@+id/navigation_converter"
         android:name="com.developer.valyutaapp.ui.converter.ConverterFragment"
-        tools:layout="@layout/fragment_converter" />
+        tools:layout="@layout/fragment_converter" >
+        <action
+            android:id="@+id/action_navigation_converter_to_editFragment"
+            app:destination="@id/editFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_valutes"
@@ -32,7 +36,7 @@
 
     <fragment
         android:id="@+id/editFragment"
-        android:name="com.developer.valyutaapp.ui.edit.EditFragment"
+        android:name="com.developer.valyutaapp.ui.favorite_edit.EditFragment"
         tools:layout="@layout/fragment_edit">
 
         <argument

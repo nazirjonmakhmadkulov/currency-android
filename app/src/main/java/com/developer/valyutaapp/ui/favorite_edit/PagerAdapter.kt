@@ -1,4 +1,4 @@
-package com.developer.valyutaapp.ui.edit
+package com.developer.valyutaapp.ui.favorite_edit
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class PagerAdapter(
     fragment: FragmentActivity,
-    private val itemCount: Int
+    private val itemCount: Int,
+    private val favorite: String
 ) :
     FragmentStateAdapter(fragment) {
 
@@ -15,6 +16,7 @@ class PagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         val args = Bundle()
+        args.putString("favorite", favorite)
         return when (position) {
             0 -> {
                 val f = FavoritesFragment()

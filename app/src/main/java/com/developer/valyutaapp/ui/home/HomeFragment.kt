@@ -86,7 +86,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setupViewModel() {
         lifecycleScope.launchWhenCreated {
-            viewModel.getFavoriteLocalValutes().collect {
+            viewModel.getFavoriteLocalValutes("").collect {
                 getAllValuteSuccess(it)
             }
         }

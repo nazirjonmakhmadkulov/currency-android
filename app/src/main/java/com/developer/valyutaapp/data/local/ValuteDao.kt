@@ -16,7 +16,7 @@ interface ValuteDao {
     @Query("SELECT * FROM valute WHERE dates = (SELECT MAX(dates) FROM valute)")
     fun getAllValutes(): Flow<List<Valute>>
 
-    @Query("SELECT * FROM valute WHERE favoritesValute = 1")
+    @Query("SELECT * FROM valute INNER JOIN favorite ON valute.id = favorite.id")
     fun getAllFavoritesValutes(): Flow<List<Valute>>
 
     @Query("SELECT * FROM valute ORDER BY favoritesConverter DESC")
@@ -29,7 +29,7 @@ interface ValuteDao {
     suspend fun updateValute(valute: Valute)
 
     @Delete
-    suspend fun deleteValute(vararg valutes: Valute)
+    suspend fun deleteValute(valutes: Valute)
 
     @Query("DELETE FROM valute")
     suspend fun deleteAllValutes()

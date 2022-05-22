@@ -60,22 +60,6 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
                 getAllValuteSuccess(it)
             }
         }
-        viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-        viewModel.getRemoteValutes.observe(viewLifecycleOwner) {
-            subscribeValuteState(it)
-        }
-    }
-
-    private fun subscribeValuteState(it: Result<ValCurs>) {
-        when (it) {
-            is Result.Loading -> {}
-            is Result.Success -> {
-                Log.d("Success ", it.data.valute.toString())
-            }
-            is Result.Error -> {
-                Log.d("Error ", it.code.toString() + " == " + it.errorMessage)
-            }
-        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -1,4 +1,4 @@
-package com.developer.valyutaapp.ui.edit
+package com.developer.valyutaapp.ui.favorite_edit
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,6 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.R
+import com.developer.valyutaapp.core.common.FAVORITE_CONVERTER
+import com.developer.valyutaapp.core.common.FAVORITE_VALUTE
 import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.databinding.FragmentFavoritesBinding
 import com.developer.valyutaapp.domain.entities.Valute
@@ -25,7 +27,13 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private val prefs: SharedPreference by inject()
 
     private var valuteList: MutableList<Valute> = ArrayList()
-    private val sortAdapter by lazy { FavoriteAdapter(requireContext(), valuteList, ::onItemValute) }
+    private val sortAdapter by lazy {
+        FavoriteAdapter(
+            requireContext(),
+            valuteList,
+            ::onItemValute
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,11 +49,21 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     }
 
     private fun setupViewModel() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.getFavoriteLocalValutes().collect {
-                getAllValuteSuccess(it)
+        val favorite = arguments?.getString("favorite")
+        if (FAVORITE_VALUTE == favorite) {
+            lifecycleScope.launchWhenCreated {
+                viewModel.getFavoriteLocalValutes(FAVORITE_VALUTE).collect {
+                    getAllValuteSuccess(it)
+                }
+            }
+        } else if (FAVORITE_CONVERTER == favorite) {
+            lifecycleScope.launchWhenCreated {
+                viewModel.getFavoriteLocalValutes(FAVORITE_CONVERTER).collect {
+                    getAllValuteSuccess(it)
+                }
             }
         }
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
