@@ -25,12 +25,11 @@ class SortFragment : Fragment(R.layout.fragment_sort) {
     private val prefs: SharedPreference by inject()
 
     private var valuteList: MutableList<Valute> = ArrayList()
-    private val sortAdapter by lazy { FavoriteAdapter(
-        requireContext(),
-        "favorite",
-        valuteList,
-        ::onItemValute
-    ) }
+//    private val sortAdapter by lazy { FavoriteAdapter(
+//        requireContext(),
+//        "favorite",
+//        ::onItemValute
+//    ) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +40,7 @@ class SortFragment : Fragment(R.layout.fragment_sort) {
     private fun setupViews() {
         viewBinding.recyclerValCurs.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            this.adapter = sortAdapter
+            //this.adapter = sortAdapter
         }
     }
 
@@ -57,7 +56,7 @@ class SortFragment : Fragment(R.layout.fragment_sort) {
     private fun getAllValuteSuccess(valutes: List<Valute>) {
         valuteList.clear()
         valuteList.addAll(valutes)
-        sortAdapter.notifyDataSetChanged()
+        //sortAdapter.notifyDataSetChanged()
     }
 
     private fun onItemValute(item: Valute, position: Int) {

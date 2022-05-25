@@ -1,50 +1,44 @@
 package com.developer.valyutaapp.ui.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import com.developer.valyutaapp.domain.entities.Valute
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
 import com.developer.valyutaapp.R
-import com.developer.valyutaapp.core.common.FAVORITE_CONVERTER
-import com.developer.valyutaapp.databinding.FavoritesItemBinding
+import com.developer.valyutaapp.core.base.BaseViewHolder
+import com.developer.valyutaapp.core.base.Item
+import com.developer.valyutaapp.core.base.ItemBase
 import com.developer.valyutaapp.databinding.ItemConverterBinding
 import com.developer.valyutaapp.utils.ImageResource
 
 class ConverterAdapter(
     private val context: Context,
-    private val valutes: MutableList<Valute>,
-    private val onItemValuteClick: (Valute, Int) -> Unit,
-) :
-    RecyclerView.Adapter<ConverterAdapter.ValuteHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ValuteHolder {
-        val binding =
-            ItemConverterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ValuteHolder(binding)
+    private val onItemValuteClick: (Valute) -> Unit,
+) : ItemBase<ItemConverterBinding, Valute> {
+    override fun isRelativeItem(item: Item): Boolean = item is Valute
+    override fun getLayoutId() = R.layout.item_converter
+    override fun getViewHolder(
+        layoutInflater: LayoutInflater, parent: ViewGroup,
+    ): BaseViewHolder<ItemConverterBinding, Valute> {
+        val binding = ItemConverterBinding.inflate(layoutInflater, parent, false)
+        return FavoriteViewHolder(binding, onItemValuteClick)
     }
-
-    override fun onBindViewHolder(holder: ValuteHolder, i: Int) {
-        (holder as? ValuteHolder)?.bind(valutes[i])
+    override fun getDiffUtil() = diffUtil
+    private val diffUtil = object : DiffUtil.ItemCallback<Valute>() {
+        override fun areItemsTheSame(oldItem: Valute, newItem: Valute) = oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: Valute, newItem: Valute) = oldItem == newItem
     }
-
-    override fun getItemCount(): Int {
-        return valutes.size
-    }
-
-    inner class ValuteHolder(private val binding: ItemConverterBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n")
-        fun bind(valute: Valute) = with(binding) {
-            val bt = ImageResource.getImageRes(context, valute.charCode)
+    inner class FavoriteViewHolder(binding: ItemConverterBinding, val onItemValuteClick: (Valute) -> Unit,
+    ) : BaseViewHolder<ItemConverterBinding, Valute>(binding) {
+        override fun onBind(item: Valute) = with(binding) {
+            super.onBind(item)
+            val bt = ImageResource.getImageRes(context, item.charCode)
             iconValute.setImageBitmap(bt)
-            charCode.text = valute.charCode
-            name.text = valute.name
+            charCode.text = item.charCode
+            name.text = item.name
             itemView.setOnClickListener {
-                onItemValuteClick(valute, bindingAdapterPosition)
+                onItemValuteClick(item)
             }
         }
     }

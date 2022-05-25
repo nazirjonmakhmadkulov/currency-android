@@ -15,6 +15,8 @@ import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.utils.ImageResource
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -42,7 +44,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         viewModel.getLocalValuteById(args.valId)
 
         lifecycleScope.launchWhenCreated {
-            viewModel.getLocalHistories().collect {
+            viewModel.getLocalHistories().distinctUntilChanged().collectLatest {
                 getAllValuteSuccess(it)
             }
         }

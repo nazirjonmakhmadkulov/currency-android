@@ -1,13 +1,14 @@
 package com.developer.valyutaapp.ui.favorite_edit
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.lifecycle.Transformations.distinctUntilChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.R
+import com.developer.valyutaapp.core.base.BaseAdapter
 import com.developer.valyutaapp.core.common.FAVORITE_CONVERTER
 import com.developer.valyutaapp.core.common.FAVORITE_VALUTE
 import com.developer.valyutaapp.core.database.SharedPreference
@@ -15,9 +16,10 @@ import com.developer.valyutaapp.databinding.FragmentFavoritesBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.FavoriteAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.ArrayList
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
@@ -26,15 +28,12 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     private val prefs: SharedPreference by inject()
 
-    val favorite = arguments?.getString("favorite")
-
-    private var valuteList: MutableList<Valute> = ArrayList()
-    private lateinit var sortAdapter: FavoriteAdapter
+    private lateinit var sortAdapter: BaseAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val favorite = arguments?.getString("favorite")
-        sortAdapter = FavoriteAdapter(requireContext(), favorite, valuteList, ::onItemValute)
+        sortAdapter =  BaseAdapter(listOf(FavoriteAdapter(requireContext(), favorite, ::onItemValute)))
         setupViews()
         setupViewModel()
     }
@@ -50,27 +49,24 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         val favorite = arguments?.getString("favorite")
         if (FAVORITE_VALUTE == favorite) {
             lifecycleScope.launchWhenCreated {
-                viewModel.getFavoriteLocalValutes().collect {
+                viewModel.getFavoriteLocalValutes().distinctUntilChanged().collectLatest {
                     getAllValuteSuccess(it)
                 }
             }
         } else if (FAVORITE_CONVERTER == favorite) {
             lifecycleScope.launchWhenCreated {
-                viewModel.getAllConverterLocalValutes().collect {
+                viewModel.getAllConverterLocalValutes().distinctUntilChanged().collectLatest {
                     getAllValuteSuccess(it)
                 }
             }
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun getAllValuteSuccess(valutes: List<Valute>) {
-        valuteList.clear()
-        valuteList.addAll(valutes)
-        sortAdapter.notifyDataSetChanged()
+        sortAdapter.submitList(valutes)
     }
 
-    private fun onItemValute(item: Valute, position: Int) {
+    private fun onItemValute(item: Valute) {
         viewModel.updateLocalValute(item)
     }
 }

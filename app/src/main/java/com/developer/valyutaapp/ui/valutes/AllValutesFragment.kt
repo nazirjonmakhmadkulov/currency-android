@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.R
+import com.developer.valyutaapp.core.base.BaseAdapter
+import com.developer.valyutaapp.core.base.Item
 import com.developer.valyutaapp.core.common.PATH_EXP
 import com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.core.database.SharedPreference
@@ -26,6 +28,8 @@ import com.developer.valyutaapp.ui.adapter.ValCursAdapter
 import com.developer.valyutaapp.ui.home.HomeFragmentDirections
 import com.developer.valyutaapp.ui.valute.ValuteActivity
 import com.developer.valyutaapp.utils.Utils
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.ArrayList
@@ -37,11 +41,13 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
     private val viewModel by viewModel<MainViewModel>()
     private val prefs: SharedPreference by inject()
 
-    var valuteList: MutableList<Valute> = ArrayList()
-
-    private val valCursAdapter by lazy {
-        ValCursAdapter(requireContext(), valuteList, ::onItemValute)
+    private var valutes: MutableList<Valute> = mutableListOf()
+    private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
+        MutableList(valutes.size) { valutes[it] }
     }
+    private val valCursAdapter: BaseAdapter =
+        BaseAdapter(listOf(ValCursAdapter(requireContext(), ::onItemValute)))
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,20 +64,18 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
 
     private fun setupViewModel() {
         lifecycleScope.launchWhenCreated {
-            viewModel.getLocalValutes().collect {
+            viewModel.getLocalValutes().distinctUntilChanged().collectLatest {
                 getAllValuteSuccess(it)
             }
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun getAllValuteSuccess(valutes: List<Valute>) {
-        valuteList.clear()
-        valuteList.addAll(valutes)
-        valCursAdapter.notifyDataSetChanged()
+        this.valutes = valutes.toMutableList()
+        valCursAdapter.submitList(valuteList)
     }
 
-    private fun onItemValute(item: Valute, position: Int) {
+    private fun onItemValute(item: Valute) {
         val action = AllValutesFragmentDirections.actionNavigationValutesToChartFragment(item.id)
         findNavController().navigate(action)
     }

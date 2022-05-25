@@ -1,71 +1,71 @@
 package com.developer.valyutaapp.ui.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import com.developer.valyutaapp.domain.entities.Valute
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
 import com.developer.valyutaapp.R
+import com.developer.valyutaapp.core.base.BaseViewHolder
+import com.developer.valyutaapp.core.base.Item
+import com.developer.valyutaapp.core.base.ItemBase
 import com.developer.valyutaapp.core.common.FAVORITE_CONVERTER
 import com.developer.valyutaapp.databinding.FavoritesItemBinding
 import com.developer.valyutaapp.utils.ImageResource
 
 class FavoriteAdapter(
-    private val context: Context, private val type: String?,
-    private val valutes: MutableList<Valute>,
-    private val onItemValuteClick: (Valute, Int) -> Unit,
-) :
-    RecyclerView.Adapter<FavoriteAdapter.ValuteHolder>() {
+    private val context: Context,
+    private val type: String?,
+    private val onItemValuteClick: (Valute) -> Unit,
+) : ItemBase<FavoritesItemBinding, Valute> {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ValuteHolder {
-        val binding =
-            FavoritesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ValuteHolder(binding)
+    override fun isRelativeItem(item: Item): Boolean = item is Valute
+    override fun getLayoutId() = R.layout.item
+    override fun getViewHolder(
+        layoutInflater: LayoutInflater, parent: ViewGroup,
+    ): BaseViewHolder<FavoritesItemBinding, Valute> {
+        val binding = FavoritesItemBinding.inflate(layoutInflater, parent, false)
+        return FavoriteViewHolder(binding, onItemValuteClick)
     }
 
-    override fun onBindViewHolder(holder: ValuteHolder, i: Int) {
-        (holder as? ValuteHolder)?.bind(valutes[i])
+    override fun getDiffUtil() = diffUtil
+    private val diffUtil = object : DiffUtil.ItemCallback<Valute>() {
+        override fun areItemsTheSame(oldItem: Valute, newItem: Valute) = oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: Valute, newItem: Valute) = oldItem == newItem
     }
 
-    override fun getItemCount(): Int {
-        return valutes.size
-    }
-
-    inner class ValuteHolder(private val binding: FavoritesItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n")
-        fun bind(valute: Valute) = with(binding) {
-            val bt = ImageResource.getImageRes(context, valute.charCode)
+    inner class FavoriteViewHolder(binding: FavoritesItemBinding, val onItemValuteClick: (Valute) -> Unit,
+    ) : BaseViewHolder<FavoritesItemBinding, Valute>(binding) {
+        override fun onBind(item: Valute) = with(binding) {
+            super.onBind(item)
+            val bt = ImageResource.getImageRes(context, item.charCode)
             iconValute.setImageBitmap(bt)
-            nameValute.text = valute.name
             type?.let {
                 if (type == FAVORITE_CONVERTER) {
-                    favorite.setFavorites(valute.favoritesConverter)
+                    favorite.setFavorites(item.favoritesConverter)
                     favorite.setOnClickListener {
-                        if (valute.favoritesConverter == 1) {
-                            valute.favoritesConverter = 0
+                        if (item.favoritesConverter == 1) {
+                            item.favoritesConverter = 0
                         } else {
-                            valute.favoritesConverter = 1
+                            item.favoritesConverter = 1
                         }
-                        onItemValuteClick(valute, bindingAdapterPosition)
+                        onItemValuteClick(item)
                     }
                 } else {
-                    favorite.setFavorites(valute.favoritesValute)
+                    favorite.setFavorites(item.favoritesValute)
                     favorite.setOnClickListener {
-                        if (valute.favoritesValute == 1) {
-                            valute.favoritesValute = 0
+                        if (item.favoritesValute == 1) {
+                            item.favoritesValute = 0
                         } else {
-                            valute.favoritesValute = 1
+                            item.favoritesValute = 1
                         }
-                        onItemValuteClick(valute, bindingAdapterPosition)
+                        onItemValuteClick(item)
                     }
                 }
             }
+            nameValute.text = item.name
         }
-
         private fun ImageView.setFavorites(inFavorites: Int?) {
             if (inFavorites == 1) {
                 setImageResource(R.drawable.ic_favorite)
