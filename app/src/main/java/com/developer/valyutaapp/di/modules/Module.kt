@@ -8,17 +8,17 @@ import com.developer.valyutaapp.core.database.AppDatabase
 import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.core.dispatcher.CoroutineDispatcherProvider
 import com.developer.valyutaapp.core.dispatcher.DispatcherProvider
-import com.developer.valyutaapp.data.local.FavoriteDao
+import com.developer.valyutaapp.data.local.HistoryDao
 import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.data.remote.ValuteService
-import com.developer.valyutaapp.data.repository.FavoriteLocalRepositoryImpl
+import com.developer.valyutaapp.data.repository.HistoryLocalRepositoryImpl
 import com.developer.valyutaapp.data.repository.ValuteLocalRepositoryImpl
 import com.developer.valyutaapp.data.repository.ValuteRemoteDataSource
 import com.developer.valyutaapp.data.repository.ValuteRemoteRepositoryImpl
-import com.developer.valyutaapp.domain.repository.FavoriteLocalRepository
+import com.developer.valyutaapp.domain.repository.HistoryLocalRepository
 import com.developer.valyutaapp.domain.repository.ValuteLocalRepository
 import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
-import com.developer.valyutaapp.domain.usecases.FavoriteUseCase
+import com.developer.valyutaapp.domain.usecases.HistoryUseCase
 import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import com.developer.valyutaapp.ui.MainViewModel
 import com.google.gson.FieldNamingPolicy
@@ -32,7 +32,6 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
-
 
 val viewModelModule = module {
     factory { MainViewModel(get(), get()) }
@@ -121,8 +120,8 @@ val databaseModule = module {
         return database.valuteDao()
     }
 
-    fun provideFavoriteDao(database: AppDatabase): FavoriteDao {
-        return database.favoriteDao()
+    fun provideFavoriteDao(database: AppDatabase): HistoryDao {
+        return database.historyDao()
     }
 
     single { provideDatabase(androidApplication()) }
@@ -145,13 +144,13 @@ val repositoryModule = module {
     }
     factory<ValuteLocalRepository> { provideValuteLocalRepository(get()) }
 
-    fun provideFavoriteLocalRepository(favoriteDao: FavoriteDao): FavoriteLocalRepositoryImpl {
-        return FavoriteLocalRepositoryImpl(favoriteDao)
+    fun provideFavoriteLocalRepository(favoriteDao: HistoryDao): HistoryLocalRepositoryImpl {
+        return HistoryLocalRepositoryImpl(favoriteDao)
     }
-    factory<FavoriteLocalRepository> { provideFavoriteLocalRepository(get()) }
+    factory<HistoryLocalRepository> { provideFavoriteLocalRepository(get()) }
 }
 
 val useCasesModule = module {
     factory { ValuteUseCase() }
-    factory { FavoriteUseCase() }
+    factory { HistoryUseCase() }
 }

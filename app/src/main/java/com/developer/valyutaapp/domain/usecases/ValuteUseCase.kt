@@ -18,11 +18,12 @@ class ValuteUseCase : KoinComponent {
 
     //local
     fun invokeGetLocalValutes() = valuteLocalRepository.getAllLocalValutes()
-    fun invokeGetFavoriteLocalValutes(favorite: String) = valuteLocalRepository.getAllFavoriteLocalValutes(favorite)
+    fun invokeGetFavoriteLocalValutes() = valuteLocalRepository.getAllFavoriteLocalValutes()
+    fun invokeGetAllConverterLocalValutes() = valuteLocalRepository.getAllConverterLocalValutes()
+
     suspend fun invokeGetLocalValuteById(valId: Int) =
         valuteLocalRepository.getLocalValuteById(valId)
 
-    suspend fun invokeGetLocalValuteCount() = valuteLocalRepository.getLocalValuteCount()
     suspend fun invokeUpdateLocalValute(valute: Valute) =
         valuteLocalRepository.updateLocalValute(valute)
 

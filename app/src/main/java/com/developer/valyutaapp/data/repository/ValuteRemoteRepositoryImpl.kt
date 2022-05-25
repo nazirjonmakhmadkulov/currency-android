@@ -19,9 +19,18 @@ class ValuteRemoteRepositoryImpl(
             is Result.Loading -> Result.Loading
             is Result.Success -> {
                 val valute = result.data.valute
-                valute.forEach {
-                    it.dates = getDateFormat(result.data.dates)
-                    valuteDao.insertValute(it)
+                if (valuteDao.getValuteExist(getDateFormat(result.data.dates))) {
+                    valute.forEach {
+                        it.dates = getDateFormat(result.data.dates)
+                        valuteDao.updateValuteFromRemote(
+                            it.charCode, it.nominal, it.name, it.value, it.dates, it.valId,
+                        )
+                    }
+                } else {
+                    valute.forEach {
+                        it.dates = getDateFormat(result.data.dates)
+                        valuteDao.insertValute(it)
+                    }
                 }
                 Result.Success(result.data)
             }

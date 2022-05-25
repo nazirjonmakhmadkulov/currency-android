@@ -26,17 +26,15 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     private val prefs: SharedPreference by inject()
 
+    val favorite = arguments?.getString("favorite")
+
     private var valuteList: MutableList<Valute> = ArrayList()
-    private val sortAdapter by lazy {
-        FavoriteAdapter(
-            requireContext(),
-            valuteList,
-            ::onItemValute
-        )
-    }
+    private lateinit var sortAdapter: FavoriteAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val favorite = arguments?.getString("favorite")
+        sortAdapter = FavoriteAdapter(requireContext(), favorite, valuteList, ::onItemValute)
         setupViews()
         setupViewModel()
     }
@@ -52,18 +50,17 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         val favorite = arguments?.getString("favorite")
         if (FAVORITE_VALUTE == favorite) {
             lifecycleScope.launchWhenCreated {
-                viewModel.getFavoriteLocalValutes(FAVORITE_VALUTE).collect {
+                viewModel.getFavoriteLocalValutes().collect {
                     getAllValuteSuccess(it)
                 }
             }
         } else if (FAVORITE_CONVERTER == favorite) {
             lifecycleScope.launchWhenCreated {
-                viewModel.getFavoriteLocalValutes(FAVORITE_CONVERTER).collect {
+                viewModel.getAllConverterLocalValutes().collect {
                     getAllValuteSuccess(it)
                 }
             }
         }
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -76,5 +73,4 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private fun onItemValute(item: Valute, position: Int) {
         viewModel.updateLocalValute(item)
     }
-
 }

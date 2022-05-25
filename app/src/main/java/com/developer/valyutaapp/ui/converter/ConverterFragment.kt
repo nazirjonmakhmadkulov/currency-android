@@ -78,7 +78,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
 
     private fun setupViewModel() {
         lifecycleScope.launchWhenCreated {
-            viewModel.getLocalValutes().collect {
+            viewModel.getAllConverterLocalValutes().collect {
                 getAllValuteSuccess(it)
             }
         }

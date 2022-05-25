@@ -2,17 +2,20 @@ package com.developer.valyutaapp.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import com.developer.valyutaapp.domain.entities.Valute
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.ImageView
 import com.developer.valyutaapp.R
+import com.developer.valyutaapp.core.common.FAVORITE_CONVERTER
 import com.developer.valyutaapp.databinding.FavoritesItemBinding
 import com.developer.valyutaapp.utils.ImageResource
 
 class FavoriteAdapter(
-    private val context: Context, private val valutes: MutableList<Valute>,
+    private val context: Context, private val type: String?,
+    private val valutes: MutableList<Valute>,
     private val onItemValuteClick: (Valute, Int) -> Unit,
 ) :
     RecyclerView.Adapter<FavoriteAdapter.ValuteHolder>() {
@@ -38,14 +41,28 @@ class FavoriteAdapter(
             val bt = ImageResource.getImageRes(context, valute.charCode)
             iconValute.setImageBitmap(bt)
             nameValute.text = valute.name
-            favorite.setFavorites(valute.favoritesValute)
-            favorite.setOnClickListener {
-                if (valute.favoritesValute == 1) {
-                    valute.favoritesValute = 0
+            type?.let {
+                if (type == FAVORITE_CONVERTER) {
+                    favorite.setFavorites(valute.favoritesConverter)
+                    favorite.setOnClickListener {
+                        if (valute.favoritesConverter == 1) {
+                            valute.favoritesConverter = 0
+                        } else {
+                            valute.favoritesConverter = 1
+                        }
+                        onItemValuteClick(valute, bindingAdapterPosition)
+                    }
                 } else {
-                    valute.favoritesValute = 1
+                    favorite.setFavorites(valute.favoritesValute)
+                    favorite.setOnClickListener {
+                        if (valute.favoritesValute == 1) {
+                            valute.favoritesValute = 0
+                        } else {
+                            valute.favoritesValute = 1
+                        }
+                        onItemValuteClick(valute, bindingAdapterPosition)
+                    }
                 }
-                onItemValuteClick(valute, bindingAdapterPosition)
             }
         }
 

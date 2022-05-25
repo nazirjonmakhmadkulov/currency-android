@@ -7,13 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import com.developer.valyutaapp.domain.entities.ValCurs
 import  com.developer.valyutaapp.core.common.Result
-import com.developer.valyutaapp.domain.entities.Favorite
+import com.developer.valyutaapp.domain.entities.History
 import com.developer.valyutaapp.domain.entities.Valute
-import com.developer.valyutaapp.domain.usecases.FavoriteUseCase
+import com.developer.valyutaapp.domain.usecases.HistoryUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val valuteUseCase: ValuteUseCase, private val favoriteUseCase: FavoriteUseCase) : ViewModel() {
+class MainViewModel(
+    private val valuteUseCase: ValuteUseCase,
+    private val historyUseCase: HistoryUseCase
+) : ViewModel() {
 
     private val _getRemoteValutes = MutableLiveData<Result<ValCurs>>(Result.Loading)
     val getRemoteValutes: LiveData<Result<ValCurs>> get() = _getRemoteValutes
@@ -33,21 +36,17 @@ class MainViewModel(private val valuteUseCase: ValuteUseCase, private val favori
 
     fun getLocalValutes(): Flow<List<Valute>> = valuteUseCase.invokeGetLocalValutes()
 
-    fun getFavoriteLocalValutes(favorite: String): Flow<List<Valute>> =
-        valuteUseCase.invokeGetFavoriteLocalValutes(favorite)
+    fun getFavoriteLocalValutes(): Flow<List<Valute>> =
+        valuteUseCase.invokeGetFavoriteLocalValutes()
+
+    fun getAllConverterLocalValutes(): Flow<List<Valute>> =
+        valuteUseCase.invokeGetAllConverterLocalValutes()
 
     private val _getLocalValuteById = MutableLiveData<Valute>()
     val getLocalValuteById: LiveData<Valute> get() = _getLocalValuteById
 
     fun getLocalValuteById(valId: Int) = viewModelScope.launch {
         _getLocalValuteById.value = valuteUseCase.invokeGetLocalValuteById(valId)
-    }
-
-    private val _getLocalValuteCount = MutableLiveData<Int>()
-    val getLocalValuteCount: LiveData<Int> get() = _getLocalValuteCount
-
-    fun getLocalValuteCount() = viewModelScope.launch {
-        _getLocalValuteCount.value = valuteUseCase.invokeGetLocalValuteCount()
     }
 
     private val _updateLocalValute = MutableLiveData<Unit>()
@@ -73,31 +72,33 @@ class MainViewModel(private val valuteUseCase: ValuteUseCase, private val favori
 
 
     //favorite
+    fun getLocalHistories(): Flow<List<History>> = historyUseCase.invokeGetLocalHistories()
+
     private val _insertLocalFavorite = MutableLiveData<Unit>()
     val insertLocalFavorite: LiveData<Unit> get() = _insertLocalFavorite
 
-    fun insertLocalFavorite(favorite: Favorite) = viewModelScope.launch {
-        _insertLocalFavorite.value = favoriteUseCase.invokeInsertLocalFavorite(favorite)
+    fun insertLocalFavorite(history: History) = viewModelScope.launch {
+        _insertLocalFavorite.value = historyUseCase.invokeInsertLocalHistory(history)
     }
 
     private val _updateLocalFavorite = MutableLiveData<Unit>()
     val updateLocalFavorite: LiveData<Unit> get() = _updateLocalFavorite
 
-    fun updateLocalFavorite(favorite: Favorite) = viewModelScope.launch {
-        _updateLocalFavorite.value = favoriteUseCase.invokeUpdateLocalFavorite(favorite)
+    fun updateLocalFavorite(history: History) = viewModelScope.launch {
+        _updateLocalFavorite.value = historyUseCase.invokeUpdateLocalHistory(history)
     }
 
     private val _deleteLocalFavorite = MutableLiveData<Unit>()
     val deleteLocalFavorite: LiveData<Unit> get() = _deleteLocalFavorite
 
     fun deleteLocalFavorite(valId: Int) = viewModelScope.launch {
-        _deleteLocalFavorite.value = favoriteUseCase.invokeDeleteLocalFavorite(valId)
+        _deleteLocalFavorite.value = historyUseCase.invokeDeleteLocalHistory(valId)
     }
 
     private val _deleteAllLocalFavorite = MutableLiveData<Unit>()
     val deleteAllLocalFavorite: LiveData<Unit> get() = _deleteAllLocalFavorite
 
     fun deleteAllLocalFavorite() = viewModelScope.launch {
-        _deleteAllLocalFavorite.value = favoriteUseCase.invokeDeleteAllLocalFavorites()
+        _deleteAllLocalFavorite.value = historyUseCase.invokeDeleteAllLocalHistory()
     }
 }

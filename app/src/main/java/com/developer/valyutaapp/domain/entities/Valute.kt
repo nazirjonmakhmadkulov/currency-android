@@ -10,10 +10,12 @@ import org.simpleframework.xml.Root
 @Root(name = "Valute", strict = false)
 data class Valute(
 
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
+
     @field:Attribute(name = "ID")
     @param:Attribute(name = "ID")
-    @PrimaryKey(autoGenerate = false)
-    var id: Int = 0,
+    var valId: Int = 0,
 
     @field:Element(name = "CharCode")
     @param:Element(name = "CharCode")

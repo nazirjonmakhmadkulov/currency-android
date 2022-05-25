@@ -86,7 +86,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setupViewModel() {
         lifecycleScope.launchWhenCreated {
-            viewModel.getFavoriteLocalValutes("").collect {
+            viewModel.getFavoriteLocalValutes().collect {
                 getAllValuteSuccess(it)
             }
         }
@@ -114,23 +114,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         valuteList.addAll(valutes)
         valCursAdapter.notifyDataSetChanged()
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//        return true
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        val id = item.itemId
-//        if (id == R.id.setting) {
-//            val intent = Intent(this, SettingActivity::class.java)
-//            startActivity(intent)
-//        } else if (id == R.id.update) {
-//            setupViews()
-//            viewModel.getRemoteValutes()
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 
     private fun onItemValute(item: Valute?, position: Int) {
         if (item != null) {
