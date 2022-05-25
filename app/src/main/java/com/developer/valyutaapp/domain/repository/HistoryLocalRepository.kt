@@ -7,6 +7,6 @@ interface HistoryLocalRepository {
     fun getAllLocalHistory(): Flow<List<History>>
     suspend fun insertLocalHistory(history: History)
     suspend fun updateLocalHistory(history: History)
-    suspend fun deleteLocalHistory(valId: Int)
+    suspend fun deleteLocalHistory(history: History)
     suspend fun deleteAllLocalHistory()
 }

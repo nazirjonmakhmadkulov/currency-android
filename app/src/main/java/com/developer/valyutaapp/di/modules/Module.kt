@@ -108,12 +108,8 @@ val netModule = module {
 }
 
 val databaseModule = module {
-
     fun provideDatabase(application: Application): AppDatabase {
-        return Room.databaseBuilder(application, AppDatabase::class.java, DB_NAME)
-            //.fallbackToDestructiveMigration()
-            //.allowMainThreadQueries()
-            .build()
+        return Room.databaseBuilder(application, AppDatabase::class.java, DB_NAME).build()
     }
 
     fun provideValuteDao(database: AppDatabase): ValuteDao {
@@ -123,7 +119,6 @@ val databaseModule = module {
     fun provideFavoriteDao(database: AppDatabase): HistoryDao {
         return database.historyDao()
     }
-
     single { provideDatabase(androidApplication()) }
     single { provideValuteDao(get()) }
     single { provideFavoriteDao(get()) }
@@ -131,13 +126,14 @@ val databaseModule = module {
 
 val repositoryModule = module {
     fun provideValuteRemoteRepository(
-        dispatcherProvider: DispatcherProvider,
-        remoteDataSource: ValuteRemoteDataSource,
-        valuteDao: ValuteDao
+        dispatcherProvider: DispatcherProvider, remoteDataSource: ValuteRemoteDataSource,
+        valuteDao: ValuteDao, historyDao: HistoryDao
     ): ValuteRemoteRepositoryImpl {
-        return ValuteRemoteRepositoryImpl(dispatcherProvider, remoteDataSource, valuteDao)
+        return ValuteRemoteRepositoryImpl(
+            dispatcherProvider, remoteDataSource, valuteDao, historyDao
+        )
     }
-    factory<ValuteRemoteRepository> { provideValuteRemoteRepository(get(), get(), get()) }
+    factory<ValuteRemoteRepository> { provideValuteRemoteRepository(get(), get(), get(), get()) }
 
     fun provideValuteLocalRepository(valuteDao: ValuteDao): ValuteLocalRepositoryImpl {
         return ValuteLocalRepositoryImpl(valuteDao)

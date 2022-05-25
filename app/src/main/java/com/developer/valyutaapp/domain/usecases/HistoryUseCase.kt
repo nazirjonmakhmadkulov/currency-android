@@ -19,8 +19,8 @@ class HistoryUseCase : KoinComponent {
     suspend fun invokeUpdateLocalHistory(history: History) =
         favoriteLocalRepository.updateLocalHistory(history)
 
-    suspend fun invokeDeleteLocalHistory(valId: Int) =
-        favoriteLocalRepository.deleteLocalHistory(valId)
+    suspend fun invokeDeleteLocalHistory(history: History) =
+        favoriteLocalRepository.deleteLocalHistory(history)
 
     suspend fun invokeDeleteAllLocalHistory() = favoriteLocalRepository.deleteAllLocalHistory()
 }

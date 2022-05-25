@@ -11,14 +11,17 @@ interface HistoryDao {
     @Query("SELECT * FROM history")
     fun getAllHistories(): Flow<List<History>>
 
+    @Query("SELECT EXISTS(SELECT * FROM valute WHERE dates = :dates)")
+    suspend fun getValuteExist(dates: String): Boolean
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHistory(history: History)
 
     @Update
     suspend fun updateHistory(history: History)
 
-    @Query("DELETE FROM history WHERE id=:valId")
-    suspend fun deleteHistory(valId: Int)
+    @Delete
+    suspend fun deleteHistory(history: History)
 
     @Query("DELETE FROM history")
     suspend fun deleteAllHistories()

@@ -91,8 +91,8 @@ class MainViewModel(
     private val _deleteLocalFavorite = MutableLiveData<Unit>()
     val deleteLocalFavorite: LiveData<Unit> get() = _deleteLocalFavorite
 
-    fun deleteLocalFavorite(valId: Int) = viewModelScope.launch {
-        _deleteLocalFavorite.value = historyUseCase.invokeDeleteLocalHistory(valId)
+    fun deleteLocalFavorite(history: History) = viewModelScope.launch {
+        _deleteLocalFavorite.value = historyUseCase.invokeDeleteLocalHistory(history)
     }
 
     private val _deleteAllLocalFavorite = MutableLiveData<Unit>()

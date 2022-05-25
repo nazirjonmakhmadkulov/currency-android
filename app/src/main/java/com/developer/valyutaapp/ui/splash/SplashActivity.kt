@@ -16,14 +16,12 @@ import com.developer.valyutaapp.utils.Utils.setStatusBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : AppCompatActivity() {
-    private val viewModel by viewModel<MainViewModel>()
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar(window)
         splashAndroid12()
-        fetchValutes()
         postDelay()
     }
 
@@ -34,14 +32,10 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchValutes() {
-        //viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-    }
-
     private fun postDelay() {
         Handler(Looper.getMainLooper()).postDelayed({
             callMain()
-        }, 2000)
+        }, 1000)
     }
 
     private fun callMain() {
