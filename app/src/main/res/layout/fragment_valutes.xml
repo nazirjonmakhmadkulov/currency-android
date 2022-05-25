@@ -4,8 +4,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgrond"
-    android:fitsSystemWindows="true">
+    android:background="@color/backgrond">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerValCurs"
@@ -14,8 +13,7 @@
         android:background="@color/colorback"
         android:clipToPadding="false"
         android:paddingTop="10dp"
-        android:paddingBottom="60dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:paddingBottom="60dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"

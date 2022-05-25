@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.R
@@ -22,6 +23,7 @@ import com.developer.valyutaapp.domain.entities.ValCurs
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.ValCursAdapter
+import com.developer.valyutaapp.ui.home.HomeFragmentDirections
 import com.developer.valyutaapp.ui.valute.ValuteActivity
 import com.developer.valyutaapp.utils.Utils
 import org.koin.android.ext.android.inject
@@ -69,12 +71,8 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
         valCursAdapter.notifyDataSetChanged()
     }
 
-    private fun onItemValute(item: Valute?, position: Int) {
-        if (item != null) {
-            val intent = Intent(requireContext(), ValuteActivity::class.java)
-            intent.putExtra("id", item.id)
-            intent.putExtra("click", position)
-            startActivity(intent)
-        }
+    private fun onItemValute(item: Valute, position: Int) {
+        val action = AllValutesFragmentDirections.actionNavigationValutesToChartFragment(item.id)
+        findNavController().navigate(action)
     }
 }

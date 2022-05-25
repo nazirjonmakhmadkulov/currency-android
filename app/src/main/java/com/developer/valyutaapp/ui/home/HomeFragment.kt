@@ -115,12 +115,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         valCursAdapter.notifyDataSetChanged()
     }
 
-    private fun onItemValute(item: Valute?, position: Int) {
-        if (item != null) {
-            val intent = Intent(requireContext(), ValuteActivity::class.java)
-            intent.putExtra("id", item.id)
-            intent.putExtra("click", position)
-            startActivity(intent)
-        }
+    private fun onItemValute(item: Valute, position: Int) {
+        val action = HomeFragmentDirections.actionNavigationHomeToChartFragment(item.id)
+        findNavController().navigate(action)
     }
 }

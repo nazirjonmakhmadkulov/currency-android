@@ -23,7 +23,7 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
 
     private val prefs: SharedPreference by inject()
 
-    val args: EditFragmentArgs by navArgs()
+    private val args: EditFragmentArgs by navArgs()
 
     private lateinit var viewPager: ViewPager2
     private lateinit var pageAdapter: PagerAdapter
@@ -35,18 +35,16 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
         setupTap()
     }
 
-    private fun setupToolbar() {
-        with(viewBinding) {
-            toolbar.setNavigationOnClickListener {
-                findNavController().popBackStack()
+    private fun setupToolbar() = with(viewBinding) {
+        toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.save ->
+                    findNavController().popBackStack()
             }
-            toolbar.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.save ->
-                        findNavController().popBackStack()
-                }
-                return@setOnMenuItemClickListener true
-            }
+            return@setOnMenuItemClickListener true
         }
     }
 
