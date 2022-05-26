@@ -46,7 +46,7 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
         MutableList(valutes.size) { valutes[it] }
     }
     private val valCursAdapter: BaseAdapter =
-        BaseAdapter(listOf(ValCursAdapter(requireContext(), ::onItemValute)))
+        BaseAdapter(listOf(ValCursAdapter(::onItemValute)))
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

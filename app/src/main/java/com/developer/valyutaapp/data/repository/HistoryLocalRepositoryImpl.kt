@@ -19,8 +19,8 @@ class HistoryLocalRepositoryImpl(private val historyDao: HistoryDao) : HistoryLo
         historyDao.updateHistory(history)
     }
 
-    override suspend fun deleteLocalHistory(history: History) {
-        historyDao.deleteHistory(history)
+    override suspend fun deleteLocalHistory(dates: String) {
+        historyDao.deleteHistory(dates)
     }
 
     override suspend fun deleteAllLocalHistory() {

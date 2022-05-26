@@ -1,6 +1,6 @@
 package com.developer.valyutaapp.ui.adapter
 
-import android.content.Context
+import android.util.Log
 import com.developer.valyutaapp.domain.entities.Valute
 import android.view.ViewGroup
 import android.view.LayoutInflater
@@ -15,9 +15,8 @@ import com.developer.valyutaapp.databinding.FavoritesItemBinding
 import com.developer.valyutaapp.utils.ImageResource
 
 class FavoriteAdapter(
-    private val context: Context,
     private val type: String?,
-    private val onItemValuteClick: (Valute) -> Unit,
+    private val onItemValuteClick: (Valute ,Int) -> Unit,
 ) : ItemBase<FavoritesItemBinding, Valute> {
 
     override fun isRelativeItem(item: Item): Boolean = item is Valute
@@ -35,11 +34,11 @@ class FavoriteAdapter(
         override fun areContentsTheSame(oldItem: Valute, newItem: Valute) = oldItem == newItem
     }
 
-    inner class FavoriteViewHolder(binding: FavoritesItemBinding, val onItemValuteClick: (Valute) -> Unit,
+    inner class FavoriteViewHolder(binding: FavoritesItemBinding, val onItemValuteClick: (Valute, Int) -> Unit,
     ) : BaseViewHolder<FavoritesItemBinding, Valute>(binding) {
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
-            val bt = ImageResource.getImageRes(context, item.charCode)
+            val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
             iconValute.setImageBitmap(bt)
             type?.let {
                 if (type == FAVORITE_CONVERTER) {
@@ -50,7 +49,7 @@ class FavoriteAdapter(
                         } else {
                             item.favoritesConverter = 1
                         }
-                        onItemValuteClick(item)
+                        onItemValuteClick(item, bindingAdapterPosition)
                     }
                 } else {
                     favorite.setFavorites(item.favoritesValute)
@@ -60,12 +59,19 @@ class FavoriteAdapter(
                         } else {
                             item.favoritesValute = 1
                         }
-                        onItemValuteClick(item)
+                        onItemValuteClick(item, bindingAdapterPosition)
                     }
                 }
             }
             nameValute.text = item.name
         }
+
+        override fun onBind(item: Valute, payloads: List<Any>) {
+            super.onBind(item, payloads)
+//            val inFavorites = payloads.last() as Int
+//            binding.favorite.setFavorites(item.favoritesValute)
+        }
+
         private fun ImageView.setFavorites(inFavorites: Int?) {
             if (inFavorites == 1) {
                 setImageResource(R.drawable.ic_favorite)

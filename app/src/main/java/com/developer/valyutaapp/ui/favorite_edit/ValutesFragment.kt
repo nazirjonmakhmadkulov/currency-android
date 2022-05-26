@@ -1,6 +1,5 @@
 package com.developer.valyutaapp.ui.favorite_edit
 
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -14,6 +13,7 @@ import com.developer.valyutaapp.databinding.FragmentValutesBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.FavoriteAdapter
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.android.ext.android.inject
@@ -31,7 +31,7 @@ class ValutesFragment : Fragment(R.layout.fragment_valutes) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val favorite = arguments?.getString("favorite")
-        sortAdapter =  BaseAdapter(listOf(FavoriteAdapter(requireContext(), favorite, ::onItemValute)))
+        sortAdapter = BaseAdapter(listOf(FavoriteAdapter(favorite, ::onItemValute)))
         setupViews()
         setupViewModel()
     }
@@ -55,7 +55,8 @@ class ValutesFragment : Fragment(R.layout.fragment_valutes) {
         sortAdapter.submitList(valutes)
     }
 
-    private fun onItemValute(item: Valute) {
+    private fun onItemValute(item: Valute, position: Int) {
         viewModel.updateLocalValute(item)
+        sortAdapter.notifyItemChanged(position)
     }
 }

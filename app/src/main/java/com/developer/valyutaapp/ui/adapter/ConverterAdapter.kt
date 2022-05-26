@@ -13,7 +13,6 @@ import com.developer.valyutaapp.databinding.ItemConverterBinding
 import com.developer.valyutaapp.utils.ImageResource
 
 class ConverterAdapter(
-    private val context: Context,
     private val onItemValuteClick: (Valute) -> Unit,
 ) : ItemBase<ItemConverterBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute
@@ -33,7 +32,7 @@ class ConverterAdapter(
     ) : BaseViewHolder<ItemConverterBinding, Valute>(binding) {
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
-            val bt = ImageResource.getImageRes(context, item.charCode)
+            val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
             iconValute.setImageBitmap(bt)
             charCode.text = item.charCode
             name.text = item.name

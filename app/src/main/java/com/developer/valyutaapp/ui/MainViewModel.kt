@@ -8,6 +8,7 @@ import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import com.developer.valyutaapp.domain.entities.ValCurs
 import  com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.domain.entities.History
+import com.developer.valyutaapp.domain.entities.ValHistory
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.domain.usecases.HistoryUseCase
 import kotlinx.coroutines.flow.Flow
@@ -70,8 +71,23 @@ class MainViewModel(
         _deleteAllLocalValute.value = valuteUseCase.invokeDeleteAllLocalValutes()
     }
 
+    //history
+    private val _getRemoteHistories = MutableLiveData<Result<ValHistory>>(Result.Loading)
+    val getRemoteHistories: LiveData<Result<ValHistory>> get() = _getRemoteHistories
+    fun getRemoteHistories(d1: String, d2: String, cn: Int, cs: String, exp: String) =
+        viewModelScope.launch {
+            when (val result = historyUseCase.invokeGetRemoteHistories(d1, d2, cn, cs, exp)) {
+                is Result.Loading -> {}
+                is Result.Success -> {
+                    _getRemoteHistories.value = Result.Success(result.data)
+                }
+                is Result.Error -> {
+                    _getRemoteHistories.value =
+                        Result.Error(result.cause, result.code, result.errorMessage)
+                }
+            }
+        }
 
-    //favorite
     fun getLocalHistories(): Flow<List<History>> = historyUseCase.invokeGetLocalHistories()
 
     private val _insertLocalFavorite = MutableLiveData<Unit>()
@@ -91,8 +107,8 @@ class MainViewModel(
     private val _deleteLocalFavorite = MutableLiveData<Unit>()
     val deleteLocalFavorite: LiveData<Unit> get() = _deleteLocalFavorite
 
-    fun deleteLocalFavorite(history: History) = viewModelScope.launch {
-        _deleteLocalFavorite.value = historyUseCase.invokeDeleteLocalHistory(history)
+    fun deleteLocalFavorite(date: String) = viewModelScope.launch {
+        _deleteLocalFavorite.value = historyUseCase.invokeDeleteLocalHistory(date)
     }
 
     private val _deleteAllLocalFavorite = MutableLiveData<Unit>()

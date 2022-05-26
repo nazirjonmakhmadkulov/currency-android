@@ -20,8 +20,8 @@ interface HistoryDao {
     @Update
     suspend fun updateHistory(history: History)
 
-    @Delete
-    suspend fun deleteHistory(history: History)
+    @Query("DELETE FROM history WHERE dates = :dates")
+    suspend fun deleteHistory(dates: String)
 
     @Query("DELETE FROM history")
     suspend fun deleteAllHistories()

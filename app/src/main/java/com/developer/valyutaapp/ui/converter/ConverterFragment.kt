@@ -33,7 +33,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         MutableList(valutes.size) { valutes[it] }
     }
     private val converterAdapter: BaseAdapter =
-        BaseAdapter(listOf(ConverterAdapter(requireContext(), ::onItemValute)))
+        BaseAdapter(listOf(ConverterAdapter(::onItemValute)))
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,8 +76,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     }
 
     private fun getAllValuteSuccess(valutes: List<Valute>) {
-        this.valutes = valutes.toMutableList()
-        converterAdapter.submitList(valuteList)
+        converterAdapter.submitList(valutes)
     }
 
     private fun onItemValute(item: Valute) {

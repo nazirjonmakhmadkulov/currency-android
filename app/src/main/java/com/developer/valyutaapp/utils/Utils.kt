@@ -10,25 +10,41 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
 
     @SuppressLint("SimpleDateFormat")
+    val parser = SimpleDateFormat("yyyy-MM-dd")
+
+    @SuppressLint("SimpleDateFormat")
     fun getDate(): String {
-        val dfDate: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-        return dfDate.format(Calendar.getInstance().time)
+        return parser.format(Calendar.getInstance().time)
     }
 
     @SuppressLint("SimpleDateFormat")
     fun getDateFormat(date: String): String {
-        val parser = SimpleDateFormat("yyyy-MM-dd")
         val formatter = SimpleDateFormat("dd.MM.yyyy")
-       return formatter.format(parser.parse(date)!!)
+        return formatter.format(parser.parse(date)!!)
     }
 
+    @SuppressLint("SimpleDateFormat")
+    fun getMonthAge(): String {
+        val cal = Calendar.getInstance()
+        cal.time = Date()
+        cal.add(Calendar.MONTH, -1)
+        return parser.format(cal.time)
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun isBetweenDate(date: String): String {
+        val cal = Calendar.getInstance()
+        cal.time = Date()
+        cal.add(Calendar.MONTH, -1)
+
+        return parser.format(cal.time)
+    }
 
     fun mathNominal(a: Double, b: Double): Double {
         return a * b

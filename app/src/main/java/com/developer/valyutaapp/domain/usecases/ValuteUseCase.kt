@@ -14,7 +14,7 @@ class ValuteUseCase : KoinComponent {
 
     //remote
     suspend fun invokeGetRemoteValutes(date: String, exp: String) =
-        valuteRemoteRepository.getAllValute(date, exp)
+        valuteRemoteRepository.getAllValutes(date, exp)
 
     //local
     fun invokeGetLocalValutes() = valuteLocalRepository.getAllLocalValutes()

@@ -14,7 +14,6 @@ import com.developer.valyutaapp.databinding.ItemBinding
 import com.developer.valyutaapp.utils.ImageResource
 
 class ValCursAdapter(
-    private val context: Context,
     private val onItemValuteClick: (Valute) -> Unit,
 ) : ItemBase<ItemBinding, Valute> {
 
@@ -37,7 +36,7 @@ class ValCursAdapter(
         @SuppressLint("SetTextI18n")
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
-            val bt = ImageResource.getImageRes(context, item.charCode)
+            val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
             iconValute.setImageBitmap(bt)
             name.text = item.charCode
             nameCountry.text = item.name

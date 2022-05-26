@@ -33,7 +33,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val favorite = arguments?.getString("favorite")
-        sortAdapter =  BaseAdapter(listOf(FavoriteAdapter(requireContext(), favorite, ::onItemValute)))
+        sortAdapter = BaseAdapter(listOf(FavoriteAdapter(favorite, ::onItemValute)))
         setupViews()
         setupViewModel()
     }
@@ -66,7 +66,8 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         sortAdapter.submitList(valutes)
     }
 
-    private fun onItemValute(item: Valute) {
+    private fun onItemValute(item: Valute, position: Int) {
         viewModel.updateLocalValute(item)
+        sortAdapter.notifyItemChanged(position)
     }
 }

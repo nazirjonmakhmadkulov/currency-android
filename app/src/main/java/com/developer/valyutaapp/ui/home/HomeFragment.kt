@@ -39,10 +39,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
         MutableList(valutes.size) { valutes[it] }
     }
-    private val valCursAdapter: BaseAdapter =
-        BaseAdapter(listOf(ValCursAdapter(requireContext(), ::onItemValute)))
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    private val valCursAdapter: BaseAdapter =
+        BaseAdapter(listOf(ValCursAdapter(::onItemValute)))
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
@@ -62,7 +62,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun swipeRefresh() = with(viewBinding) {
         swipe.setColorSchemeResources(
             R.color.black_second
@@ -109,11 +108,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun getAllValuteSuccess(valutes: List<Valute>) {
-        this.valutes = valutes.toMutableList()
-        valCursAdapter.submitList(valuteList)
+        valCursAdapter.submitList(valutes)
     }
 
     private fun onItemValute(item: Valute) {
+        viewModel.getRemoteHistories(Utils.getMonthAge(), Utils.getDate(), item.valId, item.charCode, PATH_EXP)
         val action = HomeFragmentDirections.actionNavigationHomeToChartFragment(item.id)
         findNavController().navigate(action)
     }

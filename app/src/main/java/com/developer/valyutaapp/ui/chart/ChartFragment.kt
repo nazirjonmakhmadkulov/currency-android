@@ -1,6 +1,7 @@
 package com.developer.valyutaapp.ui.chart
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -8,16 +9,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.R
-import com.developer.valyutaapp.core.database.SharedPreference
+import com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.databinding.FragmentChartBinding
 import com.developer.valyutaapp.domain.entities.History
+import com.developer.valyutaapp.domain.entities.ValCurs
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.utils.ImageResource
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -43,8 +44,13 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private fun setupViewModel() = with(viewBinding) {
         viewModel.getLocalValuteById(args.valId)
 
+        viewModel.getRemoteValutes.observe(viewLifecycleOwner) {
+            subscribeHistoryState(it)
+        }
+
         lifecycleScope.launchWhenCreated {
             viewModel.getLocalHistories().distinctUntilChanged().collectLatest {
+            Log.d("getLocalHistories", it.toString())
                 getAllValuteSuccess(it)
             }
         }
@@ -58,6 +64,17 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         }
     }
 
+    private fun subscribeHistoryState(it: Result<ValCurs>) {
+        when (it) {
+            is Result.Loading -> {}
+            is Result.Success -> {
+            }
+            is Result.Error -> {
+                Log.d("Error ", it.code.toString() + " == " + it.errorMessage)
+            }
+        }
+    }
+
     private fun getAllValuteSuccess(valutes: List<History>) {
         showBarChart(valutes)
     }
@@ -67,7 +84,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         val title = "color"
         //fit the data into a bar
         for (i in valutes.indices) {
-            val barEntry = Entry(valutes[i].nominal.toFloat(), valutes[i].value.toFloat())
+            val barEntry = Entry(i.toFloat(), valutes[i].value.toFloat())
             entries.add(barEntry)
         }
         val barDataSet = LineDataSet(entries, title)
