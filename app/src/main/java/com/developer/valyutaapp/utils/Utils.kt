@@ -39,11 +39,8 @@ object Utils {
 
     @SuppressLint("SimpleDateFormat")
     fun isBetweenDate(date: String): String {
-        val cal = Calendar.getInstance()
-        cal.time = Date()
-        cal.add(Calendar.MONTH, -1)
-
-        return parser.format(cal.time)
+        val formatter = SimpleDateFormat("dd.MM.yyyy")
+        return formatter.format(parser.parse(date)!!)
     }
 
     fun mathNominal(a: Double, b: Double): Double {

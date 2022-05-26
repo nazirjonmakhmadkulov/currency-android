@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardId"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,13 +19,13 @@
             android:layout_height="80dp"
             android:padding="2dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/tajikistan"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:strokeColor="@color/purple_500"
-            app:strokeWidth="1dp" />
+            app:strokeWidth="1dp"
+            tools:src="@drawable/tajikistan" />
 
         <TextView
             android:id="@+id/date"
@@ -32,12 +33,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
-            android:gravity="end|right|top"
-            android:text="1.1.2002"
             android:textColor="@color/black_second"
-            android:textSize="13dp"
+            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1.1.2002" />
 
         <TextView
             android:id="@+id/name"
@@ -45,7 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="12dp"
-            android:text="TJS"
             android:textAllCaps="true"
             android:textColor="@color/text"
             android:textSize="18sp"
@@ -54,22 +53,22 @@
             app:layout_constraintEnd_toStartOf="@+id/somon"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/iconValute"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TJS" />
 
         <TextView
             android:id="@+id/somon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
-            android:gravity="end|right"
-            android:text="938 TJS"
             android:textColor="@color/text"
             android:textSize="18sp"
             android:textStyle="normal|bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/name"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="938 TJS" />
 
         <TextView
             android:id="@+id/nameCountry"
@@ -77,7 +76,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="12dp"
-            android:text="TJS"
             android:textColor="@color/black_second"
             android:textSize="12sp"
             android:textStyle="normal|bold"
@@ -85,21 +83,21 @@
             app:layout_constraintEnd_toStartOf="@+id/value"
             app:layout_constraintStart_toEndOf="@+id/iconValute"
             app:layout_constraintTop_toBottomOf="@+id/name"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintVertical_bias="0"
+            tools:text="TJS" />
 
         <TextView
             android:id="@+id/value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
-            android:gravity="end|right"
-            android:text="938 TJS"
             android:textColor="@color/black_second"
             android:textSize="12sp"
             android:textStyle="normal|bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/somon"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintVertical_bias="0"
+            tools:text="938 TJS" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

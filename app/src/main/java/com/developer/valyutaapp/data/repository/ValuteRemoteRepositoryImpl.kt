@@ -11,6 +11,7 @@ import com.developer.valyutaapp.domain.entities.ValHistory
 import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
 import com.developer.valyutaapp.utils.Utils.getDateFormat
 import com.developer.valyutaapp.utils.Utils.getMonthAge
+import com.developer.valyutaapp.utils.Utils.isBetweenDate
 
 class ValuteRemoteRepositoryImpl(
     private val dispatcherProvider: DispatcherProvider,
@@ -38,20 +39,6 @@ class ValuteRemoteRepositoryImpl(
                         valuteDao.insertValute(it)
                     }
                 }
-//                if (!historyDao.getValuteExist(getDateFormat(result.data.dates))) {
-//                    valute.forEach {
-//                        historyDao.insertHistory(
-//                            History(
-//                                valId = it.id,
-//                                charCode = it.charCode,
-//                                nominal = it.nominal,
-//                                name = it.name,
-//                                value = it.value,
-//                                dates = getDateFormat(result.data.dates)
-//                            )
-//                        )
-//                    }
-//                }
                 Result.Success(result.data)
             }
             is Result.Error -> Result.Error(
@@ -73,19 +60,19 @@ class ValuteRemoteRepositoryImpl(
                 Log.d("valute", result.data.toString())
                 valute.forEach {
                    // Log.d("getValuteExist", historyDao.getValuteExist(getDateFormat(it.dates)).toString())
-                    if (!historyDao.getValuteExist(it.dates)) {
+                    if (!historyDao.getValuteExist(isBetweenDate(it.dates))) {
                         historyDao.insertHistory(
                             History(
                                 valId = it.valId,
                                 charCode = it.charCode,
                                 nominal = it.nominal,
                                 value = it.value,
-                                dates = it.dates
+                                dates = isBetweenDate(it.dates)
                             )
                         )
                     } else {
                         if (it.dates > getMonthAge()){
-                            historyDao.deleteHistory(it.dates)
+                            historyDao.deleteHistory(isBetweenDate(it.dates))
                         }
                     }
                 }
