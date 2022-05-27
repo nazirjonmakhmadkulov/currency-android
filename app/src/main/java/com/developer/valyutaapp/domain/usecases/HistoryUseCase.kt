@@ -17,7 +17,7 @@ class HistoryUseCase : KoinComponent {
         valuteRemoteRepository.getAllHistories(d1, d2, cn, cs, exp)
 
     //local
-    fun invokeGetLocalHistories() = historyLocalRepository.getAllLocalHistory()
+    fun invokeGetLocalHistories(valId: Int) = historyLocalRepository.getAllLocalHistory(valId)
 
     suspend fun invokeInsertLocalHistory(history: History) =
         historyLocalRepository.insertLocalHistory(history)
@@ -25,8 +25,8 @@ class HistoryUseCase : KoinComponent {
     suspend fun invokeUpdateLocalHistory(history: History) =
         historyLocalRepository.updateLocalHistory(history)
 
-    suspend fun invokeDeleteLocalHistory(dates: String) =
-        historyLocalRepository.deleteLocalHistory(dates)
+    suspend fun invokeDeleteLocalHistory() =
+        historyLocalRepository.deleteLocalHistory()
 
     suspend fun invokeDeleteAllLocalHistory() = historyLocalRepository.deleteAllLocalHistory()
 }

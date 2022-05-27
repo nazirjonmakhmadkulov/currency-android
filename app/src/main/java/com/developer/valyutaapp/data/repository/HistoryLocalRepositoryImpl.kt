@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.Flow
 
 class HistoryLocalRepositoryImpl(private val historyDao: HistoryDao) : HistoryLocalRepository {
 
-    override fun getAllLocalHistory(): Flow<List<History>> {
-        return historyDao.getAllHistories()
+    override fun getAllLocalHistory(valId: Int): Flow<List<History>> {
+        return historyDao.getAllHistories(valId)
     }
 
     override suspend fun insertLocalHistory(history: History) {
@@ -19,8 +19,8 @@ class HistoryLocalRepositoryImpl(private val historyDao: HistoryDao) : HistoryLo
         historyDao.updateHistory(history)
     }
 
-    override suspend fun deleteLocalHistory(dates: String) {
-        historyDao.deleteHistory(dates)
+    override suspend fun deleteLocalHistory() {
+        //historyDao.deleteHistory()
     }
 
     override suspend fun deleteAllLocalHistory() {

@@ -33,14 +33,21 @@ object Utils {
     fun getMonthAge(): String {
         val cal = Calendar.getInstance()
         cal.time = Date()
-        cal.add(Calendar.MONTH, -1)
+        cal.add(Calendar.DAY_OF_MONTH, -30)
         return parser.format(cal.time)
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun isBetweenDate(date: String): String {
+    fun dateFormatDb(date: String): String {
         val formatter = SimpleDateFormat("dd.MM.yyyy")
-        return formatter.format(parser.parse(date)!!)
+        return parser.format(formatter.parse(date)!!)
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun dateFormatChart(date: String): String {
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        val parser = SimpleDateFormat("dd MMM")
+        return parser.format(formatter.parse(date)!!)
     }
 
     fun mathNominal(a: Double, b: Double): Double {

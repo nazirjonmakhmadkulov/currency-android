@@ -113,7 +113,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun onItemValute(item: Valute) {
         viewModel.getRemoteHistories(Utils.getMonthAge(), Utils.getDate(), item.valId, item.charCode, PATH_EXP)
-        val action = HomeFragmentDirections.actionNavigationHomeToChartFragment(item.id)
+        val action = HomeFragmentDirections.actionNavigationHomeToChartFragment(item.valId)
         findNavController().navigate(action)
     }
 }

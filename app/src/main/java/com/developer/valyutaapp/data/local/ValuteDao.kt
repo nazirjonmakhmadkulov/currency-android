@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ValuteDao {
 
-    @Query("SELECT * FROM valute WHERE id=:valId")
+    @Query("SELECT * FROM valute WHERE valId=:valId")
     suspend fun getValuteById(valId: Int): Valute
 
     @Query("SELECT EXISTS(SELECT * FROM valute WHERE dates = :dates)")

@@ -88,7 +88,7 @@ class MainViewModel(
             }
         }
 
-    fun getLocalHistories(): Flow<List<History>> = historyUseCase.invokeGetLocalHistories()
+    fun getLocalHistories(valId: Int): Flow<List<History>> = historyUseCase.invokeGetLocalHistories(valId)
 
     private val _insertLocalFavorite = MutableLiveData<Unit>()
     val insertLocalFavorite: LiveData<Unit> get() = _insertLocalFavorite
@@ -107,8 +107,8 @@ class MainViewModel(
     private val _deleteLocalFavorite = MutableLiveData<Unit>()
     val deleteLocalFavorite: LiveData<Unit> get() = _deleteLocalFavorite
 
-    fun deleteLocalFavorite(date: String) = viewModelScope.launch {
-        _deleteLocalFavorite.value = historyUseCase.invokeDeleteLocalHistory(date)
+    fun deleteLocalFavorite() = viewModelScope.launch {
+        _deleteLocalFavorite.value = historyUseCase.invokeDeleteLocalHistory()
     }
 
     private val _deleteAllLocalFavorite = MutableLiveData<Unit>()

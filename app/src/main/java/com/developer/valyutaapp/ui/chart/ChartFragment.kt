@@ -15,11 +15,16 @@ import com.developer.valyutaapp.domain.entities.History
 import com.developer.valyutaapp.domain.entities.ValCurs
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.utils.ImageResource
+import com.developer.valyutaapp.utils.Utils
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.collections.ArrayList
 
 
 class ChartFragment : Fragment(R.layout.fragment_chart) {
@@ -28,6 +33,8 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private val viewModel by viewModel<MainViewModel>()
 
     private val args: ChartFragmentArgs by navArgs()
+
+    private var dateItems: MutableList<String> = mutableListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,8 +56,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         }
 
         lifecycleScope.launchWhenCreated {
-            viewModel.getLocalHistories().distinctUntilChanged().collectLatest {
-            Log.d("getLocalHistories", it.toString())
+            viewModel.getLocalHistories(args.valId).collect {
                 getAllValuteSuccess(it)
             }
         }
@@ -67,8 +73,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private fun subscribeHistoryState(it: Result<ValCurs>) {
         when (it) {
             is Result.Loading -> {}
-            is Result.Success -> {
-            }
+            is Result.Success -> {}
             is Result.Error -> {
                 Log.d("Error ", it.code.toString() + " == " + it.errorMessage)
             }
@@ -76,12 +81,25 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     }
 
     private fun getAllValuteSuccess(valutes: List<History>) {
+        dateItems.addAll(valutes.map { it.dates })
         showBarChart(valutes)
     }
 
     private fun showBarChart(valutes: List<History>) {
         val entries = ArrayList<Entry>()
         val title = "color"
+
+        val xAxis: XAxis = viewBinding.chart.xAxis
+        xAxis.setDrawGridLines(true)
+        xAxis.granularity = 1f
+        xAxis.isGranularityEnabled = true
+        if (valutes.size > 2) {
+            xAxis.valueFormatter = object : ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return Utils.dateFormatChart(valutes[value.toInt()].dates)
+                }
+            }
+        }
         //fit the data into a bar
         for (i in valutes.indices) {
             val barEntry = Entry(i.toFloat(), valutes[i].value.toFloat())
@@ -89,6 +107,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         }
         val barDataSet = LineDataSet(entries, title)
         val data = LineData(barDataSet)
+
         barDataSet.valueTextSize = 12f
         barDataSet.colors = ColorTemplate.COLORFUL_COLORS.toMutableList()
         viewBinding.chart.data = data

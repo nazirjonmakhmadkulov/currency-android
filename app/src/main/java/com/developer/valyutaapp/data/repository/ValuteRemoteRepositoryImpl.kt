@@ -1,6 +1,5 @@
 package com.developer.valyutaapp.data.repository
 
-import android.util.Log
 import com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.core.dispatcher.DispatcherProvider
@@ -11,7 +10,7 @@ import com.developer.valyutaapp.domain.entities.ValHistory
 import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
 import com.developer.valyutaapp.utils.Utils.getDateFormat
 import com.developer.valyutaapp.utils.Utils.getMonthAge
-import com.developer.valyutaapp.utils.Utils.isBetweenDate
+import com.developer.valyutaapp.utils.Utils.dateFormatDb
 
 class ValuteRemoteRepositoryImpl(
     private val dispatcherProvider: DispatcherProvider,
@@ -57,22 +56,20 @@ class ValuteRemoteRepositoryImpl(
             is Result.Loading -> Result.Loading
             is Result.Success -> {
                 val valute = result.data.history
-                Log.d("valute", result.data.toString())
                 valute.forEach {
-                   // Log.d("getValuteExist", historyDao.getValuteExist(getDateFormat(it.dates)).toString())
-                    if (!historyDao.getValuteExist(isBetweenDate(it.dates))) {
+                    if (!historyDao.getValuteExist(dateFormatDb(it.dates), it.valId)) {
                         historyDao.insertHistory(
                             History(
                                 valId = it.valId,
                                 charCode = it.charCode,
                                 nominal = it.nominal,
                                 value = it.value,
-                                dates = isBetweenDate(it.dates)
+                                dates = dateFormatDb(it.dates)
                             )
                         )
                     } else {
-                        if (it.dates > getMonthAge()){
-                            historyDao.deleteHistory(isBetweenDate(it.dates))
+                        if (dateFormatDb(it.dates) < getMonthAge()) {
+                            historyDao.deleteHistory(it.valId)
                         }
                     }
                 }
@@ -85,5 +82,4 @@ class ValuteRemoteRepositoryImpl(
             )
         }
     }
-
 }

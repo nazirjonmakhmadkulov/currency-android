@@ -4,9 +4,9 @@ import com.developer.valyutaapp.domain.entities.History
 import kotlinx.coroutines.flow.Flow
 
 interface HistoryLocalRepository {
-    fun getAllLocalHistory(): Flow<List<History>>
+    fun getAllLocalHistory(valId: Int): Flow<List<History>>
     suspend fun insertLocalHistory(history: History)
     suspend fun updateLocalHistory(history: History)
-    suspend fun deleteLocalHistory(dates: String)
+    suspend fun deleteLocalHistory()
     suspend fun deleteAllLocalHistory()
 }
