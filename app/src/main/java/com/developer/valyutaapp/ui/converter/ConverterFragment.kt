@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.FieldPosition
 
 class ConverterFragment : Fragment(R.layout.fragment_converter) {
 
@@ -28,12 +29,14 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     private val viewModel by viewModel<MainViewModel>()
     private val prefs: SharedPreference by inject()
 
+    private var mathValutes: MutableList<Valute> = mutableListOf()
     private var valutes: MutableList<Valute> = mutableListOf()
+
     private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
         MutableList(valutes.size) { valutes[it] }
     }
     private val converterAdapter: BaseAdapter =
-        BaseAdapter(listOf(ConverterAdapter(::onItemValute)))
+        BaseAdapter(listOf(ConverterAdapter(::onChangeValute, ::onItemValute)))
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,10 +79,50 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     }
 
     private fun getAllValuteSuccess(valutes: List<Valute>) {
-        converterAdapter.submitList(valutes)
+        this.valutes.addAll(valutes)
+        mathValutes.addAll(valutes)
+        converterAdapter.submitList(mathValutes.toList())
     }
 
     private fun onItemValute(item: Valute) {
 
+    }
+
+    private fun onChangeValute(item: String, position: Int) {
+        mathValutes.clear()
+        valutes.forEachIndexed { index, valute ->
+            if (index == position) {
+                mathValutes.add(
+                    Valute(
+                        id = valute.id,
+                        valId = valute.valId,
+                        charCode = valute.charCode,
+                        nominal = valute.nominal,
+                        name = valute.name,
+                        value = item,
+                        dates = valute.dates,
+                        favoritesValute = valute.favoritesValute,
+                        favoritesConverter = valute.favoritesConverter,
+                    )
+                )
+            } else {
+                mathValutes.add(
+                    Valute(
+                        id = valute.id,
+                        valId = valute.valId,
+                        charCode = valute.charCode,
+                        nominal = valute.nominal,
+                        name = valute.name,
+                        value = (valute.value.toDouble() * item.toDouble()).toString(),
+                        dates = valute.dates,
+                        favoritesValute = valute.favoritesValute,
+                        favoritesConverter = valute.favoritesConverter,
+                    )
+                )
+            }
+            converterAdapter.submitList(mathValutes.toList())
+            val sum = valute.value.toDouble() * item.toDouble()
+            println("$sum")
+        }
     }
 }

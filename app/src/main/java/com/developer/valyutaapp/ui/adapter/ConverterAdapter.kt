@@ -1,6 +1,7 @@
 package com.developer.valyutaapp.ui.adapter
 
-import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import com.developer.valyutaapp.domain.entities.Valute
 import android.view.ViewGroup
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.developer.valyutaapp.databinding.ItemConverterBinding
 import com.developer.valyutaapp.utils.ImageResource
 
 class ConverterAdapter(
+    private val onChangeValute: (String, Int) -> Unit,
     private val onItemValuteClick: (Valute) -> Unit,
 ) : ItemBase<ItemConverterBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute
@@ -23,19 +25,41 @@ class ConverterAdapter(
         val binding = ItemConverterBinding.inflate(layoutInflater, parent, false)
         return FavoriteViewHolder(binding, onItemValuteClick)
     }
+
     override fun getDiffUtil() = diffUtil
     private val diffUtil = object : DiffUtil.ItemCallback<Valute>() {
         override fun areItemsTheSame(oldItem: Valute, newItem: Valute) = oldItem.id == newItem.id
         override fun areContentsTheSame(oldItem: Valute, newItem: Valute) = oldItem == newItem
     }
-    inner class FavoriteViewHolder(binding: ItemConverterBinding, val onItemValuteClick: (Valute) -> Unit,
+
+    inner class FavoriteViewHolder(
+        binding: ItemConverterBinding, val onItemValuteClick: (Valute) -> Unit,
     ) : BaseViewHolder<ItemConverterBinding, Valute>(binding) {
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
             iconValute.setImageBitmap(bt)
             charCode.text = item.charCode
-            name.text = item.name
+            name.text = item.value
+            moneyConvert.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    if (s!!.isNotBlank()) {
+                        onChangeValute(s.toString(), bindingAdapterPosition)
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+            })
+
             itemView.setOnClickListener {
                 onItemValuteClick(item)
             }

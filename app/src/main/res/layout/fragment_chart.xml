@@ -36,13 +36,13 @@
                     android:layout_height="50dp"
                     android:padding="2dp"
                     android:scaleType="centerCrop"
-                    tools:src="@drawable/tajikistan"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                     app:strokeColor="@color/purple_500"
-                    app:strokeWidth="1dp" />
+                    app:strokeWidth="1dp"
+                    tools:src="@drawable/tajikistan" />
 
                 <TextView
                     android:id="@+id/name"
@@ -50,7 +50,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
-                    tools:text="TJS"
                     android:textAllCaps="true"
                     android:textColor="@color/text"
                     android:textSize="16sp"
@@ -59,7 +58,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/somon"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/iconValute"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="TJS" />
 
                 <TextView
                     android:id="@+id/somon"
@@ -67,14 +67,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     android:gravity="end|right"
-                    tools:text="938 TJS"
                     android:textColor="@color/text"
                     android:textSize="16sp"
                     android:textStyle="normal|bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/name"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="938 TJS" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.MaterialToolbar>
@@ -84,6 +84,7 @@
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

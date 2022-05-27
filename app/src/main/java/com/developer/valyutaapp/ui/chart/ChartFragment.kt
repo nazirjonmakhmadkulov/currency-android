@@ -20,9 +20,6 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.collections.ArrayList
 
@@ -93,6 +90,9 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         xAxis.setDrawGridLines(true)
         xAxis.granularity = 1f
         xAxis.isGranularityEnabled = true
+        xAxis.enableGridDashedLine(10f, 10f, 0f)
+        xAxis.setDrawLimitLinesBehindData(true)
+
         if (valutes.size > 2) {
             xAxis.valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
