@@ -4,7 +4,6 @@ import android.preference.PreferenceActivity
 import android.os.Bundle
 import com.developer.valyutaapp.R
 import android.content.Intent
-import com.developer.valyutaapp.ui.sort.SortActivity
 import com.developer.valyutaapp.ui.widget.WidgetActivity
 import android.widget.LinearLayout
 import android.view.LayoutInflater
@@ -28,11 +27,11 @@ class SettingActivity : PreferenceActivity() {
         sort = findPreference("sort") as Preference
         widget = findPreference("checked") as Preference
         autoUpdate = findPreference("auto") as SwitchPreference
-        sort!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            val intent = Intent(this@SettingActivity, SortActivity::class.java)
-            startActivity(intent)
-            false
-        }
+//        sort!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+//            val intent = Intent(this@SettingActivity, SortActivity::class.java)
+//            startActivity(intent)
+//            false
+//        }
         widget!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             val intent = Intent(this@SettingActivity, WidgetActivity::class.java)
             startActivity(intent)
