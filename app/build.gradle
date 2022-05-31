@@ -57,6 +57,9 @@ dependencies {
     //Fragment
     implementation "androidx.fragment:fragment-ktx:1.4.1"
 
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:2.7.1"
+
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
     implementation 'ru.gildor.coroutines:kotlin-coroutines-retrofit:1.1.0'

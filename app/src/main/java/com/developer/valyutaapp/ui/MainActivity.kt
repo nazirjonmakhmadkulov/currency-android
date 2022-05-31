@@ -1,30 +1,33 @@
 package com.developer.valyutaapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
-import com.developer.valyutaapp.R
-import android.os.Bundle
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.lifecycleScope
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.*
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.developer.valyutaapp.R
 import com.developer.valyutaapp.core.common.PATH_EXP
 import com.developer.valyutaapp.core.common.Result
-import com.developer.valyutaapp.databinding.ActivityMainBinding
 import com.developer.valyutaapp.core.database.SharedPreference
+import com.developer.valyutaapp.databinding.ActivityMainBinding
 import com.developer.valyutaapp.domain.entities.ValCurs
+import com.developer.valyutaapp.service.NotifyWorker
 import com.developer.valyutaapp.service.auto.AutoService
 import com.developer.valyutaapp.utils.Utils
 import com.developer.valyutaapp.utils.Utils.setStatusBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -33,6 +36,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val viewModel by viewModel<MainViewModel>()
 
+    companion object {
+        const val MESSAGE_STATUS = "message_status"
+    }
+
+    private lateinit var worker: WorkManager
+
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
@@ -40,6 +49,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar(window)
+        worker = WorkManager.getInstance()
+        worker()
         if (prefs.getBool() == "1") {
             startService(Intent(this, AutoService::class.java))
         } else if (prefs.getBool() == "0") {
@@ -61,6 +72,47 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setupActionBarWithNavController(navController, appBarConfiguration)
         setupViewModel()
     }
+
+    private fun worker() {
+        WorkManager.getInstance(this)
+            .enqueueUniquePeriodicWork(
+                "Some-Unique-Name",
+                ExistingPeriodicWorkPolicy.KEEP,
+                createWorkRequest()
+            )
+
+        val powerConstraints = Constraints.Builder().setRequiresCharging(true).build()
+        val taskData = Data.Builder().putString(MESSAGE_STATUS, "Notification Done.").build()
+        val request = OneTimeWorkRequest.Builder(NotifyWorker::class.java)
+            .setConstraints(powerConstraints).setInputData(taskData).build()
+
+        worker.getWorkInfoByIdLiveData(request.id).observe(this) { workInfo ->
+            workInfo.let {
+                if (it.state.isFinished) {
+                    val outputData = it.outputData
+                    val taskResult = outputData.getString(NotifyWorker.WORK_RESULT)
+                    if (taskResult != null) {
+                        //textInput.value = taskResult
+                    }
+                } else {
+                    val workStatus = workInfo.state
+                    //textInput.value = workStatus.toString()
+                }
+            }
+        }
+    }
+
+    private fun createConstraints() = Constraints.Builder()
+        .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
+        .setRequiresCharging(false)
+        .setRequiresBatteryNotLow(true)
+        .build()
+
+
+    private fun createWorkRequest() = PeriodicWorkRequestBuilder<NotifyWorker>(24, TimeUnit.HOURS)
+        .setConstraints(createConstraints())
+        .setInitialDelay(5000, TimeUnit.MILLISECONDS)
+        .build()
 
     private fun setupViewModel() {
         viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)

@@ -20,10 +20,8 @@ object Notification {
     private const val NOTIFICATION_ID = 100
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    private fun showNotification(
-        context: Context, title: String?, message: String?
-    ) {
-        val intent: Intent = Intent(context, MainActivity::class.java)
+    fun showNotification(context: Context, title: String, message: String) {
+        val intent = Intent(context, MainActivity::class.java)
         intent.data = Uri.parse("custom://" + System.currentTimeMillis())
         intent.action = "actionstring" + System.currentTimeMillis()
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
