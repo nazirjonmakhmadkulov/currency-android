@@ -1,6 +1,5 @@
 package com.developer.valyutaapp.ui.adapter
 
-import android.util.Log
 import com.developer.valyutaapp.domain.entities.Valute
 import android.view.ViewGroup
 import android.view.LayoutInflater

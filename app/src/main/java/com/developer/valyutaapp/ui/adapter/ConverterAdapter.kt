@@ -17,6 +17,7 @@ class ConverterAdapter(
     private val onChangeValute: (String, Int) -> Unit,
     private val onItemValuteClick: (Valute) -> Unit,
 ) : ItemBase<ItemConverterBinding, Valute> {
+    private var posSelect: Int = -1
     override fun isRelativeItem(item: Item): Boolean = item is Valute
     override fun getLayoutId() = R.layout.item_converter
     override fun getViewHolder(
@@ -44,25 +45,26 @@ class ConverterAdapter(
             moneyConvert.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     if (s!!.isNotBlank()) {
+                        posSelect = bindingAdapterPosition
                         onChangeValute(s.toString(), bindingAdapterPosition)
                     }
                 }
-
                 override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
+                    s: CharSequence?, start: Int, count: Int, after: Int
                 ) {
                 }
-
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 }
             })
-
             itemView.setOnClickListener {
                 onItemValuteClick(item)
             }
+        }
+
+        override fun onBind(item: Valute, payloads: List<Any>) {
+            super.onBind(item, payloads)
+            binding.name.text = item.value
+            //println("payloads $item")
         }
     }
 }

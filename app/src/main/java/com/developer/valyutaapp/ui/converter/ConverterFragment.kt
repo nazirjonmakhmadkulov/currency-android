@@ -15,12 +15,12 @@ import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.databinding.FragmentConverterBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
+import com.developer.valyutaapp.ui.adapter.ConAdapter
 import com.developer.valyutaapp.ui.adapter.ConverterAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.text.FieldPosition
 
 class ConverterFragment : Fragment(R.layout.fragment_converter) {
 
@@ -38,6 +38,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     private val converterAdapter: BaseAdapter =
         BaseAdapter(listOf(ConverterAdapter(::onChangeValute, ::onItemValute)))
 
+    private val conAdapter by lazy { ConAdapter(::onChangeValute, ::onItemValute) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -80,8 +81,8 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
 
     private fun getAllValuteSuccess(valutes: List<Valute>) {
         this.valutes.addAll(valutes)
-        mathValutes.addAll(valutes)
-        converterAdapter.submitList(mathValutes.toList())
+        //mathValutes.addAll(valutes)
+        converterAdapter.submitList(valutes.toList())
     }
 
     private fun onItemValute(item: Valute) {
@@ -120,7 +121,12 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
                     )
                 )
             }
-            converterAdapter.submitList(mathValutes.toList())
+//             println("${mathValutes[index]}")
+//            if (position != index) {
+//                converterAdapter.notifyItemChanged(index, mathValutes[index])
+//                converterAdapter.notifyDataSetChanged()
+//            }
+             converterAdapter.submitList(mathValutes.toList())
             val sum = valute.value.toDouble() * item.toDouble()
             println("$sum")
         }
