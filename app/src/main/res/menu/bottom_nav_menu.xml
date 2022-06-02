@@ -20,7 +20,7 @@
         android:title="Валюты" />
 
     <item
-        android:id="@+id/navigation_more"
+        android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_favorite"
         android:title="Ещё" />
 </menu>

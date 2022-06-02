@@ -4,7 +4,7 @@
     <PreferenceCategory app:title="@string/autoupdate">
 
         <SwitchPreferenceCompat
-            app:dependency="sync"
+            app:dependency="auto"
             app:key="auto"
             app:summaryOff="@string/autoenable"
             app:summaryOn="@string/autoenable"

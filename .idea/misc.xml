@@ -48,6 +48,8 @@
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.30648148148148147" />
         <entry key="app/src/main/res/menu/menu_save.xml" value="0.3546875" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/preference.xml" value="0.18072916666666666" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.18072916666666666" />
       </map>
     </option>
   </component>
