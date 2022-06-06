@@ -17,8 +17,10 @@ import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.ConAdapter
 import com.developer.valyutaapp.ui.adapter.ConverterAdapter
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -121,14 +123,17 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
                     )
                 )
             }
-//             println("${mathValutes[index]}")
-//            if (position != index) {
-//                converterAdapter.notifyItemChanged(index, mathValutes[index])
-//                converterAdapter.notifyDataSetChanged()
-//            }
-             converterAdapter.submitList(mathValutes.toList())
+            println("${mathValutes[index]}")
+            lifecycleScope.launch(Dispatchers.Main) {
+                if (position != index) {
+                    converterAdapter.notifyItemChanged(index, mathValutes[index])
+                    // converterAdapter.notifyDataSetChanged()
+                }
+            }
+
             val sum = valute.value.toDouble() * item.toDouble()
             println("$sum")
         }
+        //converterAdapter.submitList(mathValutes.toList())
     }
 }

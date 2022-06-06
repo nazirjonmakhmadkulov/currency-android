@@ -1,14 +1,14 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory app:title="@string/autoupdate">
+    <PreferenceCategory app:title="@string/auto_update">
 
         <SwitchPreferenceCompat
             app:dependency="auto"
             app:key="auto"
-            app:summaryOff="@string/autoenable"
-            app:summaryOn="@string/autoenable"
-            app:title="@string/autoupdate" />
+            app:summaryOff="@string/auto_enable"
+            app:summaryOn="@string/auto_enable"
+            app:title="@string/auto_update" />
 
         <EditTextPreference
             app:key="signature"

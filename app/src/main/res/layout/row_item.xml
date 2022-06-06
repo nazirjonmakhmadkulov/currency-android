@@ -8,6 +8,6 @@
         android:id="@+id/list_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorback"
+        android:background="@color/color_back"
         android:padding="5dp" />
 </RelativeLayout>

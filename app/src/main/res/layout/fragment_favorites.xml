@@ -3,13 +3,13 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgrond">
+    android:background="@color/background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerValCurs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorback"
+        android:background="@color/color_back"
         android:clipToPadding="false"
         android:paddingBottom="60dp"
         android:paddingTop="10dp" />

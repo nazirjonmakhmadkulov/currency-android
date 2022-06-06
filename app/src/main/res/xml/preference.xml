@@ -3,8 +3,8 @@
 
     <SwitchPreference
         android:key="auto"
-        android:summary="@string/autoenable"
-        android:title="@string/autoupdate"
+        android:summary="@string/auto_enable"
+        android:title="@string/auto_update"
         android:persistent="false"
         android:disableDependentsState="false">
     </SwitchPreference>
