@@ -4,7 +4,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -18,7 +17,6 @@
             android:id="@+id/recyclerValCurs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_back"
             android:clipToPadding="false"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -27,7 +25,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:background="@color/background"
         android:fitsSystemWindows="true"
         app:elevation="0dp">
 
@@ -39,6 +37,7 @@
             app:menu="@menu/menu_main"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="Главная"
+            app:titleTextColor="@color/white"
             app:titleCentered="false" />
     </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

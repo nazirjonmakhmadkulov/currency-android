@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardId"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,13 +20,13 @@
             android:layout_height="80dp"
             android:padding="2dp"
             android:scaleType="centerCrop"
-            tools:src="@drawable/tajikistan"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:strokeColor="@color/purple_500"
-            app:strokeWidth="1dp" />
+            app:strokeWidth="1dp"
+            tools:src="@drawable/tajikistan" />
 
         <TextView
             android:id="@+id/charCode"
@@ -33,7 +34,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="12dp"
-            tools:text="TJS"
             android:textAllCaps="true"
             android:textColor="@color/text"
             android:textSize="18sp"
@@ -41,7 +41,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/iconValute"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TJS" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -81,10 +82,10 @@
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="4dp"
             android:gravity="end"
-            tools:text="TJS"
             android:textSize="12sp"
             android:textStyle="normal|bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="TJS" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

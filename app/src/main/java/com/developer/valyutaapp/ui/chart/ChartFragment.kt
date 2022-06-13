@@ -57,6 +57,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
                 getAllValuteSuccess(it)
             }
         }
+
         lifecycleScope.launchWhenCreated {
             viewModel.getLocalValuteById.observe(viewLifecycleOwner) {
                 val bt = ImageResource.getImageRes(requireContext(), it.charCode)

@@ -13,7 +13,6 @@ import com.developer.valyutaapp.databinding.FragmentValutesBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.FavoriteAdapter
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.android.ext.android.inject

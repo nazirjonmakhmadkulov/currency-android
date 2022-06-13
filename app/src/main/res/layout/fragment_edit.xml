@@ -6,18 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    app:statusBarBackground="@color/white"
     tools:context=".ui.favorite_edit.EditFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/background"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
-        app:elevation="0dp"
-        app:statusBarForeground="@color/white">
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -37,6 +35,7 @@
                 app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title="Избранное"
+                app:titleTextColor="@color/white"
                 app:titleCentered="false" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
