@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.Flow
 interface ValuteDao {
 
     @Query("SELECT * FROM valute WHERE valId=:valId")
-    suspend fun getValuteById(valId: Int): Valute
+    fun getValuteById(valId: Int): Valute
 
     @Query("SELECT EXISTS(SELECT * FROM valute WHERE dates = :dates)")
-    suspend fun getValuteExist(dates: String): Boolean
+    fun getValuteExist(dates: String): Boolean
 
     @Query("SELECT * FROM valute")
     fun getAllValutes(): Flow<List<Valute>>
@@ -23,17 +23,21 @@ interface ValuteDao {
     fun getAllFavoritesValutes(): Flow<List<Valute>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertValute(valute: Valute)
+    fun insertValute(valute: Valute)
 
     @Update
-    suspend fun updateValute(valutes: Valute)
+    fun updateValute(valutes: Valute)
 
     @Query("UPDATE valute SET charCode=:code, nominal=:nomi, name=:name, value=:value, dates=:dates WHERE valId=:id")
-    suspend fun updateValuteFromRemote(code: String, nomi: Int, name: String, value: String, dates: String, id: Int)
+    fun updateValuteFromRemote(
+        code: String, nomi: Int,
+        name: String, value: String,
+        dates: String, id: Int
+    )
 
     @Delete
-    suspend fun deleteValute(valutes: Valute)
+    fun deleteValute(valutes: Valute)
 
     @Query("DELETE FROM valute")
-    suspend fun deleteAllValutes()
+    fun deleteAllValutes()
 }

@@ -14,6 +14,9 @@
     <string name="auto_update">Автоматическое обновление</string>
     <string name="pol_update">12-и часовой режим</string>
     <string name="auto_enable">Включить</string>
+    <string name="favorites">Избранное</string>
+    <string name="favorites_valutes">Избранное валют</string>
+
     <string name="banner_ad_unit_id" tools:ignore="MissingTranslation">ca-app-pub-7733697700012664~1688146414</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

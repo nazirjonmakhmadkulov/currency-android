@@ -78,10 +78,8 @@ class ValuteFragment : Fragment(R.layout.fragment_valute) {
         } else {
             viewBinding.edit2.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
-                    charSequence: CharSequence,
-                    i: Int,
-                    i1: Int,
-                    i2: Int
+                    charSequence: CharSequence, i: Int,
+                    i1: Int, i2: Int
                 ) {
                 }
 

@@ -44,7 +44,11 @@
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.developer.valyutaapp.ui.setting.SettingsFragment"
-        tools:layout="@xml/root_preferences" />
+        tools:layout="@xml/root_preferences" >
+        <action
+            android:id="@+id/action_navigation_settings_to_editFragment"
+            app:destination="@id/editFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/editFragment"

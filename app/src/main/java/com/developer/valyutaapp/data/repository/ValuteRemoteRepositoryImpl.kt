@@ -11,6 +11,8 @@ import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
 import com.developer.valyutaapp.utils.Utils.getDateFormat
 import com.developer.valyutaapp.utils.Utils.getMonthAge
 import com.developer.valyutaapp.utils.Utils.dateFormatDb
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class ValuteRemoteRepositoryImpl(
     private val dispatcherProvider: DispatcherProvider,
@@ -19,8 +21,8 @@ class ValuteRemoteRepositoryImpl(
     private val historyDao: HistoryDao
 ) : ValuteRemoteRepository {
 
-    override suspend fun getAllValutes(date: String, exp: String): Result<ValCurs> {
-        return when (val result =
+    override suspend fun getAllValutes(date: String, exp: String): Result<ValCurs> = withContext(Dispatchers.IO) {
+        return@withContext when (val result =
             valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)) {
             is Result.Loading -> Result.Loading
             is Result.Success -> {
@@ -50,7 +52,7 @@ class ValuteRemoteRepositoryImpl(
                 result.errorMessage
             )
         }
-    }
+        }
 
     override suspend fun getAllHistories(
         d1: String, d2: String, cn: Int, cs: String, exp: String
