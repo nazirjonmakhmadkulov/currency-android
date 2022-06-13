@@ -51,8 +51,18 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        swipeRefresh()
         setupViews()
         setupViewModel()
+    }
+
+    private fun swipeRefresh() = with(viewBinding) {
+        swipe.setColorSchemeResources(
+            R.color.black_second
+        )
+        swipe.setOnRefreshListener {
+            viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
+        }
     }
 
     private fun setupViews() {
@@ -66,6 +76,22 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
         lifecycleScope.launchWhenCreated {
             viewModel.getLocalValutes().distinctUntilChanged().collectLatest {
                 getAllValuteSuccess(it)
+            }
+        }
+        viewModel.getRemoteValutes.observe(viewLifecycleOwner) {
+            subscribeValuteState(it)
+        }
+    }
+
+    private fun subscribeValuteState(it: Result<ValCurs>) {
+        when (it) {
+            is Result.Loading -> {}
+            is Result.Success -> {
+                viewBinding.swipe.isRefreshing = false
+            }
+            is Result.Error -> {
+                viewBinding.swipe.isRefreshing = false
+                Log.d("Error ", it.code.toString() + " == " + it.errorMessage)
             }
         }
     }

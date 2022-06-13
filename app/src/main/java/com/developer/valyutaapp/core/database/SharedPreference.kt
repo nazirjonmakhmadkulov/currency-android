@@ -5,9 +5,11 @@ import android.content.SharedPreferences
 
 class SharedPreference(context: Context) {
 
-    private val PREFS_NAME = "currency"
-    private val LANG = "language"
-    private val BOOL = "bool"
+    companion object{
+        private const val PREFS_NAME = "currency"
+        private const val LANG = "language"
+        private const val AUTO_UPDATE = "auto_update"
+    }
 
     private val sharedPref: SharedPreferences =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -21,12 +23,12 @@ class SharedPreference(context: Context) {
         return sharedPref.getString(LANG, "")!!
     }
 
-    fun saveBool(bool: String) {
+    fun saveAutoUpdate(bool: String) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
-        editor.putString(BOOL, bool).apply()
+        editor.putString(AUTO_UPDATE, bool).apply()
     }
 
-    fun getBool(): String {
-        return sharedPref.getString(BOOL, "")!!
+    fun getAutoUpdate(): String {
+        return sharedPref.getString(AUTO_UPDATE, "")!!
     }
 }

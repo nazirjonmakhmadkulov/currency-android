@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setStatusBar(window)
         worker = WorkManager.getInstance()
         worker()
-        if (prefs.getBool() == "1") {
+        if (prefs.getAutoUpdate() == "1") {
             startService(Intent(this, AutoService::class.java))
-        } else if (prefs.getBool() == "0") {
+        } else if (prefs.getAutoUpdate() == "0") {
             stopService(Intent(this, AutoService::class.java))
         }
         val navHostFragment =

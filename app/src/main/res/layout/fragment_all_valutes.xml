@@ -7,14 +7,20 @@
     android:background="@color/background"
     android:fitsSystemWindows="true">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerValCurs"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_back"
-        android:clipToPadding="false"
-        android:paddingBottom="60dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerValCurs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_back"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -34,11 +40,4 @@
             app:title="Все валюты"
             app:titleCentered="false" />
     </com.google.android.material.appbar.AppBarLayout>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -35,6 +35,10 @@ class ValuteRemoteRepositoryImpl(
                 } else {
                     valute.forEach {
                         it.dates = getDateFormat(result.data.dates)
+                        if (it.valId == 840 || it.valId == 978 || it.valId == 810) {
+                            it.favoritesValute = 1
+                            it.favoritesConverter = 1
+                        }
                         valuteDao.insertValute(it)
                     }
                 }
