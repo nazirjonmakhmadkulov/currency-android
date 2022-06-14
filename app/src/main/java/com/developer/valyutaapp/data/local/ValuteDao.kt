@@ -10,8 +10,8 @@ interface ValuteDao {
     @Query("SELECT * FROM valute WHERE valId=:valId")
     fun getValuteById(valId: Int): Valute
 
-    @Query("SELECT EXISTS(SELECT * FROM valute WHERE dates = :dates)")
-    fun getValuteExist(dates: String): Boolean
+    @Query("SELECT EXISTS(SELECT * FROM valute WHERE valId = :valId)")
+    fun getValuteExist(valId: Int): Boolean
 
     @Query("SELECT * FROM valute")
     fun getAllValutes(): Flow<List<Valute>>

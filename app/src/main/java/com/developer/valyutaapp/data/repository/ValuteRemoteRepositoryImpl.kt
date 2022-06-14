@@ -21,37 +21,34 @@ class ValuteRemoteRepositoryImpl(
     private val historyDao: HistoryDao
 ) : ValuteRemoteRepository {
 
-    override suspend fun getAllValutes(date: String, exp: String): Result<ValCurs> = withContext(Dispatchers.IO) {
-        return@withContext when (val result =
-            valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)) {
-            is Result.Loading -> Result.Loading
-            is Result.Success -> {
-                val valute = result.data.valute
-                if (valuteDao.getValuteExist(getDateFormat(result.data.dates))) {
+    override suspend fun getAllValutes(date: String, exp: String): Result<ValCurs> =
+        withContext(Dispatchers.IO) {
+            return@withContext when (val result =
+                valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)) {
+                is Result.Loading -> Result.Loading
+                is Result.Success -> {
+                    val valute = result.data.valute
                     valute.forEach {
-                        it.dates = getDateFormat(result.data.dates)
-                        valuteDao.updateValuteFromRemote(
-                            it.charCode, it.nominal, it.name, it.value, it.dates, it.valId,
-                        )
-                    }
-                } else {
-                    valute.forEach {
-                        it.dates = getDateFormat(result.data.dates)
-                        if (it.valId == 840 || it.valId == 978 || it.valId == 810) {
-                            it.favoritesValute = 1
-                            it.favoritesConverter = 1
+                        if (valuteDao.getValuteExist(it.valId)) {
+                            it.dates = getDateFormat(result.data.dates)
+                            valuteDao.updateValuteFromRemote(
+                                it.charCode, it.nominal, it.name, it.value, it.dates, it.valId,
+                            )
+                        } else {
+                            it.dates = getDateFormat(result.data.dates)
+                            if (it.valId == 840 || it.valId == 978 || it.valId == 810) {
+                                it.favoritesValute = 1
+                                it.favoritesConverter = 1
+                            }
+                            valuteDao.insertValute(it)
                         }
-                        valuteDao.insertValute(it)
                     }
+                    Result.Success(result.data)
                 }
-                Result.Success(result.data)
+                is Result.Error -> Result.Error(
+                    result.cause, result.code, result.errorMessage
+                )
             }
-            is Result.Error -> Result.Error(
-                result.cause,
-                result.code,
-                result.errorMessage
-            )
-        }
         }
 
     override suspend fun getAllHistories(
