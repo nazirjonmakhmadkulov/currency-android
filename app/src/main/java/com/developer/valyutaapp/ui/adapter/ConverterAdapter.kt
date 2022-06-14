@@ -12,6 +12,7 @@ import com.developer.valyutaapp.core.base.Item
 import com.developer.valyutaapp.core.base.ItemBase
 import com.developer.valyutaapp.databinding.ItemConverterBinding
 import com.developer.valyutaapp.utils.ImageResource
+import com.developer.valyutaapp.utils.Utils.decFormat
 
 class ConverterAdapter(
     private val onChangeValute: (String, Int) -> Unit,
@@ -42,7 +43,7 @@ class ConverterAdapter(
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
             iconValute.setImageBitmap(bt)
             charCode.text = item.charCode
-            name.text = item.value
+            moneyConvert.setText(decFormat(item.value.toDouble()))
             moneyConvert.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     if (s!!.isNotBlank()) {

@@ -10,6 +10,8 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,6 +50,12 @@ object Utils {
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         val parser = SimpleDateFormat("dd MMM")
         return parser.format(formatter.parse(date)!!)
+    }
+
+    fun decFormat(cost: Double): String {
+        val dec = DecimalFormat("#.##")
+        dec.roundingMode = RoundingMode.CEILING
+        return dec.format(cost)
     }
 
     fun mathNominal(a: Double, b: Double): Double {

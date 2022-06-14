@@ -1,6 +1,8 @@
 package com.developer.valyutaapp.ui.converter
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -23,6 +25,7 @@ import com.developer.valyutaapp.ui.adapter.ConAdapter
 import com.developer.valyutaapp.ui.adapter.ConverterAdapter
 import com.developer.valyutaapp.utils.Utils
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -50,7 +53,6 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
-        swipeRefresh()
         setupViews()
         setupViewModel()
     }
@@ -66,15 +68,6 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         }
     }
 
-    private fun swipeRefresh() = with(viewBinding) {
-        swipe.setColorSchemeResources(
-            R.color.black_second
-        )
-        swipe.setOnRefreshListener {
-            viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-        }
-    }
-
     private fun callFavoriteEdit() {
         val action =
             ConverterFragmentDirections.actionNavigationConverterToEditFragment(FAVORITE_CONVERTER)
@@ -86,6 +79,42 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
             layoutManager = LinearLayoutManager(requireContext())
             this.adapter = converterAdapter
         }
+
+        viewBinding.convert.moneyConvert.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s!!.isNotBlank()) {
+                    valutes.clear()
+                    lifecycleScope.launch {
+                        delay(100)
+                        if (!viewBinding.convert.moneyConvert.text.isNullOrBlank()) {
+                            mathValutes.forEachIndexed { index, valute ->
+                                valutes.add(
+                                    Valute(
+                                        id = valute.id,
+                                        valId = valute.valId,
+                                        charCode = valute.charCode,
+                                        nominal = valute.nominal,
+                                        name = valute.name,
+                                        value = (valute.value.toDouble() * viewBinding.convert.moneyConvert.text.toString()
+                                            .toDouble()).toString(),
+                                        dates = valute.dates,
+                                        favoritesValute = valute.favoritesValute,
+                                        favoritesConverter = valute.favoritesConverter,
+                                    )
+                                )
+                                //val sum = valute.value.toDouble() * item.toDouble()
+                                //println("$sum")
+                            }
+                        }
+                        converterAdapter.submitList(valutes.toList())
+                        converterAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
     private fun setupViewModel() {
@@ -94,27 +123,11 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
                 getAllValuteSuccess(it)
             }
         }
-        viewModel.getRemoteValutes.observe(viewLifecycleOwner) {
-            subscribeValuteState(it)
-        }
     }
 
-    private fun subscribeValuteState(it: Result<ValCurs>) {
-        when (it) {
-            is Result.Loading -> {}
-            is Result.Success -> {
-                viewBinding.swipe.isRefreshing = false
-            }
-            is Result.Error -> {
-                viewBinding.swipe.isRefreshing = false
-                Log.d("Error ", it.code.toString() + " == " + it.errorMessage)
-            }
-        }
-    }
-
-    private fun getAllValuteSuccess(valutes: List<Valute>) {
-        this.valutes.addAll(valutes)
-        //mathValutes.addAll(valutes)
+    private fun getAllValuteSuccess(valute: List<Valute>) {
+        this.valutes.addAll(valute)
+        mathValutes.addAll(valute)
         converterAdapter.submitList(valutes.toList())
     }
 
@@ -123,48 +136,49 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     }
 
     private fun onChangeValute(item: String, position: Int) {
-        mathValutes.clear()
-        valutes.forEachIndexed { index, valute ->
-            if (index == position) {
-                mathValutes.add(
-                    Valute(
-                        id = valute.id,
-                        valId = valute.valId,
-                        charCode = valute.charCode,
-                        nominal = valute.nominal,
-                        name = valute.name,
-                        value = item,
-                        dates = valute.dates,
-                        favoritesValute = valute.favoritesValute,
-                        favoritesConverter = valute.favoritesConverter,
-                    )
-                )
-            } else {
-                mathValutes.add(
-                    Valute(
-                        id = valute.id,
-                        valId = valute.valId,
-                        charCode = valute.charCode,
-                        nominal = valute.nominal,
-                        name = valute.name,
-                        value = (valute.value.toDouble() * item.toDouble()).toString(),
-                        dates = valute.dates,
-                        favoritesValute = valute.favoritesValute,
-                        favoritesConverter = valute.favoritesConverter,
-                    )
-                )
-            }
-            println("${mathValutes[index]}")
-            lifecycleScope.launch(Dispatchers.Main) {
-                if (position != index) {
-                    converterAdapter.notifyItemChanged(index, mathValutes[index])
-                    // converterAdapter.notifyDataSetChanged()
-                }
-            }
+        valutes.clear()
+        lifecycleScope.launch {
+            delay(300)
+            mathValutes.forEachIndexed { index, valute ->
+//                valutes.add(
+//                    Valute(
+//                        id = valute.id,
+//                        valId = valute.valId,
+//                        charCode = valute.charCode,
+//                        nominal = valute.nominal,
+//                        name = valute.name,
+//                        value = (valute.value.toDouble() * item.toDouble()).toString(),
+//                        dates = valute.dates,
+//                        favoritesValute = valute.favoritesValute,
+//                        favoritesConverter = valute.favoritesConverter,
+//                    )
+//                )
+//            if (index == position) {
+//                mathValutes.add(
+//                    Valute(
+//                        id = valute.id,
+//                        valId = valute.valId,
+//                        charCode = valute.charCode,
+//                        nominal = valute.nominal,
+//                        name = valute.name,
+//                        value = item,
+//                        dates = valute.dates,
+//                        favoritesValute = valute.favoritesValute,
+//                        favoritesConverter = valute.favoritesConverter,
+//                    )
+//                )
+//            } else {
+//
+//            }
+//                println("${valutes[index]}")
+//                converterAdapter.notifyItemChanged(index, mathValutes[index])
+//                converterAdapter.notifyDataSetChanged()
 
-            val sum = valute.value.toDouble() * item.toDouble()
-            println("$sum")
+//                val sum = valute.value.toDouble() * item.toDouble()
+//                println("$sum")
+            }
+//            converterAdapter.submitList(valutes.toList())
+//            converterAdapter.notifyDataSetChanged()
         }
-        //converterAdapter.submitList(mathValutes.toList())
     }
 }
