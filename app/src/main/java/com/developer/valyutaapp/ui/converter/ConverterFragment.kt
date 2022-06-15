@@ -87,6 +87,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
                     lifecycleScope.launch {
                         delay(100)
                         if (!viewBinding.convert.moneyConvert.text.isNullOrBlank()) {
+                            val num = viewBinding.convert.moneyConvert.text.toString()
                             mathValutes.forEachIndexed { index, valute ->
                                 valutes.add(
                                     Valute(
@@ -95,8 +96,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
                                         charCode = valute.charCode,
                                         nominal = valute.nominal,
                                         name = valute.name,
-                                        value = (valute.value.toDouble() * viewBinding.convert.moneyConvert.text.toString()
-                                            .toDouble()).toString(),
+                                        value = (valute.nominal.toDouble() * (num.toDouble() / valute.value.toDouble())).toString(),
                                         dates = valute.dates,
                                         favoritesValute = valute.favoritesValute,
                                         favoritesConverter = valute.favoritesConverter,
@@ -105,9 +105,9 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
                                 //val sum = valute.value.toDouble() * item.toDouble()
                                 //println("$sum")
                             }
+                            converterAdapter.submitList(valutes.toList())
+                            converterAdapter.notifyDataSetChanged()
                         }
-                        converterAdapter.submitList(valutes.toList())
-                        converterAdapter.notifyDataSetChanged()
                     }
                 }
             }
@@ -135,11 +135,15 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
 
     }
 
-    private fun onChangeValute(item: String, position: Int) {
+    private fun onChangeValute(item: Double, position: Int) {
         valutes.clear()
         lifecycleScope.launch {
             delay(300)
             mathValutes.forEachIndexed { index, valute ->
+                val valu = valute.value.trim().toDouble()
+                println(item)
+//                val ite = item.trim().toDouble()
+//                val sum = valu * ite
 //                valutes.add(
 //                    Valute(
 //                        id = valute.id,
@@ -147,7 +151,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
 //                        charCode = valute.charCode,
 //                        nominal = valute.nominal,
 //                        name = valute.name,
-//                        value = (valute.value.toDouble() * item.toDouble()).toString(),
+//                        value = sum.toString(),
 //                        dates = valute.dates,
 //                        favoritesValute = valute.favoritesValute,
 //                        favoritesConverter = valute.favoritesConverter,
@@ -177,8 +181,8 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
 //                val sum = valute.value.toDouble() * item.toDouble()
 //                println("$sum")
             }
-//            converterAdapter.submitList(valutes.toList())
-//            converterAdapter.notifyDataSetChanged()
+            converterAdapter.submitList(valutes.toList())
+            converterAdapter.notifyDataSetChanged()
         }
     }
 }

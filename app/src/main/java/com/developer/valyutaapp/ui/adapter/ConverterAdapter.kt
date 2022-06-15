@@ -13,9 +13,12 @@ import com.developer.valyutaapp.core.base.ItemBase
 import com.developer.valyutaapp.databinding.ItemConverterBinding
 import com.developer.valyutaapp.utils.ImageResource
 import com.developer.valyutaapp.utils.Utils.decFormat
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ConverterAdapter(
-    private val onChangeValute: (String, Int) -> Unit,
+    private val onChangeValute: (Double, Int) -> Unit,
     private val onItemValuteClick: (Valute) -> Unit,
 ) : ItemBase<ItemConverterBinding, Valute> {
     private var posSelect: Int = -1
@@ -30,7 +33,9 @@ class ConverterAdapter(
 
     override fun getDiffUtil() = diffUtil
     private val diffUtil = object : DiffUtil.ItemCallback<Valute>() {
-        override fun areItemsTheSame(oldItem: Valute, newItem: Valute) = oldItem.id == newItem.id
+        override fun areItemsTheSame(oldItem: Valute, newItem: Valute) =
+            oldItem.valId == newItem.valId
+
         override fun areContentsTheSame(oldItem: Valute, newItem: Valute) = oldItem == newItem
     }
 
@@ -43,18 +48,27 @@ class ConverterAdapter(
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
             iconValute.setImageBitmap(bt)
             charCode.text = item.charCode
-            moneyConvert.setText(decFormat(item.value.toDouble()))
+            if (bindingAdapterPosition != posSelect)
+                moneyConvert.setText(decFormat(item.value.toDouble()))
             moneyConvert.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     if (s!!.isNotBlank()) {
                         posSelect = bindingAdapterPosition
-                        onChangeValute(s.toString(), bindingAdapterPosition)
+                        GlobalScope.launch {
+                            delay(200)
+                            onChangeValute(
+                                moneyConvert.text.toString().trim().toDouble(),
+                                bindingAdapterPosition
+                            )
+                        }
                     }
                 }
+
                 override fun beforeTextChanged(
                     s: CharSequence?, start: Int, count: Int, after: Int
                 ) {
                 }
+
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 }
             })

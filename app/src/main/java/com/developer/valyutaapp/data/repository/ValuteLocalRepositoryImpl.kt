@@ -3,7 +3,9 @@ package com.developer.valyutaapp.data.repository
 import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.domain.repository.ValuteLocalRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalRepository {
 
@@ -24,24 +26,26 @@ class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalR
     }
 
     override fun insertLocalValute(valute: Valute) {
-        return valuteDao.insertValute(valute)
+        valuteDao.insertValute(valute)
     }
 
-    override fun updateLocalValute(valute: Valute) {
-        return valuteDao.updateValute(valute)
+    override suspend fun updateLocalValute(valute: Valute) {
+        withContext(Dispatchers.IO){
+            valuteDao.updateValute(valute)
+        }
     }
 
     override fun updateLocalValuteFromRemote(valute: Valute) {
-        return valuteDao.updateValuteFromRemote(
+        valuteDao.updateValuteFromRemote(
             valute.charCode, valute.nominal, valute.name, valute.value, valute.dates, valute.id
         )
     }
 
     override fun deleteLocalValute(valute: Valute) {
-        return valuteDao.deleteValute(valute)
+        valuteDao.deleteValute(valute)
     }
 
     override fun deleteAllLocalValutes() {
-        return valuteDao.deleteAllValutes()
+        valuteDao.deleteAllValutes()
     }
 }

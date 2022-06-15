@@ -21,14 +21,14 @@ class ValuteUseCase : KoinComponent {
     fun invokeGetFavoriteLocalValutes() = valuteLocalRepository.getAllFavoriteLocalValutes()
     fun invokeGetAllConverterLocalValutes() = valuteLocalRepository.getAllConverterLocalValutes()
 
-    suspend fun invokeGetLocalValuteById(valId: Int) =
+    fun invokeGetLocalValuteById(valId: Int) =
         valuteLocalRepository.getLocalValuteById(valId)
 
     suspend fun invokeUpdateLocalValute(valute: Valute) =
         valuteLocalRepository.updateLocalValute(valute)
 
-    suspend fun invokeDeleteLocalValute(valute: Valute) =
+    fun invokeDeleteLocalValute(valute: Valute) =
         valuteLocalRepository.deleteLocalValute(valute)
 
-    suspend fun invokeDeleteAllLocalValutes() = valuteLocalRepository.deleteAllLocalValutes()
+    fun invokeDeleteAllLocalValutes() = valuteLocalRepository.deleteAllLocalValutes()
 }

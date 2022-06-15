@@ -11,7 +11,7 @@ import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.utils.ImageResource
 
 class ConAdapter(
-    private val onChangeValute: (String, Int) -> Unit,
+    private val onChangeValute: (Double, Int) -> Unit,
     private val onItemValuteClick: (Valute) -> Unit,
 ) :
     RecyclerView.Adapter<ConAdapter.ConvertViewHolder>() {
@@ -47,7 +47,7 @@ class ConAdapter(
             moneyConvert.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     if (s!!.isNotBlank()) {
-                        onChangeValute(s.toString(), bindingAdapterPosition)
+                        onChangeValute(s.toString().toDouble(), bindingAdapterPosition)
                     }
                 }
                 override fun beforeTextChanged(

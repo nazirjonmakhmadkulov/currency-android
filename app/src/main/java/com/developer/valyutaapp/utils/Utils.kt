@@ -53,7 +53,7 @@ object Utils {
     }
 
     fun decFormat(cost: Double): String {
-        val dec = DecimalFormat("#.##")
+        val dec = DecimalFormat("#.###")
         dec.roundingMode = RoundingMode.CEILING
         return dec.format(cost)
     }

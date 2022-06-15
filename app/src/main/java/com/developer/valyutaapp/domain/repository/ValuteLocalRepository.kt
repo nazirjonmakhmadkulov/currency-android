@@ -9,7 +9,7 @@ interface ValuteLocalRepository {
     fun getAllConverterLocalValutes(): Flow<List<Valute>>
     fun getLocalValuteById(valId: Int): Valute
     fun insertLocalValute(valute: Valute)
-    fun updateLocalValute(valute: Valute)
+    suspend fun updateLocalValute(valute: Valute)
     fun updateLocalValuteFromRemote(valute: Valute)
     fun deleteLocalValute(valute: Valute)
     fun deleteAllLocalValutes()
