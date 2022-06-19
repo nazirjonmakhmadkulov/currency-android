@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".di.CurrencyApp"
+        android:name=".di.ValyutaApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,10 +24,8 @@
             android:exported="true" />
 
         <activity android:name=".ui.widget.WidgetActivity" />
-        <activity android:name=".ui.sort.SortActivity" />
         <activity android:name=".ui.valute.ValuteActivity" />
         <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.setting.SettingActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
