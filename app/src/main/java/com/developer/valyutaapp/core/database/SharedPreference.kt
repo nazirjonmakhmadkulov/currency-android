@@ -9,6 +9,7 @@ class SharedPreference(context: Context) {
         private const val PREFS_NAME = "currency"
         private const val LANG = "language"
         private const val AUTO_UPDATE = "auto_update"
+        private const val THEME = "theme"
     }
 
     private val sharedPref: SharedPreferences =
@@ -30,5 +31,14 @@ class SharedPreference(context: Context) {
 
     fun getAutoUpdate(): String {
         return sharedPref.getString(AUTO_UPDATE, "")!!
+    }
+
+    fun saveTheme(theme: Boolean) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putBoolean(THEME, theme).apply()
+    }
+
+    fun getTheme(): Boolean {
+        return sharedPref.getBoolean(THEME, false)
     }
 }

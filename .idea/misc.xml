@@ -20,15 +20,19 @@
         <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/row_item.xml" value="0.3625" />
         <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/toolbar.xml" value="0.3625" />
         <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/xml/preference.xml" value="0.5" />
+        <entry key="app/src/main/res/drawable-v23/splash.xml" value="0.3105" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3105" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1275" />
         <entry key="app/src/main/res/drawable/ic_edit.xml" value="0.2295" />
         <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_save.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_unfavorite.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/splash.xml" value="0.3105" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22922165482132523" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.34923076923076923" />
+        <entry key="app/src/main/res/layout/activity_sort.xml" value="0.2046875" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3546875" />
         <entry key="app/src/main/res/layout/dialog_item.xml" value="0.3546875" />
         <entry key="app/src/main/res/layout/edit_fragment.xml" value="0.3546875" />
@@ -41,7 +45,9 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/layout/fragment_sort.xml" value="0.3546875" />
+        <entry key="app/src/main/res/layout/fragment_valute.xml" value="0.2046875" />
         <entry key="app/src/main/res/layout/fragment_valutes.xml" value="0.23237597911227154" />
+        <entry key="app/src/main/res/layout/fragment_widget.xml" value="0.2046875" />
         <entry key="app/src/main/res/layout/item.xml" value="0.31553192138671876" />
         <entry key="app/src/main/res/layout/item_convert_tjk.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/item_converter.xml" value="0.3546875" />

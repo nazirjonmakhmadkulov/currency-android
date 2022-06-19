@@ -9,6 +9,16 @@
             app:title="@string/auto_update" />
     </PreferenceCategory>
 
+    <PreferenceCategory app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="theme"
+            app:summaryOff="@string/theme_light"
+            app:summaryOn="@string/theme_dark"
+            app:title="@string/theme_app" />
+    </PreferenceCategory>
+
     <Preference
         app:iconSpaceReserved="false"
         app:key="favorite"

@@ -12,7 +12,6 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
         app:elevation="0dp">

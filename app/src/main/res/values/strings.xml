@@ -13,6 +13,11 @@
     <string name="setting">Настройка</string>
     <string name="auto_update">Автоматическое обновление</string>
     <string name="pol_update">12-и часовой режим</string>
+
+    <string name="theme_app">Темы приложения</string>
+    <string name="theme_light">Светлая тема</string>
+    <string name="theme_dark">Тёмная тема</string>
+
     <string name="auto_enable">Включить</string>
     <string name="favorites">Избранное</string>
     <string name="favorites_valutes">Избранное валют</string>

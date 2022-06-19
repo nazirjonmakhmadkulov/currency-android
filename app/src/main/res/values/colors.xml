@@ -4,8 +4,15 @@
     <color name="purple_500">#007acc</color>
     <color name="purple_700">#3F82B6</color>
 
+    <color name="purple_20">#80008AE6</color>
+    <color name="purple_50">#80007ACC</color>
+    <color name="purple_70">#803F82B6</color>
+
     <color name="teal_200">#D32196F3</color>
     <color name="teal_700">#FF018786</color>
+
+    <color name="teal_20">#802196F3</color>
+    <color name="teal_70">#80018786</color>
 
     <color name="black">#E8545B61</color>
     <color name="white">#FFFFFFFF</color>
@@ -18,5 +25,6 @@
     <color name="btn_change">#71358dc4</color>
     <color name="btn_clean">#71c43548</color>
     <color name="btn_nbt">#79121111</color>
-    <color name="background">#E6008AE6</color>
+    <color name="background_dark">#80008AE6</color>
+    <color name="background_light">#E6008AE6</color>
 </resources>

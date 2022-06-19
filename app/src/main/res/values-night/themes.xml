@@ -1,37 +1,45 @@
-<!--<resources xmlns:tools="http://schemas.android.com/tools">-->
-<!--    <style name="Theme.Valute" parent="Theme.MaterialComponents.DayNight">-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Valute" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
 
-<!--        <item name="colorPrimary">@color/purple_500</item>-->
-<!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
-<!--        <item name="colorOnPrimary">@color/purple_700</item>-->
-<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
-<!--        <item name="colorSecondary">@color/teal_200</item>-->
-<!--        <item name="colorSecondaryVariant">@color/teal_700</item>-->
-<!--        <item name="colorOnSecondary">@color/black</item>-->
+        <item name="colorPrimary">@color/purple_50</item>
+        <item name="colorPrimaryVariant">@color/purple_70</item>
+        <item name="colorOnPrimary">@color/purple_70</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_20</item>
+        <item name="colorSecondaryVariant">@color/teal_70</item>
+        <item name="colorOnSecondary">@color/black</item>
 
-<!--        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>-->
-<!--        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>-->
-<!--        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>-->
-<!--        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>-->
-<!--    </style>-->
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
 
-<!--    <style name="AppTheme.NoActionBar">-->
-<!--        <item name="windowActionBar">false</item>-->
-<!--        <item name="windowNoTitle">true</item>-->
-<!--    </style>-->
+        <item name="preferenceTheme">@style/AppTheme.PreferenceThemeOverlay</item>
 
-<!--    <style name="roundedImageViewRounded">-->
-<!--        <item name="cornerFamily">rounded</item>-->
-<!--        <item name="cornerSize">50%</item>-->
-<!--    </style>-->
+        <item name="appBarLayoutStyle">@style/appBarLayout</item>
 
-<!--    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">-->
-<!--        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>-->
-<!--        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
-<!--        <item name="android:statusBarColor" tools:targetApi="l">@color/purple_700</item>-->
-<!--        <item name="android:windowBackground">@drawable/splash</item>-->
-<!--    </style>-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
-<!--</resources>-->
+    <style name="roundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 
-<resources></resources>
+    <style name="appBarLayout" parent="Widget.Design.AppBarLayout">
+        <item name="android:background">@color/background_dark</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/purple_70</item>
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
+    <style name="AppTheme.PreferenceThemeOverlay" parent="PreferenceThemeOverlay">
+        <item name="android:layout">@layout/fragment_setting</item>
+    </style>
+
+</resources>

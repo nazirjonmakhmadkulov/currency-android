@@ -40,7 +40,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="bottom"
-        android:background="@color/white"
         android:fitsSystemWindows="true"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />

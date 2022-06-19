@@ -1,6 +1,8 @@
 package com.developer.valyutaapp.ui.setting
 
+import android.content.res.Configuration
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -18,6 +20,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
         val autoUpdate: SwitchPreferenceCompat = findPreference("auto")!!
+        val themeApp: SwitchPreferenceCompat = findPreference("theme")!!
         val favorite: Preference = findPreference("favorite")!!
 
         if (prefs.getAutoUpdate() == "1") {
@@ -25,6 +28,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         } else if (prefs.getAutoUpdate() == "0") {
             autoUpdate.isChecked = false
         }
+
 
         favorite.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             val action =
@@ -42,6 +46,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 autoUpdate.isChecked = false
                 prefs.saveAutoUpdate("0")
                 //stopService(Intent(this@SettingActivity, AutoService::class.java))
+            }
+            false
+        }
+
+        themeApp.isChecked = prefs.getTheme()
+        themeApp.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                Configuration.UI_MODE_NIGHT_YES ->
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                Configuration.UI_MODE_NIGHT_NO ->
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            if (themeApp.isChecked) {
+                themeApp.isChecked = true
+                prefs.saveTheme(theme = true)
+            } else {
+                themeApp.isChecked = false
+                prefs.saveTheme(theme = false)
             }
             false
         }

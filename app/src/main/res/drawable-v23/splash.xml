@@ -4,6 +4,6 @@
     <item
         android:width="140dp"
         android:height="140dp"
-        android:drawable="@drawable/iconbt"
+        android:drawable="@drawable/ic_launcher"
         android:gravity="center" />
 </layer-list>
