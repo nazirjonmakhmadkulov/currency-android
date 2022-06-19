@@ -53,8 +53,8 @@ class ValuteRemoteRepositoryImpl(
 
     override suspend fun getAllHistories(
         d1: String, d2: String, cn: Int, cs: String, exp: String
-    ): Result<ValHistory> {
-        return when (val result =
+    ): Result<ValHistory> = withContext(Dispatchers.IO) {
+        return@withContext when (val result =
             valuteRemoteDataSource.getRemoteHistories(dispatcherProvider.io, d1, d2, cn, cs, exp)) {
             is Result.Loading -> Result.Loading
             is Result.Success -> {

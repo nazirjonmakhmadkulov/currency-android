@@ -16,12 +16,13 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Valute">
+        android:theme="@style/Theme.Valute"
+        tools:targetApi="n">
 
         <service
             android:name=".service.widget.WidgetService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
 
         <activity android:name=".ui.widget.WidgetActivity" />
         <activity android:name=".ui.valute.ValuteActivity" />
@@ -53,7 +54,7 @@
         <service
             android:name=".service.auto.AutoService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
     </application>
 
 </manifest>

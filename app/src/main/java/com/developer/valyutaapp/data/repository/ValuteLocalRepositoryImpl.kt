@@ -21,8 +21,8 @@ class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalR
         return valuteDao.getAllConverterValutes()
     }
 
-    override fun getLocalValuteById(valId: Int): Valute {
-        return valuteDao.getValuteById(valId)
+    override suspend fun getLocalValuteById(valId: Int): Valute = withContext(Dispatchers.IO) {
+        return@withContext valuteDao.getValuteById(valId)
     }
 
     override fun insertLocalValute(valute: Valute) {
@@ -30,7 +30,7 @@ class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalR
     }
 
     override suspend fun updateLocalValute(valute: Valute) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             valuteDao.updateValute(valute)
         }
     }
