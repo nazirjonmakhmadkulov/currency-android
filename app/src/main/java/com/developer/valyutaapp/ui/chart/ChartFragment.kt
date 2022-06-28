@@ -30,7 +30,6 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private val viewModel by viewModel<MainViewModel>()
 
     private val args: ChartFragmentArgs by navArgs()
-
     private var dateItems: MutableList<String> = mutableListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,22 +39,14 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     }
 
     private fun setupToolbar() = with(viewBinding) {
-        toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
+        toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
     }
 
     private fun setupViewModel() = with(viewBinding) {
         viewModel.getLocalValuteById(args.valId)
-
-        viewModel.getRemoteValutes.observe(viewLifecycleOwner) {
-            subscribeHistoryState(it)
-        }
-
+        viewModel.getRemoteValutes.observe(viewLifecycleOwner) { subscribeHistoryState(it) }
         lifecycleScope.launchWhenCreated {
-            viewModel.getLocalHistories(args.valId).collect {
-                getAllValuteSuccess(it)
-            }
+            viewModel.getLocalHistories(args.valId).collect { getAllValuteSuccess(it) }
         }
 
         lifecycleScope.launchWhenCreated {
@@ -86,11 +77,12 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private fun showBarChart(valutes: List<History>) {
         val entries = ArrayList<Entry>()
         val title = "color"
-
+        viewBinding.chart.setPinchZoom(true)
         val xAxis: XAxis = viewBinding.chart.xAxis
         xAxis.setDrawGridLines(true)
         xAxis.granularity = 1f
         xAxis.isGranularityEnabled = true
+        xAxis.granularity = 1f
         xAxis.enableGridDashedLine(10f, 10f, 0f)
         xAxis.setDrawLimitLinesBehindData(true)
 

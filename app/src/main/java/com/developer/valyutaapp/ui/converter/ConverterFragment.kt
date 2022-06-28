@@ -57,14 +57,12 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         setupViewModel()
     }
 
-    private fun setupToolbar() {
-        with(viewBinding) {
-            toolbar.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.edit_favorites -> callFavoriteEdit()
-                }
-                return@setOnMenuItemClickListener true
+    private fun setupToolbar() = with(viewBinding) {
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.edit_favorites -> callFavoriteEdit()
             }
+            return@setOnMenuItemClickListener true
         }
     }
 

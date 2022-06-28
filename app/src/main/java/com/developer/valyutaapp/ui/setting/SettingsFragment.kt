@@ -29,7 +29,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             autoUpdate.isChecked = false
         }
 
-
         favorite.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             val action =
                 SettingsFragmentDirections.actionNavigationSettingsToEditFragment(FAVORITE_VALUTE)

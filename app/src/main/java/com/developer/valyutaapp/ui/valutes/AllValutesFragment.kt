@@ -28,9 +28,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
 
     private val viewBinding by viewBinding(FragmentAllValutesBinding::bind)
-
     private val viewModel by viewModel<MainViewModel>()
-    private val prefs: SharedPreference by inject()
 
     private var valutes: MutableList<Valute> = mutableListOf()
     private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
@@ -48,9 +46,7 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
     }
 
     private fun swipeRefresh() = with(viewBinding) {
-        swipe.setColorSchemeResources(
-            R.color.black_second
-        )
+        swipe.setColorSchemeResources(R.color.black_second)
         swipe.setOnRefreshListener {
             viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
         }
@@ -69,17 +65,13 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
                 getAllValuteSuccess(it)
             }
         }
-        viewModel.getRemoteValutes.observe(viewLifecycleOwner) {
-            subscribeValuteState(it)
-        }
+        viewModel.getRemoteValutes.observe(viewLifecycleOwner) { subscribeValuteState(it) }
     }
 
     private fun subscribeValuteState(it: Result<ValCurs>) {
         when (it) {
             is Result.Loading -> {}
-            is Result.Success -> {
-                viewBinding.swipe.isRefreshing = false
-            }
+            is Result.Success -> viewBinding.swipe.isRefreshing = false
             is Result.Error -> {
                 viewBinding.swipe.isRefreshing = false
                 Log.d("Error ", it.code.toString() + " == " + it.errorMessage)

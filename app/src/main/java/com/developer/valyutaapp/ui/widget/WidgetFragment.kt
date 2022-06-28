@@ -17,5 +17,4 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
 
         }
     }
-
 }

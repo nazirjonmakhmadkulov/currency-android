@@ -19,9 +19,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class EditFragment : Fragment(R.layout.fragment_edit) {
 
     private val viewBinding by viewBinding(FragmentEditBinding::bind)
-    private val viewModel by viewModel<MainViewModel>()
-
-    private val prefs: SharedPreference by inject()
 
     private val args: EditFragmentArgs by navArgs()
 
@@ -36,9 +33,7 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
     }
 
     private fun setupToolbar() = with(viewBinding) {
-        toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
+        toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.save ->

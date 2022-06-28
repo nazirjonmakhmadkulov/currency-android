@@ -49,21 +49,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupViewModel()
     }
 
-    private fun setupToolbar() {
-        with(viewBinding) {
-            toolbar.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.edit_favorites -> callFavoriteEdit()
-                }
-                return@setOnMenuItemClickListener true
+    private fun setupToolbar() = with(viewBinding) {
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.edit_favorites -> callFavoriteEdit()
             }
+            return@setOnMenuItemClickListener true
         }
     }
 
     private fun swipeRefresh() = with(viewBinding) {
-        swipe.setColorSchemeResources(
-            R.color.black_second
-        )
+        swipe.setColorSchemeResources(R.color.black_second)
         swipe.setOnRefreshListener {
             viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
         }
@@ -87,17 +83,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 getAllValuteSuccess(it)
             }
         }
-        viewModel.getRemoteValutes.observe(viewLifecycleOwner) {
-            subscribeValuteState(it)
-        }
+        viewModel.getRemoteValutes.observe(viewLifecycleOwner) { subscribeValuteState(it) }
     }
 
     private fun subscribeValuteState(it: Result<ValCurs>) {
         when (it) {
             is Result.Loading -> {}
-            is Result.Success -> {
-                viewBinding.swipe.isRefreshing = false
-            }
+            is Result.Success -> viewBinding.swipe.isRefreshing = false
             is Result.Error -> {
                 viewBinding.swipe.isRefreshing = false
                 Log.d("Error ", it.code.toString() + " == " + it.errorMessage)
@@ -110,7 +102,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun onItemValute(item: Valute) {
-        viewModel.getRemoteHistories(Utils.getMonthAge(), Utils.getDate(), item.valId, item.charCode, PATH_EXP)
+        viewModel.getRemoteHistories(
+            Utils.getMonthAge(),
+            Utils.getDate(),
+            item.valId,
+            item.charCode,
+            PATH_EXP
+        )
         val action = HomeFragmentDirections.actionNavigationHomeToChartFragment(item.valId)
         findNavController().navigate(action)
     }
