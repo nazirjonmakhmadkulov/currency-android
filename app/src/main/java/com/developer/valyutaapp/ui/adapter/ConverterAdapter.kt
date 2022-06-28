@@ -44,7 +44,6 @@ class ConverterAdapter(
     ) : BaseViewHolder<ItemConverterBinding, Valute>(binding) {
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
-
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
             iconValute.setImageBitmap(bt)
             charCode.text = item.charCode
@@ -63,14 +62,10 @@ class ConverterAdapter(
                         }
                     }
                 }
-
                 override fun beforeTextChanged(
                     s: CharSequence?, start: Int, count: Int, after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                }
+                ) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
             itemView.setOnClickListener {
                 onItemValuteClick(item)

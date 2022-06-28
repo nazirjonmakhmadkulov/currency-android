@@ -13,11 +13,8 @@ import com.developer.valyutaapp.utils.ImageResource
 class ConAdapter(
     private val onChangeValute: (Double, Int) -> Unit,
     private val onItemValuteClick: (Valute) -> Unit,
-) :
-    RecyclerView.Adapter<ConAdapter.ConvertViewHolder>() {
-
+) : RecyclerView.Adapter<ConAdapter.ConvertViewHolder>() {
     private var items: ArrayList<Valute> = ArrayList()
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConvertViewHolder {
         val binding =
             ItemConverterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -50,14 +47,13 @@ class ConAdapter(
                         onChangeValute(s.toString().toDouble(), bindingAdapterPosition)
                     }
                 }
+
                 override fun beforeTextChanged(
                     s: CharSequence?, start: Int, count: Int, after: Int
                 ) {
                 }
-                override fun onTextChanged(
-                    s: CharSequence?, start: Int, before: Int, count: Int
-                ) {
-                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
             itemView.setOnClickListener {
                 onItemValuteClick(valute)

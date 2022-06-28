@@ -1,6 +1,5 @@
 package com.developer.valyutaapp.ui.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import com.developer.valyutaapp.domain.entities.Valute
 import android.view.ViewGroup
@@ -27,7 +26,6 @@ class WidgetAdapter(
         return valutes[i].id.toLong()
     }
 
-    @SuppressLint("ViewHolder")
     override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val v = inflater.inflate(R.layout.favorites_item, viewGroup, false)
@@ -42,9 +40,7 @@ class WidgetAdapter(
 //        checkBox.setOnCheckedChangeListener { _, _ ->
 //            checkBox.isChecked = checkBox.isChecked
 //        }
-        linearLayout.setOnClickListener {
-            onItemValuteClick(valutes[i], i)
-        }
+        linearLayout.setOnClickListener { onItemValuteClick(valutes[i], i) }
         return v
     }
 }
