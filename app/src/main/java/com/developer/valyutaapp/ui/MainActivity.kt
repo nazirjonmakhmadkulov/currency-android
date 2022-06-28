@@ -108,7 +108,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         .setRequiresBatteryNotLow(true)
         .build()
 
-
     private fun createWorkRequest() = PeriodicWorkRequestBuilder<NotifyWorker>(24, TimeUnit.HOURS)
         .setConstraints(createConstraints())
         .setInitialDelay(5000, TimeUnit.MILLISECONDS)
@@ -116,18 +115,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun setupViewModel() {
         viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-        viewModel.getRemoteValutes.observe(this) {
-            subscribeValuteState(it)
-        }
+        viewModel.getRemoteValutes.observe(this) { subscribeValuteState(it) }
     }
 
     private fun subscribeValuteState(it: Result<ValCurs>) {
         when (it) {
             is Result.Loading -> {}
-            is Result.Success -> {
-            }
+            is Result.Success -> {}
             is Result.Error -> {
-                Log.d("Error ", it.code.toString() + " == " + it.errorMessage)
+                Log.d("Error ", it.code.toString() + " = " + it.errorMessage)
             }
         }
     }

@@ -1,6 +1,5 @@
 package com.developer.valyutaapp.utils
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.net.ConnectivityManager
@@ -9,29 +8,22 @@ import android.os.Build
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import androidx.annotation.RequiresApi
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
-
-    @SuppressLint("SimpleDateFormat")
-    val parser = SimpleDateFormat("yyyy-MM-dd")
-
-    @SuppressLint("SimpleDateFormat")
+    private val parser = SimpleDateFormat("yyyy-MM-dd")
     fun getDate(): String {
         return parser.format(Calendar.getInstance().time)
     }
 
-    @SuppressLint("SimpleDateFormat")
     fun getDateFormat(date: String): String {
         val formatter = SimpleDateFormat("dd.MM.yyyy")
         return formatter.format(parser.parse(date)!!)
     }
 
-    @SuppressLint("SimpleDateFormat")
     fun getMonthAge(): String {
         val cal = Calendar.getInstance()
         cal.time = Date()
@@ -39,13 +31,11 @@ object Utils {
         return parser.format(cal.time)
     }
 
-    @SuppressLint("SimpleDateFormat")
     fun dateFormatDb(date: String): String {
         val formatter = SimpleDateFormat("dd.MM.yyyy")
         return parser.format(formatter.parse(date)!!)
     }
 
-    @SuppressLint("SimpleDateFormat")
     fun dateFormatChart(date: String): String {
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         val parser = SimpleDateFormat("dd MMM")
@@ -86,7 +76,6 @@ object Utils {
         return hasInternet
     }
 
-    @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun setStatusBar(window: Window) {
         if (Build.VERSION.SDK_INT in 19..20) {
             setWindowFlag(window, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true)

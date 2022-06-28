@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 
 class SharedPreference(context: Context) {
 
-    companion object{
+    companion object {
         private const val PREFS_NAME = "currency"
         private const val LANG = "language"
         private const val AUTO_UPDATE = "auto_update"

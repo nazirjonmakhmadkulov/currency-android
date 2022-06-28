@@ -2,6 +2,7 @@ package com.developer.valyutaapp.di
 
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import com.developer.valyutaapp.di.modules.*
 import com.developer.valyutaapp.core.database.SharedPreference
@@ -35,11 +36,10 @@ class ValyutaApp : Application() {
                 )
             )
         }
-//        if (prefs.getTheme()) {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//        } else {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//        }
+        if (prefs.getTheme())
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     override fun attachBaseContext(base: Context?) {

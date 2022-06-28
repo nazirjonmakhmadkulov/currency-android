@@ -1,8 +1,5 @@
 package com.developer.valyutaapp.core.network
 
-/**
- * various error status to know what happened if something goes wrong with a repository call
- */
 enum class HttpResult {
     NO_CONNECTION,
     TIMEOUT,

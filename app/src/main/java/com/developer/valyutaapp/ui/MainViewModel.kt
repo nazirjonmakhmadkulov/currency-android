@@ -24,14 +24,10 @@ class MainViewModel(
 
     fun getRemoteValutes(date: String, exp: String) = viewModelScope.launch {
         when (val result = valuteUseCase.invokeGetRemoteValutes(date, exp)) {
-            is Result.Loading -> {}
-            is Result.Success -> {
-                _getRemoteValutes.value = Result.Success(result.data)
-            }
-            is Result.Error -> {
-                _getRemoteValutes.value =
+            is Result.Loading -> Result.Loading
+            is Result.Success -> _getRemoteValutes.value = Result.Success(result.data)
+            is Result.Error -> _getRemoteValutes.value =
                     Result.Error(result.cause, result.code, result.errorMessage)
-            }
         }
     }
 
@@ -77,14 +73,11 @@ class MainViewModel(
     fun getRemoteHistories(d1: String, d2: String, cn: Int, cs: String, exp: String) =
         viewModelScope.launch {
             when (val result = historyUseCase.invokeGetRemoteHistories(d1, d2, cn, cs, exp)) {
-                is Result.Loading -> {}
-                is Result.Success -> {
-                    _getRemoteHistories.value = Result.Success(result.data)
-                }
-                is Result.Error -> {
+                is Result.Loading -> Result.Loading
+                is Result.Success -> _getRemoteHistories.value = Result.Success(result.data)
+                is Result.Error ->
                     _getRemoteHistories.value =
                         Result.Error(result.cause, result.code, result.errorMessage)
-                }
             }
         }
 

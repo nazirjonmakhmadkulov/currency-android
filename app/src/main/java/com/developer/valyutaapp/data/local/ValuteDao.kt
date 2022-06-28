@@ -30,9 +30,7 @@ interface ValuteDao {
 
     @Query("UPDATE valute SET charCode=:code, nominal=:nomi, name=:name, value=:value, dates=:dates WHERE valId=:id")
     fun updateValuteFromRemote(
-        code: String, nomi: Int,
-        name: String, value: String,
-        dates: String, id: Int
+        code: String, nomi: Int, name: String, value: String, dates: String, id: Int
     )
 
     @Delete

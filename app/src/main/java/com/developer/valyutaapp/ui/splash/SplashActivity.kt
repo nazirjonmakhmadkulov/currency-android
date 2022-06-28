@@ -24,11 +24,6 @@ class SplashActivity : AppCompatActivity() {
     private val prefs: SharedPreference by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (prefs.getTheme())
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        else
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
         super.onCreate(savedInstanceState)
         setStatusBar(window)
         splashAndroid12()

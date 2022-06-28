@@ -3,10 +3,6 @@ package com.developer.valyutaapp.core.dispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-/**
- * Provide coroutines context.
- */
-
 class CoroutineDispatcherProvider : DispatcherProvider {
     override val ui: CoroutineDispatcher
         get() = Dispatchers.Main
