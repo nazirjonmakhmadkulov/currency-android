@@ -37,7 +37,6 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
     private val valCursAdapter: BaseAdapter =
         BaseAdapter(listOf(ValCursAdapter(::onItemValute)))
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         swipeRefresh()
@@ -59,12 +58,8 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
         }
     }
 
-    private fun setupViewModel() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.getLocalValutes().distinctUntilChanged().collectLatest {
-                getAllValuteSuccess(it)
-            }
-        }
+    private fun setupViewModel() = lifecycleScope.launchWhenCreated {
+        viewModel.getLocalValutes().distinctUntilChanged().collectLatest { getAllValuteSuccess(it) }
         viewModel.getRemoteValutes.observe(viewLifecycleOwner) { subscribeValuteState(it) }
     }
 
@@ -85,7 +80,13 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
     }
 
     private fun onItemValute(item: Valute) {
-        viewModel.getRemoteHistories(Utils.getMonthAge(), Utils.getDate(), item.valId, item.charCode, PATH_EXP)
+        viewModel.getRemoteHistories(
+            Utils.getMonthAge(),
+            Utils.getDate(),
+            item.valId,
+            item.charCode,
+            PATH_EXP
+        )
         val action = AllValutesFragmentDirections.actionNavigationValutesToChartFragment(item.valId)
         findNavController().navigate(action)
     }
