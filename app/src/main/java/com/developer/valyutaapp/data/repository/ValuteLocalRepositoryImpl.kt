@@ -30,9 +30,7 @@ class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalR
     }
 
     override suspend fun updateLocalValute(valute: Valute) {
-        withContext(Dispatchers.IO) {
-            valuteDao.updateValute(valute)
-        }
+        withContext(Dispatchers.IO) { valuteDao.updateValute(valute) }
     }
 
     override fun updateLocalValuteFromRemote(valute: Valute) {

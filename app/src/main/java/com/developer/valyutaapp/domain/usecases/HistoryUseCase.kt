@@ -19,14 +19,14 @@ class HistoryUseCase : KoinComponent {
     //local
     fun invokeGetLocalHistories(valId: Int) = historyLocalRepository.getAllLocalHistory(valId)
 
-    suspend fun invokeInsertLocalHistory(history: History) =
+    fun invokeInsertLocalHistory(history: History) =
         historyLocalRepository.insertLocalHistory(history)
 
-    suspend fun invokeUpdateLocalHistory(history: History) =
+    fun invokeUpdateLocalHistory(history: History) =
         historyLocalRepository.updateLocalHistory(history)
 
-    suspend fun invokeDeleteLocalHistory() =
+    fun invokeDeleteLocalHistory() =
         historyLocalRepository.deleteLocalHistory()
 
-    suspend fun invokeDeleteAllLocalHistory() = historyLocalRepository.deleteAllLocalHistory()
+    fun invokeDeleteAllLocalHistory() = historyLocalRepository.deleteAllLocalHistory()
 }

@@ -19,9 +19,7 @@ class HistoryLocalRepositoryImpl(private val historyDao: HistoryDao) : HistoryLo
         historyDao.updateHistory(history)
     }
 
-    override fun deleteLocalHistory() {
-        //historyDao.deleteHistory()
-    }
+    override fun deleteLocalHistory() {}
 
     override fun deleteAllLocalHistory() {
         historyDao.deleteAllHistories()

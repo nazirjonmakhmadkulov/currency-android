@@ -12,16 +12,12 @@ class ValuteRemoteDataSource(private val serviceBuilder: ValuteService) : Remote
     suspend fun getRemoteValutes(
         dispatcher: CoroutineDispatcher, date: String, exp: String
     ): Result<ValCurs> {
-        return safeApiCall(dispatcher) {
-            serviceBuilder.getRemoteValutes(date, exp)
-        }
+        return safeApiCall(dispatcher) { serviceBuilder.getRemoteValutes(date, exp) }
     }
 
     suspend fun getRemoteHistories(
         dispatcher: CoroutineDispatcher, d1: String, d2: String, cn: Int, cs: String, exp: String
     ): Result<ValHistory> {
-        return safeApiCall(dispatcher) {
-            serviceBuilder.getRemoteHistories(d1, d2, cn, cs, exp)
-        }
+        return safeApiCall(dispatcher) { serviceBuilder.getRemoteHistories(d1, d2, cn, cs, exp) }
     }
 }

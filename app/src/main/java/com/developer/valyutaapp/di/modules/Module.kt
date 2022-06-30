@@ -94,7 +94,6 @@ val netModule = module {
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(SERVER_URL)
-            //.addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
             .addConverterFactory(SimpleXmlConverterFactory.create())
             .client(client)
             .build()
@@ -104,7 +103,6 @@ val netModule = module {
     single { provideHttpClient(get()) }
     single { provideGson() }
     single { provideRetrofit(get()) }
-
 }
 
 val databaseModule = module {
