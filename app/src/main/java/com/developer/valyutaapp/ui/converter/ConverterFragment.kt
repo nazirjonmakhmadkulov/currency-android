@@ -3,7 +3,6 @@ package com.developer.valyutaapp.ui.converter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -14,17 +13,12 @@ import com.developer.valyutaapp.R
 import com.developer.valyutaapp.core.base.BaseAdapter
 import com.developer.valyutaapp.core.base.Item
 import com.developer.valyutaapp.core.common.FAVORITE_CONVERTER
-import com.developer.valyutaapp.core.common.PATH_EXP
-import com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.databinding.FragmentConverterBinding
-import com.developer.valyutaapp.domain.entities.ValCurs
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.ConAdapter
 import com.developer.valyutaapp.ui.adapter.ConverterAdapter
-import com.developer.valyutaapp.utils.Utils
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -104,12 +98,11 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
                                 //println("$sum")
                             }
                             converterAdapter.submitList(valutes.toList())
-                            converterAdapter.notifyDataSetChanged()
+                            //converterAdapter.notifyDataSetChanged()
                         }
                     }
                 }
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
@@ -129,9 +122,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         converterAdapter.submitList(valutes.toList())
     }
 
-    private fun onItemValute(item: Valute) {
-
-    }
+    private fun onItemValute(item: Valute) {}
 
     private fun onChangeValute(item: Double, position: Int) {
         valutes.clear()

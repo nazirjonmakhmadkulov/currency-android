@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/drawable/radio_gender_off.xml" value="0.167" />
+        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/drawable/radio_gender_on.xml" value="0.2805" />
+        <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/drawable/radio_gender_states.xml" value="0.2805" />
         <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/drawable/rounded_border_edittext.xml" value="0.3235" />
         <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/activity_about.xml" value="0.3625" />
         <entry key="..\:/Users/n.mahmadkulov/AndroidStudioProjects/CurrencyRates/app/src/main/res/layout/activity_main.xml" value="0.3625" />

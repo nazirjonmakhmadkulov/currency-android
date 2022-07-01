@@ -15,6 +15,7 @@ import java.util.*
 
 object Utils {
     private val parser = SimpleDateFormat("yyyy-MM-dd")
+
     fun getDate(): String {
         return parser.format(Calendar.getInstance().time)
     }
@@ -24,10 +25,24 @@ object Utils {
         return formatter.format(parser.parse(date)!!)
     }
 
+    fun getWeekAge(): String {
+        val cal = Calendar.getInstance()
+        cal.time = Date()
+        cal.add(Calendar.DAY_OF_MONTH, -7)
+        return parser.format(cal.time)
+    }
+
     fun getMonthAge(): String {
         val cal = Calendar.getInstance()
         cal.time = Date()
         cal.add(Calendar.DAY_OF_MONTH, -30)
+        return parser.format(cal.time)
+    }
+
+    fun getYearAge(): String {
+        val cal = Calendar.getInstance()
+        cal.time = Date()
+        cal.add(Calendar.MONTH, -12)
         return parser.format(cal.time)
     }
 

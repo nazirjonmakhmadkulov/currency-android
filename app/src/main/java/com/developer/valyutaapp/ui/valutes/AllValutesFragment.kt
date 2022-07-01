@@ -87,7 +87,7 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
             item.charCode,
             PATH_EXP
         )
-        val action = AllValutesFragmentDirections.actionNavigationValutesToChartFragment(item.valId)
+        val action = AllValutesFragmentDirections.actionNavigationValutesToChartFragment(item.valId, item.charCode)
         findNavController().navigate(action)
     }
 }

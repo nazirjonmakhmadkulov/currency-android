@@ -66,6 +66,9 @@
         <argument
             android:name="val_id"
             app:argType="integer" />
+        <argument
+            android:name="char_code"
+            app:argType="string" />
     </fragment>
 
     <fragment
