@@ -19,7 +19,7 @@ interface HistoryDao {
     @Update
     fun updateHistory(history: History)
 
-    @Query("DELETE FROM history WHERE dates < datetime('now',  '-30 day') AND valId = :id")
+    @Query("DELETE FROM history WHERE dates < datetime('now',  '-365 day') AND valId = :id")
     fun deleteHistory(id: Int)
 
     @Query("DELETE FROM history")
