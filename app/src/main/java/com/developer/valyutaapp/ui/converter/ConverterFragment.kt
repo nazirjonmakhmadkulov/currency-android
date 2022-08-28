@@ -27,21 +27,16 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ConverterFragment : Fragment(R.layout.fragment_converter) {
-
     private val viewBinding by viewBinding(FragmentConverterBinding::bind)
-
     private val viewModel by viewModel<MainViewModel>()
     private val prefs: SharedPreference by inject()
-
     private var mathValutes: MutableList<Valute> = mutableListOf()
     private var valutes: MutableList<Valute> = mutableListOf()
-
     private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
         MutableList(valutes.size) { valutes[it] }
     }
     private val converterAdapter: BaseAdapter =
         BaseAdapter(listOf(ConverterAdapter(::onChangeValute, ::onItemValute)))
-
     private val conAdapter by lazy { ConAdapter(::onChangeValute, ::onItemValute) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -8,7 +8,6 @@ import com.developer.valyutaapp.R
 import com.developer.valyutaapp.databinding.FragmentSortBinding
 
 class WidgetFragment : Fragment(R.layout.fragment_widget) {
-
     private val viewBinding by viewBinding(FragmentSortBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

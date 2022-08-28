@@ -14,17 +14,9 @@ class WidgetAdapter(
     private val valutes: MutableList<Valute>,
     private val onItemValuteClick: (Valute, Int) -> Unit,
 ) : BaseAdapter() {
-    override fun getCount(): Int {
-        return valutes.size
-    }
-
-    override fun getItem(i: Int): Any {
-        return valutes[i]
-    }
-
-    override fun getItemId(i: Int): Long {
-        return valutes[i].id.toLong()
-    }
+    override fun getCount(): Int =  valutes.size
+    override fun getItem(i: Int): Any = valutes[i]
+    override fun getItemId(i: Int): Long = valutes[i].id.toLong()
 
     override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

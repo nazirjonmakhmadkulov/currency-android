@@ -27,19 +27,14 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
-
     private val viewBinding by viewBinding(FragmentHomeBinding::bind)
-
     private val viewModel by viewModel<MainViewModel>()
     private val prefs: SharedPreference by inject()
-
     private var valutes: MutableList<Valute> = mutableListOf()
     private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
         MutableList(valutes.size) { valutes[it] }
     }
-
-    private val valCursAdapter: BaseAdapter =
-        BaseAdapter(listOf(ValCursAdapter(::onItemValute)))
+    private val valCursAdapter: BaseAdapter = BaseAdapter(listOf(ValCursAdapter(::onItemValute)))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,9 +55,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun swipeRefresh() = with(viewBinding) {
         swipe.setColorSchemeResources(R.color.black_second)
-        swipe.setOnRefreshListener {
-            viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-        }
+        swipe.setOnRefreshListener { viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP) }
     }
 
     private fun callFavoriteEdit() {

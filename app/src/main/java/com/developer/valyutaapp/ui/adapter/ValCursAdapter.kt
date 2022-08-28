@@ -14,7 +14,6 @@ import com.developer.valyutaapp.utils.ImageResource
 class ValCursAdapter(
     private val onItemValuteClick: (Valute) -> Unit,
 ) : ItemBase<ItemBinding, Valute> {
-
     override fun isRelativeItem(item: Item): Boolean = item is Valute
     override fun getLayoutId() = R.layout.item
     override fun getViewHolder(

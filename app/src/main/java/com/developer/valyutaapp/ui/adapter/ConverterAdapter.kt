@@ -67,9 +67,7 @@ class ConverterAdapter(
                 ) {}
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
-            itemView.setOnClickListener {
-                onItemValuteClick(item)
-            }
+            itemView.setOnClickListener { onItemValuteClick(item) }
         }
 
         override fun onBind(item: Valute, payloads: List<Any>) {

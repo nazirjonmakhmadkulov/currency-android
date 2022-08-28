@@ -13,12 +13,10 @@ import com.developer.valyutaapp.core.database.SharedPreference
 import org.koin.android.ext.android.inject
 
 class SettingsFragment : PreferenceFragmentCompat() {
-
     private val prefs: SharedPreference by inject()
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
-
         val autoUpdate: SwitchPreferenceCompat = findPreference("auto")!!
         val themeApp: SwitchPreferenceCompat = findPreference("theme")!!
         val favorite: Preference = findPreference("favorite")!!

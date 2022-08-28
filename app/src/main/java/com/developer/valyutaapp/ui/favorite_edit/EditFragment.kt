@@ -17,11 +17,8 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EditFragment : Fragment(R.layout.fragment_edit) {
-
     private val viewBinding by viewBinding(FragmentEditBinding::bind)
-
     private val args: EditFragmentArgs by navArgs()
-
     private lateinit var viewPager: ViewPager2
     private lateinit var pageAdapter: PagerAdapter
     private lateinit var tabLayout: TabLayout
@@ -36,8 +33,7 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
         toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.save ->
-                    findNavController().popBackStack()
+                R.id.save -> findNavController().popBackStack()
             }
             return@setOnMenuItemClickListener true
         }

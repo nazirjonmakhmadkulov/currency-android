@@ -32,10 +32,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ChartFragment : Fragment(R.layout.fragment_chart) {
-
     private val viewBinding by viewBinding(FragmentChartBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
-
     private val args: ChartFragmentArgs by navArgs()
     private var dateItems: MutableList<String> = mutableListOf()
 
@@ -47,11 +45,29 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
             val radio: RadioButton = view.findViewById(checkedId)
             when (radio) {
                 viewBinding.week ->
-                    viewModel.getRemoteHistories(getWeekAge(), getDate(), args.valId, args.charCode, PATH_EXP)
+                    viewModel.getRemoteHistories(
+                        getWeekAge(),
+                        getDate(),
+                        args.valId,
+                        args.charCode,
+                        PATH_EXP
+                    )
                 viewBinding.month ->
-                    viewModel.getRemoteHistories(getMonthAge(), getDate(), args.valId, args.charCode, PATH_EXP)
+                    viewModel.getRemoteHistories(
+                        getMonthAge(),
+                        getDate(),
+                        args.valId,
+                        args.charCode,
+                        PATH_EXP
+                    )
                 viewBinding.year ->
-                    viewModel.getRemoteHistories(getYearAge(), getDate(), args.valId, args.charCode, PATH_EXP)
+                    viewModel.getRemoteHistories(
+                        getYearAge(),
+                        getDate(),
+                        args.valId,
+                        args.charCode,
+                        PATH_EXP
+                    )
             }
         }
     }
@@ -81,9 +97,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         when (it) {
             is Result.Loading -> {}
             is Result.Success -> {}
-            is Result.Error -> {
-                Log.d("Error ", it.code.toString() + " == " + it.errorMessage)
-            }
+            is Result.Error -> Log.d("Error ", "${it.code} =  ${it.errorMessage}")
         }
     }
 

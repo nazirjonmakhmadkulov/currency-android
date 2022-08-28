@@ -29,10 +29,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
-
     private val viewBinding by viewBinding(ActivityMainBinding::bind, R.id.container)
     private val prefs: SharedPreference by inject()
-
     private val viewModel by viewModel<MainViewModel>()
 
     companion object {
@@ -40,7 +38,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private lateinit var worker: WorkManager
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
@@ -48,13 +45,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar(window)
+        initTheme()
         worker = WorkManager.getInstance()
         worker()
-        if (prefs.getAutoUpdate() == "1") {
-            startService(Intent(this, AutoService::class.java))
-        } else if (prefs.getAutoUpdate() == "0") {
-            stopService(Intent(this, AutoService::class.java))
-        }
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
         navController = navHostFragment.navController
@@ -73,6 +66,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setupViewModel()
     }
 
+    private fun initTheme() {
+        if (prefs.getAutoUpdate() == "1") {
+            startService(Intent(this, AutoService::class.java))
+        } else if (prefs.getAutoUpdate() == "0") {
+            stopService(Intent(this, AutoService::class.java))
+        }
+    }
+
     private fun worker() {
         WorkManager.getInstance(this)
             .enqueueUniquePeriodicWork(
@@ -85,7 +86,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val taskData = Data.Builder().putString(MESSAGE_STATUS, "Notification Done.").build()
         val request = OneTimeWorkRequest.Builder(NotifyWorker::class.java)
             .setConstraints(powerConstraints).setInputData(taskData).build()
-
         worker.getWorkInfoByIdLiveData(request.id).observe(this) { workInfo ->
             workInfo.let {
                 if (it.state.isFinished) {
@@ -122,9 +122,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         when (it) {
             is Result.Loading -> {}
             is Result.Success -> {}
-            is Result.Error -> {
-                Log.d("Error ", it.code.toString() + " = " + it.errorMessage)
-            }
+            is Result.Error -> Log.d("Error ", "${it.code} = ${it.errorMessage}")
         }
     }
 }

@@ -26,7 +26,6 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
-
     private val viewBinding by viewBinding(FragmentAllValutesBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
 
@@ -46,9 +45,7 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
 
     private fun swipeRefresh() = with(viewBinding) {
         swipe.setColorSchemeResources(R.color.black_second)
-        swipe.setOnRefreshListener {
-            viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-        }
+        swipe.setOnRefreshListener { viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP) }
     }
 
     private fun setupViews() {

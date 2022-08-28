@@ -19,10 +19,8 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ValutesFragment : Fragment(R.layout.fragment_valutes) {
-
     private val viewBinding by viewBinding(FragmentValutesBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
-
     private lateinit var sortAdapter: BaseAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
