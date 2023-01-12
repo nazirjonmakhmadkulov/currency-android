@@ -33,9 +33,7 @@ class ConverterAdapter(
 
     override fun getDiffUtil() = diffUtil
     private val diffUtil = object : DiffUtil.ItemCallback<Valute>() {
-        override fun areItemsTheSame(oldItem: Valute, newItem: Valute) =
-            oldItem.valId == newItem.valId
-
+        override fun areItemsTheSame(oldItem: Valute, newItem: Valute) = oldItem.valId == newItem.valId
         override fun areContentsTheSame(oldItem: Valute, newItem: Valute) = oldItem == newItem
     }
 
