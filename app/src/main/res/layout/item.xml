@@ -6,20 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:padding="6dp">
+        android:paddingHorizontal="6dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iconValute"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:padding="2dp"
-            android:scaleType="centerCrop"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:padding="3dp"
+            android:scaleType="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -79,7 +79,7 @@
             android:layout_marginEnd="12dp"
             android:textColor="@color/black_second"
             android:textSize="12sp"
-            android:textStyle="normal|bold"
+            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/value"
             app:layout_constraintStart_toEndOf="@+id/iconValute"

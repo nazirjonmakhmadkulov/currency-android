@@ -1,7 +1,5 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory app:iconSpaceReserved="false">
-
         <SwitchPreferenceCompat
             app:iconSpaceReserved="false"
             app:key="auto"
@@ -10,7 +8,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory app:iconSpaceReserved="false">
-
         <SwitchPreferenceCompat
             app:iconSpaceReserved="false"
             app:key="theme"
@@ -19,10 +16,11 @@
             app:title="@string/theme_app" />
     </PreferenceCategory>
 
-    <Preference
-        app:iconSpaceReserved="false"
-        app:key="favorite"
-        app:summary="@string/favorites_valutes"
-        app:title="@string/favorites" />
-
+    <PreferenceCategory app:iconSpaceReserved="false">
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="favorite"
+            app:summary="@string/favorites_valutes"
+            app:title="@string/favorites" />
+    </PreferenceCategory>
 </PreferenceScreen>
