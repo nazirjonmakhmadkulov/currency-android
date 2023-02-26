@@ -37,4 +37,7 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="year">Год</string>
+    <string name="month">Месяц</string>
+    <string name="week">Неделю</string>
 </resources>

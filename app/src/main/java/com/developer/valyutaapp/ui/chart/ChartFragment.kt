@@ -28,6 +28,8 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -36,6 +38,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private val viewModel by viewModel<MainViewModel>()
     private val args: ChartFragmentArgs by navArgs()
     private var dateItems: MutableList<String> = mutableListOf()
+    private var limit = 7
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,30 +47,23 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         viewBinding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val radio: RadioButton = view.findViewById(checkedId)
             when (radio) {
-                viewBinding.week ->
-                    viewModel.getRemoteHistories(
-                        getWeekAge(),
-                        getDate(),
-                        args.valId,
-                        args.charCode,
-                        PATH_EXP
-                    )
-                viewBinding.month ->
-                    viewModel.getRemoteHistories(
-                        getMonthAge(),
-                        getDate(),
-                        args.valId,
-                        args.charCode,
-                        PATH_EXP
-                    )
-                viewBinding.year ->
-                    viewModel.getRemoteHistories(
-                        getYearAge(),
-                        getDate(),
-                        args.valId,
-                        args.charCode,
-                        PATH_EXP
-                    )
+                viewBinding.week -> {
+                    getRemoteHistories(getWeekAge())
+                    limit = 7
+                    getLocalHistories(limit)
+                }
+
+                viewBinding.month -> {
+                    getRemoteHistories(getMonthAge())
+                    limit = 30
+                    getLocalHistories(limit)
+                }
+
+                viewBinding.year -> {
+                    getRemoteHistories(getYearAge())
+                    limit = 365
+                    getLocalHistories(limit)
+                }
             }
         }
     }
@@ -78,11 +74,10 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
 
     private fun setupViewModel() = with(viewBinding) {
         viewModel.getLocalValuteById(args.valId)
-        viewModel.getRemoteValutes.observe(viewLifecycleOwner) { subscribeHistoryState(it) }
+        getLocalHistories(limit)
         lifecycleScope.launchWhenCreated {
-            viewModel.getLocalHistories(args.valId).collect { getAllValuteSuccess(it) }
+            viewModel.getRemoteValutes.collect { subscribeHistoryState(it) }
         }
-
         lifecycleScope.launchWhenCreated {
             viewModel.getLocalValuteById.observe(viewLifecycleOwner) {
                 val bt = ImageResource.getImageRes(requireContext(), it.charCode)
@@ -93,17 +88,32 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         }
     }
 
+    private fun getRemoteHistories(dates: String) {
+        viewModel.getRemoteHistories(
+            dates, getDate(), args.valId, args.charCode, PATH_EXP
+        )
+    }
+
+    private fun getLocalHistories(limit: Int) {
+        lifecycleScope.launchWhenCreated {
+            viewModel.getLocalHistories(args.valId, limit).collect { getAllValuteSuccess(it) }
+        }
+    }
+
     private fun subscribeHistoryState(it: Result<ValCurs>) {
         when (it) {
             is Result.Loading -> {}
-            is Result.Success -> {}
+            is Result.Success -> {
+                getLocalHistories(limit)
+                Log.d("Error ", "${it} =  ${it}")
+            }
             is Result.Error -> Log.d("Error ", "${it.code} =  ${it.errorMessage}")
         }
     }
 
     private fun getAllValuteSuccess(valutes: List<History>) {
         dateItems.addAll(valutes.map { it.dates })
-        showBarChart(valutes)
+        showBarChart(valutes.asReversed())
     }
 
     private fun showBarChart(valutes: List<History>) = with(viewBinding) {

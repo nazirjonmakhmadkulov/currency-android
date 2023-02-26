@@ -12,6 +12,8 @@ import com.developer.valyutaapp.domain.entities.ValHistory
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.domain.usecases.HistoryUseCase
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -19,8 +21,8 @@ class MainViewModel(
     private val historyUseCase: HistoryUseCase
 ) : ViewModel() {
 
-    private val _getRemoteValutes = MutableLiveData<Result<ValCurs>>(Result.Loading)
-    val getRemoteValutes: LiveData<Result<ValCurs>> get() = _getRemoteValutes
+    private val _getRemoteValutes = MutableStateFlow<Result<ValCurs>>(Result.Loading)
+    val getRemoteValutes: StateFlow<Result<ValCurs>> get() = _getRemoteValutes
 
     fun getRemoteValutes(date: String, exp: String) = viewModelScope.launch {
         when (val result = valuteUseCase.invokeGetRemoteValutes(date, exp)) {
@@ -72,7 +74,7 @@ class MainViewModel(
     val getRemoteHistories: LiveData<Result<ValHistory>> get() = _getRemoteHistories
     fun getRemoteHistories(d1: String, d2: String, cn: Int, cs: String, exp: String) =
         viewModelScope.launch {
-            when (val result = historyUseCase.invokeGetRemoteHistories(d1, d2, cn, cs, exp)) {
+            when (val result = historyUseCase.getRemoteHistories(d1, d2, cn, cs, exp)) {
                 is Result.Loading -> Result.Loading
                 is Result.Success -> _getRemoteHistories.value = Result.Success(result.data)
                 is Result.Error ->
@@ -81,33 +83,33 @@ class MainViewModel(
             }
         }
 
-    fun getLocalHistories(valId: Int): Flow<List<History>> = historyUseCase.invokeGetLocalHistories(valId)
+    fun getLocalHistories(valId: Int, day: Int): Flow<List<History>> = historyUseCase.getLocalHistories(valId, day)
 
     private val _insertLocalFavorite = MutableLiveData<Unit>()
     val insertLocalFavorite: LiveData<Unit> get() = _insertLocalFavorite
 
     fun insertLocalFavorite(history: History) = viewModelScope.launch {
-        _insertLocalFavorite.value = historyUseCase.invokeInsertLocalHistory(history)
+        _insertLocalFavorite.value = historyUseCase.insertLocalHistory(history)
     }
 
     private val _updateLocalFavorite = MutableLiveData<Unit>()
     val updateLocalFavorite: LiveData<Unit> get() = _updateLocalFavorite
 
     fun updateLocalFavorite(history: History) = viewModelScope.launch {
-        _updateLocalFavorite.value = historyUseCase.invokeUpdateLocalHistory(history)
+        _updateLocalFavorite.value = historyUseCase.updateLocalHistory(history)
     }
 
     private val _deleteLocalFavorite = MutableLiveData<Unit>()
     val deleteLocalFavorite: LiveData<Unit> get() = _deleteLocalFavorite
 
     fun deleteLocalFavorite() = viewModelScope.launch {
-        _deleteLocalFavorite.value = historyUseCase.invokeDeleteLocalHistory()
+        _deleteLocalFavorite.value = historyUseCase.deleteLocalHistory()
     }
 
     private val _deleteAllLocalFavorite = MutableLiveData<Unit>()
     val deleteAllLocalFavorite: LiveData<Unit> get() = _deleteAllLocalFavorite
 
     fun deleteAllLocalFavorite() = viewModelScope.launch {
-        _deleteAllLocalFavorite.value = historyUseCase.invokeDeleteAllLocalHistory()
+        _deleteAllLocalFavorite.value = historyUseCase.deleteAllLocalHistory()
     }
 }

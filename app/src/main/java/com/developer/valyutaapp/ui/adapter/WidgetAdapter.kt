@@ -1,5 +1,6 @@
 package com.developer.valyutaapp.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.developer.valyutaapp.domain.entities.Valute
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ class WidgetAdapter(
     override fun getItem(i: Int): Any = valutes[i]
     override fun getItemId(i: Int): Long = valutes[i].id.toLong()
 
+    @SuppressLint("MissingInflatedId")
     override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val v = inflater.inflate(R.layout.favorites_item, viewGroup, false)

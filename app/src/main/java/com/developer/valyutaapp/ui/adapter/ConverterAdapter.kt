@@ -45,17 +45,17 @@ class ConverterAdapter(
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
             iconValute.setImageBitmap(bt)
             charCode.text = item.charCode
-            if (bindingAdapterPosition != posSelect)
+            if (position != posSelect)
                 moneyConvert.setText(decFormat(item.value.toDouble()))
             moneyConvert.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     if (s!!.isNotBlank()) {
-                        posSelect = bindingAdapterPosition
+                        posSelect = position
                         GlobalScope.launch {
                             delay(200)
                             onChangeValute(
                                 moneyConvert.text.toString().trim().toDouble(),
-                                bindingAdapterPosition
+                                position
                             )
                         }
                     }

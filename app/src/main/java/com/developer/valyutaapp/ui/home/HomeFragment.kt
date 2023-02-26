@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -76,7 +77,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 getAllValuteSuccess(it)
             }
         }
-        viewModel.getRemoteValutes.observe(viewLifecycleOwner) { subscribeValuteState(it) }
+        lifecycleScope.launchWhenStarted {
+            viewModel.getRemoteValutes.collect { subscribeValuteState(it) }
+        }
     }
 
     private fun subscribeValuteState(it: Result<ValCurs>) {

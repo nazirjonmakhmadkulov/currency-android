@@ -57,7 +57,9 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
 
     private fun setupViewModel() = lifecycleScope.launchWhenCreated {
         viewModel.getLocalValutes().distinctUntilChanged().collectLatest { getAllValuteSuccess(it) }
-        viewModel.getRemoteValutes.observe(viewLifecycleOwner) { subscribeValuteState(it) }
+        lifecycleScope.launchWhenStarted {
+            viewModel.getRemoteValutes.collect { subscribeValuteState(it) }
+        }
     }
 
     private fun subscribeValuteState(it: Result<ValCurs>) {

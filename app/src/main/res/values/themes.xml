@@ -12,8 +12,11 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
         <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/white</item>
+<!--        <item name="android:windowBackground">@android:color/transparent</item>-->
         <!-- Customize your theme here. -->
         <item name="preferenceTheme">@style/AppTheme.PreferenceThemeOverlay</item>
 
@@ -28,7 +31,9 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/purple_700</item>
         <item name="android:windowBackground">@drawable/splash</item>
-        <!--        <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
         <!--        <item name="android:windowTranslucentStatus">true</item>-->
     </style>
 

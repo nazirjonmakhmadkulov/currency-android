@@ -33,8 +33,8 @@
                     android:id="@+id/iconValute"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="2dp"
-                    android:scaleType="centerCrop"
+                    android:padding="3dp"
+                    android:scaleType="centerInside"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -82,7 +82,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="6dp"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -102,7 +101,7 @@
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center"
-                android:text="Неделю" />
+                android:text="@string/week" />
 
             <RadioButton
                 android:id="@+id/month"
@@ -113,7 +112,7 @@
                 android:background="@drawable/radio_gender_states"
                 android:button="@null"
                 android:gravity="center"
-                android:text="Месяц" />
+                android:text="@string/month" />
 
             <RadioButton
                 android:id="@+id/year"
@@ -124,7 +123,7 @@
                 android:background="@drawable/radio_gender_states"
                 android:button="@null"
                 android:gravity="center"
-                android:text="Год" />
+                android:text="@string/year" />
         </RadioGroup>
 
         <com.github.mikephil.charting.charts.LineChart
@@ -132,6 +131,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="6dp" />
-
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

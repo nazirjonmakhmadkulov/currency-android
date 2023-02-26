@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.coroutineScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -115,7 +116,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun setupViewModel() {
         viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-        viewModel.getRemoteValutes.observe(this) { subscribeValuteState(it) }
+        lifecycle.coroutineScope.launchWhenStarted {
+            viewModel.getRemoteValutes.collect { subscribeValuteState(it) }
+        }
     }
 
     private fun subscribeValuteState(it: Result<ValCurs>) {

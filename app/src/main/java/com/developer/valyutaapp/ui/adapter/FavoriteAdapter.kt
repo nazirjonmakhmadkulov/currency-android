@@ -45,14 +45,14 @@ class FavoriteAdapter(
                     favorite.setOnClickListener {
                         if (item.favoritesConverter == 1) item.favoritesConverter = 0
                         else item.favoritesConverter = 1
-                        onItemValuteClick(item, bindingAdapterPosition)
+                        onItemValuteClick(item, position)
                     }
                 } else {
                     favorite.setFavorites(item.favoritesValute)
                     favorite.setOnClickListener {
                         if (item.favoritesValute == 1) item.favoritesValute = 0
                         else item.favoritesValute = 1
-                        onItemValuteClick(item, bindingAdapterPosition)
+                        onItemValuteClick(item, position)
                     }
                 }
             }

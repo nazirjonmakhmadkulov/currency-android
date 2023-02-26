@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface HistoryDao {
 
-    @Query("SELECT * FROM history WHERE valId = :valId")
-    fun getAllHistories(valId: Int): Flow<List<History>>
+    @Query("SELECT * FROM history WHERE valId = :valId order by dates DESC LIMIT :limit")
+    fun getAllHistories(valId: Int, limit: Int): Flow<List<History>>
 
     @Query("SELECT EXISTS(SELECT * FROM history WHERE dates = :dates AND valId = :id)")
     fun getValuteExist(dates: String, id: Int): Boolean
