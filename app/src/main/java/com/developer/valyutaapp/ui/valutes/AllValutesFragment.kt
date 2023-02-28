@@ -13,7 +13,6 @@ import com.developer.valyutaapp.core.base.BaseAdapter
 import com.developer.valyutaapp.core.base.Item
 import com.developer.valyutaapp.core.common.PATH_EXP
 import com.developer.valyutaapp.core.common.Result
-import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.databinding.FragmentAllValutesBinding
 import com.developer.valyutaapp.domain.entities.ValCurs
 import com.developer.valyutaapp.domain.entities.Valute
@@ -22,7 +21,6 @@ import com.developer.valyutaapp.ui.adapter.ValCursAdapter
 import com.developer.valyutaapp.utils.Utils
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
@@ -79,13 +77,6 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
     }
 
     private fun onItemValute(item: Valute) {
-        viewModel.getRemoteHistories(
-            Utils.getMonthAge(),
-            Utils.getDate(),
-            item.valId,
-            item.charCode,
-            PATH_EXP
-        )
         val action = AllValutesFragmentDirections.actionNavigationValutesToChartFragment(item.valId, item.charCode)
         findNavController().navigate(action)
     }

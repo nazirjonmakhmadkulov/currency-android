@@ -1,5 +1,6 @@
 package com.developer.valyutaapp.data.repository
 
+import android.util.Log
 import com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.core.dispatcher.DispatcherProvider
@@ -36,7 +37,7 @@ class ValuteRemoteRepositoryImpl(
             }
         }
 
-    private fun insertAndUpdateValute(dates: String, valute: Valute) {
+    private suspend fun insertAndUpdateValute(dates: String, valute: Valute) {
         if (valuteDao.getValuteExist(valute.valId)) {
             valute.dates = getDateFormat(dates)
             valuteDao.updateValuteFromRemote(
@@ -64,6 +65,7 @@ class ValuteRemoteRepositoryImpl(
             valuteRemoteDataSource.getRemoteHistories(dispatcherProvider.io, d1, d2, cn, cs, exp)) {
             is Result.Loading -> Result.Loading
             is Result.Success -> {
+                Log.d("getAllHistories", result.data.history.toString())
                 val valute = result.data.history
                 valute.forEach { insertHistory(it) }
                 Result.Success(result.data)
@@ -72,7 +74,7 @@ class ValuteRemoteRepositoryImpl(
         }
     }
 
-    private fun insertHistory(history: History) {
+    private suspend fun insertHistory(history: History) {
         if (!historyDao.getValuteExist(dateFormatDb(history.dates), history.valId)) {
             val historyNew = History(
                 valId = history.valId,

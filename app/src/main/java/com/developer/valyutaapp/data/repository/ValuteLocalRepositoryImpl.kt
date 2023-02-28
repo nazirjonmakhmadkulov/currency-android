@@ -3,12 +3,9 @@ package com.developer.valyutaapp.data.repository
 import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.domain.repository.ValuteLocalRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
 
 class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalRepository {
-
     override fun getAllLocalValutes(): Flow<List<Valute>> {
         return valuteDao.getAllValutes()
     }
@@ -21,29 +18,29 @@ class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalR
         return valuteDao.getAllConverterValutes()
     }
 
-    override suspend fun getLocalValuteById(valId: Int): Valute = withContext(Dispatchers.IO) {
-        return@withContext valuteDao.getValuteById(valId)
+    override suspend fun getLocalValuteById(valId: Int): Valute  {
+        return valuteDao.getValuteById(valId)
     }
 
-    override fun insertLocalValute(valute: Valute) {
+    override suspend fun insertLocalValute(valute: Valute) {
         valuteDao.insertValute(valute)
     }
 
     override suspend fun updateLocalValute(valute: Valute) {
-        withContext(Dispatchers.IO) { valuteDao.updateValute(valute) }
+        valuteDao.updateValute(valute)
     }
 
-    override fun updateLocalValuteFromRemote(valute: Valute) {
+    override suspend fun updateLocalValuteFromRemote(valute: Valute) {
         valuteDao.updateValuteFromRemote(
             valute.charCode, valute.nominal, valute.name, valute.value, valute.dates, valute.id
         )
     }
 
-    override fun deleteLocalValute(valute: Valute) {
+    override suspend fun deleteLocalValute(valute: Valute) {
         valuteDao.deleteValute(valute)
     }
 
-    override fun deleteAllLocalValutes() {
+    override suspend fun deleteAllLocalValutes() {
         valuteDao.deleteAllValutes()
     }
 }

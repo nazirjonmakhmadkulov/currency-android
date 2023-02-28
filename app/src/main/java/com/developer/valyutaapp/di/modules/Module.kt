@@ -21,6 +21,7 @@ import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
 import com.developer.valyutaapp.domain.usecases.HistoryUseCase
 import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import com.developer.valyutaapp.ui.MainViewModel
+import com.developer.valyutaapp.ui.chart.ChartViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -34,7 +35,8 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
 
 val viewModelModule = module {
-    factory { MainViewModel(get(), get()) }
+    factory { MainViewModel(get()) }
+    factory { ChartViewModel(get(), get()) }
 }
 
 val connectionInternet = module {

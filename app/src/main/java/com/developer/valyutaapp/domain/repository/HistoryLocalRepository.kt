@@ -5,8 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface HistoryLocalRepository {
     fun getAllLocalHistory(valId: Int, day:Int): Flow<List<History>>
-    fun insertLocalHistory(history: History)
-    fun updateLocalHistory(history: History)
-    fun deleteLocalHistory()
-    fun deleteAllLocalHistory()
+    suspend fun insertLocalHistory(history: History)
+    suspend fun updateLocalHistory(history: History)
+    suspend fun deleteLocalHistory()
+    suspend fun deleteAllLocalHistory()
 }

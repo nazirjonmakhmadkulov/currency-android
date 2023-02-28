@@ -7,109 +7,40 @@ import androidx.lifecycle.viewModelScope
 import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import com.developer.valyutaapp.domain.entities.ValCurs
 import  com.developer.valyutaapp.core.common.Result
-import com.developer.valyutaapp.domain.entities.History
-import com.developer.valyutaapp.domain.entities.ValHistory
 import com.developer.valyutaapp.domain.entities.Valute
-import com.developer.valyutaapp.domain.usecases.HistoryUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val valuteUseCase: ValuteUseCase,
-    private val historyUseCase: HistoryUseCase
+    private val valuteUseCase: ValuteUseCase
 ) : ViewModel() {
 
     private val _getRemoteValutes = MutableStateFlow<Result<ValCurs>>(Result.Loading)
     val getRemoteValutes: StateFlow<Result<ValCurs>> get() = _getRemoteValutes
-
     fun getRemoteValutes(date: String, exp: String) = viewModelScope.launch {
-        when (val result = valuteUseCase.invokeGetRemoteValutes(date, exp)) {
+        when (val result = valuteUseCase.getRemoteValutes(date, exp)) {
             is Result.Loading -> Result.Loading
             is Result.Success -> _getRemoteValutes.value = Result.Success(result.data)
             is Result.Error -> _getRemoteValutes.value =
-                    Result.Error(result.cause, result.code, result.errorMessage)
+                Result.Error(result.cause, result.code, result.errorMessage)
         }
     }
 
-    fun getLocalValutes(): Flow<List<Valute>> = valuteUseCase.invokeGetLocalValutes()
-
-    fun getFavoriteLocalValutes(): Flow<List<Valute>> =
-        valuteUseCase.invokeGetFavoriteLocalValutes()
-
-    fun getAllConverterLocalValutes(): Flow<List<Valute>> =
-        valuteUseCase.invokeGetAllConverterLocalValutes()
+    fun getLocalValutes(): Flow<List<Valute>> = valuteUseCase.getLocalValutes()
+    fun getFavoriteLocalValutes(): Flow<List<Valute>> = valuteUseCase.getFavoriteLocalValutes()
+    fun getAllConverterLocalValutes(): Flow<List<Valute>> = valuteUseCase.getAllConverterLocalValutes()
 
     private val _getLocalValuteById = MutableLiveData<Valute>()
     val getLocalValuteById: LiveData<Valute> get() = _getLocalValuteById
-
     fun getLocalValuteById(valId: Int) = viewModelScope.launch {
-        _getLocalValuteById.value = valuteUseCase.invokeGetLocalValuteById(valId)
+        _getLocalValuteById.value = valuteUseCase.getLocalValuteById(valId)
     }
 
     private val _updateLocalValute = MutableLiveData<Unit>()
     val updateLocalValute: LiveData<Unit> get() = _updateLocalValute
-
     fun updateLocalValute(valute: Valute) = viewModelScope.launch {
-        _updateLocalValute.value = valuteUseCase.invokeUpdateLocalValute(valute)
-    }
-
-    private val _deleteLocalValute = MutableLiveData<Unit>()
-    val deleteLocalValute: LiveData<Unit> get() = _deleteLocalValute
-
-    fun deleteLocalValute(valute: Valute) = viewModelScope.launch {
-        _deleteLocalValute.value = valuteUseCase.invokeDeleteLocalValute(valute)
-    }
-
-    private val _deleteAllLocalValute = MutableLiveData<Unit>()
-    val deleteAllLocalValute: LiveData<Unit> get() = _deleteAllLocalValute
-
-    fun deleteAllLocalValute() = viewModelScope.launch {
-        _deleteAllLocalValute.value = valuteUseCase.invokeDeleteAllLocalValutes()
-    }
-
-    //history
-    private val _getRemoteHistories = MutableLiveData<Result<ValHistory>>(Result.Loading)
-    val getRemoteHistories: LiveData<Result<ValHistory>> get() = _getRemoteHistories
-    fun getRemoteHistories(d1: String, d2: String, cn: Int, cs: String, exp: String) =
-        viewModelScope.launch {
-            when (val result = historyUseCase.getRemoteHistories(d1, d2, cn, cs, exp)) {
-                is Result.Loading -> Result.Loading
-                is Result.Success -> _getRemoteHistories.value = Result.Success(result.data)
-                is Result.Error ->
-                    _getRemoteHistories.value =
-                        Result.Error(result.cause, result.code, result.errorMessage)
-            }
-        }
-
-    fun getLocalHistories(valId: Int, day: Int): Flow<List<History>> = historyUseCase.getLocalHistories(valId, day)
-
-    private val _insertLocalFavorite = MutableLiveData<Unit>()
-    val insertLocalFavorite: LiveData<Unit> get() = _insertLocalFavorite
-
-    fun insertLocalFavorite(history: History) = viewModelScope.launch {
-        _insertLocalFavorite.value = historyUseCase.insertLocalHistory(history)
-    }
-
-    private val _updateLocalFavorite = MutableLiveData<Unit>()
-    val updateLocalFavorite: LiveData<Unit> get() = _updateLocalFavorite
-
-    fun updateLocalFavorite(history: History) = viewModelScope.launch {
-        _updateLocalFavorite.value = historyUseCase.updateLocalHistory(history)
-    }
-
-    private val _deleteLocalFavorite = MutableLiveData<Unit>()
-    val deleteLocalFavorite: LiveData<Unit> get() = _deleteLocalFavorite
-
-    fun deleteLocalFavorite() = viewModelScope.launch {
-        _deleteLocalFavorite.value = historyUseCase.deleteLocalHistory()
-    }
-
-    private val _deleteAllLocalFavorite = MutableLiveData<Unit>()
-    val deleteAllLocalFavorite: LiveData<Unit> get() = _deleteAllLocalFavorite
-
-    fun deleteAllLocalFavorite() = viewModelScope.launch {
-        _deleteAllLocalFavorite.value = historyUseCase.deleteAllLocalHistory()
+        _updateLocalValute.value = valuteUseCase.updateLocalValute(valute)
     }
 }

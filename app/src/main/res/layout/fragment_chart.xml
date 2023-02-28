@@ -99,7 +99,6 @@
                 android:layout_weight="0.333"
                 android:background="@drawable/radio_gender_states"
                 android:button="@null"
-                android:checked="true"
                 android:gravity="center"
                 android:text="@string/week" />
 
@@ -122,6 +121,7 @@
                 android:layout_weight="0.333"
                 android:background="@drawable/radio_gender_states"
                 android:button="@null"
+                android:checked="true"
                 android:gravity="center"
                 android:text="@string/year" />
         </RadioGroup>
@@ -132,4 +132,11 @@
             android:layout_height="match_parent"
             android:layout_marginTop="6dp" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

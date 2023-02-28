@@ -12,14 +12,14 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
-class ValyutaApp : Application() {
+class ValuteApp : Application() {
 
     private val prefs: SharedPreference by inject()
 
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            androidContext(this@ValyutaApp.applicationContext)
+            androidContext(this@ValuteApp.applicationContext)
             androidLogger(Level.DEBUG)
             modules(
                 listOf(

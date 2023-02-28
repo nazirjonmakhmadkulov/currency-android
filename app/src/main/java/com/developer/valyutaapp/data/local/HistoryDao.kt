@@ -6,22 +6,21 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HistoryDao {
-
     @Query("SELECT * FROM history WHERE valId = :valId order by dates DESC LIMIT :limit")
     fun getAllHistories(valId: Int, limit: Int): Flow<List<History>>
 
     @Query("SELECT EXISTS(SELECT * FROM history WHERE dates = :dates AND valId = :id)")
-    fun getValuteExist(dates: String, id: Int): Boolean
+    suspend fun getValuteExist(dates: String, id: Int): Boolean
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertHistory(history: History)
+    suspend fun insertHistory(history: History)
 
     @Update
-    fun updateHistory(history: History)
+    suspend fun updateHistory(history: History)
 
     @Query("DELETE FROM history WHERE dates < datetime('now',  '-365 day') AND valId = :id")
-    fun deleteHistory(id: Int)
+    suspend fun deleteHistory(id: Int)
 
     @Query("DELETE FROM history")
-    fun deleteAllHistories()
+    suspend fun deleteAllHistories()
 }

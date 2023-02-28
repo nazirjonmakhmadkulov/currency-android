@@ -15,30 +15,25 @@ import com.developer.valyutaapp.core.common.PATH_EXP
 import com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.databinding.FragmentChartBinding
 import com.developer.valyutaapp.domain.entities.History
-import com.developer.valyutaapp.domain.entities.ValCurs
-import com.developer.valyutaapp.ui.MainViewModel
+import com.developer.valyutaapp.domain.entities.ValHistory
 import com.developer.valyutaapp.utils.ImageResource
 import com.developer.valyutaapp.utils.Utils
 import com.developer.valyutaapp.utils.Utils.getDate
-import com.developer.valyutaapp.utils.Utils.getMonthAge
-import com.developer.valyutaapp.utils.Utils.getWeekAge
 import com.developer.valyutaapp.utils.Utils.getYearAge
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ChartFragment : Fragment(R.layout.fragment_chart) {
     private val viewBinding by viewBinding(FragmentChartBinding::bind)
-    private val viewModel by viewModel<MainViewModel>()
+    private val viewModel by viewModel<ChartViewModel>()
     private val args: ChartFragmentArgs by navArgs()
     private var dateItems: MutableList<String> = mutableListOf()
-    private var limit = 7
+    private var limit = 365
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,23 +42,9 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         viewBinding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val radio: RadioButton = view.findViewById(checkedId)
             when (radio) {
-                viewBinding.week -> {
-                    getRemoteHistories(getWeekAge())
-                    limit = 7
-                    getLocalHistories(limit)
-                }
-
-                viewBinding.month -> {
-                    getRemoteHistories(getMonthAge())
-                    limit = 30
-                    getLocalHistories(limit)
-                }
-
-                viewBinding.year -> {
-                    getRemoteHistories(getYearAge())
-                    limit = 365
-                    getLocalHistories(limit)
-                }
+                viewBinding.week -> getLocalHistories(7)
+                viewBinding.month -> getLocalHistories(30)
+                viewBinding.year -> getLocalHistories(limit)
             }
         }
     }
@@ -73,22 +54,25 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     }
 
     private fun setupViewModel() = with(viewBinding) {
+        getRemoteHistories(getYearAge())
         viewModel.getLocalValuteById(args.valId)
-        getLocalHistories(limit)
         lifecycleScope.launchWhenCreated {
-            viewModel.getRemoteValutes.collect { subscribeHistoryState(it) }
+            viewModel.getRemoteHistories.collect { subscribeHistoryState(it) }
         }
         lifecycleScope.launchWhenCreated {
-            viewModel.getLocalValuteById.observe(viewLifecycleOwner) {
-                val bt = ImageResource.getImageRes(requireContext(), it.charCode)
-                iconValute.setImageBitmap(bt)
-                name.text = it.charCode
-                somon.text = it.value
+            viewModel.getLocalValuteById.collect { valute ->
+                valute?.let {
+                    val bt = ImageResource.getImageRes(requireContext(), it.charCode)
+                    iconValute.setImageBitmap(bt)
+                    name.text = it.charCode
+                    somon.text = it.value
+                }
             }
         }
     }
 
     private fun getRemoteHistories(dates: String) {
+        viewBinding.loading.visibility = View.VISIBLE
         viewModel.getRemoteHistories(
             dates, getDate(), args.valId, args.charCode, PATH_EXP
         )
@@ -100,18 +84,23 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         }
     }
 
-    private fun subscribeHistoryState(it: Result<ValCurs>) {
+    private fun subscribeHistoryState(it: Result<ValHistory>) {
         when (it) {
             is Result.Loading -> {}
             is Result.Success -> {
                 getLocalHistories(limit)
-                Log.d("Error ", "${it} =  ${it}")
+                viewBinding.loading.visibility = View.GONE
             }
-            is Result.Error -> Log.d("Error ", "${it.code} =  ${it.errorMessage}")
+            is Result.Error -> {
+                viewBinding.loading.visibility = View.GONE
+                Log.d("Error ", "${it.code} =  ${it.errorMessage}")
+            }
         }
     }
 
     private fun getAllValuteSuccess(valutes: List<History>) {
+        showBarChart(emptyList())
+        dateItems.clear()
         dateItems.addAll(valutes.map { it.dates })
         showBarChart(valutes.asReversed())
     }

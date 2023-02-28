@@ -13,18 +13,15 @@ class ValuteUseCase : KoinComponent {
     private val valuteLocalRepository: ValuteLocalRepository by inject()
 
     //remote
-    suspend fun invokeGetRemoteValutes(date: String, exp: String) = valuteRemoteRepository.getAllValutes(date, exp)
+    suspend fun getRemoteValutes(date: String, exp: String) = valuteRemoteRepository.getAllValutes(date, exp)
 
     //local
-    fun invokeGetLocalValutes() = valuteLocalRepository.getAllLocalValutes()
-    fun invokeGetFavoriteLocalValutes() = valuteLocalRepository.getAllFavoriteLocalValutes()
-    fun invokeGetAllConverterLocalValutes() = valuteLocalRepository.getAllConverterLocalValutes()
+    fun getLocalValutes() = valuteLocalRepository.getAllLocalValutes()
+    fun getFavoriteLocalValutes() = valuteLocalRepository.getAllFavoriteLocalValutes()
+    fun getAllConverterLocalValutes() = valuteLocalRepository.getAllConverterLocalValutes()
 
-    suspend fun invokeGetLocalValuteById(valId: Int) = valuteLocalRepository.getLocalValuteById(valId)
-
-    suspend fun invokeUpdateLocalValute(valute: Valute) = valuteLocalRepository.updateLocalValute(valute)
-
-    fun invokeDeleteLocalValute(valute: Valute) = valuteLocalRepository.deleteLocalValute(valute)
-
-    fun invokeDeleteAllLocalValutes() = valuteLocalRepository.deleteAllLocalValutes()
+    suspend fun getLocalValuteById(valId: Int) = valuteLocalRepository.getLocalValuteById(valId)
+    suspend fun updateLocalValute(valute: Valute) = valuteLocalRepository.updateLocalValute(valute)
+    suspend fun deleteLocalValute(valute: Valute) = valuteLocalRepository.deleteLocalValute(valute)
+    suspend fun deleteAllLocalValutes() = valuteLocalRepository.deleteAllLocalValutes()
 }

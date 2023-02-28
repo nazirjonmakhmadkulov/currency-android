@@ -21,6 +21,7 @@ class ConverterAdapter(
     private val onChangeValute: (Double, Int) -> Unit,
     private val onItemValuteClick: (Valute) -> Unit,
 ) : ItemBase<ItemConverterBinding, Valute> {
+
     private var posSelect: Int = -1
     override fun isRelativeItem(item: Item): Boolean = item is Valute
     override fun getLayoutId() = R.layout.item_converter
@@ -33,8 +34,11 @@ class ConverterAdapter(
 
     override fun getDiffUtil() = diffUtil
     private val diffUtil = object : DiffUtil.ItemCallback<Valute>() {
-        override fun areItemsTheSame(oldItem: Valute, newItem: Valute) = oldItem.valId == newItem.valId
-        override fun areContentsTheSame(oldItem: Valute, newItem: Valute) = oldItem == newItem
+        override fun areItemsTheSame(oldItem: Valute, newItem: Valute) =
+            oldItem.valId == newItem.valId
+
+        override fun areContentsTheSame(oldItem: Valute, newItem: Valute) =
+            oldItem.value == newItem.value
     }
 
     inner class FavoriteViewHolder(
@@ -45,24 +49,16 @@ class ConverterAdapter(
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
             iconValute.setImageBitmap(bt)
             charCode.text = item.charCode
-            if (position != posSelect)
-                moneyConvert.setText(decFormat(item.value.toDouble()))
+            if (position != posSelect) moneyConvert.setText(decFormat(item.value.toDouble()))
+
             moneyConvert.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     if (s!!.isNotBlank()) {
                         posSelect = position
-                        GlobalScope.launch {
-                            delay(200)
-                            onChangeValute(
-                                moneyConvert.text.toString().trim().toDouble(),
-                                position
-                            )
-                        }
+                        onChangeValute(moneyConvert.text.toString().trim().toDouble(), position)
                     }
                 }
-                override fun beforeTextChanged(
-                    s: CharSequence?, start: Int, count: Int, after: Int
-                ) {}
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
             itemView.setOnClickListener { onItemValuteClick(item) }
