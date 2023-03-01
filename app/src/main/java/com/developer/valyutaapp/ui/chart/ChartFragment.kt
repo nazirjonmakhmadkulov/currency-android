@@ -25,6 +25,8 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -33,7 +35,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private val viewModel by viewModel<ChartViewModel>()
     private val args: ChartFragmentArgs by navArgs()
     private var dateItems: MutableList<String> = mutableListOf()
-    private var limit = 365
+    private var limit = 7
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,7 +46,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
             when (radio) {
                 viewBinding.week -> getLocalHistories(7)
                 viewBinding.month -> getLocalHistories(30)
-                viewBinding.year -> getLocalHistories(limit)
+                viewBinding.year -> getLocalHistories(365)
             }
         }
     }
@@ -80,7 +82,8 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
 
     private fun getLocalHistories(limit: Int) {
         lifecycleScope.launchWhenCreated {
-            viewModel.getLocalHistories(args.valId, limit).collect { getAllValuteSuccess(it) }
+            viewModel.getLocalHistories(args.valId, limit).distinctUntilChanged()
+                .collectLatest { getAllValuteSuccess(it) }
         }
     }
 

@@ -37,7 +37,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     }
     private val converterAdapter: BaseAdapter =
         BaseAdapter(listOf(ConverterAdapter(::onChangeValute, ::onItemValute)))
-    private val conAdapter by lazy { ConAdapter(::onChangeValute, ::onItemValute) }
+//    private val conAdapter by lazy { ConAdapter(::onChangeValute, ::onItemValute) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -119,7 +119,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
 
     private fun onItemValute(item: Valute) {}
 
-    private fun onChangeValute(item: Double, position: Int) {
+    private fun onChangeValute(item: String, position: Int) {
         valutes.clear()
         lifecycleScope.launch {
             delay(300)
@@ -165,8 +165,8 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
 //                val sum = valute.value.toDouble() * item.toDouble()
 //                println("$sum")
             }
-            converterAdapter.submitList(valutes.toList())
-            converterAdapter.notifyDataSetChanged()
+          //  converterAdapter.submitList(valutes.toList())
+            //converterAdapter.notifyDataSetChanged()
         }
     }
 }

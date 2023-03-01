@@ -99,6 +99,7 @@
                 android:layout_weight="0.333"
                 android:background="@drawable/radio_gender_states"
                 android:button="@null"
+                android:checked="true"
                 android:gravity="center"
                 android:text="@string/week" />
 
@@ -121,7 +122,6 @@
                 android:layout_weight="0.333"
                 android:background="@drawable/radio_gender_states"
                 android:button="@null"
-                android:checked="true"
                 android:gravity="center"
                 android:text="@string/year" />
         </RadioGroup>
