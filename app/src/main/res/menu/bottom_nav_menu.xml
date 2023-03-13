@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home"
-        android:title="Главная" />
+        android:title="@string/home" />
 
-    <item
-        android:id="@+id/navigation_converter"
-        android:icon="@drawable/ic_converter"
-        android:title="Конвертер" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_converter"-->
+<!--        android:icon="@drawable/ic_converter"-->
+<!--        android:title="@string/converter" />-->
 
     <item
         android:id="@+id/navigation_valutes"
         android:icon="@drawable/ic_all"
-        android:title="Валюты" />
+        android:title="@string/valutes" />
 
     <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_settings"
-        android:title="Ещё" />
+        android:title="@string/more" />
 </menu>

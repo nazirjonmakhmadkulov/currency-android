@@ -40,4 +40,8 @@
     <string name="year">Год</string>
     <string name="month">Месяц</string>
     <string name="week">Неделю</string>
+    <string name="home">Главная</string>
+    <string name="converter">Конвертер</string>
+    <string name="valutes">Валюты</string>
+    <string name="more">Ещё</string>
 </resources>

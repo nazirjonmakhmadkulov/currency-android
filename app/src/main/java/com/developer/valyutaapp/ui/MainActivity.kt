@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
-                R.id.navigation_converter,
+                //R.id.navigation_converter,
                 R.id.navigation_valutes,
                 R.id.navigation_settings
             )
