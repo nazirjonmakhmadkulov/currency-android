@@ -35,7 +35,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
             android:textColor="@color/black_second"
-            android:textSize="13sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="1.1.2002" />
@@ -45,30 +45,30 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="12dp"
             android:textAllCaps="true"
             android:textColor="@color/text"
             android:textSize="18sp"
             android:textStyle="normal|bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/somon"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/iconValute"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date"
             tools:text="TJS" />
 
         <TextView
             android:id="@+id/somon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="12dp"
             android:textColor="@color/text"
             android:textSize="18sp"
             android:textStyle="normal|bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/name"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date"
             tools:text="938 TJS" />
 
         <TextView
