@@ -5,9 +5,9 @@
 <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
 <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70"></a>
 
-# Курсы валют Таджикистана
+## Курсы валют Таджикистана
 
-# Features
+### Features
 Android приложение, которое получает список валют и  отображает информацию 
 с официального сайта [Национальный банк Таджикистана](https://www.nbt.tj/ru/kurs/kurs.php).
 Пользователи могут просматривать список валют на последние обновления, 
