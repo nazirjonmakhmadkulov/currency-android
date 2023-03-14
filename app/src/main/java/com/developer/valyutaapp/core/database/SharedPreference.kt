@@ -20,8 +20,8 @@ class SharedPreference(context: Context) {
         editor.putString(LANG, lang).apply()
     }
 
-    fun getLang(): String {
-        return sharedPref.getString(LANG, "")!!
+    fun getLang(): String? {
+        return sharedPref.getString(LANG, null)
     }
 
     fun saveAutoUpdate(bool: String) {
@@ -29,8 +29,8 @@ class SharedPreference(context: Context) {
         editor.putString(AUTO_UPDATE, bool).apply()
     }
 
-    fun getAutoUpdate(): String {
-        return sharedPref.getString(AUTO_UPDATE, "")!!
+    fun getAutoUpdate(): String? {
+        return sharedPref.getString(AUTO_UPDATE, null)
     }
 
     fun saveTheme(theme: Boolean) {
