@@ -11,7 +11,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -30,6 +33,7 @@ import com.developer.valyutaapp.service.auto.AutoService
 import com.developer.valyutaapp.utils.Utils
 import com.developer.valyutaapp.utils.Utils.setStatusBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -140,8 +144,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun setupViewModel() {
         viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-        lifecycle.coroutineScope.launchWhenStarted {
-            viewModel.getRemoteValutes.collect { subscribeValuteState(it) }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getRemoteValutes.collect { subscribeValuteState(it) }
+            }
         }
     }
 

@@ -2,11 +2,12 @@ package com.developer.valyutaapp.ui.chart
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -27,7 +28,9 @@ import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class ChartFragment : Fragment(R.layout.fragment_chart) {
@@ -58,16 +61,20 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private fun setupViewModel() = with(viewBinding) {
         getRemoteHistories(getYearAge())
         viewModel.getLocalValuteById(args.valId)
-        lifecycleScope.launchWhenCreated {
-            viewModel.getRemoteHistories.collect { subscribeHistoryState(it) }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getRemoteHistories.collect { subscribeHistoryState(it) }
+            }
         }
-        lifecycleScope.launchWhenCreated {
-            viewModel.getLocalValuteById.collect { valute ->
-                valute?.let {
-                    val bt = ImageResource.getImageRes(requireContext(), it.charCode)
-                    iconValute.setImageBitmap(bt)
-                    name.text = it.charCode
-                    somon.text = it.value
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getLocalValuteById.collect { valute ->
+                    valute?.let {
+                        val bt = ImageResource.getImageRes(requireContext(), it.charCode)
+                        iconValute.setImageBitmap(bt)
+                        name.text = it.charCode
+                        somon.text = it.value
+                    }
                 }
             }
         }
@@ -81,9 +88,11 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     }
 
     private fun getLocalHistories(limit: Int) {
-        lifecycleScope.launchWhenCreated {
-            viewModel.getLocalHistories(args.valId, limit).distinctUntilChanged()
-                .collectLatest { getAllValuteSuccess(it) }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getLocalHistories(args.valId, limit).distinctUntilChanged()
+                    .collectLatest { getAllValuteSuccess(it) }
+            }
         }
     }
 
@@ -96,7 +105,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
             }
             is Result.Error -> {
                 viewBinding.loading.visibility = View.GONE
-                Log.d("Error ", "${it.code} =  ${it.errorMessage}")
+                Timber.d("Error ", "${it.code} =  ${it.errorMessage}")
             }
         }
     }

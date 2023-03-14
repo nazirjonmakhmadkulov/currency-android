@@ -1,6 +1,5 @@
 package com.developer.valyutaapp.data.repository
 
-import android.util.Log
 import com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.core.dispatcher.DispatcherProvider
@@ -15,6 +14,7 @@ import com.developer.valyutaapp.utils.Utils.getMonthAge
 import com.developer.valyutaapp.utils.Utils.dateFormatDb
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class ValuteRemoteRepositoryImpl(
     private val dispatcherProvider: DispatcherProvider,
@@ -65,7 +65,7 @@ class ValuteRemoteRepositoryImpl(
             valuteRemoteDataSource.getRemoteHistories(dispatcherProvider.io, d1, d2, cn, cs, exp)) {
             is Result.Loading -> Result.Loading
             is Result.Success -> {
-                Log.d("getAllHistories", result.data.history.toString())
+                Timber.d("getAllHistories ${result.data.history}")
                 val valute = result.data.history
                 valute.forEach { insertHistory(it) }
                 Result.Success(result.data)
