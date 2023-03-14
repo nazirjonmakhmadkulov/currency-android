@@ -1,11 +1,16 @@
 package com.developer.valyutaapp.ui
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -27,6 +32,7 @@ import com.developer.valyutaapp.utils.Utils.setStatusBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -42,6 +48,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
+    private val pushNotificationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            Timber.d("Permission POST_NOTIFICATION isGranted:$granted")
+        }
+
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +60,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         initTheme()
         worker = WorkManager.getInstance()
         worker()
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_main) as NavHostFragment
         navController = navHostFragment.navController
         setSupportActionBar(viewBinding.toolbar)
         val bottomNavView: BottomNavigationView = viewBinding.bottomNavigation
@@ -65,6 +75,20 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         setupViewModel()
+        checkStatusPostNotification()
+    }
+
+
+    private fun checkStatusPostNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            when {
+                ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                        == PackageManager.PERMISSION_GRANTED -> Timber.d("Permission POST_NOTIFICATION GRANTED")
+                shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) ->
+                    Timber.d("Permission POST_NOTIFICATION blocked")
+                else -> pushNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
     }
 
     private fun initTheme() {
@@ -125,7 +149,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         when (it) {
             is Result.Loading -> {}
             is Result.Success -> {}
-            is Result.Error -> Log.d("Error ", "${it.code} = ${it.errorMessage}")
+            is Result.Error -> Timber.d("Error ", "${it.code} = ${it.errorMessage}")
         }
     }
 }
