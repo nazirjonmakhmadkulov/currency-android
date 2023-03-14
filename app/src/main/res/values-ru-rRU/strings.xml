@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Курсы валют</string>
+
+    <string name="appwidget_text">USD</string>
+    <string name="add_widget">Add widget</string>
+
+    <string name="ok">OK</string>
+    <string name="language">Язык</string>
+    <string name="eng">English</string>
+    <string name="rus">Русский</string>
+
+    <string name="splash">Национальный банк Таджикистана</string>
+
+    <string name="setting">Настройка</string>
+    <string name="auto_update">Автоматическое обновление</string>
+    <string name="pol_update">12-и часовой режим</string>
+
+    <string name="theme_app">Темы приложения</string>
+    <string name="theme_light">Светлая тема</string>
+    <string name="theme_dark">Тёмная тема</string>
+
+    <string name="auto_enable">Включить</string>
+    <string name="favorites">Избранное</string>
+    <string name="all">Все</string>
+
+    <string name="favorites_valutes">Избранное валют</string>
+
+    <string name="currency_converter">Конвертер валют</string>
+    <string name="all_valutes">Все валюты</string>
+
+    <string name="banner_ad_unit_id" tools:ignore="MissingTranslation">ca-app-pub-7733697700012664~1688146414</string>
+
+    <string name="year">Год</string>
+    <string name="month">Месяц</string>
+    <string name="week">Неделю</string>
+    <string name="home">Главная</string>
+    <string name="converter">Конвертер</string>
+    <string name="valutes">Валюты</string>
+    <string name="more">Ещё</string>
+    <string name="update">Обновлено</string>
+</resources>

@@ -1,7 +1,7 @@
 package com.developer.valyutaapp.ui
 
 import android.Manifest
-import android.content.Intent
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -24,6 +24,7 @@ import com.developer.valyutaapp.core.common.PATH_EXP
 import com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.databinding.ActivityMainBinding
+import com.developer.valyutaapp.di.ValuteApp
 import com.developer.valyutaapp.domain.entities.ValCurs
 import com.developer.valyutaapp.utils.Utils
 import com.developer.valyutaapp.utils.Utils.setStatusBar
@@ -45,6 +46,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             Timber.d("Permission POST_NOTIFICATION isGranted:$granted")
         }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase?.let { ValuteApp.localeManager.setLocale(it) })
+    }
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {

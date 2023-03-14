@@ -33,7 +33,7 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_collapseMode="pin"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="Все валюты"
+            app:title="@string/all_valutes"
             app:titleTextColor="@color/white"
             app:titleCentered="false" />
     </com.google.android.material.appbar.AppBarLayout>

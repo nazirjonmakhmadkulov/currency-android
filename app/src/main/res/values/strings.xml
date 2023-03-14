@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Курсы валют</string>
+    <string name="app_name">Currency rate</string>
 
     <string name="appwidget_text">USD</string>
     <string name="add_widget">Add widget</string>
 
     <string name="ok">OK</string>
-    <string name="language">Язык</string>
+    <string name="language">Language</string>
     <string name="eng">English</string>
-    <string name="rus">Русский</string>
+    <string name="rus">Russian</string>
 
-    <string name="splash">Национальный банк Таджикистана</string>
+    <string name="splash">National Bank of Tajikistan</string>
 
-    <string name="setting">Настройка</string>
-    <string name="auto_update">Автоматическое обновление</string>
-    <string name="pol_update">12-и часовой режим</string>
+    <string name="setting">Settings</string>
+    <string name="auto_update">Automatic updates</string>
+    <string name="pol_update">12-hour mode</string>
 
-    <string name="theme_app">Темы приложения</string>
-    <string name="theme_light">Светлая тема</string>
-    <string name="theme_dark">Тёмная тема</string>
+    <string name="theme_app">Application theme</string>
+    <string name="theme_light">Light theme</string>
+    <string name="theme_dark">Dark theme</string>
 
-    <string name="language_app">Темы приложения</string>
-    <string name="language_en">Светлая тема</string>
-    <string name="language_ru">Тёмная тема</string>
-    <string name="language_tj">Тёмная тема</string>
+    <string name="auto_enable">Turn on</string>
+    <string name="favorites">Favourites</string>
+    <string name="all">All</string>
 
-    <string name="auto_enable">Включить</string>
-    <string name="favorites">Избранное</string>
-    <string name="favorites_valutes">Избранное валют</string>
+    <string name="favorites_valutes">Currency Favorites</string>
+
+    <string name="currency_converter">Currency Converter</string>
+    <string name="all_valutes">All currencies</string>
 
     <string name="banner_ad_unit_id" tools:ignore="MissingTranslation">ca-app-pub-7733697700012664~1688146414</string>
 
-    <string name="year">Год</string>
-    <string name="month">Месяц</string>
-    <string name="week">Неделю</string>
-    <string name="home">Главная</string>
-    <string name="converter">Конвертер</string>
-    <string name="valutes">Валюты</string>
-    <string name="more">Ещё</string>
-    <string name="update">Обновлено</string>
+    <string name="year">Year</string>
+    <string name="month">Month</string>
+    <string name="week">Week</string>
+    <string name="home">Home</string>
+    <string name="converter">Converter</string>
+    <string name="valutes">Currencies</string>
+    <string name="more">More</string>
+    <string name="update">Updated</string>
 </resources>
