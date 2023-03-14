@@ -1,5 +1,6 @@
 package com.developer.valyutaapp.ui.splash
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.content.res.Configuration
@@ -19,8 +20,8 @@ import com.developer.valyutaapp.utils.Utils.setStatusBar
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
-    private val prefs: SharedPreference by inject()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar(window)
