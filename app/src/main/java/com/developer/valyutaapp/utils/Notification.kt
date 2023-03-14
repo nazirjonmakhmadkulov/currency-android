@@ -25,8 +25,11 @@ object Notification {
         intent.data = Uri.parse("custom://" + System.currentTimeMillis())
         intent.action = "actionstring" + System.currentTimeMillis()
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        val pi =
-            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pi = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_MUTABLE)
+        } else {
+            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        }
         val notification: Notification
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)

@@ -7,13 +7,22 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
+import androidx.work.*
 import com.developer.valyutaapp.R
 import com.developer.valyutaapp.core.common.FAVORITE_VALUTE
 import com.developer.valyutaapp.core.database.SharedPreference
+import com.developer.valyutaapp.service.auto.AutoWorker
 import org.koin.android.ext.android.inject
+import java.util.concurrent.TimeUnit
 
 class SettingsFragment : PreferenceFragmentCompat() {
     private val prefs: SharedPreference by inject()
+    companion object {
+        const val MESSAGE_STATUS = "message_status"
+        const val DURATION: Long = 1000
+        const val REPEAT_INTERVAL: Long = 12
+        const val UNIQUE_WORK_NAME: String = "auto-update-unique"
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -38,11 +47,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (autoUpdate.isChecked) {
                 autoUpdate.isChecked = true
                 prefs.saveAutoUpdate("1")
-                //startService(Intent(this@SettingActivity, AutoService::class.java))
+                workerInit()
             } else {
                 autoUpdate.isChecked = false
                 prefs.saveAutoUpdate("0")
-                //stopService(Intent(this@SettingActivity, AutoService::class.java))
+                workerCancel()
             }
             false
         }
@@ -64,5 +73,28 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
             false
         }
+    }
+
+    private fun createConstraints() = Constraints.Builder()
+        .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
+        .setRequiresCharging(false)
+        .setRequiresBatteryNotLow(true)
+        .setRequiredNetworkType(NetworkType.CONNECTED)
+        .build()
+
+    private fun createWorkRequest() =
+        PeriodicWorkRequestBuilder<AutoWorker>(REPEAT_INTERVAL, TimeUnit.HOURS)
+            .setConstraints(createConstraints())
+            .setInitialDelay(DURATION, TimeUnit.MILLISECONDS)
+            .build()
+
+    private fun workerInit() {
+        WorkManager.getInstance(requireContext()).enqueueUniquePeriodicWork(
+            UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, createWorkRequest()
+        )
+    }
+
+    private fun workerCancel(){
+        WorkManager.getInstance(requireContext()).cancelUniqueWork(UNIQUE_WORK_NAME)
     }
 }
