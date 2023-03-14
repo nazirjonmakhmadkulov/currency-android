@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Курсы валют</string>
+
     <string name="appwidget_text">USD</string>
     <string name="add_widget">Add widget</string>
 
@@ -8,6 +9,7 @@
     <string name="language">Язык</string>
     <string name="eng">English</string>
     <string name="rus">Русский</string>
+
     <string name="splash">Национальный банк Таджикистана</string>
 
     <string name="setting">Настройка</string>
@@ -18,25 +20,17 @@
     <string name="theme_light">Светлая тема</string>
     <string name="theme_dark">Тёмная тема</string>
 
+    <string name="language_app">Темы приложения</string>
+    <string name="language_en">Светлая тема</string>
+    <string name="language_ru">Тёмная тема</string>
+    <string name="language_tj">Тёмная тема</string>
+
     <string name="auto_enable">Включить</string>
     <string name="favorites">Избранное</string>
     <string name="favorites_valutes">Избранное валют</string>
 
     <string name="banner_ad_unit_id" tools:ignore="MissingTranslation">ca-app-pub-7733697700012664~1688146414</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="year">Год</string>
     <string name="month">Месяц</string>
     <string name="week">Неделю</string>
