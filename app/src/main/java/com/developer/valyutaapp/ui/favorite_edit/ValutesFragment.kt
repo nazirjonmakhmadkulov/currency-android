@@ -3,6 +3,7 @@ package com.developer.valyutaapp.ui.favorite_edit
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -13,6 +14,7 @@ import com.developer.valyutaapp.databinding.FragmentValutesBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.FavoriteAdapter
+import com.developer.valyutaapp.utils.launchAndCollectIn
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.android.ext.android.inject
@@ -39,10 +41,8 @@ class ValutesFragment : Fragment(R.layout.fragment_valutes) {
     }
 
     private fun setupViewModel() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.getLocalValutes().distinctUntilChanged().collectLatest {
-                getAllValuteSuccess(it)
-            }
+        viewModel.getLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
+            getAllValuteSuccess(it)
         }
     }
 

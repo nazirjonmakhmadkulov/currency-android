@@ -3,6 +3,7 @@ package com.developer.valyutaapp.ui.favorite_edit
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -15,6 +16,7 @@ import com.developer.valyutaapp.databinding.FragmentFavoritesBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.FavoriteAdapter
+import com.developer.valyutaapp.utils.launchAndCollectIn
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import org.koin.android.ext.android.inject
@@ -44,16 +46,12 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private fun setupViewModel() {
         val favorite = arguments?.getString("favorite")
         if (FAVORITE_VALUTE == favorite) {
-            lifecycleScope.launchWhenCreated {
-                viewModel.getFavoriteLocalValutes().distinctUntilChanged().collectLatest {
-                    getAllValuteSuccess(it)
-                }
+            viewModel.getFavoriteLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
+                getAllValuteSuccess(it)
             }
         } else if (FAVORITE_CONVERTER == favorite) {
-            lifecycleScope.launchWhenCreated {
-                viewModel.getAllConverterLocalValutes().distinctUntilChanged().collectLatest {
-                    getAllValuteSuccess(it)
-                }
+            viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
+                getAllValuteSuccess(it)
             }
         }
     }

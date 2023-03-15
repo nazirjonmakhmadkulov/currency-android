@@ -1,11 +1,9 @@
 package com.developer.valyutaapp.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.lifecycle.coroutineScope
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -22,10 +20,10 @@ import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.ValCursAdapter
 import com.developer.valyutaapp.utils.Utils
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
+import com.developer.valyutaapp.utils.launchAndCollectIn
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewBinding by viewBinding(FragmentHomeBinding::bind)
@@ -72,23 +70,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setupViewModel() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.getFavoriteLocalValutes().distinctUntilChanged().collectLatest {
-                getAllValuteSuccess(it)
-            }
+        viewModel.getFavoriteLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
+            getAllValuteSuccess(it)
         }
-        lifecycleScope.launchWhenStarted {
-            viewModel.getRemoteValutes.collect { subscribeValuteState(it) }
+        viewModel.getRemoteValutes.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
+            subscribeValuteState(it)
         }
     }
 
-    private fun subscribeValuteState(it: Result<ValCurs>) {
-        when (it) {
+    private fun subscribeValuteState(result: Result<ValCurs>) {
+        when (result) {
             is Result.Loading -> {}
             is Result.Success -> viewBinding.swipe.isRefreshing = false
             is Result.Error -> {
                 viewBinding.swipe.isRefreshing = false
-                Log.d("Error ", it.code.toString() + " == " + it.errorMessage)
+                Timber.d("Error ", result.code.toString() + " = " + result.errorMessage)
             }
         }
     }

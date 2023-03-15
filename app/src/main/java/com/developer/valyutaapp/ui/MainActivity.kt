@@ -10,8 +10,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -28,8 +26,8 @@ import com.developer.valyutaapp.di.ValuteApp
 import com.developer.valyutaapp.domain.entities.ValCurs
 import com.developer.valyutaapp.utils.Utils
 import com.developer.valyutaapp.utils.Utils.setStatusBar
+import com.developer.valyutaapp.utils.launchAndCollectIn
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -88,18 +86,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun setupViewModel() {
         viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.getRemoteValutes.collect { subscribeValuteState(it) }
-            }
+        viewModel.getRemoteValutes.launchAndCollectIn(this, Lifecycle.State.STARTED) {
+            subscribeValuteState(it)
         }
     }
 
-    private fun subscribeValuteState(it: Result<ValCurs>) {
-        when (it) {
+    private fun subscribeValuteState(result: Result<ValCurs>) {
+        when (result) {
             is Result.Loading -> {}
             is Result.Success -> {}
-            is Result.Error -> Timber.d("Error ", "${it.code} = ${it.errorMessage}")
+            is Result.Error -> Timber.d("Error ", "${result.code} = ${result.errorMessage}")
         }
     }
 }

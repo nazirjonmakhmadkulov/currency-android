@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,7 @@ import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.ConAdapter
 import com.developer.valyutaapp.ui.adapter.ConverterAdapter
+import com.developer.valyutaapp.utils.launchAndCollectIn
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -104,10 +106,8 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     }
 
     private fun setupViewModel() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.getAllConverterLocalValutes().distinctUntilChanged().collectLatest {
-                getAllValuteSuccess(it)
-            }
+        viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
+            getAllValuteSuccess(it)
         }
     }
 

@@ -20,7 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Valute"
         tools:targetApi="n">
-
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
@@ -52,11 +51,5 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/app_widget_info" />
         </receiver>
-
-        <service
-            android:name=".service.auto.AutoService"
-            android:enabled="true"
-            android:exported="false" />
     </application>
-
 </manifest>
