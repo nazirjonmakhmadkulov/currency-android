@@ -1,5 +1,6 @@
 package com.developer.valyutaapp.ui.adapter
 
+import android.annotation.SuppressLint
 import com.developer.valyutaapp.domain.entities.Valute
 import android.view.ViewGroup
 import android.view.LayoutInflater
@@ -30,6 +31,7 @@ class ValCursAdapter(
     inner class ValuteViewHolder(
         binding: ItemBinding, val onItemValuteClick: (Valute) -> Unit,
     ) : BaseViewHolder<ItemBinding, Valute>(binding) {
+        @SuppressLint("SetTextI18n")
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
@@ -37,8 +39,8 @@ class ValCursAdapter(
             name.text = item.charCode
             nameCountry.text = item.name
             date.text = item.dates
-            value.text = "${item.nominal} ${item.charCode}"
             somon.text = item.value + " TJS"
+            value.text = "${item.nominal} ${item.charCode}"
             cardId.setOnClickListener { onItemValuteClick(item) }
         }
     }

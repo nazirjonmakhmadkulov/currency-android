@@ -84,7 +84,6 @@ dependencies {
 
     // Koin main features for Android
     implementation 'io.insert-koin:koin-android:3.3.3'
-    // No more koin-android-viewmodel, koin-android-scope, koin-android-fragment
 
     // Java Compatibility
     implementation 'io.insert-koin:koin-android-compat:3.3.3'
