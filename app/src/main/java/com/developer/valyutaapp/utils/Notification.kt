@@ -54,7 +54,7 @@ object Notification {
             notificationManager.createNotificationChannel(notificationChannel)
             notificationManager.notify(NOTIFICATION_ID, notification)
         } else {
-            notification = NotificationCompat.Builder(context)
+            notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(getNotificationIcon())
                 .setAutoCancel(true)
                 .setContentText(message)
