@@ -34,13 +34,9 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="3dp"
-                    android:scaleType="centerInside"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                    app:strokeColor="@color/purple_500"
-                    app:strokeWidth="1dp"
                     tools:src="@drawable/tajikistan" />
 
                 <TextView
