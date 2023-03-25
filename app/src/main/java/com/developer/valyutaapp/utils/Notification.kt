@@ -43,6 +43,7 @@ object Notification {
                 .setWhen(System.currentTimeMillis())
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentTitle(title).build()
+            notification.flags = Notification.FLAG_AUTO_CANCEL
             val notificationManager = context.getSystemService(
                 Context.NOTIFICATION_SERVICE
             ) as NotificationManager
@@ -64,13 +65,13 @@ object Notification {
             val notificationManager = context.getSystemService(
                 Context.NOTIFICATION_SERVICE
             ) as NotificationManager
+            notification.flags = Notification.FLAG_AUTO_CANCEL
             notificationManager.notify(NOTIFICATION_ID, notification)
         }
     }
 
     private fun getNotificationIcon(): Int {
-        val useWhiteIcon =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+        val useWhiteIcon = true
         return if (useWhiteIcon) R.mipmap.ic_launcher else R.mipmap.ic_launcher
     }
 }
