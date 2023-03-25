@@ -74,7 +74,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             false
         }
 
-
         listPreference?.setOnPreferenceChangeListener { preference, newValue ->
             if (preference is ListPreference) {
                 val index = preference.findIndexOfValue(newValue.toString())
