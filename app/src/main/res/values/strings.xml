@@ -39,4 +39,7 @@
     <string name="valutes">Currencies</string>
     <string name="more">More</string>
     <string name="update">Updated</string>
+
+    <string name="not_connected">⚠️ Вы не подключены к Интернету</string>
+
 </resources>

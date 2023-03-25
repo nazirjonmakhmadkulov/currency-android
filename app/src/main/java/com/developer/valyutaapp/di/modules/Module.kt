@@ -8,6 +8,7 @@ import com.developer.valyutaapp.core.database.AppDatabase
 import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.core.dispatcher.CoroutineDispatcherProvider
 import com.developer.valyutaapp.core.dispatcher.DispatcherProvider
+import com.developer.valyutaapp.core.network.NetworkStatusViewModel
 import com.developer.valyutaapp.data.local.HistoryDao
 import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.data.remote.ValuteService
@@ -25,6 +26,7 @@ import com.developer.valyutaapp.ui.chart.ChartViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,6 +38,7 @@ import java.util.concurrent.TimeUnit
 
 val viewModelModule = module {
     factory { MainViewModel(get()) }
+    factory { NetworkStatusViewModel() }
     factory { ChartViewModel(get(), get()) }
 }
 

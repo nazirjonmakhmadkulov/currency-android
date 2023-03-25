@@ -1,12 +1,18 @@
 package com.developer.valyutaapp.utils
 
+import android.app.Activity
+import android.content.res.TypedArray
+import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.WindowInsets
 import android.widget.EditText
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.developer.valyutaapp.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.awaitClose
@@ -16,6 +22,30 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+
+fun Activity.getStatusBarHeight(): Int {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        window.decorView.rootWindowInsets?.displayCutout?.let { return it.safeInsetTop }
+    }
+    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+    return if (resourceId > 0) resources.getDimensionPixelSize(resourceId)
+    else 0
+}
+
+fun Activity.getActionBarHeight(): Int {
+    val ta: TypedArray = theme.obtainStyledAttributes(intArrayOf(R.attr.actionBarSize))
+    return ta.getDimension(0, 0f).toInt()
+}
+
+fun Activity.getNavigationBarHeight(): Int {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        val insets: WindowInsets = windowManager.currentWindowMetrics.windowInsets
+        return insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+    }
+    val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+    return if (resourceId > 0) resources.getDimensionPixelSize(resourceId)
+    else 0
+}
 
 fun EditText.textChanges(): Flow<CharSequence?> {
     return callbackFlow {
@@ -31,7 +61,7 @@ fun EditText.textChanges(): Flow<CharSequence?> {
     }.onStart { emit(text) }
 }
 
-public fun LifecycleOwner.addRepeatingJob(
+fun LifecycleOwner.addRepeatingJob(
     state: Lifecycle.State,
     coroutineContext: CoroutineContext = EmptyCoroutineContext,
     block: suspend CoroutineScope.() -> Unit
