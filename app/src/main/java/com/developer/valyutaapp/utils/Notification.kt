@@ -34,7 +34,7 @@ object Notification {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setOngoing(true)
-                .setSmallIcon(getNotificationIcon())
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setContentIntent(pi)
@@ -56,7 +56,7 @@ object Notification {
             notificationManager.notify(NOTIFICATION_ID, notification)
         } else {
             notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
-                .setSmallIcon(getNotificationIcon())
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setAutoCancel(true)
                 .setContentText(message)
                 .setContentIntent(pi)
@@ -68,10 +68,5 @@ object Notification {
             notification.flags = Notification.FLAG_AUTO_CANCEL
             notificationManager.notify(NOTIFICATION_ID, notification)
         }
-    }
-
-    private fun getNotificationIcon(): Int {
-        val useWhiteIcon = true
-        return if (useWhiteIcon) R.mipmap.ic_launcher else R.mipmap.ic_launcher
     }
 }
