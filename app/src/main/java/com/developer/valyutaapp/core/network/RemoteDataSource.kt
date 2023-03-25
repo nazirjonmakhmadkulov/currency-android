@@ -1,13 +1,13 @@
 package com.developer.valyutaapp.core.network
 
-import com.squareup.moshi.Moshi
+import com.developer.valyutaapp.core.common.Result
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
-import com.developer.valyutaapp.core.common.Result
 
 open class RemoteDataSource {
     open suspend fun <T> safeApiCall(dispatcher: CoroutineDispatcher, apiCall: suspend () -> T): Result<T> {
@@ -40,8 +40,8 @@ open class RemoteDataSource {
     private fun parseHttpError(throwable: HttpException) : Result<Nothing> {
         return try {
             val errorBody = throwable.response()?.errorBody()?.string() ?: "Unknown HTTP error body"
-            val moshi = Moshi.Builder().build()
-            val adapter = moshi.adapter(Object::class.java)
+            val gson = Gson()
+            val adapter = gson.getAdapter(Object::class.java)
             val errorMessage = adapter.fromJson(errorBody)
             error(HttpResult.CLIENT_ERROR, throwable.code(), errorMessage.toString())
         } catch (exception : Exception) {
