@@ -11,8 +11,8 @@ android {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
         targetSdk = 33
-        versionCode = 4
-        versionName = "2.2"
+        versionCode = 5
+        versionName = "2.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }
@@ -81,9 +81,6 @@ dependencies {
 
     // Koin main features for Android
     implementation("io.insert-koin:koin-android:3.3.3")
-
-    // Java Compatibility
-    implementation("io.insert-koin:koin-android-compat:3.3.3")
     // Jetpack WorkManager
     implementation("io.insert-koin:koin-androidx-workmanager:3.3.3")
     // Navigation Graph
