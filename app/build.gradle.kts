@@ -49,9 +49,6 @@ dependencies {
 
     implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.8")
 
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
-
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
 
@@ -83,8 +80,6 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.3.3")
     // Jetpack WorkManager
     implementation("io.insert-koin:koin-androidx-workmanager:3.3.3")
-    // Navigation Graph
-    implementation("io.insert-koin:koin-androidx-navigation:3.3.3")
 
     //Okhttp logging
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7")
