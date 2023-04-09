@@ -1,6 +1,7 @@
 package com.developer.valyutaapp.utils
 
 import android.app.Activity
+import android.content.Context
 import android.content.res.TypedArray
 import android.os.Build
 import android.text.Editable
@@ -46,6 +47,12 @@ fun Activity.getNavigationBarHeight(): Int {
     return if (resourceId > 0) resources.getDimensionPixelSize(resourceId)
     else 0
 }
+
+fun Context.getScreenWidth(): Int =
+    this.resources.displayMetrics.widthPixels - 10
+
+fun Context.getScreenHeight(): Int =
+    this.resources.displayMetrics.heightPixels
 
 fun EditText.textChanges(): Flow<CharSequence?> {
     return callbackFlow {

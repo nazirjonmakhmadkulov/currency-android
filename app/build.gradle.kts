@@ -11,12 +11,17 @@ android {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
         targetSdk = 33
-        versionCode = 5
-        versionName = "2.3"
+        versionCode = 7
+        versionName = "2.4.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }
     buildTypes {
+        debug {
+            isMinifyEnabled = true
+            isDebuggable = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -33,8 +38,8 @@ android {
     }
 }
 dependencies {
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10")
+    implementation("androidx.core:core-ktx:1.10.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
@@ -89,4 +94,8 @@ dependencies {
     implementation("io.github.pilgr:paperdb:2.7.2")
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    implementation("com.yandex.android:mobileads:5.7.0")
+    implementation("com.yandex.ads.mediation:mobileads-admob:21.3.0.0")
+    implementation("com.google.android.gms:play-services-ads:21.3.0")
 }
