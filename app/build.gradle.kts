@@ -13,6 +13,7 @@ android {
         targetSdk = 33
         versionCode = 7
         versionName = "2.4.0"
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }
@@ -23,8 +24,8 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         release {
-            isMinifyEnabled = false
             isShrinkResources = true
+            isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -45,6 +46,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.preference:preference-ktx:1.2.0")
+    implementation("androidx.annotation:annotation:1.6.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -80,7 +82,6 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.retrofit2:converter-simplexml:2.9.0")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
 
     // Koin main features for Android
     implementation("io.insert-koin:koin-android:3.3.3")
@@ -88,8 +89,8 @@ dependencies {
     implementation("io.insert-koin:koin-androidx-workmanager:3.3.3")
 
     //Okhttp logging
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.7")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.9")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.9")
 
     //Widget
     implementation("io.github.pilgr:paperdb:2.7.2")

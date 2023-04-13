@@ -37,7 +37,7 @@ class ConAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(valute: Valute) = with(binding) {
             val bt = ImageResource.getImageRes(root.context, valute.charCode)
-            iconValute.setImageBitmap(bt)
+            iconValute.setImageDrawable(bt)
             charCode.text = valute.charCode
             name.text = valute.value
             moneyConvert.addTextChangedListener(object : TextWatcher {

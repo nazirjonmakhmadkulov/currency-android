@@ -1,15 +1,15 @@
 package com.developer.valyutaapp.ui.adapter
 
 import android.annotation.SuppressLint
-import com.developer.valyutaapp.domain.entities.Valute
-import android.view.ViewGroup
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.developer.valyutaapp.R
 import com.developer.valyutaapp.core.base.BaseViewHolder
 import com.developer.valyutaapp.core.base.Item
 import com.developer.valyutaapp.core.base.ItemBase
 import com.developer.valyutaapp.databinding.ItemBinding
+import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.utils.ImageResource
 
 class ValCursAdapter(
@@ -35,7 +35,7 @@ class ValCursAdapter(
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
-            iconValute.setImageBitmap(bt)
+            iconValute.setImageDrawable(bt)
             name.text = item.charCode
             nameCountry.text = item.name
             date.text = item.dates

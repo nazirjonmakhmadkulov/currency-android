@@ -1,23 +1,22 @@
 package com.developer.valyutaapp.ui.widget
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
-import com.developer.valyutaapp.domain.entities.Valute
-import com.developer.valyutaapp.ui.adapter.DialogAdapter
-import com.developer.valyutaapp.R
 import android.os.Bundle
 import android.util.Log
-import com.developer.valyutaapp.utils.ImageResource
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.developer.valyutaapp.R
 import com.developer.valyutaapp.databinding.ActivityWidgetBinding
+import com.developer.valyutaapp.domain.entities.Valute
+import com.developer.valyutaapp.ui.adapter.DialogAdapter
+import com.developer.valyutaapp.utils.ImageResource
 import com.developer.valyutaapp.utils.Utils
 import io.paperdb.Paper
 import java.text.DecimalFormat
-import java.util.ArrayList
 
 class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewInterface {
 
@@ -90,7 +89,7 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
     @SuppressLint("SetTextI18n")
     override fun displayValuteWithId(valute: Valute) {
         val bt = ImageResource.getImageRes(this, valute.charCode)
-        viewBinding.iconValute1.setImageBitmap(bt)
+        viewBinding.iconValute1.setImageDrawable(bt)
         viewBinding.tvNominal.text = java.lang.String.valueOf(valute.nominal)
         viewBinding.tvValue.text = valute.value
         viewBinding.name1.text = valute.charCode

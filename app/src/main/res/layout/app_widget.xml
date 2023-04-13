@@ -117,8 +117,7 @@
                 style="@style/Widget.AppCompat.ActionButton"
                 android:layout_width="40dp"
                 android:layout_height="36dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/refreshs" />
+                android:layout_marginLeft="10dp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
