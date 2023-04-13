@@ -2,15 +2,15 @@ package com.developer.valyutaapp.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.developer.valyutaapp.domain.entities.Valute
-import android.widget.BaseAdapter
-import android.view.ViewGroup
 import android.view.LayoutInflater
-import com.developer.valyutaapp.R
-import androidx.cardview.widget.CardView
-import android.widget.TextView
 import android.view.View
+import android.view.ViewGroup
+import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import com.developer.valyutaapp.R
+import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.utils.ImageResource
 
 class DialogAdapter(
@@ -31,7 +31,7 @@ class DialogAdapter(
         val icon = v.findViewById<View>(R.id.img_flag) as ImageView
         val txName = v.findViewById<View>(R.id.name_currency) as TextView
         val bt = ImageResource.getImageRes(context, valutes[i].charCode)
-        icon.setImageBitmap(bt)
+        icon.setImageDrawable(bt)
         txName.text = valutes[i].name
         cardView.setOnClickListener {
             onItemValuteClick(valutes[i], i)

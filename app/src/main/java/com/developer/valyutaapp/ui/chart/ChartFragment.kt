@@ -22,7 +22,9 @@ import com.developer.valyutaapp.utils.Utils.getYearAge
 import com.developer.valyutaapp.utils.launchAndCollectIn
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -64,7 +66,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         viewModel.getLocalValuteById.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { valute ->
             valute?.let {
                 val bt = ImageResource.getImageRes(requireContext(), it.charCode)
-                iconValute.setImageBitmap(bt)
+                iconValute.setImageDrawable(bt)
                 name.text = it.charCode
                 somon.text = it.value
             }

@@ -1,8 +1,7 @@
 package com.developer.valyutaapp.ui.adapter
 
-import com.developer.valyutaapp.domain.entities.Valute
-import android.view.ViewGroup
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import com.developer.valyutaapp.R
@@ -11,6 +10,7 @@ import com.developer.valyutaapp.core.base.Item
 import com.developer.valyutaapp.core.base.ItemBase
 import com.developer.valyutaapp.core.common.FAVORITE_CONVERTER
 import com.developer.valyutaapp.databinding.FavoritesItemBinding
+import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.utils.ImageResource
 
 class FavoriteAdapter(
@@ -38,7 +38,7 @@ class FavoriteAdapter(
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
-            iconValute.setImageBitmap(bt)
+            iconValute.setImageDrawable(bt)
             type?.let {
                 if (type == FAVORITE_CONVERTER) {
                     favorite.setFavorites(item.favoritesConverter)

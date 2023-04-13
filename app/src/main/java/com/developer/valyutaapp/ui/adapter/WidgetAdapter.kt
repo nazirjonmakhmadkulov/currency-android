@@ -2,12 +2,12 @@ package com.developer.valyutaapp.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.developer.valyutaapp.domain.entities.Valute
-import android.view.ViewGroup
 import android.view.LayoutInflater
-import com.developer.valyutaapp.R
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
+import com.developer.valyutaapp.R
+import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.utils.ImageResource
 
 class WidgetAdapter(
@@ -29,7 +29,7 @@ class WidgetAdapter(
         val checkBox = v.findViewById<View>(R.id.favorite) as ImageView
         val tvName = v.findViewById<View>(R.id.name_currency) as TextView
         val bt = ImageResource.getImageRes(context, valutes[i].charCode)
-        icon.setImageBitmap(bt)
+        icon.setImageDrawable(bt)
         tvName.text = valutes[i].name
 //        checkBox.setOnCheckedChangeListener { _, _ ->
 //            checkBox.isChecked = checkBox.isChecked

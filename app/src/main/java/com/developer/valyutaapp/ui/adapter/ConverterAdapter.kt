@@ -3,25 +3,18 @@ package com.developer.valyutaapp.ui.adapter
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import com.developer.valyutaapp.domain.entities.Valute
-import android.view.ViewGroup
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.developer.valyutaapp.R
 import com.developer.valyutaapp.core.base.BaseViewHolder
 import com.developer.valyutaapp.core.base.Item
 import com.developer.valyutaapp.core.base.ItemBase
 import com.developer.valyutaapp.databinding.ItemConverterBinding
+import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.utils.ImageResource
 import com.developer.valyutaapp.utils.Utils.decFormat
-import com.developer.valyutaapp.utils.textChanges
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 class ConverterAdapter(
     private val onChangeValute: (String, Int) -> Unit,
@@ -54,7 +47,7 @@ class ConverterAdapter(
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
-            iconValute.setImageBitmap(bt)
+            iconValute.setImageDrawable(bt)
             charCode.text = item.charCode
             if (adapterPosition != posSelect) moneyConvert.setText(decFormat(item.value.toDouble()))
             moneyConvert.addTextChangedListener(object : TextWatcher {

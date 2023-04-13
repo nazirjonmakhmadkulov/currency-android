@@ -1,17 +1,17 @@
 package com.developer.valyutaapp.data.repository
 
 import com.developer.valyutaapp.core.common.Result
-import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.core.dispatcher.DispatcherProvider
 import com.developer.valyutaapp.data.local.HistoryDao
+import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.domain.entities.History
 import com.developer.valyutaapp.domain.entities.ValCurs
 import com.developer.valyutaapp.domain.entities.ValHistory
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
+import com.developer.valyutaapp.utils.Utils.dateFormatDb
 import com.developer.valyutaapp.utils.Utils.getDateFormat
 import com.developer.valyutaapp.utils.Utils.getMonthAge
-import com.developer.valyutaapp.utils.Utils.dateFormatDb
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -29,6 +29,7 @@ class ValuteRemoteRepositoryImpl(
                 valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)) {
                 is Result.Loading -> Result.Loading
                 is Result.Success -> {
+                    Timber.d("getRemoteValutes ${result.data}")
                     val valute = result.data.valute
                     valute.forEach { insertAndUpdateValute(result.data.dates, it) }
                     Result.Success(result.data)
@@ -38,6 +39,7 @@ class ValuteRemoteRepositoryImpl(
         }
 
     private suspend fun insertAndUpdateValute(dates: String, valute: Valute) {
+        Timber.d("insertAndUpdateValute ${valute}")
         if (valuteDao.getValuteExist(valute.valId)) {
             valute.dates = getDateFormat(dates)
             valuteDao.updateValuteFromRemote(
