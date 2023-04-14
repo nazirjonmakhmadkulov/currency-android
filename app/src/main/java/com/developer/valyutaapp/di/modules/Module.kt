@@ -41,10 +41,6 @@ val viewModelModule = module {
     factory { ChartViewModel(get(), get()) }
 }
 
-val connectionInternet = module {
-    //single { Connection(get()) }
-}
-
 val sharedPreference = module {
     factory { SharedPreference(get()) }
 }
@@ -80,8 +76,7 @@ val netModule = module {
         val httpInterceptor = HttpLoggingInterceptor()
         httpInterceptor.level = HttpLoggingInterceptor.Level.BODY
         val okHttpClientBuilder = OkHttpClient.Builder()
-            .cache(cache)
-            .addInterceptor(httpInterceptor)
+            .cache(cache).addInterceptor(httpInterceptor)
             .apply {
                 readTimeout(200, TimeUnit.SECONDS)
                 writeTimeout(200, TimeUnit.SECONDS)
@@ -131,9 +126,7 @@ val repositoryModule = module {
         dispatcherProvider: DispatcherProvider, remoteDataSource: ValuteRemoteDataSource,
         valuteDao: ValuteDao, historyDao: HistoryDao
     ): ValuteRemoteRepositoryImpl {
-        return ValuteRemoteRepositoryImpl(
-            dispatcherProvider, remoteDataSource, valuteDao, historyDao
-        )
+        return ValuteRemoteRepositoryImpl(dispatcherProvider, remoteDataSource, valuteDao, historyDao)
     }
     factory<ValuteRemoteRepository> { provideValuteRemoteRepository(get(), get(), get(), get()) }
 

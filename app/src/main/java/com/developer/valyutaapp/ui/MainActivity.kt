@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val mBannerAdView = viewBinding.adView
         val adRequest: AdRequest = AdRequest.Builder().build()
         mBannerAdView.setAdUnitId("R-M-2277119-1")
-        mBannerAdView.setAdSize(AdSize.flexibleSize(getScreenWidth(), 50))
+        mBannerAdView.setAdSize(AdSize.inlineSize(getScreenWidth(), 50))
         mBannerAdView.loadAd(adRequest)
     }
 

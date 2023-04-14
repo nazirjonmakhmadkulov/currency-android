@@ -1,13 +1,16 @@
 package com.developer.valyutaapp.utils
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.Window
 import android.view.WindowManager
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
+@SuppressLint("SimpleDateFormat")
 object Utils {
     private val parser = SimpleDateFormat("yyyy-MM-dd")
 
@@ -56,14 +59,6 @@ object Utils {
         val dec = DecimalFormat("#.###")
         dec.roundingMode = RoundingMode.CEILING
         return dec.format(cost)
-    }
-
-    fun mathNominal(a: Double, b: Double): Double {
-        return a * b
-    }
-
-    fun mathValue(a: Double, b: Double, c: Double): Double {
-        return a * c / b
     }
 
     fun setStatusBar(window: Window) {

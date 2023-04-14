@@ -1,8 +1,8 @@
 package com.developer.valyutaapp.ui.valutes
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,8 +30,7 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
     private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
         MutableList(valutes.size) { valutes[it] }
     }
-    private val valCursAdapter: BaseAdapter =
-        BaseAdapter(listOf(ValCursAdapter(::onItemValute)))
+    private val valCursAdapter: BaseAdapter = BaseAdapter(listOf(ValCursAdapter(::onItemValute)))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -78,7 +77,8 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
     }
 
     private fun onItemValute(item: Valute) {
-        val action = AllValutesFragmentDirections.actionNavigationValutesToChartFragment(item.valId, item.charCode)
+        val action =
+            AllValutesFragmentDirections.actionNavigationValutesToChartFragment(item.valId, item.charCode)
         findNavController().navigate(action)
     }
 }

@@ -22,30 +22,25 @@ class ValuteRemoteRepositoryImpl(
     private val historyDao: HistoryDao
 ) : ValuteRemoteRepository {
 
-    override suspend fun getAllValutes(date: String, exp: String): Result<ValCurs> =
-        withContext(Dispatchers.IO) {
-            return@withContext when (val result =
-                valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)) {
-                is Result.Loading -> Result.Loading
-                is Result.Success -> {
-                    val valute = result.data.valute
-                    valute.forEach { insertAndUpdateValute(result.data.dates, it) }
-                    Result.Success(result.data)
-                }
-                is Result.Error -> Result.Error(result.cause, result.code, result.errorMessage)
+    override suspend fun getAllValutes(date: String, exp: String): Result<ValCurs> = withContext(Dispatchers.IO) {
+        return@withContext when (val result =
+            valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)) {
+            is Result.Loading -> Result.Loading
+            is Result.Success -> {
+                val valute = result.data.valute
+                valute.forEach { insertAndUpdateValute(result.data.dates, it) }
+                Result.Success(result.data)
             }
+
+            is Result.Error -> Result.Error(result.cause, result.code, result.errorMessage)
         }
+    }
 
     private suspend fun insertAndUpdateValute(dates: String, valute: Valute) {
         if (valuteDao.getValuteExist(valute.valId)) {
             valute.dates = getDateFormat(dates)
             valuteDao.updateValuteFromRemote(
-                valute.charCode,
-                valute.nominal,
-                valute.name,
-                valute.value,
-                valute.dates,
-                valute.valId,
+                valute.charCode, valute.nominal, valute.name, valute.value, valute.dates, valute.valId,
             )
         } else {
             valute.dates = getDateFormat(dates)
@@ -68,6 +63,7 @@ class ValuteRemoteRepositoryImpl(
                 valute.forEach { insertHistory(it) }
                 Result.Success(result.data)
             }
+
             is Result.Error -> Result.Error(result.cause, result.code, result.errorMessage)
         }
     }

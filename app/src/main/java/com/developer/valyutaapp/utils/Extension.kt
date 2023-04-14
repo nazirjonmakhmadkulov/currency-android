@@ -51,11 +51,9 @@ fun Activity.getNavigationBarHeight(): Int {
     else 0
 }
 
-fun Context.getScreenWidth(): Int =
-    this.resources.displayMetrics.widthPixels - 10
+fun Context.getScreenWidth(): Int = this.resources.displayMetrics.widthPixels
 
-fun Context.getScreenHeight(): Int =
-    this.resources.displayMetrics.heightPixels
+fun Context.getScreenHeight(): Int = this.resources.displayMetrics.heightPixels
 
 fun EditText.textChanges(): Flow<CharSequence?> {
     return callbackFlow {
@@ -84,7 +82,5 @@ inline fun <T> Flow<T>.launchAndCollectIn(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     crossinline action: suspend CoroutineScope.(T) -> Unit
 ) = owner.lifecycleScope.launch {
-    owner.repeatOnLifecycle(minActiveState) {
-        collect { action(it) }
-    }
+    owner.repeatOnLifecycle(minActiveState) { collect { action(it) } }
 }

@@ -2,12 +2,12 @@ package com.developer.valyutaapp.ui.chart
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.developer.valyutaapp.domain.usecases.ValuteUseCase
-import  com.developer.valyutaapp.core.common.Result
+import com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.domain.entities.History
 import com.developer.valyutaapp.domain.entities.ValHistory
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.domain.usecases.HistoryUseCase
+import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,12 +32,10 @@ class ChartViewModel(
             when (val result = historyUseCase.getRemoteHistories(d1, d2, cn, cs, exp)) {
                 is Result.Loading -> Result.Loading
                 is Result.Success -> _getRemoteHistories.value = Result.Success(result.data)
-                is Result.Error ->
-                    _getRemoteHistories.value =
-                        Result.Error(result.cause, result.code, result.errorMessage)
+                is Result.Error -> _getRemoteHistories.value =
+                    Result.Error(result.cause, result.code, result.errorMessage)
             }
         }
 
-    fun getLocalHistories(valId: Int, day: Int): Flow<List<History>> =
-        historyUseCase.getLocalHistories(valId, day)
+    fun getLocalHistories(valId: Int, day: Int): Flow<List<History>> = historyUseCase.getLocalHistories(valId, day)
 }

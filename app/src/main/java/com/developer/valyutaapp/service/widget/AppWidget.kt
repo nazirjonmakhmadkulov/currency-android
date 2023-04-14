@@ -12,35 +12,24 @@ import com.developer.valyutaapp.R
 
 open class AppWidget : AppWidgetProvider() {
     private var pendingIntent: PendingIntent? = null
-    override fun onUpdate(
-        context: Context,
-        appWidgetManager: AppWidgetManager,
-        appWidgetIds: IntArray
-    ) {
+    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val i = Intent(context, WidgetService::class.java)
+        val intent = Intent(context, WidgetService::class.java)
         if (pendingIntent == null) {
-            pendingIntent =
-                PendingIntent.getService(context, 0, i, PendingIntent.FLAG_CANCEL_CURRENT)
+            pendingIntent = PendingIntent.getService(
+                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
         }
-        manager.setRepeating(
-            AlarmManager.ELAPSED_REALTIME,
-            SystemClock.elapsedRealtime(),
-            60000,
-            pendingIntent
-        )
+        manager.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), 60000, pendingIntent)
         val views = RemoteViews(context.packageName, R.layout.app_widget)
-        views.setOnClickPendingIntent(
-            R.id.updatewidget,
-            getPendingUpdateIntent(context)
-        )
+        views.setOnClickPendingIntent(R.id.updatewidget, getPendingUpdateIntent(context))
         appWidgetManager.updateAppWidget(appWidgetIds, views)
     }
 
      private fun getPendingUpdateIntent(context: Context): PendingIntent {
         val intent = Intent(context, javaClass)
         intent.action = ACTION_UPDATE_CLICK
-        return PendingIntent.getBroadcast(context, 1, intent, 0)
+        return PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_MUTABLE)
     }
 
     override fun onReceive(context: Context, intent: Intent) {

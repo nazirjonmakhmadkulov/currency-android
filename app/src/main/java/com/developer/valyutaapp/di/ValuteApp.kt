@@ -6,7 +6,15 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import com.developer.valyutaapp.core.database.SharedPreference
-import com.developer.valyutaapp.di.modules.*
+import com.developer.valyutaapp.di.modules.apiModules
+import com.developer.valyutaapp.di.modules.databaseModule
+import com.developer.valyutaapp.di.modules.dispatcherProviders
+import com.developer.valyutaapp.di.modules.netModule
+import com.developer.valyutaapp.di.modules.remoteDataSources
+import com.developer.valyutaapp.di.modules.repositoryModule
+import com.developer.valyutaapp.di.modules.sharedPreference
+import com.developer.valyutaapp.di.modules.useCasesModule
+import com.developer.valyutaapp.di.modules.viewModelModule
 import com.developer.valyutaapp.utils.LocaleManager
 import com.yandex.mobile.ads.common.MobileAds
 import org.koin.android.ext.android.inject
@@ -46,7 +54,6 @@ class ValuteApp : Application() {
                 listOf(
                     useCasesModule,
                     viewModelModule,
-                    connectionInternet,
                     dispatcherProviders,
                     remoteDataSources,
                     repositoryModule,
@@ -62,9 +69,7 @@ class ValuteApp : Application() {
             Timber.tag(YANDEX_MOBILE_ADS_TAG).d("SDK initialized")
         }
 
-        if (prefs.getTheme())
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        else
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        if (prefs.getTheme()) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }
