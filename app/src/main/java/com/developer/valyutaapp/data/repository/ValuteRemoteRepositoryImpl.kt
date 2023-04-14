@@ -11,10 +11,9 @@ import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
 import com.developer.valyutaapp.utils.Utils.dateFormatDb
 import com.developer.valyutaapp.utils.Utils.getDateFormat
-import com.developer.valyutaapp.utils.Utils.getMonthAge
+import com.developer.valyutaapp.utils.Utils.getYearAge
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class ValuteRemoteRepositoryImpl(
     private val dispatcherProvider: DispatcherProvider,
@@ -29,7 +28,6 @@ class ValuteRemoteRepositoryImpl(
                 valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)) {
                 is Result.Loading -> Result.Loading
                 is Result.Success -> {
-                    Timber.d("getRemoteValutes ${result.data}")
                     val valute = result.data.valute
                     valute.forEach { insertAndUpdateValute(result.data.dates, it) }
                     Result.Success(result.data)
@@ -39,7 +37,6 @@ class ValuteRemoteRepositoryImpl(
         }
 
     private suspend fun insertAndUpdateValute(dates: String, valute: Valute) {
-        Timber.d("insertAndUpdateValute ${valute}")
         if (valuteDao.getValuteExist(valute.valId)) {
             valute.dates = getDateFormat(dates)
             valuteDao.updateValuteFromRemote(
@@ -67,7 +64,6 @@ class ValuteRemoteRepositoryImpl(
             valuteRemoteDataSource.getRemoteHistories(dispatcherProvider.io, d1, d2, cn, cs, exp)) {
             is Result.Loading -> Result.Loading
             is Result.Success -> {
-                Timber.d("getAllHistories ${result.data.history}")
                 val valute = result.data.history
                 valute.forEach { insertHistory(it) }
                 Result.Success(result.data)
@@ -87,7 +83,7 @@ class ValuteRemoteRepositoryImpl(
             )
             historyDao.insertHistory(historyNew)
         } else {
-            if (dateFormatDb(history.dates) < getMonthAge()) {
+            if (dateFormatDb(history.dates) < getYearAge()) {
                 historyDao.deleteHistory(history.valId)
             }
         }

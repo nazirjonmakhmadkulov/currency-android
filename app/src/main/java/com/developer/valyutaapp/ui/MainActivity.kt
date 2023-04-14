@@ -23,8 +23,12 @@ import com.developer.valyutaapp.core.network.NetworkStatusViewModel
 import com.developer.valyutaapp.databinding.ActivityMainBinding
 import com.developer.valyutaapp.di.ValuteApp
 import com.developer.valyutaapp.domain.entities.ValCurs
-import com.developer.valyutaapp.utils.*
+import com.developer.valyutaapp.utils.Utils
 import com.developer.valyutaapp.utils.Utils.setStatusBar
+import com.developer.valyutaapp.utils.getActionBarHeight
+import com.developer.valyutaapp.utils.getScreenWidth
+import com.developer.valyutaapp.utils.getStatusBarHeight
+import com.developer.valyutaapp.utils.launchAndCollectIn
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.yandex.mobile.ads.banner.AdSize
@@ -38,8 +42,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val viewModel by viewModel<MainViewModel>()
     private val networkStatusViewModel by viewModel<NetworkStatusViewModel>()
     private var snackBarNetwork: Snackbar? = null
-
-//    private var mInterstitialAd: InterstitialAd? = null
 
     private val pushNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->

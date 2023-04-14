@@ -11,21 +11,21 @@ android {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
         targetSdk = 33
-        versionCode = 8
-        versionName = "2.4.2"
+        versionCode = 9
+        versionName = "2.4.3"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }
     buildTypes {
         debug {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             isDebuggable = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         release {
-            isShrinkResources = true
-            isMinifyEnabled = true
+            //isShrinkResources = true
+            //isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -38,6 +38,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    namespace = "com.developer.valyutaapp"
 }
 dependencies {
     implementation("androidx.core:core-ktx:1.10.0")
