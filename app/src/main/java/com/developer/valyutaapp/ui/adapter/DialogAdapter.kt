@@ -33,9 +33,7 @@ class DialogAdapter(
         val bt = ImageResource.getImageRes(context, valutes[i].charCode)
         icon.setImageDrawable(bt)
         txName.text = valutes[i].name
-        cardView.setOnClickListener {
-            onItemValuteClick(valutes[i], i)
-        }
+        cardView.setOnClickListener { onItemValuteClick(valutes[i], i) }
         return v
     }
 }

@@ -3,8 +3,8 @@ package com.developer.valyutaapp.ui.converter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -18,12 +18,9 @@ import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.databinding.FragmentConverterBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.ui.MainViewModel
-import com.developer.valyutaapp.ui.adapter.ConAdapter
 import com.developer.valyutaapp.ui.adapter.ConverterAdapter
 import com.developer.valyutaapp.utils.launchAndCollectIn
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,8 +34,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
         MutableList(valutes.size) { valutes[it] }
     }
-    private val converterAdapter: BaseAdapter =
-        BaseAdapter(listOf(ConverterAdapter(::onChangeValute, ::onItemValute)))
+    private val converterAdapter: BaseAdapter = BaseAdapter(listOf(ConverterAdapter(::onChangeValute, ::onItemValute)))
 //    private val conAdapter by lazy { ConAdapter(::onChangeValute, ::onItemValute) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

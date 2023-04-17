@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
 
 interface ItemBase<V : ViewBinding, I : Item> {
-
     fun isRelativeItem(item: Item): Boolean
 
     @LayoutRes
@@ -19,5 +18,4 @@ interface ItemBase<V : ViewBinding, I : Item> {
     ): BaseViewHolder<V, I>
 
     fun getDiffUtil(): DiffUtil.ItemCallback<I>
-
 }

@@ -14,7 +14,6 @@ import com.developer.valyutaapp.databinding.ItemConverterBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.utils.ImageResource
 import com.developer.valyutaapp.utils.Utils.decFormat
-import kotlinx.coroutines.FlowPreview
 
 class ConverterAdapter(
     private val onChangeValute: (String, Int) -> Unit,
@@ -43,7 +42,6 @@ class ConverterAdapter(
     inner class FavoriteViewHolder(
         binding: ItemConverterBinding, val onItemValuteClick: (Valute) -> Unit,
     ) : BaseViewHolder<ItemConverterBinding, Valute>(binding) {
-        @OptIn(FlowPreview::class)
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
@@ -67,7 +65,6 @@ class ConverterAdapter(
         override fun onBind(item: Valute, payloads: List<Any>) {
             super.onBind(item, payloads)
             binding.name.text = item.value
-            //println("payloads $item")
         }
     }
 }

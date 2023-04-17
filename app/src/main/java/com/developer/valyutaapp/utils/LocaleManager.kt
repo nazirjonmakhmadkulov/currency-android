@@ -7,18 +7,19 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.LocaleList
-import android.preference.PreferenceManager
 import androidx.annotation.RequiresApi
+import androidx.preference.PreferenceManager
 import java.util.*
 
-@Suppress("DEPRECATION")
-class LocaleManager(context: Context?) {
+class LocaleManager(context: Context) {
     companion object {
-        const val LANGUAGE_ENGLISH = "en"
+        //        const val LANGUAGE_ENGLISH = "en"
         const val LANGUAGE_RUSSIAN = "ru"
         private const val LANGUAGE_KEY = "language_key"
     }
+
     private var prefs: SharedPreferences? = null
+
     init {
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
     }
@@ -38,7 +39,7 @@ class LocaleManager(context: Context?) {
 
     @SuppressLint("ApplySharedPref")
     private fun persistLanguage(language: String) {
-        prefs!!.edit().putString(LANGUAGE_KEY, language).commit()
+        prefs?.edit()?.putString(LANGUAGE_KEY, language)?.commit()
     }
 
     private fun updateResources(context: Context, language: String?): Context {
@@ -52,7 +53,7 @@ class LocaleManager(context: Context?) {
                 setLocaleForApi24(config, locale)
                 ctx = ctx.createConfigurationContext(config)
             } else {
-                config.locale = locale
+                config.setLocale(locale)
                 res.updateConfiguration(config, res.displayMetrics)
             }
         }
@@ -71,7 +72,6 @@ class LocaleManager(context: Context?) {
         config.setLocales(LocaleList(*locales))
     }
 
-    @SuppressLint("AnnotateVersionCheck")
     private fun isAtLeastVersion(version: Int): Boolean {
         return Build.VERSION.SDK_INT >= version
     }

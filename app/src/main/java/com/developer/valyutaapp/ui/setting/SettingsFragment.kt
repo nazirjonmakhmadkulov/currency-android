@@ -8,7 +8,11 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
-import androidx.work.*
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.developer.valyutaapp.R
 import com.developer.valyutaapp.core.common.FAVORITE_VALUTE
 import com.developer.valyutaapp.core.database.SharedPreference
@@ -78,9 +82,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (preference is ListPreference) {
                 val index = preference.findIndexOfValue(newValue.toString())
                 //val entry = preference.entries[index]
-                val entryvalue = preference.entryValues[index]
-                prefs.saveLang(entryvalue.toString())
-                ValuteApp.localeManager.setNewLocale(requireActivity(), entryvalue.toString())
+                val charSequence = preference.entryValues[index]
+                prefs.saveLang(charSequence.toString())
+                ValuteApp.localeManager.setNewLocale(requireActivity(), charSequence.toString())
                 requireActivity().recreate()
             }
             true

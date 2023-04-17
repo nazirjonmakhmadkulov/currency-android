@@ -1,5 +1,6 @@
 package com.developer.valyutaapp.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.res.TypedArray
@@ -24,6 +25,7 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@SuppressLint("DiscouragedApi", "InternalInsetResource")
 fun Activity.getStatusBarHeight(): Int {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
         window.decorView.rootWindowInsets?.displayCutout?.let { return it.safeInsetTop }
@@ -38,6 +40,7 @@ fun Activity.getActionBarHeight(): Int {
     return ta.getDimension(0, 0f).toInt()
 }
 
+@SuppressLint("DiscouragedApi", "InternalInsetResource")
 fun Activity.getNavigationBarHeight(): Int {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
         val insets: WindowInsets = windowManager.currentWindowMetrics.windowInsets
@@ -48,11 +51,9 @@ fun Activity.getNavigationBarHeight(): Int {
     else 0
 }
 
-fun Context.getScreenWidth(): Int =
-    this.resources.displayMetrics.widthPixels - 10
+fun Context.getScreenWidth(): Int = this.resources.displayMetrics.widthPixels
 
-fun Context.getScreenHeight(): Int =
-    this.resources.displayMetrics.heightPixels
+fun Context.getScreenHeight(): Int = this.resources.displayMetrics.heightPixels
 
 fun EditText.textChanges(): Flow<CharSequence?> {
     return callbackFlow {
@@ -81,7 +82,5 @@ inline fun <T> Flow<T>.launchAndCollectIn(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     crossinline action: suspend CoroutineScope.(T) -> Unit
 ) = owner.lifecycleScope.launch {
-    owner.repeatOnLifecycle(minActiveState) {
-        collect { action(it) }
-    }
+    owner.repeatOnLifecycle(minActiveState) { collect { action(it) } }
 }
