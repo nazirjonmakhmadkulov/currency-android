@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         when (result) {
             is Result.Loading -> {}
             is Result.Success -> {}
-            is Result.Error -> Timber.d("Error ", "${result.code} = ${result.errorMessage}")
+            is Result.Error -> Timber.d("Error ${result.code} ${result.errorMessage}")
         }
     }
 }

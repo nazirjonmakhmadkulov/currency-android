@@ -95,7 +95,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
             }
             is Result.Error -> {
                 viewBinding.loading.visibility = View.GONE
-                Timber.d("Error ", "${result.code} = ${result.errorMessage}")
+                Timber.d("Error ${result.code} ${result.errorMessage}")
             }
         }
     }

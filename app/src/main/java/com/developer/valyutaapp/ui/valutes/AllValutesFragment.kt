@@ -66,7 +66,7 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
             is Result.Success -> viewBinding.swipe.isRefreshing = false
             is Result.Error -> {
                 viewBinding.swipe.isRefreshing = false
-                Timber.d("Error ", result.code.toString() + " = " + result.errorMessage)
+                Timber.d("Error ${result.code} ${result.errorMessage}")
             }
         }
     }
