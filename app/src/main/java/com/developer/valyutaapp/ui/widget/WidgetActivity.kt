@@ -2,7 +2,6 @@ package com.developer.valyutaapp.ui.widget
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -19,14 +18,13 @@ import io.paperdb.Paper
 import java.text.DecimalFormat
 
 class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewInterface {
-
     private val viewBinding by viewBinding(ActivityWidgetBinding::bind, R.id.container)
 
-    var alertdialog: AlertDialog.Builder? = null
-    var dialog: AlertDialog? = null
-    var valutes: ArrayList<Valute>? = null
+    private var alertdialog: AlertDialog.Builder? = null
+    private var dialog: AlertDialog? = null
+    private var valutes: ArrayList<Valute>? = null
     private var valuteId = 840
-    var adapter: DialogAdapter? = null
+    private var adapter: DialogAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,29 +33,20 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
         valuteById
         valuteList
         viewBinding.saveWidget.setOnClickListener {
-            val val_dec: String
             val decimalFormat = DecimalFormat("#.####")
             val decimal = decimalFormat.format(viewBinding.tvValue.text.toString().toDouble())
-            val_dec = if (viewBinding.tvNominal.text.toString().length < 3) {
+            val value = if (viewBinding.tvNominal.text.toString().length < 3) {
                 decimalFormat.format(viewBinding.tvNominal.text.toString().toDouble())
             } else {
                 viewBinding.tvNominal.text.toString()
             }
-            Paper.init(this@WidgetActivity)
+            Paper.init(this)
             Paper.book().write("charcode", viewBinding.name1.text)
-            Log.d("widget", " = " + viewBinding.name1.text)
             Paper.book().write("charcode2", viewBinding.name2.text)
-            Log.d("widget", " = " + viewBinding.name2.text)
-            Paper.book().write("nominal", val_dec)
-            Log.d("widget", " = " + viewBinding.tvNominal.text)
+            Paper.book().write("nominal", value)
             Paper.book().write("value", decimal.toString())
-            Log.d("widget", " = $decimal")
             Paper.book().write("dat", Utils.getDate())
-            Toast.makeText(
-                this@WidgetActivity,
-                "Через минуту он будет установлен",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast.makeText(this, "Через минуту он будет установлен", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -71,7 +60,7 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
         }
     private val valuteList: Unit
         get() {
-           // widgetPresenter!!.valutes()
+            // widgetPresenter!!.valutes()
         }
 
     override fun showToast(s: String) {
@@ -117,6 +106,4 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
         dialog = alertdialog!!.create()
         dialog!!.show()
     }
-
-
 }
