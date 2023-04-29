@@ -5,11 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
 
-class BaseAdapter(
-    private val bases: List<ItemBase<*, *>>,
-) : ListAdapter<Item, BaseViewHolder<ViewBinding, Item>>(
-    BaseDiffUtil(bases)
-) {
+class BaseAdapter(private val bases: List<ItemBase<*, *>>) :
+    ListAdapter<Item, BaseViewHolder<ViewBinding, Item>>(BaseDiffUtil(bases)) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ViewBinding, Item> {
         val inflater = LayoutInflater.from(parent.context)
         return bases.find { it.getLayoutId() == viewType }
@@ -31,6 +29,7 @@ class BaseAdapter(
             holder.onBind(currentList[position], payloads)
         }
     }
+
     override fun getItemViewType(position: Int): Int {
         val item = currentList[position]
         return bases.find { it.isRelativeItem(item) }

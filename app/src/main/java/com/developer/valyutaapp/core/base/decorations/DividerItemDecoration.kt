@@ -7,10 +7,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
-class DividerItemDecoration(
-    context: Context,
-    resId: Int
-) : RecyclerView.ItemDecoration() {
+class DividerItemDecoration(context: Context, resId: Int) : RecyclerView.ItemDecoration() {
 
     private var mDivider: Drawable = ContextCompat.getDrawable(context, resId)!!
 

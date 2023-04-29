@@ -28,17 +28,11 @@ class VerticalDividerItemDecoration(
         }
     }
 
-    private fun RecyclerView.Adapter<*>.isPrevTargetView(
-        currentPosition: Int,
-        viewType: Int
-    ) = currentPosition != 0 && getItemViewType(currentPosition - 1) == viewType
+    private fun RecyclerView.Adapter<*>.isPrevTargetView(currentPosition: Int, viewType: Int) =
+        currentPosition != 0 && getItemViewType(currentPosition - 1) == viewType
 
-    private fun RecyclerView.Adapter<*>.isNextTargetView(
-        currentPosition: Int,
-        viewType: Int
-    ): Boolean {
+    private fun RecyclerView.Adapter<*>.isNextTargetView(currentPosition: Int, viewType: Int): Boolean {
         val lastIndex = itemCount - 1
         return currentPosition != lastIndex && getItemViewType(currentPosition + 1) == viewType
     }
-
 }
