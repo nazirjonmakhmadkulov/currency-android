@@ -4,18 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.developer.valyutaapp.domain.usecases.ValuteUseCase
+import com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.domain.entities.ValCurs
-import  com.developer.valyutaapp.core.common.Result
 import com.developer.valyutaapp.domain.entities.Valute
+import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class MainViewModel(
-    private val valuteUseCase: ValuteUseCase
-) : ViewModel() {
+class MainViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
 
     private val _getRemoteValutes = MutableStateFlow<Result<ValCurs>>(Result.Loading)
     val getRemoteValutes: StateFlow<Result<ValCurs>> get() = _getRemoteValutes

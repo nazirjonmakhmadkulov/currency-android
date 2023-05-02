@@ -22,7 +22,7 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
 
     private var alertdialog: AlertDialog.Builder? = null
     private var dialog: AlertDialog? = null
-    private var valutes: ArrayList<Valute>? = null
+    private var valutes: MutableList<Valute> = mutableListOf()
     private var valuteId = 840
     private var adapter: DialogAdapter? = null
 
@@ -87,7 +87,7 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
     }
 
     override fun displayValutes(valute: List<Valute>) {
-        valutes!!.addAll(valute)
+        valutes.addAll(valute)
     }
 
     override fun displayError(s: String) {
@@ -96,14 +96,14 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
 
     fun dialogValutes() {
         alertdialog = AlertDialog.Builder(this)
-        alertdialog!!.setTitle("Все валюты")
+        alertdialog?.setTitle("Все валюты")
         val inflater = this.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val row = inflater.inflate(R.layout.row_item, null)
-        val listView = row.findViewById<View>(R.id.list_dialog) as ListView
-        //adapter = DialogAdapter(this, valutes!!)
-        listView.adapter = adapter
-        alertdialog!!.setView(row)
-        dialog = alertdialog!!.create()
-        dialog!!.show()
+        //val listView = row.findViewById<ListView>(R.id.recycler_dialog)
+        adapter = DialogAdapter(this, valutes)
+        //listView.adapter = adapter
+        alertdialog?.setView(row)
+        dialog = alertdialog?.create()
+        dialog?.show()
     }
 }
