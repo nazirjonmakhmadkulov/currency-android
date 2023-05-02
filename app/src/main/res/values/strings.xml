@@ -22,6 +22,7 @@
 
     <string name="auto_enable">Turn on</string>
     <string name="favorites">Favourites</string>
+    <string name="widget">Widget</string>
     <string name="all">All</string>
 
     <string name="favorites_valutes">Currency Favorites</string>

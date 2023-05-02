@@ -36,6 +36,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val themeApp = findPreference<SwitchPreferenceCompat>("theme")
         val listPreference = findPreference<ListPreference>("key_language")
         val favorite = findPreference<Preference>("favorite")
+        val widget = findPreference<Preference>("widget")
 
         if (prefs.getAutoUpdate() == "1") {
             autoUpdate?.isChecked = true
@@ -45,6 +46,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         favorite?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             val action = SettingsFragmentDirections.actionNavigationSettingsToEditFragment(FAVORITE_VALUTE)
+            findNavController().navigate(action)
+            true
+        }
+
+        widget?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            val action = SettingsFragmentDirections.actionNavigationSettingsToWidgetFragment()
             findNavController().navigate(action)
             true
         }

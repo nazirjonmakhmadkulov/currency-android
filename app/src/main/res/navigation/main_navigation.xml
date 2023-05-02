@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_navigation_settings_to_editFragment"
             app:destination="@id/editFragment" />
+        <action
+            android:id="@+id/action_navigation_settings_to_widgetFragment"
+            app:destination="@id/widgetFragment" />
     </fragment>
 
     <fragment

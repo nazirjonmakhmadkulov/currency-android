@@ -22,6 +22,7 @@
 
     <string name="auto_enable">Включить</string>
     <string name="favorites">Избранное</string>
+    <string name="widget">Widget</string>
     <string name="all">Все</string>
 
     <string name="favorites_valutes">Избранное валют</string>

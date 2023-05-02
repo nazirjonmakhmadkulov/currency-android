@@ -16,7 +16,7 @@ import com.developer.valyutaapp.utils.ImageResource
 class DialogAdapter(
     private val context: Context,
     private val valutes: MutableList<Valute>,
-    private val onItemValuteClick: (Valute, Int) -> Unit,
+    //private val onItemValuteClick: (Valute, Int) -> Unit,
 ) : BaseAdapter() {
     override fun getCount(): Int =  valutes.size
     override fun getItem(i: Int): Any = valutes[i]
@@ -26,14 +26,14 @@ class DialogAdapter(
     override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val v = inflater.inflate(R.layout.dialog_item, viewGroup, false)
-        val cardView = v.findViewById<View>(R.id.item_dialog) as CardView
-        //val listView = v.findViewById<View>(R.id.list_dialog) as ListView
-        val icon = v.findViewById<View>(R.id.img_flag) as ImageView
-        val txName = v.findViewById<View>(R.id.name_currency) as TextView
+        val cardView = v.findViewById<CardView>(R.id.item_dialog)
+        //val listView = v.findViewById<ListView>(R.id.list_dialog)
+        val icon = v.findViewById<ImageView>(R.id.img_flag)
+        val txName = v.findViewById<TextView>(R.id.name_currency)
         val bt = ImageResource.getImageRes(context, valutes[i].charCode)
         icon.setImageDrawable(bt)
         txName.text = valutes[i].name
-        cardView.setOnClickListener { onItemValuteClick(valutes[i], i) }
+        //cardView.setOnClickListener { onItemValuteClick(valutes[i], i) }
         return v
     }
 }
