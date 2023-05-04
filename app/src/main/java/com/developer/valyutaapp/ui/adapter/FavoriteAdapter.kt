@@ -59,12 +59,6 @@ class FavoriteAdapter(
             nameValute.text = item.name
         }
 
-        override fun onBind(item: Valute, payloads: List<Any>) {
-            super.onBind(item, payloads)
-//            val inFavorites = payloads.last() as Int
-//            binding.favorite.setFavorites(item.favoritesValute)
-        }
-
         private fun ImageView.setFavorites(inFavorites: Int?) {
             if (inFavorites == 1) setImageResource(R.drawable.ic_favorite)
             else setImageResource(R.drawable.ic_unfavorite)
