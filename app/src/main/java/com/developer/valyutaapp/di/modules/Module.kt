@@ -23,6 +23,7 @@ import com.developer.valyutaapp.domain.usecases.HistoryUseCase
 import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.chart.ChartViewModel
+import com.developer.valyutaapp.ui.widget.WidgetViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -39,6 +40,7 @@ val viewModelModule = module {
     factory { MainViewModel(get()) }
     factory { NetworkStatusViewModel() }
     factory { ChartViewModel(get(), get()) }
+    factory { WidgetViewModel(get()) }
 }
 
 val sharedPreference = module {

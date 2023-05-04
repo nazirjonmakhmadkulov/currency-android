@@ -13,7 +13,6 @@ import com.developer.valyutaapp.core.base.BaseAdapter
 import com.developer.valyutaapp.core.base.Item
 import com.developer.valyutaapp.databinding.FragmentWidgetBinding
 import com.developer.valyutaapp.domain.entities.Valute
-import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.ValCursAdapter
 import com.developer.valyutaapp.utils.launchAndCollectIn
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -22,7 +21,7 @@ import timber.log.Timber
 
 class WidgetFragment : Fragment(R.layout.fragment_widget) {
     private val viewBinding by viewBinding(FragmentWidgetBinding::bind)
-    private val viewModel by viewModel<MainViewModel>()
+    private val viewModel by viewModel<WidgetViewModel>()
 
     private var valutes: MutableList<Valute> = mutableListOf()
     private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
@@ -52,6 +51,7 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
 
     private fun setupViewModel() {
         Timber.d("listval $valuteList")
+        viewModel.getLocalValuteById(840)
         viewModel.getLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
             getAllValuteSuccess(it)
         }
@@ -71,18 +71,6 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
         valCursAdapter.submitList(valuteList)
         recyclerView.adapter = valCursAdapter
         materialAlertDialogBuilder.setView(view).show()
-
-//        alertdialog = AlertDialog.Builder(requireContext())
-//        alertdialog?.setTitle("Все валюты")
-//        val inflater = requireActivity().getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//        val row = inflater.inflate(R.layout.row_item, null)
-//        val recyclerView = row.findViewById<RecyclerView>(R.id.recycler_dialog)
-//        Timber.d("listval $valuteList")
-//        valCursAdapter.submitList(valuteList)
-//        recyclerView.adapter = valCursAdapter
-//        alertdialog?.setView(row)
-//        dialog = alertdialog?.create()
-//        dialog?.show()
     }
 
     private fun onItemValute(item: Valute) {
