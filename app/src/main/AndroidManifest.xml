@@ -30,7 +30,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.widget.WidgetActivity" />
         <activity android:name=".ui.MainActivity" />
 
         <service

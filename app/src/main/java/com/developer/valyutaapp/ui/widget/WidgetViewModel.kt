@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 
 class WidgetViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
     fun getLocalValutes(): Flow<List<Valute>> = valuteUseCase.getLocalValutes()
+
     private val _getLocalValuteById = MutableLiveData<Valute>()
     val getLocalValuteById: LiveData<Valute> get() = _getLocalValuteById
     fun getLocalValuteById(valId: Int) = viewModelScope.launch {
