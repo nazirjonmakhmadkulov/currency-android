@@ -3,7 +3,6 @@ package com.developer.valyutaapp.ui.widget
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +16,7 @@ import com.developer.valyutaapp.utils.Utils
 import io.paperdb.Paper
 import java.text.DecimalFormat
 
-class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewInterface {
+class WidgetActivity : AppCompatActivity(R.layout.activity_widget) {
     private val viewBinding by viewBinding(ActivityWidgetBinding::bind, R.id.container)
 
     private var alertdialog: AlertDialog.Builder? = null
@@ -29,9 +28,6 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         valutes = ArrayList()
-        setupMVP()
-        valuteById
-        valuteList
         viewBinding.saveWidget.setOnClickListener {
             val decimalFormat = DecimalFormat("#.####")
             val decimal = decimalFormat.format(viewBinding.tvValue.text.toString().toDouble())
@@ -50,33 +46,8 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
         }
     }
 
-    private fun setupMVP() {
-        //widgetPresenter = WidgetPresenter(this.applicationContext, this)
-    }
-
-    private val valuteById: Unit
-        get() {
-            //widgetPresenter!!.getValuteById(valuteId)
-        }
-    private val valuteList: Unit
-        get() {
-            // widgetPresenter!!.valutes()
-        }
-
-    override fun showToast(s: String) {
-        Toast.makeText(this@WidgetActivity, s, Toast.LENGTH_LONG).show()
-    }
-
-    override fun showProgressBar() {
-        viewBinding.progressBar.visibility = View.VISIBLE
-    }
-
-    override fun hideProgressBar() {
-        viewBinding.progressBar.visibility = View.GONE
-    }
-
     @SuppressLint("SetTextI18n")
-    override fun displayValuteWithId(valute: Valute) {
+    fun displayValuteWithId(valute: Valute) {
         val bt = ImageResource.getImageRes(this, valute.charCode)
         viewBinding.iconValute1.setImageDrawable(bt)
         viewBinding.tvNominal.text = java.lang.String.valueOf(valute.nominal)
@@ -86,13 +57,6 @@ class WidgetActivity : AppCompatActivity(R.layout.activity_widget), WidgetViewIn
         viewBinding.iconValute2.setImageResource(R.drawable.tajikistan)
     }
 
-    override fun displayValutes(valute: List<Valute>) {
-        valutes.addAll(valute)
-    }
-
-    override fun displayError(s: String) {
-        showToast(s)
-    }
 
     fun dialogValutes() {
         alertdialog = AlertDialog.Builder(this)
