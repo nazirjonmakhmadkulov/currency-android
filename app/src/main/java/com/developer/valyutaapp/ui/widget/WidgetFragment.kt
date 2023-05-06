@@ -84,7 +84,7 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
     private fun dialogValutes() {
         val materialAlertDialogBuilder = MaterialAlertDialogBuilder(requireContext())
         materialAlertDialogBuilder.setTitle("Все валюты")
-        val view = LayoutInflater.from(requireContext()).inflate(R.layout.row_item, null, false)
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_dialog, null, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_dialog)
         Timber.d("listval $valuteList")
         valCursAdapter.submitList(valuteList)
