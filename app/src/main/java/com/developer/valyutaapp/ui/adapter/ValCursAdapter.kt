@@ -16,7 +16,7 @@ class ValCursAdapter(
     private val onItemValuteClick: (Valute) -> Unit,
 ) : ItemBase<ItemBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute
-    override fun getLayoutId() = R.layout.item
+    override fun getLayoutId() = R.layout.item_valute
     override fun getViewHolder(layoutInflater: LayoutInflater, parent: ViewGroup): BaseViewHolder<ItemBinding, Valute> {
         val binding = ItemBinding.inflate(layoutInflater, parent, false)
         return ValuteViewHolder(binding, onItemValuteClick)

@@ -18,7 +18,7 @@ class FavoriteAdapter(
     private val onItemValuteClick: (Valute, Int) -> Unit,
 ) : ItemBase<FavoritesItemBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute
-    override fun getLayoutId() = R.layout.item
+    override fun getLayoutId() = R.layout.item_valute
     override fun getViewHolder(
         layoutInflater: LayoutInflater, parent: ViewGroup,
     ): BaseViewHolder<FavoritesItemBinding, Valute> {
