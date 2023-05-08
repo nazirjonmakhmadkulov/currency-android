@@ -80,7 +80,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             is Result.Error -> {
                 viewBinding.swipe.isRefreshing = false
-                Timber.d("Error ", result.code.toString() + " = " + result.errorMessage)
+                Timber.d("Error ${result.code.toString()} ${result.errorMessage} }")
             }
         }
     }
