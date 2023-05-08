@@ -18,19 +18,17 @@
 
         <ImageView
             android:id="@+id/img_flag"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_weight="0.2"
             android:contentDescription="@null"
-            android:padding="15dp"
+            android:padding="16dp"
             android:src="@drawable/tajikistan" />
 
         <TextView
             android:id="@+id/name_currency"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:padding="15dp"
+            android:padding="16dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             tools:text="Name Currency" />
     </LinearLayout>
