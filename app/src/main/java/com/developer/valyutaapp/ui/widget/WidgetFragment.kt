@@ -88,7 +88,6 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
     }
 
     private fun onItemValute(item: Valute) {
-
         dialog?.dismiss()
     }
 }
