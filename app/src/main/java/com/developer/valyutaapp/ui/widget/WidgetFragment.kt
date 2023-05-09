@@ -57,17 +57,17 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
         this.valutes.addAll(valutes.toMutableList())
     }
 
-    private fun setWidgetData() {
+    private fun setWidgetData() = with(viewBinding){
         val decimalFormat = DecimalFormat("#.####")
-        val decimal = decimalFormat.format(viewBinding.tvValue.text.toString().toDouble())
-        val value = if (viewBinding.tvNominal.text.toString().length < 3) {
-            decimalFormat.format(viewBinding.tvNominal.text.toString().toDouble())
+        val decimal = decimalFormat.format(tvValue.text.toString().toDouble())
+        val value = if (tvNominal.text.toString().length < 3) {
+            decimalFormat.format(tvNominal.text.toString().toDouble())
         } else {
-            viewBinding.tvNominal.text.toString()
+            tvNominal.text.toString()
         }
         Paper.init(requireContext())
-        Paper.book().write("charcode", viewBinding.name1.text)
-        Paper.book().write("charcode2", viewBinding.name2.text)
+        Paper.book().write("charcode", name1.text)
+        Paper.book().write("charcode2",name2.text)
         Paper.book().write("nominal", value)
         Paper.book().write("value", decimal.toString())
         Paper.book().write("dat", Utils.getDate())
@@ -88,7 +88,6 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
     }
 
     private fun onItemValute(item: Valute) {
-
         dialog?.dismiss()
     }
 }

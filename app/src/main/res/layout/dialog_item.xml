@@ -18,18 +18,19 @@
 
         <ImageView
             android:id="@+id/img_flag"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:contentDescription="@null"
-            android:padding="16dp"
+            android:padding="12dp"
             android:src="@drawable/tajikistan" />
 
         <TextView
             android:id="@+id/name_currency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:padding="12dp"
+            android:textColor="@android:color/black"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             tools:text="Name Currency" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

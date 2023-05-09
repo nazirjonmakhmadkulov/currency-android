@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/row"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:cardElevation="16dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_back"
+        android:layout_marginTop="16dp"
         android:clipToPadding="false"
         android:paddingBottom="50dp" />
-</FrameLayout>
+</androidx.cardview.widget.CardView>
