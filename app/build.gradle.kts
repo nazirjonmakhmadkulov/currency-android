@@ -52,7 +52,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation("com.google.android.material:material:1.8.0")
+    implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.multidex:multidex:2.0.1")
 
     implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.8")
