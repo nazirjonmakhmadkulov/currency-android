@@ -82,5 +82,5 @@ inline fun <T> Flow<T>.launchAndCollectIn(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     crossinline action: suspend CoroutineScope.(T) -> Unit
 ) = owner.lifecycleScope.launch {
-    owner.repeatOnLifecycle(minActiveState) { collect { action(it) } }
+    owner.repeatOnLifecycle(minActiveState) { collect { it -> action(it) } }
 }
