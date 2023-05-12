@@ -1,7 +1,5 @@
 package com.developer.valyutaapp.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.developer.valyutaapp.core.common.Result
@@ -14,7 +12,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
-
     private val _getRemoteValutes = MutableStateFlow<Result<ValCurs>>(Result.Loading)
     val getRemoteValutes: StateFlow<Result<ValCurs>> get() = _getRemoteValutes
     fun getRemoteValutes(date: String, exp: String) = viewModelScope.launch {
@@ -30,15 +27,7 @@ class MainViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
     fun getFavoriteLocalValutes(): Flow<List<Valute>> = valuteUseCase.getFavoriteLocalValutes()
     fun getAllConverterLocalValutes(): Flow<List<Valute>> = valuteUseCase.getAllConverterLocalValutes()
 
-    private val _getLocalValuteById = MutableLiveData<Valute>()
-    val getLocalValuteById: LiveData<Valute> get() = _getLocalValuteById
-    fun getLocalValuteById(valId: Int) = viewModelScope.launch {
-        _getLocalValuteById.value = valuteUseCase.getLocalValuteById(valId)
-    }
-
-    private val _updateLocalValute = MutableLiveData<Unit>()
-    val updateLocalValute: LiveData<Unit> get() = _updateLocalValute
     fun updateLocalValute(valute: Valute) = viewModelScope.launch {
-        _updateLocalValute.value = valuteUseCase.updateLocalValute(valute)
+        valuteUseCase.updateLocalValute(valute)
     }
 }
