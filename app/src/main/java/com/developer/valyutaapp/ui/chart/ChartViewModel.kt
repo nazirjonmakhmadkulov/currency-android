@@ -13,10 +13,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class ChartViewModel(
-    private val valuteUseCase: ValuteUseCase,
-    private val historyUseCase: HistoryUseCase
-) : ViewModel() {
+class ChartViewModel(private val valuteUseCase: ValuteUseCase, private val historyUseCase: HistoryUseCase) :
+    ViewModel() {
 
     private val _getLocalValuteById = MutableStateFlow<Valute?>(null)
     val getLocalValuteById: StateFlow<Valute?> get() = _getLocalValuteById
@@ -27,15 +25,13 @@ class ChartViewModel(
     //history
     private val _getRemoteHistories = MutableStateFlow<Result<ValHistory>>(Result.Loading)
     val getRemoteHistories: StateFlow<Result<ValHistory>> get() = _getRemoteHistories
-    fun getRemoteHistories(d1: String, d2: String, cn: Int, cs: String, exp: String) =
-        viewModelScope.launch {
-            when (val result = historyUseCase.getRemoteHistories(d1, d2, cn, cs, exp)) {
-                is Result.Loading -> Result.Loading
-                is Result.Success -> _getRemoteHistories.value = Result.Success(result.data)
-                is Result.Error -> _getRemoteHistories.value =
-                    Result.Error(result.cause, result.code, result.errorMessage)
-            }
+    fun getRemoteHistories(d1: String, d2: String, cn: Int, cs: String, exp: String) = viewModelScope.launch {
+        when (val result = historyUseCase.getRemoteHistories(d1, d2, cn, cs, exp)) {
+            is Result.Loading -> Result.Loading
+            is Result.Success -> _getRemoteHistories.value = Result.Success(result.data)
+            is Result.Error -> _getRemoteHistories.value = Result.Error(result.cause, result.code, result.errorMessage)
         }
+    }
 
     fun getLocalHistories(valId: Int, day: Int): Flow<List<History>> = historyUseCase.getLocalHistories(valId, day)
 }

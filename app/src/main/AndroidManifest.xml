@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Valute"
         tools:targetApi="n">
+
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
