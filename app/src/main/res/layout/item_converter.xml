@@ -64,7 +64,7 @@
                 android:layout_gravity="center"
                 android:background="@color/white"
                 android:gravity="end|center_vertical"
-                android:hint="0"
+                android:hint="@string/zero"
                 android:imeOptions="actionDone"
                 android:inputType="number|numberDecimal"
                 android:maxLength="15"
