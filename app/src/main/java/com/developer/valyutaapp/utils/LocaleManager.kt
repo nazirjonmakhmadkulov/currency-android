@@ -65,9 +65,7 @@ class LocaleManager(context: Context) {
         val set: MutableSet<Locale> = LinkedHashSet()
         set.add(target)
         val all = LocaleList.getDefault()
-        for (i in 0 until all.size()) {
-            set.add(all[i])
-        }
+        for (i in 0 until all.size()) set.add(all[i])
         val locales = set.toTypedArray()
         config.setLocales(LocaleList(*locales))
     }
