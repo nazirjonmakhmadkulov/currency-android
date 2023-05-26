@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
     id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -76,7 +76,7 @@ dependencies {
     // Room
     implementation("androidx.room:room-ktx:2.5.1")
     implementation("androidx.room:room-runtime:2.5.1")
-    kapt("androidx.room:room-compiler:2.5.1")
+    ksp("androidx.room:room-compiler:2.5.1")
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -89,8 +89,8 @@ dependencies {
     implementation("io.insert-koin:koin-androidx-workmanager:3.3.3")
 
     //Okhttp logging
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.9")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.9")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.10")
 
     //Widget
     implementation("io.github.pilgr:paperdb:2.7.2")
