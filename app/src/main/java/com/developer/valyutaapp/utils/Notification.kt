@@ -44,13 +44,9 @@ object Notification {
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentTitle(title).build()
             notification.flags = Notification.FLAG_AUTO_CANCEL
-            val notificationManager = context.getSystemService(
-                Context.NOTIFICATION_SERVICE
-            ) as NotificationManager
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             val notificationChannel = NotificationChannel(
-                NOTIFICATION_CHANNEL_ID,
-                title,
-                NotificationManager.IMPORTANCE_DEFAULT
+                NOTIFICATION_CHANNEL_ID, title, NotificationManager.IMPORTANCE_DEFAULT
             )
             notificationManager.createNotificationChannel(notificationChannel)
             notificationManager.notify(NOTIFICATION_ID, notification)
@@ -62,9 +58,7 @@ object Notification {
                 .setContentIntent(pi)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentTitle(title).build()
-            val notificationManager = context.getSystemService(
-                Context.NOTIFICATION_SERVICE
-            ) as NotificationManager
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notification.flags = Notification.FLAG_AUTO_CANCEL
             notificationManager.notify(NOTIFICATION_ID, notification)
         }
