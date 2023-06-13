@@ -70,12 +70,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         mBannerAdView.loadAd(adRequest)
     }
 
-    private fun setupSnackBar(): Snackbar? {
-        snackBarNetwork = Snackbar
+    private fun setupSnackBar(): Snackbar {
+       val snackBarNetwork = Snackbar
             .make(this.viewBinding.root, getString(R.string.not_connected), Snackbar.LENGTH_INDEFINITE)
             .setBackgroundTint(ContextCompat.getColor(this@MainActivity, R.color.peach))
-        val view: View? = snackBarNetwork?.view
-        val params: CoordinatorLayout.LayoutParams = view?.layoutParams as CoordinatorLayout.LayoutParams
+        val view: View = snackBarNetwork.view
+        val params: CoordinatorLayout.LayoutParams = view.layoutParams as CoordinatorLayout.LayoutParams
         params.gravity = Gravity.TOP
         view.translationY = getStatusBarHeight().toFloat() + getActionBarHeight().toFloat()
         view.layoutParams = params
