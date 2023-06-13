@@ -9,7 +9,6 @@ object ImageResource {
     fun getImageRes(context: Context, img: String): Drawable? = when (img) {
         "USD" -> ContextCompat.getDrawable(context, R.drawable.america)
         "EUR" -> ContextCompat.getDrawable(context, R.drawable.european)
-        "XDR" -> ContextCompat.getDrawable(context, R.mipmap.xdr)
         "CNY" -> ContextCompat.getDrawable(context, R.drawable.china)
         "CHF" -> ContextCompat.getDrawable(context, R.drawable.switzerland)
         "RUB" -> ContextCompat.getDrawable(context, R.drawable.russia)
