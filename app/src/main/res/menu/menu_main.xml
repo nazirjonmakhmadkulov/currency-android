@@ -8,6 +8,6 @@
         android:id="@+id/edit_favorites"
         android:icon="@drawable/ic_edit"
         app:showAsAction="always"
-        android:title="Update"/>
+        android:title="@string/update"/>
 
 </menu>
