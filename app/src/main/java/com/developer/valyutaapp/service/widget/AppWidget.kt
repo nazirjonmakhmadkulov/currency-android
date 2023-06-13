@@ -20,7 +20,9 @@ open class AppWidget : AppWidgetProvider() {
                 context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
         }
-        manager.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), 60000, pendingIntent)
+        pendingIntent?.let {
+            manager.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), 60000, it)
+        }
         val views = RemoteViews(context.packageName, R.layout.app_widget)
         views.setOnClickPendingIntent(R.id.updatewidget, getPendingUpdateIntent(context))
         appWidgetManager.updateAppWidget(appWidgetIds, views)

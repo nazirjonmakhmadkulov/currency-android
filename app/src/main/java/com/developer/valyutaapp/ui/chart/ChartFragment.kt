@@ -43,8 +43,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         setupToolbar()
         setupViewModel()
         viewBinding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val radio: RadioButton = view.findViewById(checkedId)
-            when (radio) {
+            when (view.findViewById(checkedId) as? RadioButton) {
                 viewBinding.week -> getLocalHistories(7)
                 viewBinding.month -> getLocalHistories(30)
                 viewBinding.year -> getLocalHistories(365)
@@ -133,12 +132,6 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         chart.legend.isEnabled = true
 
         val xAxis: XAxis = viewBinding.chart.xAxis
-        //xAxis.setDrawGridLines(true)
-//        xAxis.granularity = 1f
-//        xAxis.isGranularityEnabled = true
-//        xAxis.granularity = 1f
-//        xAxis.enableGridDashedLine(10f, 10f, 0f)
-//        xAxis.setDrawLimitLinesBehindData(true)
 
         if (valutes.size > 2) {
             xAxis.valueFormatter = object : ValueFormatter() {
