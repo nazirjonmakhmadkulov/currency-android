@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 9
         versionName = "2.4.3"
         vectorDrawables.useSupportLibrary = true
@@ -41,7 +41,7 @@ android {
 }
 dependencies {
     implementation("androidx.core:core-ktx:1.10.1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
@@ -64,13 +64,13 @@ dependencies {
     api("com.jakewharton.timber:timber:5.0.1")
 
     //Fragment
-    implementation("androidx.fragment:fragment-ktx:1.5.7")
+    implementation("androidx.fragment:fragment-ktx:1.6.0")
 
     // Kotlin + coroutines
     implementation("androidx.work:work-runtime-ktx:2.8.1")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation("ru.gildor.coroutines:kotlin-coroutines-retrofit:1.1.0")
 
     // Room
@@ -84,7 +84,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-simplexml:2.9.0")
 
     // Koin main features for Android
-    implementation("io.insert-koin:koin-android:3.3.3")
+    implementation("io.insert-koin:koin-android:3.4.1")
     // Jetpack WorkManager
     implementation("io.insert-koin:koin-androidx-workmanager:3.3.3")
 
@@ -97,7 +97,7 @@ dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:5.7.0")
+    implementation("com.yandex.android:mobileads:5.8.0")
     implementation("com.yandex.ads.mediation:mobileads-admob:21.3.0.0")
     implementation("com.google.android.gms:play-services-ads:21.3.0")
 }
