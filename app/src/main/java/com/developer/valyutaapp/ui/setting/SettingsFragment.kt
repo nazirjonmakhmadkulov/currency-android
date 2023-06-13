@@ -38,11 +38,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val favorite = findPreference<Preference>("favorite")
         val widget = findPreference<Preference>("widget")
 
-        if (prefs.getAutoUpdate() == "1") {
-            autoUpdate?.isChecked = true
-        } else if (prefs.getAutoUpdate() == "0") {
-            autoUpdate?.isChecked = false
-        }
+        if (prefs.getAutoUpdate() == "1") autoUpdate?.isChecked = true
+        else if (prefs.getAutoUpdate() == "0") autoUpdate?.isChecked = false
 
         favorite?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             val action = SettingsFragmentDirections.actionNavigationSettingsToEditFragment(FAVORITE_VALUTE)
