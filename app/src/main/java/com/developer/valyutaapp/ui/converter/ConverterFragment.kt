@@ -14,20 +14,17 @@ import com.developer.valyutaapp.R
 import com.developer.valyutaapp.core.base.BaseAdapter
 import com.developer.valyutaapp.core.base.Item
 import com.developer.valyutaapp.core.common.FAVORITE_CONVERTER
-import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.databinding.FragmentConverterBinding
 import com.developer.valyutaapp.domain.entities.Valute
-import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.adapter.ConverterAdapter
 import com.developer.valyutaapp.utils.launchAndCollectIn
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ConverterFragment : Fragment(R.layout.fragment_converter) {
     private val viewBinding by viewBinding(FragmentConverterBinding::bind)
-    private val viewModel by viewModel<MainViewModel>()
+    private val viewModel by viewModel<ConverterViewModel>()
     private var mathValutes: MutableList<Valute> = mutableListOf()
     private var valutes: MutableList<Valute> = mutableListOf()
     private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
