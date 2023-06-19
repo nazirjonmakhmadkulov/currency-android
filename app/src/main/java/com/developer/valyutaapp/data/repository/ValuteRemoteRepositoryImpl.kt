@@ -32,7 +32,7 @@ class ValuteRemoteRepositoryImpl(
                 Result.Success(result.data)
             }
 
-            is Result.Error -> Result.Error(result.cause, result.code, result.errorMessage)
+            is Result.Error -> Result.Error(result.cause, result.code, result.message)
         }
     }
 
@@ -64,7 +64,7 @@ class ValuteRemoteRepositoryImpl(
                 Result.Success(result.data)
             }
 
-            is Result.Error -> Result.Error(result.cause, result.code, result.errorMessage)
+            is Result.Error -> Result.Error(result.cause, result.code, result.message)
         }
     }
 

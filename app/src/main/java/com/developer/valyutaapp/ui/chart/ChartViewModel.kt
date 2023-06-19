@@ -29,7 +29,7 @@ class ChartViewModel(private val valuteUseCase: ValuteUseCase, private val histo
         when (val result = historyUseCase.getRemoteHistories(d1, d2, cn, cs, exp)) {
             is Result.Loading -> Result.Loading
             is Result.Success -> _getRemoteHistories.value = Result.Success(result.data)
-            is Result.Error -> _getRemoteHistories.value = Result.Error(result.cause, result.code, result.errorMessage)
+            is Result.Error -> _getRemoteHistories.value = Result.Error(result.cause, result.code, result.message)
         }
     }
 
