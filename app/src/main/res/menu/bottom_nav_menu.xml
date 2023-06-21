@@ -8,10 +8,10 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_converter"-->
-<!--        android:icon="@drawable/ic_converter"-->
-<!--        android:title="@string/converter" />-->
+    <item
+        android:id="@+id/navigation_converter"
+        android:icon="@drawable/ic_converter"
+        android:title="@string/converter" />
 
     <item
         android:id="@+id/navigation_valutes"

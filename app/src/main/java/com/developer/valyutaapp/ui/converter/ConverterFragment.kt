@@ -21,6 +21,7 @@ import com.developer.valyutaapp.utils.launchAndCollectIn
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class ConverterFragment : Fragment(R.layout.fragment_converter) {
     private val viewBinding by viewBinding(FragmentConverterBinding::bind)
@@ -62,7 +63,9 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
 
         viewBinding.convert.moneyConvert.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                //if (s?.isNotBlank() == true) { }
+                if (s!!.isNotBlank()) {
+                    viewModel.submitSearchInput(s.toString())
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -74,9 +77,14 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
             getAllValuteSuccess(it)
         }
+        viewModel.valuteState.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
+            //it?.let { items -> getAllValuteSuccess(items) }
+            Timber.d("valuteState ${it}")
+        }
     }
 
     private fun getAllValuteSuccess(valute: List<Valute>) {
+        this.valutes.clear()
         this.valutes.addAll(valute)
         converterAdapter.submitList(valutes.toList())
     }

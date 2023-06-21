@@ -47,19 +47,18 @@ class ConverterAdapter(
             val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
             iconValute.setImageDrawable(bt)
             charCode.text = item.charCode
-            if (adapterPosition != posSelect) moneyConvert.setText(decFormat(item.value.toDouble()))
-            moneyConvert.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {}
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (s!!.isNotBlank()) {
-                        posSelect = adapterPosition
-                        Log.d("onChangeValute", s.toString())
-                        onChangeValute(s.toString().trim(), adapterPosition)
-                    }
-                }
-            })
-            itemView.setOnClickListener { onItemValuteClick(item) }
+//            if (adapterPosition != posSelect) moneyConvert.setText(decFormat(item.value.toDouble()))
+//            moneyConvert.addTextChangedListener(object : TextWatcher {
+//                override fun afterTextChanged(s: Editable?) {}
+//                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                    if (s!!.isNotBlank()) {
+//                        posSelect = adapterPosition
+//                        Log.d("onChangeValute", s.toString())
+//                        onChangeValute(s.toString().trim(), adapterPosition)
+//                    }
+//                }
+//            })
         }
 
         override fun onBind(item: Valute, payloads: List<Any>) {

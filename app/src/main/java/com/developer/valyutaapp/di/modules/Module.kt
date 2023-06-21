@@ -23,6 +23,7 @@ import com.developer.valyutaapp.domain.usecases.HistoryUseCase
 import com.developer.valyutaapp.domain.usecases.ValuteUseCase
 import com.developer.valyutaapp.ui.MainViewModel
 import com.developer.valyutaapp.ui.chart.ChartViewModel
+import com.developer.valyutaapp.ui.converter.ConverterViewModel
 import com.developer.valyutaapp.ui.widget.WidgetViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -38,6 +39,7 @@ import java.util.concurrent.TimeUnit
 
 val viewModelModule = module {
     factory { MainViewModel(get()) }
+    factory { ConverterViewModel(get()) }
     factory { NetworkStatusViewModel() }
     factory { ChartViewModel(get(), get()) }
     factory { WidgetViewModel(get()) }
