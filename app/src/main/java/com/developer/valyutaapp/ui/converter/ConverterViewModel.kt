@@ -33,15 +33,14 @@ class ConverterViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel()
         valutes.collectLatest { valutesList ->
             items.clear()
             valutesList.forEachIndexed { index, valute ->
-                val value = valute.value.trim().toDouble()
-                val sum = value * query.trim().toDouble()
+                val sum = (valute.nominal.toDouble() * (query.toDouble() / valute.value.toDouble())).toString()
                 items.add(Valute(
                     id = valute.id,
                     valId = valute.valId,
                     charCode = valute.charCode,
                     nominal = valute.nominal,
                     name = valute.name,
-                    value = sum.toString(),
+                    value = sum,
                     dates = valute.dates,
                     favoritesValute = valute.favoritesValute,
                     favoritesConverter = valute.favoritesConverter,
