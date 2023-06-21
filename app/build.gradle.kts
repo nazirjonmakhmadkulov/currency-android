@@ -71,7 +71,6 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
-    implementation("ru.gildor.coroutines:kotlin-coroutines-retrofit:1.1.0")
 
     // Room
     implementation("androidx.room:room-ktx:2.5.1")
