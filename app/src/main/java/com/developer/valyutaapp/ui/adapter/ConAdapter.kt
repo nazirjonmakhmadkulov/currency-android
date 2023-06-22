@@ -43,7 +43,7 @@ class ConAdapter(
             moneyConvert.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     if (s!!.isNotBlank()) {
-                        onChangeValute(s.toString().toDouble(), position)
+                        onChangeValute(s.toString().toDouble(), adapterPosition)
                     }
                 }
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
