@@ -94,6 +94,7 @@ val netModule = module {
         return GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).setLenient().create()
     }
 
+    @Suppress("DEPRECATION")
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(SERVER_URL)

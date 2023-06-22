@@ -1,8 +1,5 @@
 package com.developer.valyutaapp.ui.adapter
 
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -13,7 +10,6 @@ import com.developer.valyutaapp.core.base.ItemBase
 import com.developer.valyutaapp.databinding.ItemConverterBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.utils.ImageResource
-import com.developer.valyutaapp.utils.Utils.decFormat
 
 class ConverterAdapter(
     private val onChangeValute: (String, Int) -> Unit,
