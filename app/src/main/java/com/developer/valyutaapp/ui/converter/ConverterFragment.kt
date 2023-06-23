@@ -24,7 +24,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     private val viewBinding by viewBinding(FragmentConverterBinding::bind)
     private val viewModel by viewModel<ConverterViewModel>()
     private var valutes: MutableList<Valute> = mutableListOf()
-    private val converterAdapter: BaseAdapter = BaseAdapter(listOf(ConverterAdapter(::onChangeValute, ::onItemValute)))
+    private val converterAdapter: BaseAdapter = BaseAdapter(listOf(ConverterAdapter()))
 //    private val conAdapter by lazy { ConAdapter(::onChangeValute, ::onItemValute) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,9 +55,9 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
             this.adapter = converterAdapter
         }
 
-        viewBinding.convert.moneyConvert.doOnTextChanged { text, start, before, count ->
-            if (!text.isNullOrEmpty())
-                viewModel.submitConverterInput(text.toString())
+        viewBinding.convert.moneyConvert.doOnTextChanged { text, _, _, _ ->
+            if (!text.isNullOrEmpty()) viewModel.submitConverterInput(text.toString())
+            else viewModel.submitConverterInput("0")
         }
     }
 
@@ -74,10 +74,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
 
     private fun getAllValuteSuccess(valute: List<Valute>) {
         this.valutes.clear()
-        valute.forEach { it.dates = "0"; this.valutes.add(it) }
+        valute.forEach { it.value = "0"; this.valutes.add(it) }
         converterAdapter.submitList(valutes.toList())
     }
-
-    private fun onItemValute(item: Valute) {}
-    private fun onChangeValute(item: String, position: Int) {}
 }

@@ -32,8 +32,8 @@ class ConverterViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel()
                 charCode = valute.charCode,
                 nominal = valute.nominal,
                 name = valute.name,
-                value = valute.value,
-                dates = formatSum,
+                value = formatSum,
+                dates = valute.dates,
                 favoritesValute = valute.favoritesValute,
                 favoritesConverter = valute.favoritesConverter,
             )
