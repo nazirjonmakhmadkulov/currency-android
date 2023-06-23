@@ -38,10 +38,11 @@
             app:title="@string/favorites" />
     </PreferenceCategory>
 
-     <PreferenceCategory app:iconSpaceReserved="false">
+    <PreferenceCategory app:iconSpaceReserved="false">
         <Preference
             app:icon="@drawable/ic_widget"
             app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false"
             app:key="widget"
             app:summary="@string/widget"
             app:title="@string/widget" />
