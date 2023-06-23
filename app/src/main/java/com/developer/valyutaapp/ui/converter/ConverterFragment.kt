@@ -1,20 +1,16 @@
 package com.developer.valyutaapp.ui.converter
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.valyutaapp.R
 import com.developer.valyutaapp.core.base.BaseAdapter
-import com.developer.valyutaapp.core.base.Item
 import com.developer.valyutaapp.core.common.FAVORITE_CONVERTER
 import com.developer.valyutaapp.databinding.FragmentConverterBinding
 import com.developer.valyutaapp.domain.entities.Valute
@@ -23,15 +19,11 @@ import com.developer.valyutaapp.utils.launchAndCollectIn
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class ConverterFragment : Fragment(R.layout.fragment_converter) {
     private val viewBinding by viewBinding(FragmentConverterBinding::bind)
     private val viewModel by viewModel<ConverterViewModel>()
     private var valutes: MutableList<Valute> = mutableListOf()
-    private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
-        MutableList(valutes.size) { valutes[it] }
-    }
     private val converterAdapter: BaseAdapter = BaseAdapter(listOf(ConverterAdapter(::onChangeValute, ::onItemValute)))
 //    private val conAdapter by lazy { ConAdapter(::onChangeValute, ::onItemValute) }
 
@@ -64,34 +56,25 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         }
 
         viewBinding.convert.moneyConvert.doOnTextChanged { text, start, before, count ->
-            Timber.d("valuteState s ${text}")
+            if (!text.isNullOrEmpty())
+                viewModel.submitConverterInput(text.toString())
         }
-
-        viewBinding.convert.moneyConvert.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (s!!.isNotBlank()) {
-                    viewModel.submitSearchInput(s.toString())
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupViewModel() {
         viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
             getAllValuteSuccess(it)
         }
-        viewModel.valuteState.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
-            //it?.let { items -> getAllValuteSuccess(items) }
-            Timber.d("valuteState ${it}")
+        viewModel.valuteState.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { items ->
+            converterAdapter.submitList(items.toList())
+            launch { delay(200); converterAdapter.notifyDataSetChanged() }
         }
     }
 
     private fun getAllValuteSuccess(valute: List<Valute>) {
         this.valutes.clear()
-        this.valutes.addAll(valute)
+        valute.forEach { it.dates = "0"; this.valutes.add(it) }
         converterAdapter.submitList(valutes.toList())
     }
 
