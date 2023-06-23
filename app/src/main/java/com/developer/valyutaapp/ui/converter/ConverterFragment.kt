@@ -3,7 +3,9 @@ package com.developer.valyutaapp.ui.converter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -59,6 +61,10 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         viewBinding.recyclerValCurs.apply {
             layoutManager = LinearLayoutManager(requireContext())
             this.adapter = converterAdapter
+        }
+
+        viewBinding.convert.moneyConvert.doOnTextChanged { text, start, before, count ->
+            Timber.d("valuteState s ${text}")
         }
 
         viewBinding.convert.moneyConvert.addTextChangedListener(object : TextWatcher {

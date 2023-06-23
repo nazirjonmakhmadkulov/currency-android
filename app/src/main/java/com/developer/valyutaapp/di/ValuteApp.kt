@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
+import com.developer.valyutaapp.BuildConfig
 import com.developer.valyutaapp.core.database.SharedPreference
 import com.developer.valyutaapp.di.modules.apiModules
 import com.developer.valyutaapp.di.modules.databaseModule
@@ -47,6 +48,11 @@ class ValuteApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+
         startKoin {
             androidContext(this@ValuteApp.applicationContext)
             androidLogger(Level.DEBUG)
