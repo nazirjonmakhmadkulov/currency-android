@@ -19,6 +19,7 @@ import com.developer.valyutaapp.utils.launchAndCollectIn
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class ConverterFragment : Fragment(R.layout.fragment_converter) {
     private val viewBinding by viewBinding(FragmentConverterBinding::bind)
@@ -54,10 +55,13 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
             layoutManager = LinearLayoutManager(requireContext())
             this.adapter = converterAdapter
         }
-
         viewBinding.convert.moneyConvert.doOnTextChanged { text, _, _, _ ->
-            if (!text.isNullOrEmpty()) viewModel.submitConverterInput(text.toString())
-            else viewModel.submitConverterInput("0")
+            try {
+                if (!text.isNullOrEmpty()) viewModel.submitConverterInput(text.toString().toDouble())
+                else viewModel.submitConverterInput(0.0)
+            } catch (e: NumberFormatException) {
+                Timber.e("NumberFormatException $e")
+            }
         }
     }
 
