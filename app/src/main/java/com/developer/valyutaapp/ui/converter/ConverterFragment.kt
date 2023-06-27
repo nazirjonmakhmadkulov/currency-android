@@ -1,6 +1,5 @@
 package com.developer.valyutaapp.ui.converter
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doOnTextChanged
@@ -65,14 +64,12 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun setupViewModel() {
         viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
             getAllValuteSuccess(it)
         }
         viewModel.valuteState.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { items ->
-            converterAdapter.submitList(items.toList())
-            launch { delay(200); converterAdapter.notifyDataSetChanged() }
+            launch { delay(50); converterAdapter.submitList(items.toList()) }
         }
     }
 
