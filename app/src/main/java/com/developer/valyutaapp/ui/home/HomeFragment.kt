@@ -78,6 +78,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 viewBinding.swipe.isRefreshing = false
                 Timber.d("Success ", result.data.toString())
             }
+
             is Result.Error -> {
                 viewBinding.swipe.isRefreshing = false
                 Timber.d("Error ${result.code.toString()} ${result.message}")

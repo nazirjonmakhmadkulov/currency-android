@@ -22,9 +22,9 @@ class ConverterViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel()
 
     val valuteState = MutableSharedFlow<List<Valute>>()
 
-    fun submitConverterInput(query: String) {
+    fun submitConverterInput(query: Double) = viewModelScope.launch {
         val items = valutes.map { valute ->
-            val sumNational = nationalValute(valute.nominal.toDouble(), query.toDouble(), valute.value.toDouble())
+            val sumNational = nationalValute(valute.nominal.toDouble(), query, valute.value.toDouble())
             val formatSum = Utils.decFormat(sumNational)
             Valute(
                 id = valute.id,
@@ -38,6 +38,6 @@ class ConverterViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel()
                 favoritesConverter = valute.favoritesConverter,
             )
         }
-        viewModelScope.launch { valuteState.emit(items) }
+        valuteState.emit(items)
     }
 }

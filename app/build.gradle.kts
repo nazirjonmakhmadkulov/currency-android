@@ -11,8 +11,8 @@ android {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
         targetSdk = 34
-        versionCode = 9
-        versionName = "2.4.3"
+        versionCode = 10
+        versionName = "2.5.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
@@ -96,7 +96,7 @@ dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:5.8.0")
+    implementation("com.yandex.android:mobileads:5.9.0")
     implementation("com.yandex.ads.mediation:mobileads-admob:21.3.0.0")
     implementation("com.google.android.gms:play-services-ads:21.3.0")
 }
