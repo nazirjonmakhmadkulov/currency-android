@@ -17,6 +17,7 @@ import com.developer.valyutaapp.di.modules.sharedPreference
 import com.developer.valyutaapp.di.modules.useCasesModule
 import com.developer.valyutaapp.di.modules.viewModelModule
 import com.developer.valyutaapp.utils.LocaleManager
+import com.google.firebase.FirebaseApp
 import com.yandex.mobile.ads.common.MobileAds
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
@@ -48,6 +49,7 @@ class ValuteApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        FirebaseApp.initializeApp(this@ValuteApp)
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
