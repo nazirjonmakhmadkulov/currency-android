@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "126205567113",
+    "project_id": "currency-rates-b2ab3",
+    "storage_bucket": "currency-rates-b2ab3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126205567113:android:850b3f0a52f51ea3ec2658",
+        "android_client_info": {
+          "package_name": "com.developer.valyutaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126205567113-b9bnk6jblhepj40bq86u123uv6uc57t5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.developer.valyutaapp",
+            "certificate_hash": "ff1f973342d0b95557e8f401bbd19b6b1bd55f1f"
+          }
+        },
+        {
+          "client_id": "126205567113-rq4n6r6gmtskr2jj5hmjks6qj4u3afpi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr40cJ3Uh9ZBclbnENiW1Q6unntsctb30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126205567113-rq4n6r6gmtskr2jj5hmjks6qj4u3afpi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
