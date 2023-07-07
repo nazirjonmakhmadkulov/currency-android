@@ -11,8 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:padding="6dp">
+        android:layout_height="100dp"
+        android:paddingHorizontal="6dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iconValute"
