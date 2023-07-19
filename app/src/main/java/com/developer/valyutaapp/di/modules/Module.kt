@@ -32,17 +32,18 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
 
 val viewModelModule = module {
-    factory { MainViewModel(get()) }
-    factory { ConverterViewModel(get()) }
-    factory { NetworkStatusViewModel() }
-    factory { ChartViewModel(get(), get()) }
-    factory { WidgetViewModel(get()) }
+    viewModel { MainViewModel(get()) }
+    viewModel { ConverterViewModel(get()) }
+    viewModel { NetworkStatusViewModel() }
+    viewModel { ChartViewModel(get(), get()) }
+    viewModel { WidgetViewModel(get()) }
 }
 
 val sharedPreference = module {
@@ -60,7 +61,7 @@ val remoteDataSources = module {
     fun provideValuteRemoteDataSource(api: ValuteService): ValuteRemoteDataSource {
         return ValuteRemoteDataSource(api)
     }
-    factory { provideValuteRemoteDataSource(get()) }
+    single { provideValuteRemoteDataSource(get()) }
 }
 
 val apiModules = module {
@@ -133,20 +134,20 @@ val repositoryModule = module {
     ): ValuteRemoteRepositoryImpl {
         return ValuteRemoteRepositoryImpl(dispatcherProvider, remoteDataSource, valuteDao, historyDao)
     }
-    factory<ValuteRemoteRepository> { provideValuteRemoteRepository(get(), get(), get(), get()) }
+    single<ValuteRemoteRepository> { provideValuteRemoteRepository(get(), get(), get(), get()) }
 
     fun provideValuteLocalRepository(valuteDao: ValuteDao): ValuteLocalRepositoryImpl {
         return ValuteLocalRepositoryImpl(valuteDao)
     }
-    factory<ValuteLocalRepository> { provideValuteLocalRepository(get()) }
+    single<ValuteLocalRepository> { provideValuteLocalRepository(get()) }
 
     fun provideFavoriteLocalRepository(favoriteDao: HistoryDao): HistoryLocalRepositoryImpl {
         return HistoryLocalRepositoryImpl(favoriteDao)
     }
-    factory<HistoryLocalRepository> { provideFavoriteLocalRepository(get()) }
+    single<HistoryLocalRepository> { provideFavoriteLocalRepository(get()) }
 }
 
 val useCasesModule = module {
-    factory { ValuteUseCase() }
-    factory { HistoryUseCase() }
+    single { ValuteUseCase() }
+    single { HistoryUseCase() }
 }

@@ -15,16 +15,11 @@ class HistoryUseCase : KoinComponent {
     private val valuteRemoteRepository: ValuteRemoteRepository by inject()
 
     //remote
-    suspend fun getRemoteHistories(
-        d1: String, d2: String, cn: Int, cs: String, exp: String
-    ): Result<ValHistory> {
-        return valuteRemoteRepository.getAllHistories(d1, d2, cn, cs, exp)
-    }
+    suspend fun getRemoteHistories(d1: String, d2: String, cn: Int, cs: String, exp: String): Result<ValHistory> =
+        valuteRemoteRepository.getAllHistories(d1, d2, cn, cs, exp)
 
     //local
-    fun getLocalHistories(valId: Int, day:Int) = historyLocalRepository.getAllLocalHistory(valId, day)
-    suspend fun insertLocalHistory(history: History) = historyLocalRepository.insertLocalHistory(history)
-    suspend fun updateLocalHistory(history: History) = historyLocalRepository.updateLocalHistory(history)
+    fun getLocalHistories(valId: Int, day: Int) = historyLocalRepository.getAllLocalHistory(valId, day)
     suspend fun deleteLocalHistory() = historyLocalRepository.deleteLocalHistory()
     suspend fun deleteAllLocalHistory() = historyLocalRepository.deleteAllLocalHistory()
 }

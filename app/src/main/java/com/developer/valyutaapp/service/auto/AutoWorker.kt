@@ -12,6 +12,9 @@ import com.developer.valyutaapp.utils.Notification
 import com.developer.valyutaapp.utils.Utils
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import com.developer.valyutaapp.core.common.Result.Loading
+import com.developer.valyutaapp.core.common.Result.Success
+import com.developer.valyutaapp.core.common.Result.Error
 
 
 class AutoWorker(appContext: Context, workerParams: WorkerParameters) : CoroutineWorker(appContext, workerParams),
@@ -26,12 +29,12 @@ class AutoWorker(appContext: Context, workerParams: WorkerParameters) : Coroutin
     override suspend fun doWork(): Result {
         val outputData = Data.Builder().putString(WORK_RESULT, "Finished").build()
         return when (val result = valuteRemoteRepository.getAllValutes(Utils.getDate(), PATH_EXP)) {
-            is com.developer.valyutaapp.core.common.Result.Loading -> Result.success()
-            is com.developer.valyutaapp.core.common.Result.Success -> {
+            is Loading -> Result.success()
+            is Success -> {
                 showNotify(result.data.valute)
                 Result.success(outputData)
             }
-            is com.developer.valyutaapp.core.common.Result.Error -> Result.failure(outputData)
+            is Error -> Result.failure(outputData)
         }
     }
 
