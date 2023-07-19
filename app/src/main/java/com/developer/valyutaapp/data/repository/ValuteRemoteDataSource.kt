@@ -13,10 +13,11 @@ import org.koin.core.component.inject
 
 class ValuteRemoteDataSource(private val valuteService: ValuteService) : RemoteDataSource(), KoinComponent {
     private val prefs: SharedPreference by inject()
+    private val lang = prefs.getLang() ?: LANGUAGE_RUSSIAN
 
     suspend fun getRemoteValutes(dispatcher: CoroutineDispatcher, date: String, exp: String): Result<ValCurs> {
         return safeApiCall(dispatcher) {
-            valuteService.getRemoteValutes(lang = prefs.getLang() ?: LANGUAGE_RUSSIAN, date = date, exp = exp)
+            valuteService.getRemoteValutes(lang = lang, date = date, exp = exp)
         }
     }
 
@@ -24,9 +25,7 @@ class ValuteRemoteDataSource(private val valuteService: ValuteService) : RemoteD
         dispatcher: CoroutineDispatcher, d1: String, d2: String, cn: Int, cs: String, exp: String
     ): Result<ValHistory> {
         return safeApiCall(dispatcher) {
-            valuteService.getRemoteHistories(
-                lang = prefs.getLang() ?: LANGUAGE_RUSSIAN, d1 = d1, d2 = d2, cn = cn, cs = cs, exp = exp
-            )
+            valuteService.getRemoteHistories(lang = lang, d1 = d1, d2 = d2, cn = cn, cs = cs, exp = exp)
         }
     }
 }

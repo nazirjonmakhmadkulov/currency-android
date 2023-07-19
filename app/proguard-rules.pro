@@ -1,6 +1,6 @@
 # Add project specific ProGuard rules here.
 # You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.kts.
+# proguardFiles setting in build.gradle.
 #
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
@@ -19,3 +19,36 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep class com.shockwave.*
+-ignorewarnings
+-keepattributes *Annotation*
+-keepattributes Exceptions
+-keepattributes InnerClasses
+-keepattributes Signature
+-keepattributes SourceFile,LineNumberTable
+
+-keep class com.google.android.** { *; }
+-keep class androidx.lifecycle.** { *; }
+-keep class com.jakewharton.timber.** { *; }
+-keep class com.google.android.gms.** { *; }
+-keep class androidx.multidex.** { *; }
+-keep class org.jetbrains.kotlinx.** { *; }
+-keep class androidx.navigation.** { *; }
+-keep class org.jetbrains.kotlinx.** { *; }
+-keep class com.squareup.retrofit2.** { *; }
+-keep class com.jakewharton.retrofit.** { *; }
+-keep class androidx.work.** { *; }
+
+#\ No newline at end of file
+-keep class com.developer.valyutaapp**{*;}
+
+
+# Keep generic signature of Call, Response (R8 full mode strips signatures from non-kept items).
+ -keep,allowobfuscation,allowshrinking interface retrofit2.Call
+ -keep,allowobfuscation,allowshrinking class retrofit2.Response
+
+ # With R8 full mode generic signatures are stripped for classes that are not
+ # kept. Suspend functions are wrapped in continuations where the type argument
+ # is used.
+ -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+#\ No newline at end of file
