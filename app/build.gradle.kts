@@ -98,7 +98,7 @@ dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:5.9.0")
+    implementation("com.yandex.android:mobileads:5.10.0")
     implementation("com.yandex.ads.mediation:mobileads-admob:21.3.0.0")
     implementation("com.google.android.gms:play-services-ads:21.3.0")
 
