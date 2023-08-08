@@ -66,7 +66,7 @@ dependencies {
     api("com.jakewharton.timber:timber:5.0.1")
 
     //Fragment
-    implementation("androidx.fragment:fragment-ktx:1.6.0")
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
 
     // Kotlin + coroutines
     implementation("androidx.work:work-runtime-ktx:2.8.1")
@@ -100,7 +100,6 @@ dependencies {
 
     implementation("com.yandex.android:mobileads:5.10.0")
     implementation("com.yandex.ads.mediation:mobileads-admob:22.1.0.0")
-    //noinspection PlayServiceAdsVersion
     implementation("com.google.android.gms:play-services-ads:22.2.0")
 
     implementation(platform("com.google.firebase:firebase-bom:32.2.0"))

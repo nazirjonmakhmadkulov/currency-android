@@ -21,16 +21,32 @@
             app:layout_collapseMode="pin"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="@string/setting"
-            app:titleTextColor="@color/white"
-            app:titleCentered="false" />
+            app:titleCentered="false"
+            app:titleTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
-        android:id="@android:id/list_container"
-        android:layout_marginTop="?attr/actionBarSize"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="?attr/actionBarSize"
-        tools:targetApi="n" />
+        android:orientation="vertical"
+        android:paddingBottom="?attr/actionBarSize">
+
+        <FrameLayout
+            android:id="@android:id/list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize"
+            tools:targetApi="n" />
+
+        <TextView
+            android:id="@+id/version"
+            style="?attr/textAppearanceCaption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textColor="?android:attr/textColorTertiary"
+            tools:text="text" />
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

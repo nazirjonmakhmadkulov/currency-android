@@ -43,6 +43,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val networkStatusViewModel by viewModel<NetworkStatusViewModel>()
     private var snackBarNetwork: Snackbar? = null
 
+    companion object {
+       const val unitId1 = "R-M-2277119-1"
+       const val unitId2 = "R-M-2277119-2"
+    }
+
     private val pushNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             Timber.d("Permission POST_NOTIFICATION isGranted:$granted")
@@ -63,15 +68,29 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setupSnackBar()
         setupViewModel()
 
+        navController?.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_home, R.id.navigation_valutes -> setupAds(unitId1)
+                R.id.navigation_converter, R.id.navigation_settings -> setupAds(unitId2)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupAds(unitId1)
+    }
+
+    private fun setupAds(unitId: String) {
         val mBannerAdView = viewBinding.adView
         val adRequest: AdRequest = AdRequest.Builder().build()
-        mBannerAdView.setAdUnitId("R-M-2277119-1")
+        mBannerAdView.setAdUnitId(unitId)
         mBannerAdView.setAdSize(AdSize.inlineSize(getScreenWidth(), 50))
         mBannerAdView.loadAd(adRequest)
     }
 
     private fun setupSnackBar(): Snackbar {
-       val snackBarNetwork = Snackbar
+        val snackBarNetwork = Snackbar
             .make(this.viewBinding.root, getString(R.string.not_connected), Snackbar.LENGTH_INDEFINITE)
             .setBackgroundTint(ContextCompat.getColor(this@MainActivity, R.color.peach))
         val view: View = snackBarNetwork.view
@@ -87,8 +106,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             when {
                 ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
                         == PackageManager.PERMISSION_GRANTED -> Timber.d("Permission POST_NOTIFICATION GRANTED")
+
                 shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) ->
                     Timber.d("Permission POST_NOTIFICATION blocked")
+
                 else -> pushNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }

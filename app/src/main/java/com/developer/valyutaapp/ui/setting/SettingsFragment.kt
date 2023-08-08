@@ -1,7 +1,9 @@
 package com.developer.valyutaapp.ui.setting
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
@@ -13,9 +15,12 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.developer.valyutaapp.BuildConfig
 import com.developer.valyutaapp.R
 import com.developer.valyutaapp.core.common.FAVORITE_VALUTE
 import com.developer.valyutaapp.core.database.SharedPreference
+import com.developer.valyutaapp.databinding.FragmentSettingBinding
 import com.developer.valyutaapp.di.ValuteApp
 import com.developer.valyutaapp.service.auto.AutoWorker
 import org.koin.android.ext.android.inject
@@ -24,10 +29,18 @@ import java.util.concurrent.TimeUnit
 class SettingsFragment : PreferenceFragmentCompat() {
     private val prefs: SharedPreference by inject()
 
+    private val viewBinding by viewBinding(FragmentSettingBinding::bind)
+
     companion object {
         const val DURATION: Long = 1000
         const val REPEAT_INTERVAL: Long = 12
         const val UNIQUE_WORK_NAME: String = "auto-update-unique"
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewBinding.version.text = "Версия ${BuildConfig.VERSION_NAME}"
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
