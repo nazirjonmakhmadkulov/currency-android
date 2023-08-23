@@ -43,7 +43,7 @@ android {
 }
 dependencies {
     implementation("androidx.core:core-ktx:1.10.1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
@@ -85,9 +85,9 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-simplexml:2.9.0")
 
     // Koin main features for Android
-    implementation("io.insert-koin:koin-android:3.4.2")
+    implementation("io.insert-koin:koin-android:3.4.3")
     // Jetpack WorkManager
-    implementation("io.insert-koin:koin-androidx-workmanager:3.4.2")
+    implementation("io.insert-koin:koin-androidx-workmanager:3.4.3")
 
     //Okhttp logging
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
@@ -102,7 +102,7 @@ dependencies {
     implementation("com.yandex.ads.mediation:mobileads-admob:22.1.0.0")
     implementation("com.google.android.gms:play-services-ads:22.2.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:32.2.0"))
+    implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
     implementation("com.google.firebase:firebase-crashlytics-ktx:18.4.0")
     implementation("com.google.firebase:firebase-analytics-ktx:21.3.0")
 }
