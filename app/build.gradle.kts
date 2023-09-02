@@ -59,8 +59,8 @@ dependencies {
 
     implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.1")
 
     // Logging:
     api("com.jakewharton.timber:timber:5.0.1")
@@ -98,11 +98,11 @@ dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:5.10.0")
+    implementation("com.yandex.android:mobileads:6.0.0")
     implementation("com.yandex.ads.mediation:mobileads-admob:22.1.0.0")
-    implementation("com.google.android.gms:play-services-ads:22.2.0")
+    implementation("com.google.android.gms:play-services-ads:22.3.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.4.0")
+    implementation(platform("com.google.firebase:firebase-bom:32.2.3"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.4.1")
     implementation("com.google.firebase:firebase-analytics-ktx:21.3.0")
 }
