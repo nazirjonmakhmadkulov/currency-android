@@ -25,8 +25,11 @@ class BaseAdapter(private val bases: List<ItemBase<*, *>>) :
         position: Int,
         payloads: MutableList<Any>
     ) {
-        if (payloads.isEmpty()) super.onBindViewHolder(holder, position, payloads)
-        else holder.onBind(currentList[position], payloads)
+        if (payloads.isEmpty()) {
+            super.onBindViewHolder(holder, position, payloads)
+        } else {
+            holder.onBind(currentList[position], payloads)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {

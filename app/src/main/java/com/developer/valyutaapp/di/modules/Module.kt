@@ -1,4 +1,3 @@
-@file:Suppress("DEPRECATION")
 package com.developer.valyutaapp.di.modules
 
 import android.app.Application

@@ -20,7 +20,8 @@ class FavoriteAdapter(
     override fun isRelativeItem(item: Item): Boolean = item is Valute
     override fun getLayoutId() = R.layout.item_valute
     override fun getViewHolder(
-        layoutInflater: LayoutInflater, parent: ViewGroup
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup
     ): BaseViewHolder<FavoritesItemBinding, Valute> {
         val binding = FavoritesItemBinding.inflate(layoutInflater, parent, false)
         return FavoriteViewHolder(binding, onItemValuteClick)
@@ -44,15 +45,21 @@ class FavoriteAdapter(
                 if (type == FAVORITE_CONVERTER) {
                     favorite.setFavorites(item.favoritesConverter)
                     favorite.setOnClickListener {
-                        if (item.favoritesConverter == 1) item.favoritesConverter = 0
-                        else item.favoritesConverter = 1
+                        if (item.favoritesConverter == 1) {
+                            item.favoritesConverter = 0
+                        } else {
+                            item.favoritesConverter = 1
+                        }
                         onItemValuteClick(item, adapterPosition)
                     }
                 } else {
                     favorite.setFavorites(item.favoritesValute)
                     favorite.setOnClickListener {
-                        if (item.favoritesValute == 1) item.favoritesValute = 0
-                        else item.favoritesValute = 1
+                        if (item.favoritesValute == 1) {
+                            item.favoritesValute = 0
+                        } else {
+                            item.favoritesValute = 1
+                        }
                         onItemValuteClick(item, adapterPosition)
                     }
                 }
@@ -61,8 +68,11 @@ class FavoriteAdapter(
         }
 
         private fun ImageView.setFavorites(inFavorites: Int?) {
-            if (inFavorites == 1) setImageResource(R.drawable.ic_favorite)
-            else setImageResource(R.drawable.ic_unfavorite)
+            if (inFavorites == 1) {
+                setImageResource(R.drawable.ic_favorite)
+            } else {
+                setImageResource(R.drawable.ic_unfavorite)
+            }
         }
     }
 }

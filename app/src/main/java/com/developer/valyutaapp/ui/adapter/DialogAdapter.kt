@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import com.developer.valyutaapp.R
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.utils.ImageResource
