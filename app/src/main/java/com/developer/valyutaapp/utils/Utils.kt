@@ -61,6 +61,7 @@ object Utils {
         return dec.format(cost)
     }
 
+    @Suppress("DEPRECATION")
     fun setStatusBar(window: Window) {
         setWindowFlag(window, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
         window.statusBarColor = Color.TRANSPARENT

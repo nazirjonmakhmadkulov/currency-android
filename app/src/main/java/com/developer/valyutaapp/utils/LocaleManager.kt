@@ -42,6 +42,7 @@ class LocaleManager(context: Context) {
         prefs?.edit()?.putString(LANGUAGE_KEY, language)?.commit()
     }
 
+    @Suppress("DEPRECATION")
     private fun updateResources(context: Context, language: String?): Context {
         var ctx = context
         if (language != null) {

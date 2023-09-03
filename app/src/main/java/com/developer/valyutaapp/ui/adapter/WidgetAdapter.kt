@@ -29,7 +29,6 @@ class WidgetAdapter(
         val linearLayout = v.findViewById<View>(R.id.item_dialog) as LinearLayout
         // val listView = v.findViewById<View>(R.id.list_dialog) as ListView
         val icon = v.findViewById<View>(R.id.img_flag) as ImageView
-        val checkBox = v.findViewById<View>(R.id.favorite) as ImageView
         val tvName = v.findViewById<View>(R.id.name_currency) as TextView
         val bt = ImageResource.getImageRes(context, valutes[i].charCode)
         icon.setImageDrawable(bt)

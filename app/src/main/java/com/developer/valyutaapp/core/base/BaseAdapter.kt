@@ -12,7 +12,7 @@ class BaseAdapter(private val bases: List<ItemBase<*, *>>) :
         val inflater = LayoutInflater.from(parent.context)
         return bases.find { it.getLayoutId() == viewType }
             ?.getViewHolder(inflater, parent)
-            ?.let { it as BaseViewHolder<ViewBinding, Item> }
+            ?.let { it as? BaseViewHolder<ViewBinding, Item> }
             ?: throw IllegalArgumentException("View type not found: $viewType")
     }
 
@@ -25,17 +25,13 @@ class BaseAdapter(private val bases: List<ItemBase<*, *>>) :
         position: Int,
         payloads: MutableList<Any>
     ) {
-        if (payloads.isNullOrEmpty()) {
-            super.onBindViewHolder(holder, position, payloads)
-        } else {
-            holder.onBind(currentList[position], payloads)
-        }
+        if (payloads.isEmpty()) super.onBindViewHolder(holder, position, payloads)
+        else holder.onBind(currentList[position], payloads)
     }
 
     override fun getItemViewType(position: Int): Int {
         val item = currentList[position]
-        return bases.find { it.isRelativeItem(item) }
-            ?.getLayoutId()
+        return bases.find { it.isRelativeItem(item) }?.getLayoutId()
             ?: throw IllegalArgumentException("View type not found: $item")
     }
 }
