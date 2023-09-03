@@ -20,5 +20,5 @@ data class ValHistory(
 
     @field:Attribute(name = "Name")
     @param:Attribute(name = "Name")
-    val name: String,
+    val name: String
 )

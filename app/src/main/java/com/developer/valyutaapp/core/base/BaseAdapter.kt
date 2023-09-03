@@ -21,7 +21,9 @@ class BaseAdapter(private val bases: List<ItemBase<*, *>>) :
     }
 
     override fun onBindViewHolder(
-        holder: BaseViewHolder<ViewBinding, Item>, position: Int, payloads: MutableList<Any>
+        holder: BaseViewHolder<ViewBinding, Item>,
+        position: Int,
+        payloads: MutableList<Any>
     ) {
         if (payloads.isNullOrEmpty()) {
             super.onBindViewHolder(holder, position, payloads)

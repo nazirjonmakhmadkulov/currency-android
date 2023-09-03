@@ -23,5 +23,4 @@ class BaseDiffUtil(private val bases: List<ItemBase<*, *>>) : DiffUtil.ItemCallb
         ?.getDiffUtil()
         ?.let { it as DiffUtil.ItemCallback<Item> }
         ?: throw IllegalStateException("DiffUtil not found for $item")
-
 }

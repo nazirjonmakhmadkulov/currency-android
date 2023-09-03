@@ -81,7 +81,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             is Result.Error -> {
                 viewBinding.swipe.isRefreshing = false
-                Timber.d("Error ${result.code.toString()} ${result.message}")
+                Timber.d("Error ${result.code} ${result.message}")
             }
         }
     }

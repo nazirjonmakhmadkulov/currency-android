@@ -12,9 +12,10 @@ import org.koin.core.component.KoinComponent
 class NetworkStatusViewModel : ViewModel(), KoinComponent {
     val context by lazy { getKoin().get<Context>() }
     private val networkStatusTracker = NetworkStatusTracker(context)
+
     @OptIn(FlowPreview::class)
     val state = networkStatusTracker.networkStatus.map(
         onAvailable = { NetworkStatus.Available },
-        onUnavailable = { NetworkStatus.Unavailable },
+        onUnavailable = { NetworkStatus.Unavailable }
     ).flowOn(Dispatchers.IO)
 }

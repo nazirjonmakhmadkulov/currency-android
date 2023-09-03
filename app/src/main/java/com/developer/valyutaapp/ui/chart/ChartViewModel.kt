@@ -22,7 +22,7 @@ class ChartViewModel(private val valuteUseCase: ValuteUseCase, private val histo
         _getLocalValuteById.value = valuteUseCase.getLocalValuteById(valId)
     }
 
-    //history
+    // history
     private val _getRemoteHistories = MutableStateFlow<Result<ValHistory>>(Result.Loading)
     val getRemoteHistories: StateFlow<Result<ValHistory>> get() = _getRemoteHistories
     fun getRemoteHistories(d1: String, d2: String, cn: Int, cs: String, exp: String) = viewModelScope.launch {

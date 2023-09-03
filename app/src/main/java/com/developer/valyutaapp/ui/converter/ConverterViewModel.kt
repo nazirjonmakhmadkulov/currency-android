@@ -35,7 +35,7 @@ class ConverterViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel()
                 value = formatSum,
                 dates = valute.dates,
                 favoritesValute = valute.favoritesValute,
-                favoritesConverter = valute.favoritesConverter,
+                favoritesConverter = valute.favoritesConverter
             )
         }
         valuteState.emit(items)

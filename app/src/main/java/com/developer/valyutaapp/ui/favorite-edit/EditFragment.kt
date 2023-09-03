@@ -1,4 +1,4 @@
-package com.developer.valyutaapp.ui.favorite_edit
+package com.developer.valyutaapp.ui.`favorite-edit`
 
 import android.os.Bundle
 import android.view.View

@@ -18,8 +18,9 @@ class MainViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel() {
         when (val result = valuteUseCase.getRemoteValutes(date, exp)) {
             is Result.Loading -> Result.Loading
             is Result.Success -> _getRemoteValutes.value = Result.Success(result.data)
-            is Result.Error -> _getRemoteValutes.value =
-                Result.Error(result.cause, result.code, result.message)
+            is Result.Error ->
+                _getRemoteValutes.value =
+                    Result.Error(result.cause, result.code, result.message)
         }
     }
 

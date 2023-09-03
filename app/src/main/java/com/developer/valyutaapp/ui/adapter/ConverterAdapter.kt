@@ -10,13 +10,12 @@ import com.developer.valyutaapp.core.base.ItemBase
 import com.developer.valyutaapp.databinding.ItemConverterBinding
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.utils.ImageResource
-import com.developer.valyutaapp.utils.Utils
 
 class ConverterAdapter : ItemBase<ItemConverterBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute
     override fun getLayoutId() = R.layout.item_converter
     override fun getViewHolder(layoutInflater: LayoutInflater, parent: ViewGroup):
-            BaseViewHolder<ItemConverterBinding, Valute> {
+        BaseViewHolder<ItemConverterBinding, Valute> {
         val binding = ItemConverterBinding.inflate(layoutInflater, parent, false)
         return FavoriteViewHolder(binding)
     }

@@ -5,6 +5,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -65,7 +66,7 @@ dependencies {
     // Logging:
     api("com.jakewharton.timber:timber:5.0.1")
 
-    //Fragment
+    // Fragment
     implementation("androidx.fragment:fragment-ktx:1.6.1")
 
     // Kotlin + coroutines
@@ -79,7 +80,7 @@ dependencies {
     implementation("androidx.room:room-runtime:2.5.2")
     ksp("androidx.room:room-compiler:2.5.2")
 
-    //Retrofit
+    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.retrofit2:converter-simplexml:2.9.0")
@@ -89,11 +90,11 @@ dependencies {
     // Jetpack WorkManager
     implementation("io.insert-koin:koin-androidx-workmanager:3.4.3")
 
-    //Okhttp logging
+    // Okhttp logging
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
 
-    //Widget
+    // Widget
     implementation("io.github.pilgr:paperdb:2.7.2")
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")

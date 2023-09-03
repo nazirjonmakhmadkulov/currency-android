@@ -1,6 +1,7 @@
 package com.developer.valyutaapp.core.database
 
-import androidx.room.*
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.developer.valyutaapp.data.local.HistoryDao
 import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.domain.entities.History

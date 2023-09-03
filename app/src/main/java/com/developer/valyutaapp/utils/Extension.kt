@@ -25,8 +25,11 @@ fun Activity.getStatusBarHeight(): Int {
         window.decorView.rootWindowInsets?.displayCutout?.let { return it.safeInsetTop }
     }
     val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
-    return if (resourceId > 0) resources.getDimensionPixelSize(resourceId)
-    else 0
+    return if (resourceId > 0) {
+        resources.getDimensionPixelSize(resourceId)
+    } else {
+        0
+    }
 }
 
 fun Activity.getActionBarHeight(): Int {
@@ -41,8 +44,11 @@ fun Activity.getNavigationBarHeight(): Int {
         return insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
     }
     val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
-    return if (resourceId > 0) resources.getDimensionPixelSize(resourceId)
-    else 0
+    return if (resourceId > 0) {
+        resources.getDimensionPixelSize(resourceId)
+    } else {
+        0
+    }
 }
 
 fun Context.getScreenWidth(): Int = this.resources.displayMetrics.widthPixels

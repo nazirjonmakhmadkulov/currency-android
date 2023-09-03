@@ -15,7 +15,7 @@ class ValDialogAdapter(private val onItemValuteClick: (Valute) -> Unit) : ItemBa
     override fun isRelativeItem(item: Item): Boolean = item is Valute
     override fun getLayoutId() = R.layout.item_valute
     override fun getViewHolder(layoutInflater: LayoutInflater, parent: ViewGroup):
-            BaseViewHolder<DialogItemBinding, Valute> {
+        BaseViewHolder<DialogItemBinding, Valute> {
         val binding = DialogItemBinding.inflate(layoutInflater, parent, false)
         return ValuteViewHolder(binding, onItemValuteClick)
     }

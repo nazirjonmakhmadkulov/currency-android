@@ -30,12 +30,11 @@ class NetworkStatusTracker(context: Context) {
 
 @FlowPreview
 inline fun <Result> Flow<NetworkStatus>.map(
-    crossinline onUnavailable: suspend () -> Result, crossinline onAvailable: suspend () -> Result,
+    crossinline onUnavailable: suspend () -> Result,
+    crossinline onAvailable: suspend () -> Result
 ): Flow<Result> = map { status ->
     when (status) {
         NetworkStatus.Unavailable -> onUnavailable()
         NetworkStatus.Available -> onAvailable()
     }
 }
-
-

@@ -25,7 +25,6 @@ class DividerItemDecoration(context: Context, resId: Int) : RecyclerView.ItemDec
         // divider for each items in the RV
         // as each items are different
         for (i in 0 until parent.childCount) {
-
             // this condition is because the last
             // and the first items in the RV have
             // no dividers in the list

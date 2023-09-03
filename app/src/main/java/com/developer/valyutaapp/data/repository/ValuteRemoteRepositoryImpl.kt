@@ -23,8 +23,10 @@ class ValuteRemoteRepositoryImpl(
 ) : ValuteRemoteRepository {
 
     override suspend fun getAllValutes(date: String, exp: String): Result<ValCurs> = withContext(Dispatchers.IO) {
-        return@withContext when (val result =
-            valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)) {
+        return@withContext when (
+            val result =
+                valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)
+        ) {
             is Result.Loading -> Result.Loading
             is Result.Success -> {
                 val valute = result.data.valute
@@ -40,7 +42,12 @@ class ValuteRemoteRepositoryImpl(
         if (valuteDao.getValuteExist(valute.valId)) {
             valute.dates = getDateFormat(dates)
             valuteDao.updateValuteFromRemote(
-                valute.charCode, valute.nominal, valute.name, valute.value, valute.dates, valute.valId,
+                valute.charCode,
+                valute.nominal,
+                valute.name,
+                valute.value,
+                valute.dates,
+                valute.valId
             )
         } else {
             valute.dates = getDateFormat(dates)
@@ -53,10 +60,16 @@ class ValuteRemoteRepositoryImpl(
     }
 
     override suspend fun getAllHistories(
-        d1: String, d2: String, cn: Int, cs: String, exp: String
+        d1: String,
+        d2: String,
+        cn: Int,
+        cs: String,
+        exp: String
     ): Result<ValHistory> = withContext(Dispatchers.IO) {
-        return@withContext when (val result =
-            valuteRemoteDataSource.getRemoteHistories(dispatcherProvider.io, d1, d2, cn, cs, exp)) {
+        return@withContext when (
+            val result =
+                valuteRemoteDataSource.getRemoteHistories(dispatcherProvider.io, d1, d2, cn, cs, exp)
+        ) {
             is Result.Loading -> Result.Loading
             is Result.Success -> {
                 val valute = result.data.history

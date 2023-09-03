@@ -26,7 +26,6 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import timber.log.Timber
 
-
 class ValuteApp : Application() {
 
     companion object {
@@ -77,7 +76,10 @@ class ValuteApp : Application() {
             Timber.tag(YANDEX_MOBILE_ADS_TAG).d("SDK initialized")
         }
 
-        if (prefs.getTheme()) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        if (prefs.getTheme()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 }

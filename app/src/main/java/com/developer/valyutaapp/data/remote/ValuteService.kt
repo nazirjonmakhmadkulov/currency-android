@@ -11,7 +11,7 @@ interface ValuteService {
     suspend fun getRemoteValutes(
         @Path("lang") lang: String,
         @Query("date") date: String,
-        @Query("export") exp: String,
+        @Query("export") exp: String
     ): ValCurs
 
     @GET("{lang}/kurs/export_xml_dynamic.php")
@@ -21,6 +21,6 @@ interface ValuteService {
         @Query("d2") d2: String,
         @Query("cn") cn: Int,
         @Query("cs") cs: String,
-        @Query("export") exp: String,
+        @Query("export") exp: String
     ): ValHistory
 }

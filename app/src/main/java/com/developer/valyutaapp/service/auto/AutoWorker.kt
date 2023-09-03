@@ -6,18 +6,18 @@ import androidx.work.Data
 import androidx.work.WorkerParameters
 import com.developer.valyutaapp.R
 import com.developer.valyutaapp.core.common.PATH_EXP
+import com.developer.valyutaapp.core.common.Result.Error
+import com.developer.valyutaapp.core.common.Result.Loading
+import com.developer.valyutaapp.core.common.Result.Success
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
 import com.developer.valyutaapp.utils.Notification
 import com.developer.valyutaapp.utils.Utils
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import com.developer.valyutaapp.core.common.Result.Loading
-import com.developer.valyutaapp.core.common.Result.Success
-import com.developer.valyutaapp.core.common.Result.Error
 
-
-class AutoWorker(appContext: Context, workerParams: WorkerParameters) : CoroutineWorker(appContext, workerParams),
+class AutoWorker(appContext: Context, workerParams: WorkerParameters) :
+    CoroutineWorker(appContext, workerParams),
     KoinComponent {
 
     companion object {

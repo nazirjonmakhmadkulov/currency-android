@@ -3,19 +3,17 @@ package com.developer.valyutaapp.domain.usecases
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.domain.repository.ValuteLocalRepository
 import com.developer.valyutaapp.domain.repository.ValuteRemoteRepository
-
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-
 
 class ValuteUseCase : KoinComponent {
     private val valuteRemoteRepository: ValuteRemoteRepository by inject()
     private val valuteLocalRepository: ValuteLocalRepository by inject()
 
-    //remote
+    // remote
     suspend fun getRemoteValutes(date: String, exp: String) = valuteRemoteRepository.getAllValutes(date, exp)
 
-    //local
+    // local
     fun getLocalValutes() = valuteLocalRepository.getAllLocalValutes()
     fun getFavoriteLocalValutes() = valuteLocalRepository.getAllFavoriteLocalValutes()
     fun getAllConverterLocalValutes() = valuteLocalRepository.getAllConverterLocalValutes()

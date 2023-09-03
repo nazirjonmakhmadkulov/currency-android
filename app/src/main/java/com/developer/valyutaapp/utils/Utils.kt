@@ -68,8 +68,11 @@ object Utils {
 
     private fun setWindowFlag(window: Window, bits: Int, on: Boolean) {
         val winParams = window.attributes
-        if (on) winParams.flags = winParams.flags or bits
-        else winParams.flags = winParams.flags and bits.inv()
+        if (on) {
+            winParams.flags = winParams.flags or bits
+        } else {
+            winParams.flags = winParams.flags and bits.inv()
+        }
         window.attributes = winParams
     }
 }

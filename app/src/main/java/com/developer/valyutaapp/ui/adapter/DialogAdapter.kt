@@ -17,7 +17,7 @@ class DialogAdapter(
     private val context: Context,
     private val valutes: MutableList<Valute>
 ) : BaseAdapter() {
-    override fun getCount(): Int =  valutes.size
+    override fun getCount(): Int = valutes.size
     override fun getItem(i: Int): Any = valutes[i]
     override fun getItemId(i: Int): Long = valutes[i].id.toLong()
 

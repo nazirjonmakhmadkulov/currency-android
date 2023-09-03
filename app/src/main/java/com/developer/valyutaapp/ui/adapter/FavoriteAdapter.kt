@@ -15,12 +15,13 @@ import com.developer.valyutaapp.utils.ImageResource
 
 class FavoriteAdapter(
     private val type: String?,
-    private val onItemValuteClick: (Valute, Int) -> Unit,
+    private val onItemValuteClick: (Valute, Int) -> Unit
 ) : ItemBase<FavoritesItemBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute
     override fun getLayoutId() = R.layout.item_valute
     override fun getViewHolder(
-        layoutInflater: LayoutInflater, parent: ViewGroup,
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup
     ): BaseViewHolder<FavoritesItemBinding, Valute> {
         val binding = FavoritesItemBinding.inflate(layoutInflater, parent, false)
         return FavoriteViewHolder(binding, onItemValuteClick)
@@ -33,7 +34,8 @@ class FavoriteAdapter(
     }
 
     inner class FavoriteViewHolder(
-        binding: FavoritesItemBinding, val onItemValuteClick: (Valute, Int) -> Unit,
+        binding: FavoritesItemBinding,
+        val onItemValuteClick: (Valute, Int) -> Unit
     ) : BaseViewHolder<FavoritesItemBinding, Valute>(binding) {
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
@@ -43,15 +45,21 @@ class FavoriteAdapter(
                 if (type == FAVORITE_CONVERTER) {
                     favorite.setFavorites(item.favoritesConverter)
                     favorite.setOnClickListener {
-                        if (item.favoritesConverter == 1) item.favoritesConverter = 0
-                        else item.favoritesConverter = 1
+                        if (item.favoritesConverter == 1) {
+                            item.favoritesConverter = 0
+                        } else {
+                            item.favoritesConverter = 1
+                        }
                         onItemValuteClick(item, position)
                     }
                 } else {
                     favorite.setFavorites(item.favoritesValute)
                     favorite.setOnClickListener {
-                        if (item.favoritesValute == 1) item.favoritesValute = 0
-                        else item.favoritesValute = 1
+                        if (item.favoritesValute == 1) {
+                            item.favoritesValute = 0
+                        } else {
+                            item.favoritesValute = 1
+                        }
                         onItemValuteClick(item, position)
                     }
                 }
@@ -60,8 +68,11 @@ class FavoriteAdapter(
         }
 
         private fun ImageView.setFavorites(inFavorites: Int?) {
-            if (inFavorites == 1) setImageResource(R.drawable.ic_favorite)
-            else setImageResource(R.drawable.ic_unfavorite)
+            if (inFavorites == 1) {
+                setImageResource(R.drawable.ic_favorite)
+            } else {
+                setImageResource(R.drawable.ic_unfavorite)
+            }
         }
     }
 }

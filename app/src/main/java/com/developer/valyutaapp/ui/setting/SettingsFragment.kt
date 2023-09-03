@@ -51,8 +51,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val favorite = findPreference<Preference>("favorite")
         val widget = findPreference<Preference>("widget")
 
-        if (prefs.getAutoUpdate() == "1") autoUpdate?.isChecked = true
-        else if (prefs.getAutoUpdate() == "0") autoUpdate?.isChecked = false
+        if (prefs.getAutoUpdate() == "1") {
+            autoUpdate?.isChecked = true
+        } else if (prefs.getAutoUpdate() == "0") autoUpdate?.isChecked = false
 
         favorite?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             val action = SettingsFragmentDirections.actionNavigationSettingsToEditFragment(FAVORITE_VALUTE)
@@ -98,7 +99,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         listPreference?.setOnPreferenceChangeListener { preference, newValue ->
             if (preference is ListPreference) {
                 val index = preference.findIndexOfValue(newValue.toString())
-                //val entry = preference.entries[index]
+                // val entry = preference.entries[index]
                 val charSequence = preference.entryValues[index]
                 prefs.saveLang(charSequence.toString())
                 ValuteApp.localeManager.setNewLocale(requireActivity(), charSequence.toString())
@@ -118,7 +119,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun workerInit() {
         WorkManager.getInstance(requireContext()).enqueueUniquePeriodicWork(
-            UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, createWorkRequest()
+            UNIQUE_WORK_NAME,
+            ExistingPeriodicWorkPolicy.KEEP,
+            createWorkRequest()
         )
     }
 

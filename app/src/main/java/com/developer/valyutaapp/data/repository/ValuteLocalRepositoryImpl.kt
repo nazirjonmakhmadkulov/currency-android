@@ -4,7 +4,6 @@ import com.developer.valyutaapp.data.local.ValuteDao
 import com.developer.valyutaapp.domain.entities.Valute
 import com.developer.valyutaapp.domain.repository.ValuteLocalRepository
 import kotlinx.coroutines.flow.Flow
-import timber.log.Timber
 
 class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalRepository {
     override fun getAllLocalValutes(): Flow<List<Valute>> = valuteDao.getAllValutes()

@@ -1,9 +1,9 @@
 package com.developer.valyutaapp.service.widget
 
-import android.appwidget.AppWidgetProvider
+import android.app.AlarmManager
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
-import android.app.AlarmManager
+import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.os.SystemClock
@@ -17,7 +17,10 @@ open class AppWidget : AppWidgetProvider() {
         val intent = Intent(context, WidgetService::class.java)
         if (pendingIntent == null) {
             pendingIntent = PendingIntent.getService(
-                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
         }
         pendingIntent?.let {
@@ -28,7 +31,7 @@ open class AppWidget : AppWidgetProvider() {
         appWidgetManager.updateAppWidget(appWidgetIds, views)
     }
 
-     private fun getPendingUpdateIntent(context: Context): PendingIntent {
+    private fun getPendingUpdateIntent(context: Context): PendingIntent {
         val intent = Intent(context, javaClass)
         intent.action = ACTION_UPDATE_CLICK
         return PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_MUTABLE)
