@@ -55,7 +55,7 @@
 
     <fragment
         android:id="@+id/editFragment"
-        android:name="com.developer.valyutaapp.ui.favorite-edit.EditFragment"
+        android:name="com.developer.valyutaapp.ui.favorites.EditFragment"
         tools:layout="@layout/fragment_edit">
         <argument
             android:name="favorite"
