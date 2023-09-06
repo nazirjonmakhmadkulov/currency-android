@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
 
+@Suppress("UNCHECKED_CAST")
 class BaseAdapter(private val bases: List<ItemBase<*, *>>) :
     ListAdapter<Item, BaseViewHolder<ViewBinding, Item>>(BaseDiffUtil(bases)) {
 
