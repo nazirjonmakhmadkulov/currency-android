@@ -22,7 +22,12 @@ class ValuteRemoteDataSource(private val valuteService: ValuteService) : RemoteD
     }
 
     suspend fun getRemoteHistories(
-        dispatcher: CoroutineDispatcher, d1: String, d2: String, cn: Int, cs: String, exp: String
+        dispatcher: CoroutineDispatcher,
+        d1: String,
+        d2: String,
+        cn: Int,
+        cs: String,
+        exp: String
     ): Result<ValHistory> {
         return safeApiCall(dispatcher) {
             valuteService.getRemoteHistories(lang = lang, d1 = d1, d2 = d2, cn = cn, cs = cs, exp = exp)

@@ -57,7 +57,7 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
         this.valutes.addAll(valutes.toMutableList())
     }
 
-    private fun setWidgetData() = with(viewBinding){
+    private fun setWidgetData() = with(viewBinding) {
         val decimalFormat = DecimalFormat("#.####")
         val decimal = decimalFormat.format(tvValue.text.toString().toDouble())
         val value = if (tvNominal.text.toString().length < 3) {
@@ -67,7 +67,7 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
         }
         Paper.init(requireContext())
         Paper.book().write("charcode", name1.text)
-        Paper.book().write("charcode2",name2.text)
+        Paper.book().write("charcode2", name2.text)
         Paper.book().write("nominal", value)
         Paper.book().write("value", decimal.toString())
         Paper.book().write("dat", Utils.getDate())

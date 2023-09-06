@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
 
+@Suppress("UNCHECKED_CAST")
 class BaseAdapter(private val bases: List<ItemBase<*, *>>) :
     ListAdapter<Item, BaseViewHolder<ViewBinding, Item>>(BaseDiffUtil(bases)) {
 
@@ -12,7 +13,7 @@ class BaseAdapter(private val bases: List<ItemBase<*, *>>) :
         val inflater = LayoutInflater.from(parent.context)
         return bases.find { it.getLayoutId() == viewType }
             ?.getViewHolder(inflater, parent)
-            ?.let { it as BaseViewHolder<ViewBinding, Item> }
+            ?.let { it as? BaseViewHolder<ViewBinding, Item> }
             ?: throw IllegalArgumentException("View type not found: $viewType")
     }
 
@@ -21,9 +22,11 @@ class BaseAdapter(private val bases: List<ItemBase<*, *>>) :
     }
 
     override fun onBindViewHolder(
-        holder: BaseViewHolder<ViewBinding, Item>, position: Int, payloads: MutableList<Any>
+        holder: BaseViewHolder<ViewBinding, Item>,
+        position: Int,
+        payloads: MutableList<Any>
     ) {
-        if (payloads.isNullOrEmpty()) {
+        if (payloads.isEmpty()) {
             super.onBindViewHolder(holder, position, payloads)
         } else {
             holder.onBind(currentList[position], payloads)
@@ -32,8 +35,7 @@ class BaseAdapter(private val bases: List<ItemBase<*, *>>) :
 
     override fun getItemViewType(position: Int): Int {
         val item = currentList[position]
-        return bases.find { it.isRelativeItem(item) }
-            ?.getLayoutId()
+        return bases.find { it.isRelativeItem(item) }?.getLayoutId()
             ?: throw IllegalArgumentException("View type not found: $item")
     }
 }

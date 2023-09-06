@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 class VerticalDividerItemDecoration(
     private val viewType: Int,
     private val innerDivider: Int,
-    private val outerDivider: Int,
+    private val outerDivider: Int
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {

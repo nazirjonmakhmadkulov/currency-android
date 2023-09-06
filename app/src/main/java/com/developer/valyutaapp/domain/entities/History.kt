@@ -32,5 +32,5 @@ data class History(
 
     @field:Element(name = "Value")
     @param:Element(name = "Value")
-    var value: String = "",
+    var value: String = ""
 )

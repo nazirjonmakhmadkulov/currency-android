@@ -1,7 +1,6 @@
 package com.developer.valyutaapp.domain.entities
 
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.developer.valyutaapp.core.base.Item
 import org.simpleframework.xml.Attribute
@@ -37,5 +36,5 @@ data class Valute(
 
     var dates: String = "",
     var favoritesValute: Int = 0,
-    var favoritesConverter: Int = 0,
+    var favoritesConverter: Int = 0
 ) : Item

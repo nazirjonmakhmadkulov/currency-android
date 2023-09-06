@@ -12,7 +12,7 @@ import com.developer.valyutaapp.utils.ImageResource
 class ConAdapter(
     private var items: ArrayList<Valute>,
     private val onChangeValute: (Double, Int) -> Unit,
-    private val onItemValuteClick: (Valute) -> Unit,
+    private val onItemValuteClick: (Valute) -> Unit
 ) : RecyclerView.Adapter<ConAdapter.ConvertViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConvertViewHolder {
         val binding = ItemConverterBinding.inflate(LayoutInflater.from(parent.context), parent, false)

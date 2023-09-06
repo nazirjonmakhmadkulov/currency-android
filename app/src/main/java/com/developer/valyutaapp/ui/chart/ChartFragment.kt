@@ -30,7 +30,6 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-
 class ChartFragment : Fragment(R.layout.fragment_chart) {
     private val viewBinding by viewBinding(FragmentChartBinding::bind)
     private val viewModel by viewModel<ChartViewModel>()
@@ -75,7 +74,11 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private fun getRemoteHistories(dates: String) {
         viewBinding.loading.visibility = View.VISIBLE
         viewModel.getRemoteHistories(
-            dates, getDate(), args.valId, args.charCode, PATH_EXP
+            dates,
+            getDate(),
+            args.valId,
+            args.charCode,
+            PATH_EXP
         )
     }
 
@@ -140,7 +143,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
                 }
             }
         }
-        //fit the data into a bar
+        // fit the data into a bar
         for (i in valutes.indices) {
             val barEntry = Entry(i.toFloat(), valutes[i].value.toFloat())
             entries.add(barEntry)

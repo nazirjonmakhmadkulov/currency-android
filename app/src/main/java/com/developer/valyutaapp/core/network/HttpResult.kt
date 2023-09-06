@@ -6,5 +6,5 @@ enum class HttpResult {
     CLIENT_ERROR,
     BAD_RESPONSE,
     SERVER_ERROR,
-    NOT_DEFINED,
+    NOT_DEFINED
 }

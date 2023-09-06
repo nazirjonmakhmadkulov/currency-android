@@ -5,6 +5,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -59,13 +60,13 @@ dependencies {
 
     implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.1")
 
     // Logging:
     api("com.jakewharton.timber:timber:5.0.1")
 
-    //Fragment
+    // Fragment
     implementation("androidx.fragment:fragment-ktx:1.6.1")
 
     // Kotlin + coroutines
@@ -79,7 +80,7 @@ dependencies {
     implementation("androidx.room:room-runtime:2.5.2")
     ksp("androidx.room:room-compiler:2.5.2")
 
-    //Retrofit
+    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.retrofit2:converter-simplexml:2.9.0")
@@ -89,20 +90,20 @@ dependencies {
     // Jetpack WorkManager
     implementation("io.insert-koin:koin-androidx-workmanager:3.4.3")
 
-    //Okhttp logging
+    // Okhttp logging
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
 
-    //Widget
+    // Widget
     implementation("io.github.pilgr:paperdb:2.7.2")
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:5.10.0")
+    implementation("com.yandex.android:mobileads:6.0.0")
     implementation("com.yandex.ads.mediation:mobileads-admob:22.1.0.0")
-    implementation("com.google.android.gms:play-services-ads:22.2.0")
+    implementation("com.google.android.gms:play-services-ads:22.3.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.4.0")
+    implementation(platform("com.google.firebase:firebase-bom:32.2.3"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.4.1")
     implementation("com.google.firebase:firebase-analytics-ktx:21.3.0")
 }

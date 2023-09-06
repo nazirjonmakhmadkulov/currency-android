@@ -14,7 +14,6 @@ import androidx.core.app.NotificationCompat
 import com.developer.valyutaapp.R
 import com.developer.valyutaapp.ui.MainActivity
 
-
 object Notification {
     private const val NOTIFICATION_CHANNEL_ID = "com.developer.valyutaapp"
     private const val NOTIFICATION_ID = 100
@@ -46,7 +45,9 @@ object Notification {
             notification.flags = Notification.FLAG_AUTO_CANCEL
             val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             val notificationChannel = NotificationChannel(
-                NOTIFICATION_CHANNEL_ID, title, NotificationManager.IMPORTANCE_DEFAULT
+                NOTIFICATION_CHANNEL_ID,
+                title,
+                NotificationManager.IMPORTANCE_DEFAULT
             )
             notificationManager.createNotificationChannel(notificationChannel)
             notificationManager.notify(NOTIFICATION_ID, notification)

@@ -26,16 +26,13 @@ import com.developer.valyutaapp.domain.entities.ValCurs
 import com.developer.valyutaapp.utils.Utils
 import com.developer.valyutaapp.utils.Utils.setStatusBar
 import com.developer.valyutaapp.utils.getActionBarHeight
-import com.developer.valyutaapp.utils.getScreenWidth
 import com.developer.valyutaapp.utils.getStatusBarHeight
 import com.developer.valyutaapp.utils.launchAndCollectIn
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.yandex.mobile.ads.banner.AdSize
 import com.yandex.mobile.ads.common.AdRequest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
-
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val viewBinding by viewBinding(ActivityMainBinding::bind, R.id.container)
@@ -44,8 +41,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private var snackBarNetwork: Snackbar? = null
 
     companion object {
-       const val unitId1 = "R-M-2277119-1"
-       const val unitId2 = "R-M-2277119-2"
+        const val unitId1 = "R-M-2277119-1"
+        const val unitId2 = "R-M-2277119-2"
     }
 
     private val pushNotificationPermissionLauncher =
@@ -85,7 +82,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val mBannerAdView = viewBinding.adView
         val adRequest: AdRequest = AdRequest.Builder().build()
         mBannerAdView.setAdUnitId(unitId)
-        mBannerAdView.setAdSize(AdSize.inlineSize(getScreenWidth(), 50))
+        // mBannerAdView.setAdSize(AdSize.inlineSize(getScreenWidth(), 50))
         mBannerAdView.loadAd(adRequest)
     }
 
@@ -105,7 +102,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             when {
                 ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-                        == PackageManager.PERMISSION_GRANTED -> Timber.d("Permission POST_NOTIFICATION GRANTED")
+                    == PackageManager.PERMISSION_GRANTED -> Timber.d("Permission POST_NOTIFICATION GRANTED")
 
                 shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) ->
                     Timber.d("Permission POST_NOTIFICATION blocked")

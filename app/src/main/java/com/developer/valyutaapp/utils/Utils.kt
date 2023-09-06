@@ -61,6 +61,7 @@ object Utils {
         return dec.format(cost)
     }
 
+    @Suppress("DEPRECATION")
     fun setStatusBar(window: Window) {
         setWindowFlag(window, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
         window.statusBarColor = Color.TRANSPARENT
@@ -68,8 +69,11 @@ object Utils {
 
     private fun setWindowFlag(window: Window, bits: Int, on: Boolean) {
         val winParams = window.attributes
-        if (on) winParams.flags = winParams.flags or bits
-        else winParams.flags = winParams.flags and bits.inv()
+        if (on) {
+            winParams.flags = winParams.flags or bits
+        } else {
+            winParams.flags = winParams.flags and bits.inv()
+        }
         window.attributes = winParams
     }
 }

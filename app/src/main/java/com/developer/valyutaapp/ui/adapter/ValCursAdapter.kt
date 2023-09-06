@@ -25,7 +25,8 @@ class ValCursAdapter(private val onItemValuteClick: (Valute) -> Unit) : ItemBase
         override fun areContentsTheSame(oldItem: Valute, newItem: Valute) = oldItem == newItem
     }
     inner class ValuteViewHolder(
-        binding: ItemValuteBinding, val onItemValuteClick: (Valute) -> Unit,
+        binding: ItemValuteBinding,
+        val onItemValuteClick: (Valute) -> Unit
     ) : BaseViewHolder<ItemValuteBinding, Valute>(binding) {
         @SuppressLint("SetTextI18n")
         override fun onBind(item: Valute) = with(binding) {

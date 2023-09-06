@@ -56,8 +56,11 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         }
         viewBinding.convert.moneyConvert.doOnTextChanged { text, _, _, _ ->
             try {
-                if (!text.isNullOrEmpty()) viewModel.submitConverterInput(text.toString().toDouble())
-                else viewModel.submitConverterInput(0.0)
+                if (!text.isNullOrEmpty()) {
+                    viewModel.submitConverterInput(text.toString().toDouble())
+                } else {
+                    viewModel.submitConverterInput(0.0)
+                }
             } catch (e: NumberFormatException) {
                 Timber.e("NumberFormatException $e")
             }
