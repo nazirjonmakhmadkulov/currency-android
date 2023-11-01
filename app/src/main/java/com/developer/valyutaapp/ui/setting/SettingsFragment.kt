@@ -83,8 +83,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         themeApp?.isChecked = prefs.getTheme()
         themeApp?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_YES -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                Configuration.UI_MODE_NIGHT_NO -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                Configuration.UI_MODE_NIGHT_YES -> AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_NO
+                )
+                Configuration.UI_MODE_NIGHT_NO -> AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES
+                )
             }
             if (themeApp?.isChecked == true) {
                 themeApp.isChecked = true

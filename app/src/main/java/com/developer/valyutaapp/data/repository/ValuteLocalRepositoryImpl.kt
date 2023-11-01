@@ -19,7 +19,14 @@ class ValuteLocalRepositoryImpl(private val valuteDao: ValuteDao) : ValuteLocalR
     override suspend fun updateLocalValute(valute: Valute) = valuteDao.updateValute(valute)
 
     override suspend fun updateLocalValuteFromRemote(valute: Valute) =
-        valuteDao.updateValuteFromRemote(valute.charCode, valute.nominal, valute.name, valute.value, valute.dates, valute.id)
+        valuteDao.updateValuteFromRemote(
+            valute.charCode,
+            valute.nominal,
+            valute.name,
+            valute.value,
+            valute.dates,
+            valute.id
+        )
 
     override suspend fun deleteLocalValute(valute: Valute) = valuteDao.deleteValute(valute)
 
