@@ -46,10 +46,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    buildFeatures {
-        viewBinding = true
-    }
-    namespace = "com.developer.valyutaapp"
+    buildFeatures.viewBinding = true
+    namespace = "com.developer.currency"
 }
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
