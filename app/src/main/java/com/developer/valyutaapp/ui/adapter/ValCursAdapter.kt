@@ -15,15 +15,18 @@ import com.developer.valyutaapp.utils.ImageResource
 class ValCursAdapter(private val onItemValuteClick: (Valute) -> Unit) : ItemBase<ItemValuteBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute
     override fun getLayoutId() = R.layout.item_valute
-    override fun getViewHolder(layoutInflater: LayoutInflater, parent: ViewGroup): BaseViewHolder<ItemValuteBinding, Valute> {
+    override fun getViewHolder(layoutInflater: LayoutInflater, parent: ViewGroup):
+        BaseViewHolder<ItemValuteBinding, Valute> {
         val binding = ItemValuteBinding.inflate(layoutInflater, parent, false)
         return ValuteViewHolder(binding, onItemValuteClick)
     }
+
     override fun getDiffUtil() = diffUtil
     private val diffUtil = object : DiffUtil.ItemCallback<Valute>() {
         override fun areItemsTheSame(oldItem: Valute, newItem: Valute) = oldItem.id == newItem.id
         override fun areContentsTheSame(oldItem: Valute, newItem: Valute) = oldItem == newItem
     }
+
     inner class ValuteViewHolder(
         binding: ItemValuteBinding,
         val onItemValuteClick: (Valute) -> Unit

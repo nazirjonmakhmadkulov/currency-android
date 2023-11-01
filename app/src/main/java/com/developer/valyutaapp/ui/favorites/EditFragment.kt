@@ -37,6 +37,7 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
 
     private fun setupTap() {
         val tabs = arrayOf(getString(R.string.favorites), getString(R.string.all))
+
         pageAdapter = PagerAdapter(requireActivity(), tabs.size, args.favorite)
         viewPager = viewBinding.tabViewpager
         viewPager.adapter = this.pageAdapter

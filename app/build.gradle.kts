@@ -53,7 +53,7 @@ android {
 }
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.20")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
@@ -85,9 +85,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // Room
-    implementation("androidx.room:room-ktx:2.5.2")
-    implementation("androidx.room:room-runtime:2.5.2")
-    ksp("androidx.room:room-compiler:2.5.2")
+    implementation("androidx.room:room-ktx:2.6.0")
+    implementation("androidx.room:room-runtime:2.6.0")
+    ksp("androidx.room:room-compiler:2.6.0")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -108,11 +108,11 @@ dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:6.0.1")
+    implementation("com.yandex.android:mobileads:6.1.0")
     implementation("com.yandex.ads.mediation:mobileads-admob:22.1.0.0")
-    implementation("com.google.android.gms:play-services-ads:22.4.0")
+    implementation("com.google.android.gms:play-services-ads:22.5.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.4.3")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.3.0")
+    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.5.1")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.5.0")
 }
