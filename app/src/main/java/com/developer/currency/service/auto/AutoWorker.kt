@@ -6,19 +6,20 @@ import androidx.work.Data
 import androidx.work.WorkerParameters
 import com.developer.currency.R
 import com.developer.currency.core.common.PATH_EXP
-import com.developer.currency.core.common.Result.Error
-import com.developer.currency.core.common.Result.Loading
-import com.developer.currency.core.common.Result.Success
+import com.developer.currency.core.dispatcher.launchIO
+import com.developer.currency.core.dispatcher.withMain
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.domain.repository.ValuteRemoteRepository
 import com.developer.currency.utils.Notification
 import com.developer.currency.utils.Utils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import timber.log.Timber
 
 class AutoWorker(appContext: Context, workerParams: WorkerParameters) :
-    CoroutineWorker(appContext, workerParams),
-    KoinComponent {
+    CoroutineWorker(appContext, workerParams), KoinComponent, CoroutineScope {
 
     companion object {
         const val WORK_RESULT = "work_result"
@@ -28,14 +29,16 @@ class AutoWorker(appContext: Context, workerParams: WorkerParameters) :
 
     override suspend fun doWork(): Result {
         val outputData = Data.Builder().putString(WORK_RESULT, "Finished").build()
-        return when (val result = valuteRemoteRepository.getAllValutes(Utils.getDate(), PATH_EXP)) {
-            is Loading -> Result.success()
-            is Success -> {
-                showNotify(result.data.valute)
-                Result.success(outputData)
-            }
-            is Error -> Result.failure(outputData)
+        coroutineScope {
+            launchIO(
+                safeAction = {
+                    val result = valuteRemoteRepository.getAllValutes(Utils.getDate(), PATH_EXP)
+                    withMain { showNotify(result.valute) }
+                },
+                onError = Timber::e
+            )
         }
+        return Result.success(outputData)
     }
 
     private fun showNotify(data: List<Valute>) {

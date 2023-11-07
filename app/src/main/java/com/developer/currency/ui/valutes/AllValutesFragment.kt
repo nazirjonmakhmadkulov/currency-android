@@ -11,7 +11,6 @@ import com.developer.currency.R
 import com.developer.currency.core.base.BaseAdapter
 import com.developer.currency.core.base.Item
 import com.developer.currency.core.common.PATH_EXP
-import com.developer.currency.core.common.Result
 import com.developer.currency.databinding.FragmentAllValutesBinding
 import com.developer.currency.domain.entities.ValCurs
 import com.developer.currency.domain.entities.Valute
@@ -41,7 +40,10 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
 
     private fun swipeRefresh() = with(viewBinding) {
         swipe.setColorSchemeResources(R.color.black_second)
-        swipe.setOnRefreshListener { viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP) }
+        swipe.setOnRefreshListener {
+            viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
+            swipe.isRefreshing = false
+        }
     }
 
     private fun setupViews() {
@@ -56,18 +58,7 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
             getAllValuteSuccess(it)
         }
         viewModel.getRemoteValutes.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
-            subscribeValuteState(it)
-        }
-    }
-
-    private fun subscribeValuteState(result: Result<ValCurs>) {
-        when (result) {
-            is Result.Loading -> {}
-            is Result.Success -> viewBinding.swipe.isRefreshing = false
-            is Result.Error -> {
-                viewBinding.swipe.isRefreshing = false
-                Timber.d("Error ${result.code} ${result.message}")
-            }
+            Timber.d("Success $it")
         }
     }
 

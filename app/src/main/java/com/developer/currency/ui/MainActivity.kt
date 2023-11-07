@@ -17,7 +17,6 @@ import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.currency.R
 import com.developer.currency.core.common.PATH_EXP
-import com.developer.currency.core.common.Result
 import com.developer.currency.core.network.NetworkStatus
 import com.developer.currency.core.network.NetworkStatusViewModel
 import com.developer.currency.databinding.ActivityMainBinding
@@ -26,10 +25,12 @@ import com.developer.currency.domain.entities.ValCurs
 import com.developer.currency.utils.Utils
 import com.developer.currency.utils.Utils.setStatusBar
 import com.developer.currency.utils.getActionBarHeight
+import com.developer.currency.utils.getScreenWidth
 import com.developer.currency.utils.getStatusBarHeight
 import com.developer.currency.utils.launchAndCollectIn
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.yandex.mobile.ads.banner.BannerAdSize
 import com.yandex.mobile.ads.common.AdRequest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -82,7 +83,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val mBannerAdView = viewBinding.adView
         val adRequest: AdRequest = AdRequest.Builder().build()
         mBannerAdView.setAdUnitId(unitId)
-        // mBannerAdView.setAdSize(AdSize.inlineSize(getScreenWidth(), 50))
+         mBannerAdView.setAdSize(BannerAdSize.inlineSize(this, getScreenWidth(), 60))
         mBannerAdView.loadAd(adRequest)
     }
 
@@ -115,21 +116,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun setupViewModel() {
         viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
         viewModel.getRemoteValutes.launchAndCollectIn(this, Lifecycle.State.STARTED) {
-            subscribeValuteState(it)
+            Timber.d("RemoteValutes $it")
         }
         networkStatusViewModel.state.launchAndCollectIn(this, Lifecycle.State.STARTED) {
             when (it) {
                 NetworkStatus.Available -> snackBarNetwork?.dismiss()
                 NetworkStatus.Unavailable -> snackBarNetwork?.show()
             }
-        }
-    }
-
-    private fun subscribeValuteState(result: Result<ValCurs>) {
-        when (result) {
-            is Result.Loading -> {}
-            is Result.Success -> {}
-            is Result.Error -> Timber.d("Error ${result.code} ${result.message}")
         }
     }
 }

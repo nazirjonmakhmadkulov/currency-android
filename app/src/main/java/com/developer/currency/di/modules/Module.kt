@@ -134,7 +134,7 @@ val repositoryModule = module {
         valuteDao: ValuteDao,
         historyDao: HistoryDao
     ): ValuteRemoteRepositoryImpl {
-        return ValuteRemoteRepositoryImpl(dispatcherProvider, remoteDataSource, valuteDao, historyDao)
+        return ValuteRemoteRepositoryImpl(remoteDataSource, valuteDao, historyDao)
     }
     single<ValuteRemoteRepository> { provideValuteRemoteRepository(get(), get(), get(), get()) }
 

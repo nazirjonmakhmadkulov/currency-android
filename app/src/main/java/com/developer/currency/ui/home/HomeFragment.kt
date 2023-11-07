@@ -11,7 +11,6 @@ import com.developer.currency.R
 import com.developer.currency.core.base.BaseAdapter
 import com.developer.currency.core.common.FAVORITE_VALUTE
 import com.developer.currency.core.common.PATH_EXP
-import com.developer.currency.core.common.Result
 import com.developer.currency.databinding.FragmentHomeBinding
 import com.developer.currency.domain.entities.ValCurs
 import com.developer.currency.domain.entities.Valute
@@ -47,7 +46,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun swipeRefresh() = with(viewBinding) {
         swipe.setColorSchemeResources(R.color.black_second)
-        swipe.setOnRefreshListener { viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP) }
+        swipe.setOnRefreshListener {
+            viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
+            swipe.isRefreshing = false
+        }
     }
 
     private fun callFavoriteEdit() {
@@ -67,22 +69,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             getAllValuteSuccess(it)
         }
         viewModel.getRemoteValutes.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
-            subscribeValuteState(it)
-        }
-    }
-
-    private fun subscribeValuteState(result: Result<ValCurs>) {
-        when (result) {
-            is Result.Loading -> {}
-            is Result.Success -> {
-                viewBinding.swipe.isRefreshing = false
-                Timber.d("Success ", result.data.toString())
-            }
-
-            is Result.Error -> {
-                viewBinding.swipe.isRefreshing = false
-                Timber.d("Error ${result.code} ${result.message}")
-            }
+            Timber.d("Success ", it)
         }
     }
 

@@ -1,7 +1,5 @@
 package com.developer.currency.data.repository
 
-import com.developer.currency.core.common.Result
-import com.developer.currency.core.dispatcher.DispatcherProvider
 import com.developer.currency.data.local.HistoryDao
 import com.developer.currency.data.local.ValuteDao
 import com.developer.currency.domain.entities.History
@@ -16,38 +14,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ValuteRemoteRepositoryImpl(
-    private val dispatcherProvider: DispatcherProvider,
     private val valuteRemoteDataSource: ValuteRemoteDataSource,
     private val valuteDao: ValuteDao,
     private val historyDao: HistoryDao
 ) : ValuteRemoteRepository {
 
-    override suspend fun getAllValutes(date: String, exp: String): Result<ValCurs> = withContext(Dispatchers.IO) {
-        return@withContext when (
-            val result =
-                valuteRemoteDataSource.getRemoteValutes(dispatcherProvider.io, date, exp)
-        ) {
-            is Result.Loading -> Result.Loading
-            is Result.Success -> {
-                val valute = result.data.valute
-                valute.forEach { insertAndUpdateValute(result.data.dates, it) }
-                Result.Success(result.data)
-            }
-
-            is Result.Error -> Result.Error(result.cause, result.code, result.message)
-        }
+    override suspend fun getAllValutes(date: String, exp: String): ValCurs {
+        val result = valuteRemoteDataSource.getRemoteValutes(date, exp)
+        val valute = result.valute
+        valute.forEach { insertAndUpdateValute(result.dates, it) }
+        return result
     }
 
     private suspend fun insertAndUpdateValute(dates: String, valute: Valute) {
         if (valuteDao.getValuteExist(valute.valId)) {
             valute.dates = getDateFormat(dates)
             valuteDao.updateValuteFromRemote(
-                valute.charCode,
-                valute.nominal,
-                valute.name,
-                valute.value,
-                valute.dates,
-                valute.valId
+                valute.charCode, valute.nominal, valute.name, valute.value, valute.dates, valute.valId
             )
         } else {
             valute.dates = getDateFormat(dates)
@@ -59,26 +42,11 @@ class ValuteRemoteRepositoryImpl(
         }
     }
 
-    override suspend fun getAllHistories(
-        d1: String,
-        d2: String,
-        cn: Int,
-        cs: String,
-        exp: String
-    ): Result<ValHistory> = withContext(Dispatchers.IO) {
-        return@withContext when (
-            val result =
-                valuteRemoteDataSource.getRemoteHistories(dispatcherProvider.io, d1, d2, cn, cs, exp)
-        ) {
-            is Result.Loading -> Result.Loading
-            is Result.Success -> {
-                val valute = result.data.history
-                valute.forEach { insertHistory(it) }
-                Result.Success(result.data)
-            }
-
-            is Result.Error -> Result.Error(result.cause, result.code, result.message)
-        }
+    override suspend fun getAllHistories(d1: String, d2: String, cn: Int, cs: String, exp: String): ValHistory {
+        val result = valuteRemoteDataSource.getRemoteHistories(d1, d2, cn, cs, exp)
+        val valute = result.history
+        valute.forEach { insertHistory(it) }
+        return result
     }
 
     private suspend fun insertHistory(history: History) {

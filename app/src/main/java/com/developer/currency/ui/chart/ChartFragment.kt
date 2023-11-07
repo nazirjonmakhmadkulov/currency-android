@@ -11,7 +11,6 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.currency.R
 import com.developer.currency.core.common.PATH_EXP
-import com.developer.currency.core.common.Result
 import com.developer.currency.databinding.FragmentChartBinding
 import com.developer.currency.domain.entities.History
 import com.developer.currency.domain.entities.ValHistory
@@ -88,18 +87,9 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
         }
     }
 
-    private fun subscribeHistoryState(result: Result<ValHistory>) {
-        when (result) {
-            is Result.Loading -> {}
-            is Result.Success -> {
-                getLocalHistories(limit)
-                viewBinding.loading.visibility = View.GONE
-            }
-            is Result.Error -> {
-                viewBinding.loading.visibility = View.GONE
-                Timber.d("Error ${result.code} ${result.message}")
-            }
-        }
+    private fun subscribeHistoryState(result: ValHistory) {
+        getLocalHistories(limit)
+        viewBinding.loading.visibility = View.GONE
     }
 
     private fun getAllValuteSuccess(valutes: List<History>) {
