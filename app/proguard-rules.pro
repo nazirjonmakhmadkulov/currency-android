@@ -40,7 +40,7 @@
 -keep class androidx.work.** { *; }
 
 #\ No newline at end of file
--keep class com.developer.valyutaapp**{*;}
+-keep class com.developer.currency**{*;}
 
 
 # Keep generic signature of Call, Response (R8 full mode strips signatures from non-kept items).
