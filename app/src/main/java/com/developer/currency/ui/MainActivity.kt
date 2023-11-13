@@ -21,7 +21,6 @@ import com.developer.currency.core.network.NetworkStatus
 import com.developer.currency.core.network.NetworkStatusViewModel
 import com.developer.currency.databinding.ActivityMainBinding
 import com.developer.currency.di.ValuteApp
-import com.developer.currency.domain.entities.ValCurs
 import com.developer.currency.utils.Utils
 import com.developer.currency.utils.Utils.setStatusBar
 import com.developer.currency.utils.getActionBarHeight
@@ -83,7 +82,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val mBannerAdView = viewBinding.adView
         val adRequest: AdRequest = AdRequest.Builder().build()
         mBannerAdView.setAdUnitId(unitId)
-         mBannerAdView.setAdSize(BannerAdSize.inlineSize(this, getScreenWidth(), 60))
+        mBannerAdView.setAdSize(BannerAdSize.inlineSize(this, getScreenWidth(), 60))
         mBannerAdView.loadAd(adRequest)
     }
 

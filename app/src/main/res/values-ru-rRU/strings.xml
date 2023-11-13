@@ -42,4 +42,7 @@
     <string name="update">Обновлено</string>
 
     <string name="not_connected">⚠️ Вы не подключены к Интернету</string>
+
+    <string name="share">Поделиться</string>
+    <string name="other">Другие</string>
 </resources>

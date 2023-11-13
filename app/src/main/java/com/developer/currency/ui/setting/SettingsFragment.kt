@@ -1,7 +1,9 @@
 package com.developer.currency.ui.setting
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
@@ -40,7 +42,38 @@ class SettingsFragment : PreferenceFragmentCompat() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupToolbar()
         viewBinding.version.text = "Версия ${BuildConfig.VERSION_NAME}"
+    }
+
+    private fun setupToolbar() {
+        viewBinding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.share -> shareDialog()
+                R.id.other -> goToAppMarket()
+            }
+            true
+        }
+    }
+
+    private fun shareDialog() {
+        val app = "https://play.google.com/store/apps/details?id=com.developer.valyutaapp"
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            action = Intent.ACTION_SEND
+            type = "*/*"
+            putExtra(Intent.EXTRA_TEXT, app)
+        }
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share)))
+    }
+
+    private fun goToAppMarket() {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://play.google.com/store/apps/dev?id=5402022606902660683")
+            )
+        )
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -86,6 +119,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 Configuration.UI_MODE_NIGHT_YES -> AppCompatDelegate.setDefaultNightMode(
                     AppCompatDelegate.MODE_NIGHT_NO
                 )
+
                 Configuration.UI_MODE_NIGHT_NO -> AppCompatDelegate.setDefaultNightMode(
                     AppCompatDelegate.MODE_NIGHT_YES
                 )

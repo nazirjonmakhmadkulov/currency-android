@@ -32,15 +32,6 @@ android {
         }
     }
 
-    signingConfigs {
-        create("release") {
-            storeFile = file("sign.jks")
-            storePassword = "904059797n"
-            keyAlias = "android_alias"
-            keyPassword = "929257979n"
-        }
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17

@@ -10,8 +10,6 @@ import com.developer.currency.domain.repository.ValuteRemoteRepository
 import com.developer.currency.utils.Utils.dateFormatDb
 import com.developer.currency.utils.Utils.getDateFormat
 import com.developer.currency.utils.Utils.getYearAge
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class ValuteRemoteRepositoryImpl(
     private val valuteRemoteDataSource: ValuteRemoteDataSource,
@@ -30,7 +28,12 @@ class ValuteRemoteRepositoryImpl(
         if (valuteDao.getValuteExist(valute.valId)) {
             valute.dates = getDateFormat(dates)
             valuteDao.updateValuteFromRemote(
-                valute.charCode, valute.nominal, valute.name, valute.value, valute.dates, valute.valId
+                valute.charCode,
+                valute.nominal,
+                valute.name,
+                valute.value,
+                valute.dates,
+                valute.valId
             )
         } else {
             valute.dates = getDateFormat(dates)

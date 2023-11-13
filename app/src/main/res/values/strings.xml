@@ -45,4 +45,6 @@
     <string name="zero" translatable="false">0</string>
     <string name="tjs" translatable="false">TJS</string>
 
+    <string name="share">Share</string>
+    <string name="other">Other</string>
 </resources>

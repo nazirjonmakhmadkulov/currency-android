@@ -27,7 +27,6 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class ChartFragment : Fragment(R.layout.fragment_chart) {
     private val viewBinding by viewBinding(FragmentChartBinding::bind)
