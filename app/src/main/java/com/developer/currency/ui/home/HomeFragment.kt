@@ -12,7 +12,6 @@ import com.developer.currency.core.base.BaseAdapter
 import com.developer.currency.core.common.FAVORITE_VALUTE
 import com.developer.currency.core.common.PATH_EXP
 import com.developer.currency.databinding.FragmentHomeBinding
-import com.developer.currency.domain.entities.ValCurs
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.ui.MainViewModel
 import com.developer.currency.ui.adapter.ValCursAdapter

@@ -3,7 +3,6 @@ package com.developer.currency.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.developer.currency.core.dispatcher.launchIO
-import com.developer.currency.domain.entities.ValCurs
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.domain.usecases.ValuteUseCase
 import kotlinx.coroutines.flow.Flow
