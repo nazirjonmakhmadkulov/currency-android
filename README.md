@@ -8,7 +8,7 @@
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
         <img height="100" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"></a>
     </td>
-    <td style="border:0px;"> 
+    <td style="border: none!important;"> 
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
         <img height="70" src="https://static-00.iconduck.com/assets.00/app-huawei-uk-icon-512x153-qosx82ey.png"></a> 
     </td>
