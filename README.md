@@ -10,7 +10,7 @@
     </td>
     <td style="border: none!important;"> 
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
-        <img height="50" src="https://static-00.iconduck.com/assets.00/app-huawei-uk-icon-512x153-qosx82ey.png"></a> 
+        <img height="53" src="https://static-00.iconduck.com/assets.00/app-huawei-uk-icon-512x153-qosx82ey.png"></a> 
     </td>
   </tr>
 </table>
