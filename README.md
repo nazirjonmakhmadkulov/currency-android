@@ -4,11 +4,11 @@
 
 <table cellspacing="0" cellpadding="0" style="border: none;">
   <tr>
-    <td valign="center">
+    <td valign="start">
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
         <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="75"></a>
     </td>
-    <td valign="center">  
+    <td valign="start">  
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
         <img src="https://static.tildacdn.com/tild3633-6364-4533-a462-303133633334/app-gallery-en.png" height="50"></a>
     </td>
