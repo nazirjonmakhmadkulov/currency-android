@@ -5,6 +5,10 @@
 <a href="https://play.google.com/store/apps/details?id=com.developer.currency">
 <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70"></a>
 
+
+<a href="https://play.google.com/store/apps/details?id=com.developer.currency">
+<img src="https://static.tildacdn.com/tild3633-6364-4533-a462-303133633334/app-gallery-en.png" height="70"></a>
+
 ## Курсы валют Таджикистана
 
 ### Features
