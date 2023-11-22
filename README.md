@@ -2,7 +2,7 @@
 <img src="/docs/3.png" width=18% height=18%> <img src="/docs/4.png" width=18% height=18%>
 <img src="/docs/5.png" width=18% height=18%>
 
-<div>
+<div style="display: flex; align-items: flex-start;">
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
     <img align=top src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70"></a>
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
