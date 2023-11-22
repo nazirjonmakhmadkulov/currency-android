@@ -2,7 +2,6 @@
 <img src="/docs/3.png" width=18% height=18%> <img src="/docs/4.png" width=18% height=18%>
 <img src="/docs/5.png" width=18% height=18%>
 
-<table style="border-collapse: collapse; border: none;">
   <tr style="border: none;">
     <td valign="start" style="border: none;">
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
@@ -13,7 +12,6 @@
         <img src="https://static.tildacdn.com/tild3633-6364-4533-a462-303133633334/app-gallery-en.png" height="50"></a>
     </td>
   </tr>
-</table>
 
 ## Курсы валют Таджикистана
 
