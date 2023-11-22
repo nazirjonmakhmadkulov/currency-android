@@ -3,7 +3,7 @@
 <img src="/docs/5.png" width=18% height=18%>
 
 <table width=70% >
-  <tr>
+  <tr style="border: 0px;">
      <td>
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
         <img width=30% src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"></a>
