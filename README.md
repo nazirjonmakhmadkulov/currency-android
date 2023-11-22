@@ -5,7 +5,7 @@
 <p>
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
     <img vspace="10" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="100"></a>
-    <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
+    <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp" height="100">
     <img valign="top" src="https://static-00.iconduck.com/assets.00/app-huawei-uk-icon-512x153-qosx82ey.png" height="70"></a>
 </p>
 
