@@ -2,7 +2,7 @@
 <img src="/docs/3.png" width=18% height=18%> <img src="/docs/4.png" width=18% height=18%>
 <img src="/docs/5.png" width=18% height=18%>
 
-<table cellspacing="0" cellpadding="0">
+<table cellspacing="0" cellpadding="0" style="border: none;">
   <tr>
     <td valign="center">
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
