@@ -2,12 +2,14 @@
 <img src="/docs/3.png" width=18% height=18%> <img src="/docs/4.png" width=18% height=18%>
 <img src="/docs/5.png" width=18% height=18%>
 
-<p align="start" width="100%">
+<div align="center">
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
-    <img width="25%" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70"></a>
+    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70"></a>
+    </div>
+<div align="center">
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
-    <img width="25%" src="https://static.tildacdn.com/tild3633-6364-4533-a462-303133633334/app-gallery-en.png" height="50"></a>
-</p>
+    <img src="https://static.tildacdn.com/tild3633-6364-4533-a462-303133633334/app-gallery-en.png" height="50"></a>
+</div>
 
 ## Курсы валют Таджикистана
 
