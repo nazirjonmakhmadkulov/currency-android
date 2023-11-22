@@ -6,7 +6,7 @@
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
     <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="75"></a>
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
-    <img src="https://consumer.huawei.com/content/dam/huawei-cbg-site/other/kz/mkt/pdp/phones/p-smart-2021/ag-logo.png" height="75"></a>
+    <img src="https://static-00.iconduck.com/assets.00/app-huawei-uk-icon-512x153-qosx82ey.png" height="75"></a>
 </p>
 
 ## Курсы валют Таджикистана
