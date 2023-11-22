@@ -3,8 +3,8 @@
 <img src="/docs/5.png" width=18% height=18%>
 
 <table style="border:0px solid white; width:100%;">
-  <tr style="border: 0px;">
-     <td style="border:0px;">
+  <tr style="border: none!important;">
+     <td style="border: none!important;">
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
         <img height="100" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"></a>
     </td>
