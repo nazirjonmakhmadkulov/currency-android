@@ -15,13 +15,8 @@
   </tr>
 </table>
 
- <style>
-        td, th {
-           border: none!important;
-        }
-    </style>
-| Time         | Length        |   
-|--------------|---------------|
+aa|bb
+--|--
 
 ## Курсы валют Таджикистана
 
