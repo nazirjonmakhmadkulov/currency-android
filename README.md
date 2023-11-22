@@ -6,11 +6,11 @@
   <tr>
      <td>
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
-        <img align="top" width=25% src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"></a>
+        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"></a>
     </td>
     <td> 
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
-        <img align="center" width=22% src="https://static-00.iconduck.com/assets.00/app-huawei-uk-icon-512x153-qosx82ey.png"></a> 
+        <img src="https://static-00.iconduck.com/assets.00/app-huawei-uk-icon-512x153-qosx82ey.png"></a> 
 </td>
   </tr>
 </table>
