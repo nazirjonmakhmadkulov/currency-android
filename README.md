@@ -7,7 +7,7 @@
 
 
 <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
-<img src="https://static.tildacdn.com/tild3633-6364-4533-a462-303133633334/app-gallery-en.png" height="40"></a>
+<img src="https://static.tildacdn.com/tild3633-6364-4533-a462-303133633334/app-gallery-en.png" height="70"></a>
 
 ## Курсы валют Таджикистана
 
