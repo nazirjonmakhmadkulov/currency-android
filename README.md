@@ -4,11 +4,11 @@
 
 <table width=70% >
   <tr style="border: 0px;">
-     <td>
+     <td style="border:0px; width:33.33%">
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
         <img width=30% src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"></a>
     </td>
-    <td> 
+    <td style="border:0px; width:33.33%"> 
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
         <img width=30% src="https://static-00.iconduck.com/assets.00/app-huawei-uk-icon-512x153-qosx82ey.png"></a> 
     </td>
