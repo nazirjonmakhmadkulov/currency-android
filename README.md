@@ -3,14 +3,10 @@
 <img src="/docs/5.png" width=18% height=18%>
 
 <p>
- <div height="100">
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
     <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="75"></a>
-</div>
-<div height="100">
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
-    <img src="https://static-00.iconduck.com/assets.00/app-huawei-uk-icon-512x153-qosx82ey.png" height="75"></a>
-</div>   
+    <img src="https://static-00.iconduck.com/assets.00/app-huawei-uk-icon-512x153-qosx82ey.png" height="75"></a>  
 </p>
 
 ## Курсы валют Таджикистана
