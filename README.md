@@ -2,7 +2,7 @@
 <img src="/docs/3.png" width=18% height=18%> <img src="/docs/4.png" width=18% height=18%>
 <img src="/docs/5.png" width=18% height=18%>
 
-<table width=70% >
+<table style="border:0px solid white; width:100%;" >
   <tr style="border: 0px;">
      <td style="border:0px; width:33.33%">
         <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
