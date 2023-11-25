@@ -33,7 +33,7 @@ fun Activity.getStatusBarHeight(): Int {
 }
 
 fun Activity.getActionBarHeight(): Int {
-    val ta: TypedArray = theme.obtainStyledAttributes(intArrayOf(R.attr.actionBarSize))
+    val ta: TypedArray = theme.obtainStyledAttributes(intArrayOf(android.R.attr.actionBarSize))
     return ta.getDimension(0, 0f).toInt()
 }
 

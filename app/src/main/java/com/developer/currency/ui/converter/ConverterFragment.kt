@@ -15,7 +15,6 @@ import com.developer.currency.databinding.FragmentConverterBinding
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.ui.adapter.ConverterAdapter
 import com.developer.currency.utils.launchAndCollectIn
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -24,8 +23,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     private val viewBinding by viewBinding(FragmentConverterBinding::bind)
     private val viewModel by viewModel<ConverterViewModel>()
     private var valutes: MutableList<Valute> = mutableListOf()
-    private val converterAdapter: BaseAdapter = BaseAdapter(listOf(ConverterAdapter()))
-//    private val conAdapter by lazy { ConAdapter(::onChangeValute, ::onItemValute) }
+    private val converterAdapter: BaseAdapter = BaseAdapter(listOf(ConverterAdapter(::onItemChange)))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,8 +42,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     }
 
     private fun callFavoriteEdit() {
-        val action =
-            ConverterFragmentDirections.actionNavigationConverterToEditFragment(FAVORITE_CONVERTER)
+        val action = ConverterFragmentDirections.actionNavigationConverterToEditFragment(FAVORITE_CONVERTER)
         findNavController().navigate(action)
     }
 
@@ -56,13 +53,16 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         }
         viewBinding.convert.moneyConvert.doOnTextChanged { text, _, _, _ ->
             try {
-                if (!text.isNullOrEmpty()) {
-                    viewModel.submitConverterInput(text.toString().toDouble())
-                } else {
-                    viewModel.submitConverterInput(0.0)
-                }
+                if (text.isNullOrEmpty()) viewModel.submitConverterInput(0, 0.0, 0.0)
+                else viewModel.submitConverterInput(0, text.toString().toDouble(), 0.0)
             } catch (e: NumberFormatException) {
                 Timber.e("NumberFormatException $e")
+            }
+        }
+        viewBinding.convert.moneyConvert.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                viewBinding.convert.moneyConvert.setText("")
+                viewBinding.convert.moneyConvert.hint = "0.0"
             }
         }
     }
@@ -71,14 +71,22 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
             getAllValuteSuccess(it)
         }
-        viewModel.valuteState.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { items ->
-            launch { delay(50); converterAdapter.submitList(items.toList()) }
+        viewModel.foreignValuteState.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { items ->
+            launch { converterAdapter.submitList(items.toList()) }
+        }
+        viewModel.nationalValuteState.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { items ->
+            launch { viewBinding.convert.moneyConvert.hint = items }
         }
     }
 
     private fun getAllValuteSuccess(valute: List<Valute>) {
         this.valutes.clear()
-        valute.forEach { it.value = "0"; this.valutes.add(it) }
+        this.valutes.addAll(valute)
         converterAdapter.submitList(valutes.toList())
+    }
+
+    private fun onItemChange(id: Int, query: String, value: String) {
+        if (query.isEmpty()) viewModel.submitConverterInput(id, 0.0, 0.0)
+        else viewModel.submitConverterInput(id, query.toDouble(), value.toDouble())
     }
 }

@@ -42,7 +42,7 @@
     <string name="update">Updated</string>
 
     <string name="not_connected">⚠️ Вы не подключены к Интернету</string>
-    <string name="zero" translatable="false">0</string>
+    <string name="zero" translatable="false">0.0</string>
     <string name="tjs" translatable="false">TJS</string>
 
     <string name="share">Share</string>

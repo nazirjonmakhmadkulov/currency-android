@@ -2,6 +2,8 @@ package com.developer.currency.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.DiffUtil
 import com.developer.currency.R
 import com.developer.currency.core.base.BaseViewHolder
@@ -11,34 +13,51 @@ import com.developer.currency.databinding.ItemConverterBinding
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.utils.ImageResource
 
-class ConverterAdapter : ItemBase<ItemConverterBinding, Valute> {
+class ConverterAdapter(private val onItemChange: (Int, String, String) -> Unit) :
+    ItemBase<ItemConverterBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute
     override fun getLayoutId() = R.layout.item_converter
     override fun getViewHolder(layoutInflater: LayoutInflater, parent: ViewGroup):
         BaseViewHolder<ItemConverterBinding, Valute> {
         val binding = ItemConverterBinding.inflate(layoutInflater, parent, false)
-        return FavoriteViewHolder(binding)
+        return FavoriteViewHolder(binding, onItemChange)
     }
 
     override fun getDiffUtil() = diffUtil
     private val diffUtil = object : DiffUtil.ItemCallback<Valute>() {
         override fun areItemsTheSame(oldItem: Valute, newItem: Valute) = oldItem.valId == newItem.valId
         override fun areContentsTheSame(oldItem: Valute, newItem: Valute) = oldItem.value == newItem.value
+        override fun getChangePayload(oldItem: Valute, newItem: Valute): Any? {
+            if (oldItem.value != newItem.value) return newItem.value
+            return super.getChangePayload(oldItem, newItem)
+        }
     }
 
-    inner class FavoriteViewHolder(binding: ItemConverterBinding) :
-        BaseViewHolder<ItemConverterBinding, Valute>(binding) {
+    inner class FavoriteViewHolder(
+        binding: ItemConverterBinding, private val onItemChange: (Int, String, String) -> Unit
+    ) : BaseViewHolder<ItemConverterBinding, Valute>(binding) {
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
-            val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
+            moneyConvert.tag = item.dates
+            moneyConvert.doOnTextChanged { text, _, _, _ ->
+                onItemChange(item.id, text.toString(), item.value)
+            }
+            moneyConvert.setOnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) onItemChange(item.id, "0.0", "0.0")
+                else {
+                    binding.moneyConvert.setText("")
+                    binding.moneyConvert.hint = "0.0"
+                }
+            }
+            val bt = ImageResource.getImageRes(root.context, item.charCode)
             iconValute.setImageDrawable(bt)
             charCode.text = item.charCode
-            moneyConvert.setText(item.value)
+            moneyConvert.hint = "0.0"
         }
 
         override fun onBind(item: Valute, payloads: List<Any>) {
             super.onBind(item, payloads)
-            binding.name.text = item.value
+            if (payloads.isNotEmpty()) binding.moneyConvert.hint = item.value
         }
     }
 }

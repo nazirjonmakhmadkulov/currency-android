@@ -125,7 +125,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
 
         val xAxis: XAxis = viewBinding.chart.xAxis
 
-        if (valutes.size > 2) {
+        if (valutes.isNotEmpty() && valutes.size > 2) {
             xAxis.valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
                     return Utils.dateFormatChart(valutes[value.toInt()].dates)

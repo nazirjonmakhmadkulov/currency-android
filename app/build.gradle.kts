@@ -14,8 +14,8 @@ android {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
         targetSdk = 34
-        versionCode = 16
-        versionName = "2.5.5"
+        versionCode = 17
+        versionName = "2.5.6"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true

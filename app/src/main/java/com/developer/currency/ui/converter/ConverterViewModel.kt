@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.domain.usecases.ValuteUseCase
 import com.developer.currency.utils.Utils
+import com.developer.currency.utils.foreignValute
 import com.developer.currency.utils.nationalValute
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -20,24 +21,30 @@ class ConverterViewModel(private val valuteUseCase: ValuteUseCase) : ViewModel()
         getAllConverterLocalValutes().onEach { valutes = it }.launchIn(viewModelScope)
     }
 
-    val valuteState = MutableSharedFlow<List<Valute>>()
+    val nationalValuteState = MutableSharedFlow<String>()
+    val foreignValuteState = MutableSharedFlow<List<Valute>>()
 
-    fun submitConverterInput(query: Double) = viewModelScope.launch {
+    fun submitConverterInput(id: Int = 0, query: Double, value: Double) = viewModelScope.launch {
         val items = valutes.map { valute ->
-            val sumNational = nationalValute(valute.nominal.toDouble(), query, valute.value.toDouble())
-            val formatSum = Utils.decFormat(sumNational)
+            val sumNational = if (id == 0) nationalValute(valute.nominal.toDouble(), query, valute.value.toDouble())
+            else {
+                val national = if (query == 0.0) "0.0" else Utils.decFormat(query * value)
+                nationalValuteState.emit(national)
+                foreignValute(query, value, valute.value.toDouble())
+            }
+            val formatValue = if (sumNational == 0.0) "0.0" else Utils.decFormat(sumNational)
             Valute(
                 id = valute.id,
                 valId = valute.valId,
                 charCode = valute.charCode,
                 nominal = valute.nominal,
                 name = valute.name,
-                value = formatSum,
+                value = formatValue,
                 dates = valute.dates,
                 favoritesValute = valute.favoritesValute,
                 favoritesConverter = valute.favoritesConverter
             )
         }
-        valuteState.emit(items)
+        foreignValuteState.emit(items)
     }
 }

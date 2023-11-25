@@ -23,20 +23,6 @@ object Utils {
         return formatter.format(parser.parse(date)!!)
     }
 
-    fun getWeekAge(): String {
-        val cal = Calendar.getInstance()
-        cal.time = Date()
-        cal.add(Calendar.DAY_OF_MONTH, -7)
-        return parser.format(cal.time)
-    }
-
-    fun getMonthAge(): String {
-        val cal = Calendar.getInstance()
-        cal.time = Date()
-        cal.add(Calendar.DAY_OF_MONTH, -30)
-        return parser.format(cal.time)
-    }
-
     fun getYearAge(): String {
         val cal = Calendar.getInstance()
         cal.time = Date()
@@ -69,11 +55,7 @@ object Utils {
 
     private fun setWindowFlag(window: Window, bits: Int, on: Boolean) {
         val winParams = window.attributes
-        if (on) {
-            winParams.flags = winParams.flags or bits
-        } else {
-            winParams.flags = winParams.flags and bits.inv()
-        }
+        winParams.flags = if (on) winParams.flags or bits else winParams.flags and bits.inv()
         window.attributes = winParams
     }
 }
