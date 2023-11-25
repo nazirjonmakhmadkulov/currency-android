@@ -14,7 +14,7 @@ import com.developer.currency.core.common.PATH_EXP
 import com.developer.currency.databinding.FragmentHomeBinding
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.ui.MainViewModel
-import com.developer.currency.ui.adapter.ValCursAdapter
+import com.developer.currency.ui.valutes.ValCursAdapter
 import com.developer.currency.core.utils.Utils
 import com.developer.currency.core.utils.launchAndCollectIn
 import org.koin.androidx.viewmodel.ext.android.viewModel

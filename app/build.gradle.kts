@@ -97,11 +97,11 @@ dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:6.1.0")
+    implementation("com.yandex.android:mobileads:6.2.0")
     implementation("com.yandex.ads.mediation:mobileads-admob:22.1.0.0")
     implementation("com.google.android.gms:play-services-ads:22.5.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.5.1")
+    implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.6.0")
     implementation("com.google.firebase:firebase-analytics-ktx:21.5.0")
 }

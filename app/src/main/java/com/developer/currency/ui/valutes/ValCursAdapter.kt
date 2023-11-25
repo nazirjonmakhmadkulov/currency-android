@@ -1,4 +1,4 @@
-package com.developer.currency.ui.adapter
+package com.developer.currency.ui.valutes
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

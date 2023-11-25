@@ -1,4 +1,4 @@
-package com.developer.currency.ui.adapter
+package com.developer.currency.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -8,10 +8,6 @@ import com.developer.currency.domain.entities.ValHistory
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.domain.usecases.HistoryUseCase
 import com.developer.currency.domain.usecases.ValuteUseCase
-import com.yandex.mobile.ads.impl.cn
-import com.yandex.mobile.ads.impl.cs
-import com.yandex.mobile.ads.impl.d1
-import com.yandex.mobile.ads.impl.d2
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
