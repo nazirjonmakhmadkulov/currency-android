@@ -2,6 +2,14 @@
 <img src="/docs/3.png" width=18% height=18%> <img src="/docs/4.png" width=18% height=18%>
 <img src="/docs/5.png" width=18% height=18%>
 
+<p>
+    <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
+    <img height="80" src="/docs/play-market.png"></a>     
+    <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
+    <img height="80" src="/docs/app-gallery.png"></a>
+</p>
+
+
 <table border="0" style="border: none;" width="0">
   <tr style="border: none!important;">
      <td style="border: none!important;">
