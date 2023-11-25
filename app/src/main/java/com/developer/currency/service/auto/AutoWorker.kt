@@ -10,8 +10,8 @@ import com.developer.currency.core.dispatcher.launchIO
 import com.developer.currency.core.dispatcher.withMain
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.domain.repository.ValuteRemoteRepository
-import com.developer.currency.utils.Notification
-import com.developer.currency.utils.Utils
+import com.developer.currency.core.utils.Notification
+import com.developer.currency.core.utils.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import org.koin.core.component.KoinComponent

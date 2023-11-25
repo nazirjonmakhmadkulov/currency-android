@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.developer.currency.R
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.utils.ImageResource
+import com.developer.currency.core.utils.ImageResource
 
 class WidgetAdapter(
     private val context: Context,

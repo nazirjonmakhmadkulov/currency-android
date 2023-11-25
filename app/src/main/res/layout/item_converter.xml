@@ -62,19 +62,20 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
-                android:enabled="false"
+                android:enabled="true"
                 android:gravity="end|center_vertical"
                 android:hint="@string/zero"
                 android:imeOptions="actionDone"
                 android:inputType="number|numberDecimal"
-                android:maxLength="15"
+                android:maxLength="10"
                 android:maxLines="1"
                 android:minWidth="120dp"
                 android:padding="0dp"
-                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/edit_text_selector"
-                android:textSize="20sp" />
+                android:textColorHint="?attr/colorOnSurface"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView

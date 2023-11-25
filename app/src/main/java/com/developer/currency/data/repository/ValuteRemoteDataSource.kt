@@ -4,7 +4,7 @@ import com.developer.currency.core.database.SharedPreference
 import com.developer.currency.data.remote.ValuteService
 import com.developer.currency.domain.entities.ValCurs
 import com.developer.currency.domain.entities.ValHistory
-import com.developer.currency.utils.LocaleManager.Companion.LANGUAGE_RUSSIAN
+import com.developer.currency.core.utils.LocaleManager.Companion.LANGUAGE_RUSSIAN
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

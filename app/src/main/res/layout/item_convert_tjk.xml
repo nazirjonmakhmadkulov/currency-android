@@ -68,11 +68,13 @@
                 android:hint="@string/zero"
                 android:imeOptions="actionDone"
                 android:inputType="number|numberDecimal"
-                android:maxLength="15"
+                android:maxLength="10"
                 android:maxLines="1"
                 android:minWidth="120dp"
+                android:textColorHint="?attr/colorOnSurface"
                 android:padding="0dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/edit_text_selector"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </com.google.android.material.textfield.TextInputLayout>

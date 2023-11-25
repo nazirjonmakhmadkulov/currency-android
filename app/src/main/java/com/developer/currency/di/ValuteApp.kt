@@ -16,7 +16,7 @@ import com.developer.currency.di.modules.repositoryModule
 import com.developer.currency.di.modules.sharedPreference
 import com.developer.currency.di.modules.useCasesModule
 import com.developer.currency.di.modules.viewModelModule
-import com.developer.currency.utils.LocaleManager
+import com.developer.currency.core.utils.LocaleManager
 import com.google.firebase.FirebaseApp
 import com.yandex.mobile.ads.common.MobileAds
 import org.koin.android.ext.android.inject

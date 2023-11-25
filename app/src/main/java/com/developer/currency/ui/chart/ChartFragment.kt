@@ -14,11 +14,11 @@ import com.developer.currency.core.common.PATH_EXP
 import com.developer.currency.databinding.FragmentChartBinding
 import com.developer.currency.domain.entities.History
 import com.developer.currency.domain.entities.ValHistory
-import com.developer.currency.utils.ImageResource
-import com.developer.currency.utils.Utils
-import com.developer.currency.utils.Utils.getDate
-import com.developer.currency.utils.Utils.getYearAge
-import com.developer.currency.utils.launchAndCollectIn
+import com.developer.currency.core.utils.ImageResource
+import com.developer.currency.core.utils.Utils
+import com.developer.currency.core.utils.Utils.getDate
+import com.developer.currency.core.utils.Utils.getYearAge
+import com.developer.currency.core.utils.launchAndCollectIn
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -125,7 +125,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
 
         val xAxis: XAxis = viewBinding.chart.xAxis
 
-        if (valutes.size > 2) {
+        if (valutes.isNotEmpty() && valutes.size > 2) {
             xAxis.valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
                     return Utils.dateFormatChart(valutes[value.toInt()].dates)
