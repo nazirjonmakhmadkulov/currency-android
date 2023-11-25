@@ -1,4 +1,4 @@
-package com.developer.currency.utils
+package com.developer.currency.core.utils
 
 import android.annotation.SuppressLint
 import android.app.Notification

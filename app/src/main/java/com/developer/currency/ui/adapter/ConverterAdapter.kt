@@ -11,7 +11,7 @@ import com.developer.currency.core.base.Item
 import com.developer.currency.core.base.ItemBase
 import com.developer.currency.databinding.ItemConverterBinding
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.utils.ImageResource
+import com.developer.currency.core.utils.ImageResource
 
 class ConverterAdapter(private val onItemChange: (Int, String, String) -> Unit) :
     ItemBase<ItemConverterBinding, Valute> {

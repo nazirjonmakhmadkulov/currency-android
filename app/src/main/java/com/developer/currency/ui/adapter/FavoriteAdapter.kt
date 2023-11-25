@@ -11,7 +11,7 @@ import com.developer.currency.core.base.ItemBase
 import com.developer.currency.core.common.FAVORITE_CONVERTER
 import com.developer.currency.databinding.FavoritesItemBinding
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.utils.ImageResource
+import com.developer.currency.core.utils.ImageResource
 
 class FavoriteAdapter(
     private val type: String?,

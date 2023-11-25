@@ -10,7 +10,7 @@ import com.developer.currency.core.base.Item
 import com.developer.currency.core.base.ItemBase
 import com.developer.currency.databinding.ItemValuteBinding
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.utils.ImageResource
+import com.developer.currency.core.utils.ImageResource
 
 class ValCursAdapter(private val onItemValuteClick: (Valute) -> Unit) : ItemBase<ItemValuteBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute

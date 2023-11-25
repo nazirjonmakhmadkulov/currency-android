@@ -7,9 +7,9 @@ import com.developer.currency.domain.entities.ValCurs
 import com.developer.currency.domain.entities.ValHistory
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.domain.repository.ValuteRemoteRepository
-import com.developer.currency.utils.Utils.dateFormatDb
-import com.developer.currency.utils.Utils.getDateFormat
-import com.developer.currency.utils.Utils.getYearAge
+import com.developer.currency.core.utils.Utils.dateFormatDb
+import com.developer.currency.core.utils.Utils.getDateFormat
+import com.developer.currency.core.utils.Utils.getYearAge
 
 class ValuteRemoteRepositoryImpl(
     private val valuteRemoteDataSource: ValuteRemoteDataSource,

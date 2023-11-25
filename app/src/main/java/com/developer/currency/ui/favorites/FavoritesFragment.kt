@@ -14,7 +14,7 @@ import com.developer.currency.databinding.FragmentFavoritesBinding
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.ui.MainViewModel
 import com.developer.currency.ui.adapter.FavoriteAdapter
-import com.developer.currency.utils.launchAndCollectIn
+import com.developer.currency.core.utils.launchAndCollectIn
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {

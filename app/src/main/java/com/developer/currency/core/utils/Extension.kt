@@ -1,4 +1,4 @@
-package com.developer.currency.utils
+package com.developer.currency.core.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,13 +11,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.developer.currency.R
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
 
 @SuppressLint("DiscouragedApi", "InternalInsetResource")
 fun Activity.getStatusBarHeight(): Int {
@@ -25,11 +21,8 @@ fun Activity.getStatusBarHeight(): Int {
         window.decorView.rootWindowInsets?.displayCutout?.let { return it.safeInsetTop }
     }
     val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
-    return if (resourceId > 0) {
-        resources.getDimensionPixelSize(resourceId)
-    } else {
-        0
-    }
+    return if (resourceId > 0) resources.getDimensionPixelSize(resourceId) else 0
+
 }
 
 fun Activity.getActionBarHeight(): Int {
@@ -44,24 +37,12 @@ fun Activity.getNavigationBarHeight(): Int {
         return insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
     }
     val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
-    return if (resourceId > 0) {
-        resources.getDimensionPixelSize(resourceId)
-    } else {
-        0
-    }
+    return if (resourceId > 0) resources.getDimensionPixelSize(resourceId) else 0
 }
 
 fun Context.getScreenWidth(): Int = this.resources.displayMetrics.widthPixels
 
 fun Context.getScreenHeight(): Int = this.resources.displayMetrics.heightPixels
-
-fun LifecycleOwner.addRepeatingJob(
-    state: Lifecycle.State,
-    coroutineContext: CoroutineContext = EmptyCoroutineContext,
-    block: suspend CoroutineScope.() -> Unit
-): Job = lifecycleScope.launch(coroutineContext) {
-    repeatOnLifecycle(state, block)
-}
 
 inline fun <T> Flow<T>.launchAndCollectIn(
     owner: LifecycleOwner,

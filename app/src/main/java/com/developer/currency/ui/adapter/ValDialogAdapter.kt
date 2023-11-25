@@ -9,7 +9,7 @@ import com.developer.currency.core.base.Item
 import com.developer.currency.core.base.ItemBase
 import com.developer.currency.databinding.DialogItemBinding
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.utils.ImageResource
+import com.developer.currency.core.utils.ImageResource
 
 class ValDialogAdapter(private val onItemValuteClick: (Valute) -> Unit) : ItemBase<DialogItemBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute

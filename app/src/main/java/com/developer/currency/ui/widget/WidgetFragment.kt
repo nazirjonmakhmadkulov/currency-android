@@ -16,8 +16,8 @@ import com.developer.currency.core.base.Item
 import com.developer.currency.databinding.FragmentWidgetBinding
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.ui.adapter.ValDialogAdapter
-import com.developer.currency.utils.Utils
-import com.developer.currency.utils.launchAndCollectIn
+import com.developer.currency.core.utils.Utils
+import com.developer.currency.core.utils.launchAndCollectIn
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.paperdb.Paper
 import org.koin.androidx.viewmodel.ext.android.viewModel
