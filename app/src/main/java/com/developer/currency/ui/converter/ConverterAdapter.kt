@@ -37,7 +37,6 @@ class ConverterAdapter(private val onItemChange: (Int, String, String) -> Unit) 
     ) : BaseViewHolder<ItemConverterBinding, Valute>(binding) {
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
-            moneyConvert.tag = item.dates
             moneyConvert.doOnTextChanged { text, _, _, _ ->
                 onItemChange(item.id, text.toString(), item.value)
             }
