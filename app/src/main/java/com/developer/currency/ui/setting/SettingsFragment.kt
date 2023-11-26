@@ -89,13 +89,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
         } else if (prefs.getAutoUpdate() == "0") autoUpdate?.isChecked = false
 
         favorite?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            val action = SettingsFragmentDirections.actionNavigationSettingsToEditFragment(FAVORITE_VALUTE)
+            val action = SettingsFragmentDirections.openEditFragment(FAVORITE_VALUTE)
             findNavController().navigate(action)
             true
         }
 
         widget?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            val action = SettingsFragmentDirections.actionNavigationSettingsToWidgetFragment()
+            val action = SettingsFragmentDirections.openWidgetFragment()
             findNavController().navigate(action)
             true
         }

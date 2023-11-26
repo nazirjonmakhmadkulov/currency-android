@@ -66,8 +66,7 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
     }
 
     private fun onItemValute(item: Valute) {
-        val action =
-            AllValutesFragmentDirections.actionNavigationValutesToChartFragment(item.valId, item.charCode)
+        val action = AllValutesFragmentDirections.openChartFragment(item.valId, item.charCode)
         findNavController().navigate(action)
     }
 }

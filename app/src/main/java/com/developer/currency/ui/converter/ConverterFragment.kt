@@ -41,7 +41,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     }
 
     private fun callFavoriteEdit() {
-        val action = ConverterFragmentDirections.actionNavigationConverterToEditFragment(FAVORITE_CONVERTER)
+        val action = ConverterFragmentDirections.openEditFragment(FAVORITE_CONVERTER)
         findNavController().navigate(action)
     }
 

@@ -52,7 +52,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun callFavoriteEdit() {
-        val action = HomeFragmentDirections.actionNavigationHomeToEditFragment(FAVORITE_VALUTE)
+        val action = HomeFragmentDirections.openEditFragment(FAVORITE_VALUTE)
         findNavController().navigate(action)
     }
 
@@ -77,7 +77,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun onItemValute(item: Valute) {
-        val action = HomeFragmentDirections.actionNavigationHomeToChartFragment(item.valId, item.charCode)
+        val action = HomeFragmentDirections.openChartFragment(item.valId, item.charCode)
         findNavController().navigate(action)
     }
 }
