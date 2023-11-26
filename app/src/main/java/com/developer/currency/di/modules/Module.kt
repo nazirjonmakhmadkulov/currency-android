@@ -129,14 +129,13 @@ val databaseModule = module {
 
 val repositoryModule = module {
     fun provideValuteRemoteRepository(
-        dispatcherProvider: DispatcherProvider,
         remoteDataSource: ValuteRemoteDataSource,
         valuteDao: ValuteDao,
         historyDao: HistoryDao
     ): ValuteRemoteRepositoryImpl {
         return ValuteRemoteRepositoryImpl(remoteDataSource, valuteDao, historyDao)
     }
-    single<ValuteRemoteRepository> { provideValuteRemoteRepository(get(), get(), get(), get()) }
+    single<ValuteRemoteRepository> { provideValuteRemoteRepository(get(), get(), get()) }
 
     fun provideValuteLocalRepository(valuteDao: ValuteDao): ValuteLocalRepositoryImpl {
         return ValuteLocalRepositoryImpl(valuteDao)

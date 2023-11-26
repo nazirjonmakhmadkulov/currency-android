@@ -157,9 +157,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun workerInit() {
         WorkManager.getInstance(requireContext()).enqueueUniquePeriodicWork(
-            UNIQUE_WORK_NAME,
-            ExistingPeriodicWorkPolicy.KEEP,
-            createWorkRequest()
+            UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, createWorkRequest()
         )
     }
 

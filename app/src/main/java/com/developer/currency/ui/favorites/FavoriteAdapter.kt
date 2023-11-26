@@ -44,15 +44,13 @@ class FavoriteAdapter(
                 if (type == FAVORITE_CONVERTER) {
                     favorite.setFavorites(item.favoritesConverter)
                     favorite.setOnClickListener {
-                        if (item.favoritesConverter == 1) item.favoritesConverter = 0
-                        else item.favoritesConverter = 1
+                        if (item.favoritesConverter == 1) item.favoritesConverter = 0 else item.favoritesConverter = 1
                         onItemValuteClick(item, bindingAdapterPosition)
                     }
                 } else {
                     favorite.setFavorites(item.favoritesValute)
                     favorite.setOnClickListener {
-                        if (item.favoritesValute == 1) item.favoritesValute = 0
-                        else item.favoritesValute = 1
+                        if (item.favoritesValute == 1) item.favoritesValute = 0 else item.favoritesValute = 1
                         onItemValuteClick(item, bindingAdapterPosition)
                     }
                 }

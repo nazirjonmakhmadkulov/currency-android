@@ -16,14 +16,14 @@ class PagerAdapter(
         args.putString("favorite", favorite)
         return when (position) {
             0 -> {
-                val f = FavoritesFragment()
-                f.arguments = args
-                return f
+                val fragment = FavoritesFragment()
+                fragment.arguments = args
+                return fragment
             }
             1 -> {
-                val f = ValutesFragment()
-                f.arguments = args
-                return f
+                val fragment = ValutesFragment()
+                fragment.arguments = args
+                return fragment
             }
             else -> createFragment(position)
         }
