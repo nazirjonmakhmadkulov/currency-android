@@ -5,7 +5,7 @@
 <p>
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
     <img height="50" style="margin: 0 0 5px 20px; float: right;" src="/docs/play-market.png"></a>   
-    <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
+    <a href="https://appgallery.huawei.ru/#/app/C109625991">
     <img height="50" style="margin: 0 0 5px 20px; float: right;" src="/docs/app-gallery.png"></a>
 </p>
 
