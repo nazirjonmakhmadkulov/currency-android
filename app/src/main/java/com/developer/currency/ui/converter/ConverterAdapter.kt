@@ -11,6 +11,7 @@ import com.developer.currency.core.base.ItemBase
 import com.developer.currency.databinding.ItemConverterBinding
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.core.utils.ImageResource
+import timber.log.Timber
 
 class ConverterAdapter(private val onItemChange: (Int, String, String) -> Unit) :
     ItemBase<ItemConverterBinding, Valute> {
@@ -38,7 +39,11 @@ class ConverterAdapter(private val onItemChange: (Int, String, String) -> Unit) 
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
             moneyConvert.doOnTextChanged { text, _, _, _ ->
-                onItemChange(item.id, text.toString(), item.value)
+                try {
+                    onItemChange(item.id, text.toString(), item.value)
+                } catch (e: NumberFormatException) {
+                    Timber.e("NumberFormatException $e")
+                }
             }
             moneyConvert.setOnFocusChangeListener { v, hasFocus ->
                 if (hasFocus) onItemChange(item.id, "0.0", "0.0")

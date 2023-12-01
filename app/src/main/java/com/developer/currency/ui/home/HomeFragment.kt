@@ -14,9 +14,9 @@ import com.developer.currency.core.common.PATH_EXP
 import com.developer.currency.databinding.FragmentHomeBinding
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.ui.MainViewModel
-import com.developer.currency.ui.valutes.ValCursAdapter
 import com.developer.currency.core.utils.Utils
 import com.developer.currency.core.utils.launchAndCollectIn
+import com.developer.currency.ui.valutes.ValCursAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -24,7 +24,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewBinding by viewBinding(FragmentHomeBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
 
-    private val valCursAdapter: BaseAdapter = BaseAdapter(listOf(ValCursAdapter(::onItemValute)))
+    private val valutesAdapter: BaseAdapter = BaseAdapter(listOf(ValCursAdapter(::onItemValute)))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,14 +52,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun callFavoriteEdit() {
-        val action = HomeFragmentDirections.actionNavigationHomeToEditFragment(FAVORITE_VALUTE)
+        val action = HomeFragmentDirections.openEditFragment(FAVORITE_VALUTE)
         findNavController().navigate(action)
     }
 
     private fun setupViews() {
         viewBinding.recyclerValCurs.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            this.adapter = valCursAdapter
+            this.adapter = valutesAdapter
         }
     }
 
@@ -73,11 +73,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun getAllValuteSuccess(valutes: List<Valute>) {
-        valCursAdapter.submitList(valutes)
+        valutesAdapter.submitList(valutes)
     }
 
     private fun onItemValute(item: Valute) {
-        val action = HomeFragmentDirections.actionNavigationHomeToChartFragment(item.valId, item.charCode)
+        val action = HomeFragmentDirections.openChartFragment(item.valId, item.charCode)
         findNavController().navigate(action)
     }
 }

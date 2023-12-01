@@ -20,6 +20,4 @@ class ValuteUseCase : KoinComponent {
 
     suspend fun getLocalValuteById(valId: Int) = valuteLocalRepository.getLocalValuteById(valId)
     suspend fun updateLocalValute(valute: Valute) = valuteLocalRepository.updateLocalValute(valute)
-    suspend fun deleteLocalValute(valute: Valute) = valuteLocalRepository.deleteLocalValute(valute)
-    suspend fun deleteAllLocalValutes() = valuteLocalRepository.deleteAllLocalValutes()
 }

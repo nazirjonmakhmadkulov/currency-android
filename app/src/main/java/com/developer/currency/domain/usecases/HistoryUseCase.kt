@@ -16,6 +16,4 @@ class HistoryUseCase : KoinComponent {
 
     // local
     fun getLocalHistories(valId: Int, day: Int) = historyLocalRepository.getAllLocalHistory(valId, day)
-    suspend fun deleteLocalHistory() = historyLocalRepository.deleteLocalHistory()
-    suspend fun deleteAllLocalHistory() = historyLocalRepository.deleteAllLocalHistory()
 }
