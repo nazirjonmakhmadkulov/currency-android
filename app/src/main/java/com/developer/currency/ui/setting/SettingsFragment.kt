@@ -57,7 +57,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun shareDialog() {
-        val app = "https://play.google.com/store/apps/details?id=com.developer.valyutaapp"
+        val app = "Google Play - https://play.google.com/store/apps/details?id=com.developer.valyutaapp" +
+            "\n\n AppGallery - https://appgallery.huawei.ru/#/app/C109625991"
         val shareIntent = Intent(Intent.ACTION_SEND).apply {
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             action = Intent.ACTION_SEND
