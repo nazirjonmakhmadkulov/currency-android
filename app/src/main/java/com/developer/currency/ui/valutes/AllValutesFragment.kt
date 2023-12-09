@@ -52,12 +52,8 @@ class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
     }
 
     private fun setupViewModel() {
-        viewModel.getLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
-            getAllValuteSuccess(it)
-        }
-        viewModel.getRemoteValutes.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
-            Timber.d("Success $it")
-        }
+        viewModel.getLocalValutes().launchAndCollectIn(viewLifecycleOwner) { getAllValuteSuccess(it) }
+        viewModel.getRemoteValutes.launchAndCollectIn(viewLifecycleOwner) {}
     }
 
     private fun getAllValuteSuccess(valutes: List<Valute>) {
