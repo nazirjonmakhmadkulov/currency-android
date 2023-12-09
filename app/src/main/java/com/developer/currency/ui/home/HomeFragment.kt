@@ -64,12 +64,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setupViewModel() {
-        viewModel.getFavoriteLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
-            getAllValuteSuccess(it)
-        }
-        viewModel.getRemoteValutes.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
-            Timber.d("Success ", it)
-        }
+        viewModel.getFavoriteLocalValutes().launchAndCollectIn(viewLifecycleOwner) { getAllValuteSuccess(it) }
+        viewModel.getRemoteValutes.launchAndCollectIn(viewLifecycleOwner) {}
     }
 
     private fun getAllValuteSuccess(valutes: List<Valute>) {

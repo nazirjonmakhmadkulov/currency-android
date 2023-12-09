@@ -67,14 +67,12 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     }
 
     private fun setupViewModel() {
-        viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
-            getAllValuteSuccess(it)
+        viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner) { getAllValuteSuccess(it) }
+        viewModel.foreignValuteState.launchAndCollectIn(viewLifecycleOwner) { items ->
+            converterAdapter.submitList(items.toList())
         }
-        viewModel.foreignValuteState.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { items ->
-            launch { converterAdapter.submitList(items.toList()) }
-        }
-        viewModel.nationalValuteState.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { items ->
-            launch { viewBinding.convert.moneyConvert.hint = items }
+        viewModel.nationalValuteState.launchAndCollectIn(viewLifecycleOwner) { items ->
+            viewBinding.convert.moneyConvert.hint = items
         }
     }
 

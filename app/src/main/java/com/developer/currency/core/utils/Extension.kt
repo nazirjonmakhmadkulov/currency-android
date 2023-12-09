@@ -22,7 +22,6 @@ fun Activity.getStatusBarHeight(): Int {
     }
     val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
     return if (resourceId > 0) resources.getDimensionPixelSize(resourceId) else 0
-
 }
 
 fun Activity.getActionBarHeight(): Int {
@@ -41,7 +40,6 @@ fun Activity.getNavigationBarHeight(): Int {
 }
 
 fun Context.getScreenWidth(): Int = this.resources.displayMetrics.widthPixels
-
 fun Context.getScreenHeight(): Int = this.resources.displayMetrics.heightPixels
 
 inline fun <T> Flow<T>.launchAndCollectIn(
