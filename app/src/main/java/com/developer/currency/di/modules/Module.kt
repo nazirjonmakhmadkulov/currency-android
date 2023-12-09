@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.developer.currency.core.common.DB_NAME
 import com.developer.currency.core.common.SERVER_URL
 import com.developer.currency.core.database.AppDatabase
-import com.developer.currency.core.database.SharedPreference
+import com.developer.currency.core.database.getSharedPreference
 import com.developer.currency.core.dispatcher.CoroutineDispatcherProvider
 import com.developer.currency.core.dispatcher.DispatcherProvider
 import com.developer.currency.core.network.NetworkStatusViewModel
@@ -16,6 +16,7 @@ import com.developer.currency.data.repository.HistoryLocalRepositoryImpl
 import com.developer.currency.data.repository.ValuteLocalRepositoryImpl
 import com.developer.currency.data.repository.ValuteRemoteDataSource
 import com.developer.currency.data.repository.ValuteRemoteRepositoryImpl
+import com.developer.currency.domain.AppSettings
 import com.developer.currency.domain.repository.HistoryLocalRepository
 import com.developer.currency.domain.repository.ValuteLocalRepository
 import com.developer.currency.domain.repository.ValuteRemoteRepository
@@ -24,6 +25,7 @@ import com.developer.currency.domain.usecases.ValuteUseCase
 import com.developer.currency.ui.MainViewModel
 import com.developer.currency.ui.chart.ChartViewModel
 import com.developer.currency.ui.converter.ConverterViewModel
+import com.developer.currency.ui.setting.SettingsViewModel
 import com.developer.currency.ui.widget.WidgetViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -32,6 +34,7 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -44,10 +47,12 @@ val viewModelModule = module {
     viewModel { NetworkStatusViewModel() }
     viewModel { ChartViewModel(get(), get()) }
     viewModel { WidgetViewModel(get()) }
+    viewModel { SettingsViewModel() }
 }
 
 val sharedPreference = module {
-    factory { SharedPreference(get()) }
+    single { androidContext().getSharedPreference() }
+    single { AppSettings() }
 }
 
 val dispatcherProviders = module {

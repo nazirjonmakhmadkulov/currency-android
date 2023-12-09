@@ -13,7 +13,6 @@ import java.util.*
 
 class LocaleManager(context: Context) {
     companion object {
-        //        const val LANGUAGE_ENGLISH = "en"
         const val LANGUAGE_RUSSIAN = "ru"
         private const val LANGUAGE_KEY = "language_key"
     }

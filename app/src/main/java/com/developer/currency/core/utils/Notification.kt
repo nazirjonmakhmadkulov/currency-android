@@ -21,8 +21,6 @@ object Notification {
     @SuppressLint("UnspecifiedImmutableFlag")
     fun showNotification(context: Context, title: String, message: String) {
         val intent = Intent(context, MainActivity::class.java)
-        intent.data = Uri.parse("custom://" + System.currentTimeMillis())
-        intent.action = "actionstring" + System.currentTimeMillis()
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         val pi = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_MUTABLE)

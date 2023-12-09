@@ -21,17 +21,15 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.currency.BuildConfig
 import com.developer.currency.R
 import com.developer.currency.core.common.FAVORITE_VALUTE
-import com.developer.currency.core.database.SharedPreference
 import com.developer.currency.databinding.FragmentSettingBinding
 import com.developer.currency.di.ValuteApp
 import com.developer.currency.service.auto.AutoWorker
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 
 class SettingsFragment : PreferenceFragmentCompat() {
-    private val prefs: SharedPreference by inject()
-
     private val viewBinding by viewBinding(FragmentSettingBinding::bind)
+    private val viewModel by viewModel<SettingsViewModel>()
 
     companion object {
         const val DURATION: Long = 1000
@@ -85,9 +83,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val favorite = findPreference<Preference>("favorite")
         val widget = findPreference<Preference>("widget")
 
-        if (prefs.getAutoUpdate() == "1") {
+        if (viewModel.authUpdate == "1") {
             autoUpdate?.isChecked = true
-        } else if (prefs.getAutoUpdate() == "0") autoUpdate?.isChecked = false
+        } else if (viewModel.authUpdate == "0") autoUpdate?.isChecked = false
 
         favorite?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             val action = SettingsFragmentDirections.openEditFragment(FAVORITE_VALUTE)
@@ -104,17 +102,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
         autoUpdate?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             if (autoUpdate?.isChecked == true) {
                 autoUpdate.isChecked = true
-                prefs.saveAutoUpdate("1")
+                viewModel.authUpdate = "1"
                 workerInit()
             } else {
                 autoUpdate?.isChecked = false
-                prefs.saveAutoUpdate("0")
+                viewModel.authUpdate = "0"
                 workerCancel()
             }
             false
         }
 
-        themeApp?.isChecked = prefs.getTheme()
+        themeApp?.isChecked = viewModel.theme
         themeApp?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
                 Configuration.UI_MODE_NIGHT_YES -> AppCompatDelegate.setDefaultNightMode(
@@ -127,10 +125,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
             if (themeApp?.isChecked == true) {
                 themeApp.isChecked = true
-                prefs.saveTheme(theme = true)
+                viewModel.theme = true
             } else {
                 themeApp?.isChecked = false
-                prefs.saveTheme(theme = false)
+                viewModel.theme = false
             }
             false
         }
@@ -140,7 +138,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 val index = preference.findIndexOfValue(newValue.toString())
                 // val entry = preference.entries[index]
                 val charSequence = preference.entryValues[index]
-                prefs.saveLang(charSequence.toString())
+                viewModel.language = charSequence.toString()
                 ValuteApp.localeManager.setNewLocale(requireActivity(), charSequence.toString())
                 requireActivity().recreate()
             }
