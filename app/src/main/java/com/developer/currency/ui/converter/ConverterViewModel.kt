@@ -2,11 +2,11 @@ package com.developer.currency.ui.converter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.developer.currency.domain.entities.Valute
-import com.developer.currency.domain.usecases.ValuteUseCase
 import com.developer.currency.core.utils.Utils
 import com.developer.currency.core.utils.foreignValute
 import com.developer.currency.core.utils.nationalValute
+import com.developer.currency.domain.entities.Valute
+import com.developer.currency.domain.usecases.ValuteUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.launchIn

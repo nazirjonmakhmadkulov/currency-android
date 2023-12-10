@@ -1,5 +1,8 @@
 package com.developer.currency.data.repository
 
+import com.developer.currency.core.utils.Utils.dateFormatDb
+import com.developer.currency.core.utils.Utils.getDateFormat
+import com.developer.currency.core.utils.Utils.getYearAge
 import com.developer.currency.data.local.HistoryDao
 import com.developer.currency.data.local.ValuteDao
 import com.developer.currency.domain.entities.History
@@ -7,9 +10,6 @@ import com.developer.currency.domain.entities.ValCurs
 import com.developer.currency.domain.entities.ValHistory
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.domain.repository.ValuteRemoteRepository
-import com.developer.currency.core.utils.Utils.dateFormatDb
-import com.developer.currency.core.utils.Utils.getDateFormat
-import com.developer.currency.core.utils.Utils.getYearAge
 
 class ValuteRemoteRepositoryImpl(
     private val valuteRemoteDataSource: ValuteRemoteDataSource,

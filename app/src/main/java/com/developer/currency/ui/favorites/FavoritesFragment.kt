@@ -10,10 +10,10 @@ import com.developer.currency.R
 import com.developer.currency.core.base.BaseAdapter
 import com.developer.currency.core.common.FAVORITE_CONVERTER
 import com.developer.currency.core.common.FAVORITE_VALUTE
+import com.developer.currency.core.utils.launchAndCollectIn
 import com.developer.currency.databinding.FragmentFavoritesBinding
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.ui.MainViewModel
-import com.developer.currency.core.utils.launchAndCollectIn
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {

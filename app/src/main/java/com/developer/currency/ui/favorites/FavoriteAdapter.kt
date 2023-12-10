@@ -9,9 +9,9 @@ import com.developer.currency.core.base.BaseViewHolder
 import com.developer.currency.core.base.Item
 import com.developer.currency.core.base.ItemBase
 import com.developer.currency.core.common.FAVORITE_CONVERTER
+import com.developer.currency.core.utils.ImageResource
 import com.developer.currency.databinding.FavoritesItemBinding
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.core.utils.ImageResource
 
 class FavoriteAdapter(
     private val type: String?,
@@ -20,7 +20,8 @@ class FavoriteAdapter(
     override fun isRelativeItem(item: Item): Boolean = item is Valute
     override fun getLayoutId() = R.layout.item_valute
     override fun getViewHolder(
-        layoutInflater: LayoutInflater, parent: ViewGroup
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup
     ): BaseViewHolder<FavoritesItemBinding, Valute> {
         val binding = FavoritesItemBinding.inflate(layoutInflater, parent, false)
         return FavoriteViewHolder(binding, onItemValuteClick)

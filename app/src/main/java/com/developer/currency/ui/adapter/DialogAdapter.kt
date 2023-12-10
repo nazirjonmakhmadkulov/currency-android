@@ -9,8 +9,8 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.developer.currency.R
-import com.developer.currency.domain.entities.Valute
 import com.developer.currency.core.utils.ImageResource
+import com.developer.currency.domain.entities.Valute
 
 class DialogAdapter(
     private val context: Context,

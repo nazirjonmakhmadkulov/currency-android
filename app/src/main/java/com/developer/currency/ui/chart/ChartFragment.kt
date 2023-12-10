@@ -11,14 +11,14 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.currency.R
 import com.developer.currency.core.common.PATH_EXP
-import com.developer.currency.databinding.FragmentChartBinding
-import com.developer.currency.domain.entities.History
-import com.developer.currency.domain.entities.ValHistory
 import com.developer.currency.core.utils.ImageResource
 import com.developer.currency.core.utils.Utils
 import com.developer.currency.core.utils.Utils.getDate
 import com.developer.currency.core.utils.Utils.getYearAge
 import com.developer.currency.core.utils.launchAndCollectIn
+import com.developer.currency.databinding.FragmentChartBinding
+import com.developer.currency.domain.entities.History
+import com.developer.currency.domain.entities.ValHistory
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry

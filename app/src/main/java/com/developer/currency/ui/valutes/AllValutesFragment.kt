@@ -3,7 +3,6 @@ package com.developer.currency.ui.valutes
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -11,13 +10,12 @@ import com.developer.currency.R
 import com.developer.currency.core.base.BaseAdapter
 import com.developer.currency.core.base.Item
 import com.developer.currency.core.common.PATH_EXP
+import com.developer.currency.core.utils.Utils
+import com.developer.currency.core.utils.launchAndCollectIn
 import com.developer.currency.databinding.FragmentAllValutesBinding
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.ui.MainViewModel
-import com.developer.currency.core.utils.Utils
-import com.developer.currency.core.utils.launchAndCollectIn
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class AllValutesFragment : Fragment(R.layout.fragment_all_valutes) {
     private val viewBinding by viewBinding(FragmentAllValutesBinding::bind)

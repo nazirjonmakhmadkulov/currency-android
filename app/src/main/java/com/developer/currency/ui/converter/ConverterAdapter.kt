@@ -8,9 +8,9 @@ import com.developer.currency.R
 import com.developer.currency.core.base.BaseViewHolder
 import com.developer.currency.core.base.Item
 import com.developer.currency.core.base.ItemBase
+import com.developer.currency.core.utils.ImageResource
 import com.developer.currency.databinding.ItemConverterBinding
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.core.utils.ImageResource
 import timber.log.Timber
 
 class ConverterAdapter(private val onItemChange: (Int, String, String) -> Unit) :
@@ -34,7 +34,8 @@ class ConverterAdapter(private val onItemChange: (Int, String, String) -> Unit) 
     }
 
     inner class FavoriteViewHolder(
-        binding: ItemConverterBinding, private val onItemChange: (Int, String, String) -> Unit
+        binding: ItemConverterBinding,
+        private val onItemChange: (Int, String, String) -> Unit
     ) : BaseViewHolder<ItemConverterBinding, Valute>(binding) {
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
