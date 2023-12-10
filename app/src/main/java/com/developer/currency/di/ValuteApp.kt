@@ -2,12 +2,11 @@ package com.developer.currency.di
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import com.developer.currency.BuildConfig
-import com.developer.currency.core.database.boolean
+import com.developer.currency.core.utils.LocaleManager
 import com.developer.currency.di.modules.apiModules
 import com.developer.currency.di.modules.databaseModule
 import com.developer.currency.di.modules.dispatcherProviders
@@ -17,7 +16,6 @@ import com.developer.currency.di.modules.repositoryModule
 import com.developer.currency.di.modules.sharedPreference
 import com.developer.currency.di.modules.useCasesModule
 import com.developer.currency.di.modules.viewModelModule
-import com.developer.currency.core.utils.LocaleManager
 import com.developer.currency.domain.AppSettings
 import com.google.firebase.FirebaseApp
 import com.yandex.mobile.ads.common.MobileAds

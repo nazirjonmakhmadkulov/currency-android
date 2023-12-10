@@ -38,6 +38,7 @@ android {
     }
 
     buildFeatures.viewBinding = true
+    buildFeatures.buildConfig = true
     namespace = "com.developer.currency"
 }
 dependencies {
