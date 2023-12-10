@@ -1,12 +1,12 @@
-<img src="/docs/1.png" width=18% height=18%> <img src="/docs/2.png" width=18% height=18%>
-<img src="/docs/3.png" width=18% height=18%> <img src="/docs/4.png" width=18% height=18%>
-<img src="/docs/5.png" width=18% height=18%>
+<img src="/docs/1.png" width=16% height=16%> <img src="/docs/2.png" width=16% height=16%>
+<img src="/docs/3.png" width=16% height=16%> <img src="/docs/4.png" width=16% height=16%>
+<img src="/docs/5.png" width=16% height=16%><img src="/docs/5.png" width=16% height=16%>
 
 <p>
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
-    <img height="50" style="margin: 0 0 5px 20px; float: right;" src="/docs/play-market.png"></a>   
+    <img height="45" style="margin: 0 0 5px 20px; float: right;" src="/docs/play-market.png"></a>   
     <a href="https://appgallery.huawei.ru/#/app/C109625991">
-    <img height="50" style="margin: 0 0 5px 20px; float: right;" src="/docs/app-gallery.png"></a>
+    <img height="45" style="margin: 0 0 5px 20px; float: right;" src="/docs/app-gallery.png"></a>
 </p>
 
 ## Курсы валют Таджикистана
