@@ -43,24 +43,24 @@ android {
 }
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.22")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.preference:preference-ktx:1.2.1")
-    implementation("androidx.annotation:annotation:1.7.0")
+    implementation("androidx.annotation:annotation:1.7.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation("com.google.android.material:material:1.10.0")
+    implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.multidex:multidex:2.0.1")
 
     implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
 
     // Logging:
     api("com.jakewharton.timber:timber:5.0.1")
@@ -85,24 +85,24 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-simplexml:2.9.0")
 
     // Koin main features for Android
-    implementation("io.insert-koin:koin-android:3.5.0")
+    implementation("io.insert-koin:koin-android:3.5.3")
     // Jetpack WorkManager
-    implementation("io.insert-koin:koin-androidx-workmanager:3.5.0")
+    implementation("io.insert-koin:koin-androidx-workmanager:3.5.3")
 
     // Okhttp logging
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.12")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.12")
 
     // Widget
     implementation("io.github.pilgr:paperdb:2.7.2")
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:6.2.0")
+    implementation("com.yandex.android:mobileads:6.3.0")
     implementation("com.yandex.ads.mediation:mobileads-admob:22.1.0.0")
-    implementation("com.google.android.gms:play-services-ads:22.5.0")
+    implementation("com.google.android.gms:play-services-ads:22.6.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-crashlytics-ktx:18.6.0")
     implementation("com.google.firebase:firebase-analytics-ktx:21.5.0")
 }
