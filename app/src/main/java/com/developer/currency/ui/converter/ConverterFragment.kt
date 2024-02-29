@@ -65,7 +65,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     }
 
     private fun setupViewModel() {
-        viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner) { getAllValuteSuccess(it) }
+        viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner) { setValutes(it) }
         viewModel.foreignValuteState.launchAndCollectIn(viewLifecycleOwner) { items ->
             converterAdapter.submitList(items.toList())
         }
@@ -74,7 +74,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         }
     }
 
-    private fun getAllValuteSuccess(valute: List<Valute>) {
+    private fun setValutes(valute: List<Valute>) {
         this.valutes.clear()
         this.valutes.addAll(valute)
         converterAdapter.submitList(valutes.toList())

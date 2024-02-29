@@ -17,10 +17,7 @@ open class AppWidget : AppWidgetProvider() {
         val intent = Intent(context, WidgetService::class.java)
         if (pendingIntent == null) {
             pendingIntent = PendingIntent.getService(
-                context,
-                0,
-                intent,
-                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
         }
         pendingIntent?.let {

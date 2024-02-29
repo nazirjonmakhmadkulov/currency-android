@@ -9,7 +9,7 @@ import com.developer.currency.core.base.BaseViewHolder
 import com.developer.currency.core.base.Item
 import com.developer.currency.core.base.ItemBase
 import com.developer.currency.core.common.FAVORITE_CONVERTER
-import com.developer.currency.core.utils.ImageResource
+import com.developer.currency.core.utils.getImageRes
 import com.developer.currency.databinding.FavoritesItemBinding
 import com.developer.currency.domain.entities.Valute
 
@@ -20,8 +20,7 @@ class FavoriteAdapter(
     override fun isRelativeItem(item: Item): Boolean = item is Valute
     override fun getLayoutId() = R.layout.item_valute
     override fun getViewHolder(
-        layoutInflater: LayoutInflater,
-        parent: ViewGroup
+        layoutInflater: LayoutInflater, parent: ViewGroup
     ): BaseViewHolder<FavoritesItemBinding, Valute> {
         val binding = FavoritesItemBinding.inflate(layoutInflater, parent, false)
         return FavoriteViewHolder(binding, onItemValuteClick)
@@ -39,21 +38,19 @@ class FavoriteAdapter(
     ) : BaseViewHolder<FavoritesItemBinding, Valute>(binding) {
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
-            val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
-            iconValute.setImageDrawable(bt)
-            type?.let {
-                if (type == FAVORITE_CONVERTER) {
-                    favorite.setFavorites(item.favoritesConverter)
-                    favorite.setOnClickListener {
-                        if (item.favoritesConverter == 1) item.favoritesConverter = 0 else item.favoritesConverter = 1
-                        onItemValuteClick(item, bindingAdapterPosition)
-                    }
-                } else {
-                    favorite.setFavorites(item.favoritesValute)
-                    favorite.setOnClickListener {
-                        if (item.favoritesValute == 1) item.favoritesValute = 0 else item.favoritesValute = 1
-                        onItemValuteClick(item, bindingAdapterPosition)
-                    }
+            val drawable = root.context.getImageRes(item.charCode)
+            iconValute.setImageDrawable(drawable)
+            if (type == FAVORITE_CONVERTER) {
+                favorite.setFavorites(item.favoritesConverter)
+                favorite.setOnClickListener {
+                    item.favoritesConverter = if (item.favoritesConverter == 1) 0 else 1
+                    onItemValuteClick(item, bindingAdapterPosition)
+                }
+            } else {
+                favorite.setFavorites(item.favoritesValute)
+                favorite.setOnClickListener {
+                    item.favoritesValute = if (item.favoritesValute == 1) 0 else 1
+                    onItemValuteClick(item, bindingAdapterPosition)
                 }
             }
             nameValute.text = item.name

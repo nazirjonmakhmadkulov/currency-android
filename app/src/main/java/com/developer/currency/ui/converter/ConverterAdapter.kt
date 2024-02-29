@@ -8,7 +8,7 @@ import com.developer.currency.R
 import com.developer.currency.core.base.BaseViewHolder
 import com.developer.currency.core.base.Item
 import com.developer.currency.core.base.ItemBase
-import com.developer.currency.core.utils.ImageResource
+import com.developer.currency.core.utils.getImageRes
 import com.developer.currency.databinding.ItemConverterBinding
 import com.developer.currency.domain.entities.Valute
 import timber.log.Timber
@@ -53,8 +53,8 @@ class ConverterAdapter(private val onItemChange: (Int, String, String) -> Unit) 
                     binding.moneyConvert.hint = "0.0"
                 }
             }
-            val bt = ImageResource.getImageRes(root.context, item.charCode)
-            iconValute.setImageDrawable(bt)
+            val drawable = root.context.getImageRes(item.charCode)
+            iconValute.setImageDrawable(drawable)
             charCode.text = item.charCode
             moneyConvert.hint = "0.0"
         }

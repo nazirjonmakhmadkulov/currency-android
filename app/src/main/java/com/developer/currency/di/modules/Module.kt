@@ -25,7 +25,9 @@ import com.developer.currency.domain.usecases.ValuteUseCase
 import com.developer.currency.ui.MainViewModel
 import com.developer.currency.ui.chart.ChartViewModel
 import com.developer.currency.ui.converter.ConverterViewModel
+import com.developer.currency.ui.home.HomeViewModel
 import com.developer.currency.ui.setting.SettingsViewModel
+import com.developer.currency.ui.valutes.AllValutesViewModel
 import com.developer.currency.ui.widget.WidgetViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -43,7 +45,9 @@ import java.util.concurrent.TimeUnit
 
 val viewModelModule = module {
     viewModel { MainViewModel(get()) }
+    viewModel { HomeViewModel(get()) }
     viewModel { ConverterViewModel(get()) }
+    viewModel { AllValutesViewModel(get()) }
     viewModel { NetworkStatusViewModel() }
     viewModel { ChartViewModel(get(), get()) }
     viewModel { WidgetViewModel(get()) }
@@ -134,9 +138,7 @@ val databaseModule = module {
 
 val repositoryModule = module {
     fun provideValuteRemoteRepository(
-        remoteDataSource: ValuteRemoteDataSource,
-        valuteDao: ValuteDao,
-        historyDao: HistoryDao
+        remoteDataSource: ValuteRemoteDataSource, valuteDao: ValuteDao, historyDao: HistoryDao
     ): ValuteRemoteRepositoryImpl {
         return ValuteRemoteRepositoryImpl(remoteDataSource, valuteDao, historyDao)
     }

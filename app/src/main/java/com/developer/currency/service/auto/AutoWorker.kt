@@ -42,12 +42,8 @@ class AutoWorker(appContext: Context, workerParams: WorkerParameters) :
     }
 
     private fun showNotify(data: List<Valute>) {
-        var info = ""
-        data.forEach {
-            if (it.valId == 840 || it.valId == 978 || it.valId == 810) {
-                info += "${it.charCode} ${it.value}  "
-            }
-        }
+        val info = data.filter { it.favoritesValute == 1 }
+            .joinToString(" ") { "${it.charCode} ${it.value}" }
         Notification.showNotification(applicationContext, applicationContext.getString(R.string.app_name), info)
     }
 }

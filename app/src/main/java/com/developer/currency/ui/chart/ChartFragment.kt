@@ -5,20 +5,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.currency.R
 import com.developer.currency.core.common.PATH_EXP
-import com.developer.currency.core.utils.ImageResource
 import com.developer.currency.core.utils.Utils
 import com.developer.currency.core.utils.Utils.getDate
 import com.developer.currency.core.utils.Utils.getYearAge
+import com.developer.currency.core.utils.getImageRes
 import com.developer.currency.core.utils.launchAndCollectIn
 import com.developer.currency.databinding.FragmentChartBinding
 import com.developer.currency.domain.entities.History
-import com.developer.currency.domain.entities.ValHistory
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -32,7 +30,7 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private val viewBinding by viewBinding(FragmentChartBinding::bind)
     private val viewModel by viewModel<ChartViewModel>()
     private val args: ChartFragmentArgs by navArgs()
-    private var dateItems: MutableList<String> = mutableListOf()
+    private val dateItems: MutableList<String> = mutableListOf()
     private var limit = 7
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,13 +53,13 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
     private fun setupViewModel() = with(viewBinding) {
         getRemoteHistories(getYearAge())
         viewModel.getLocalValuteById(args.valId)
-        viewModel.getRemoteHistories.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
-            subscribeHistoryState(it)
+        viewModel.getRemoteHistories.launchAndCollectIn(viewLifecycleOwner) {
+            subscribeHistoryState()
         }
 
-        viewModel.getLocalValuteById.launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { valute ->
+        viewModel.getLocalValuteById.launchAndCollectIn(viewLifecycleOwner) { valute ->
             valute?.let {
-                val bt = ImageResource.getImageRes(requireContext(), it.charCode)
+                val bt = requireContext().getImageRes(it.charCode)
                 iconValute.setImageDrawable(bt)
                 name.text = it.charCode
                 somon.text = it.value
@@ -71,27 +69,21 @@ class ChartFragment : Fragment(R.layout.fragment_chart) {
 
     private fun getRemoteHistories(dates: String) {
         viewBinding.loading.visibility = View.VISIBLE
-        viewModel.getRemoteHistories(
-            dates,
-            getDate(),
-            args.valId,
-            args.charCode,
-            PATH_EXP
-        )
+        viewModel.getRemoteHistories(dates, getDate(), args.valId, args.charCode, PATH_EXP)
     }
 
     private fun getLocalHistories(limit: Int) {
-        viewModel.getLocalHistories(args.valId, limit).launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
-            getAllValuteSuccess(it)
+        viewModel.getLocalHistories(args.valId, limit).launchAndCollectIn(viewLifecycleOwner) {
+            setValutes(it)
         }
     }
 
-    private fun subscribeHistoryState(result: ValHistory) {
+    private fun subscribeHistoryState() {
         getLocalHistories(limit)
         viewBinding.loading.visibility = View.GONE
     }
 
-    private fun getAllValuteSuccess(valutes: List<History>) {
+    private fun setValutes(valutes: List<History>) {
         showBarChart(emptyList())
         dateItems.clear()
         dateItems.addAll(valutes.map { it.dates })

@@ -16,11 +16,13 @@ import com.developer.currency.databinding.FragmentHomeBinding
 import com.developer.currency.domain.entities.Valute
 import com.developer.currency.ui.MainViewModel
 import com.developer.currency.ui.valutes.ValCursAdapter
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewBinding by viewBinding(FragmentHomeBinding::bind)
-    private val viewModel by viewModel<MainViewModel>()
+    private val mainViewModel by activityViewModel<MainViewModel>()
+    private val viewModel by viewModel<HomeViewModel>()
 
     private val valutesAdapter: BaseAdapter = BaseAdapter(listOf(ValCursAdapter(::onItemValute)))
 
@@ -44,7 +46,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun swipeRefresh() = with(viewBinding) {
         swipe.setColorSchemeResources(R.color.black_second)
         swipe.setOnRefreshListener {
-            viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
+            mainViewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
             swipe.isRefreshing = false
         }
     }
@@ -62,11 +64,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setupViewModel() {
-        viewModel.getFavoriteLocalValutes().launchAndCollectIn(viewLifecycleOwner) { getAllValuteSuccess(it) }
-        viewModel.getRemoteValutes.launchAndCollectIn(viewLifecycleOwner) {}
+        viewModel.fetchFavoriteValutes().launchAndCollectIn(viewLifecycleOwner) { setValutes(it) }
+        mainViewModel.getRemoteValutes.launchAndCollectIn(viewLifecycleOwner) {}
     }
 
-    private fun getAllValuteSuccess(valutes: List<Valute>) {
+    private fun setValutes(valutes: List<Valute>) {
         valutesAdapter.submitList(valutes)
     }
 

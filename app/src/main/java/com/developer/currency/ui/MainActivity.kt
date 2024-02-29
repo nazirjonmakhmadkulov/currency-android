@@ -114,10 +114,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun setupViewModel() {
         viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-        viewModel.getRemoteValutes.launchAndCollectIn(this, Lifecycle.State.STARTED) {
+        viewModel.getRemoteValutes.launchAndCollectIn(this) {
             Timber.d("RemoteValutes $it")
         }
-        networkStatusViewModel.state.launchAndCollectIn(this, Lifecycle.State.STARTED) {
+        networkStatusViewModel.state.launchAndCollectIn(this) {
             when (it) {
                 NetworkStatus.Available -> snackBarNetwork?.dismiss()
                 NetworkStatus.Unavailable -> snackBarNetwork?.show()

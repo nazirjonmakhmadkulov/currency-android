@@ -18,12 +18,12 @@ class PagerAdapter(
             0 -> {
                 val fragment = FavoritesFragment()
                 fragment.arguments = args
-                return fragment
+                fragment
             }
             1 -> {
                 val fragment = ValutesFragment()
                 fragment.arguments = args
-                return fragment
+                fragment
             }
             else -> createFragment(position)
         }

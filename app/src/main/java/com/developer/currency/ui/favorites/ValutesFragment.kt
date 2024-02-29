@@ -3,7 +3,6 @@ package com.developer.currency.ui.favorites
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.currency.R
@@ -35,12 +34,10 @@ class ValutesFragment : Fragment(R.layout.fragment_valutes) {
     }
 
     private fun setupViewModel() {
-        viewModel.getLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) {
-            getAllValuteSuccess(it)
-        }
+        viewModel.getLocalValutes().launchAndCollectIn(viewLifecycleOwner) {setValutes(it) }
     }
 
-    private fun getAllValuteSuccess(valutes: List<Valute>) {
+    private fun setValutes(valutes: List<Valute>) {
         sortAdapter.submitList(valutes)
     }
 
