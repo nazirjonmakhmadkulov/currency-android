@@ -8,8 +8,8 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.developer.currency.ui.MainActivity
 import com.developer.currency.core.utils.Utils.setStatusBar
+import com.developer.currency.ui.MainActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {

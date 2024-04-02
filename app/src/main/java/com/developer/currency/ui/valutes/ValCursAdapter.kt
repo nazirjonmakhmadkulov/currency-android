@@ -4,13 +4,14 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.developer.currency.R
 import com.developer.currency.core.base.BaseViewHolder
 import com.developer.currency.core.base.Item
 import com.developer.currency.core.base.ItemBase
+import com.developer.currency.core.utils.getImageRes
 import com.developer.currency.databinding.ItemValuteBinding
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.core.utils.ImageResource
 
 class ValCursAdapter(private val onItemValuteClick: (Valute) -> Unit) : ItemBase<ItemValuteBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute
@@ -28,20 +29,25 @@ class ValCursAdapter(private val onItemValuteClick: (Valute) -> Unit) : ItemBase
     }
 
     inner class ValuteViewHolder(
-        binding: ItemValuteBinding,
-        val onItemValuteClick: (Valute) -> Unit
+        binding: ItemValuteBinding, val onItemValuteClick: (Valute) -> Unit
     ) : BaseViewHolder<ItemValuteBinding, Valute>(binding) {
+        init {
+            binding.cardId.setOnClickListener {
+                if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
+                onItemValuteClick(item)
+            }
+        }
+
         @SuppressLint("SetTextI18n")
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
-            val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
-            iconValute.setImageDrawable(bt)
+            val drawable = root.context.getImageRes(item.charCode)
+            iconValute.setImageDrawable(drawable)
             name.text = item.charCode
             nameCountry.text = item.name
             date.text = item.dates
             somon.text = item.value + " TJS"
             value.text = "${item.nominal} ${item.charCode}"
-            cardId.setOnClickListener { onItemValuteClick(item) }
         }
     }
 }

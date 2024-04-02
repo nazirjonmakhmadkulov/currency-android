@@ -10,8 +10,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.developer.currency.R
+import com.developer.currency.core.utils.getImageRes
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.core.utils.ImageResource
 
 class WidgetAdapter(
     private val context: Context,
@@ -22,7 +22,7 @@ class WidgetAdapter(
     override fun getItem(i: Int): Any = valutes[i]
     override fun getItemId(i: Int): Long = valutes[i].id.toLong()
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "ViewHolder")
     override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val v = inflater.inflate(R.layout.favorites_item, viewGroup, false)
@@ -30,8 +30,8 @@ class WidgetAdapter(
         // val listView = v.findViewById<View>(R.id.list_dialog) as ListView
         val icon = v.findViewById<View>(R.id.img_flag) as ImageView
         val tvName = v.findViewById<View>(R.id.name_currency) as TextView
-        val bt = ImageResource.getImageRes(context, valutes[i].charCode)
-        icon.setImageDrawable(bt)
+        val drawable = context.getImageRes(valutes[i].charCode)
+        icon.setImageDrawable(drawable)
         tvName.text = valutes[i].name
 //        checkBox.setOnCheckedChangeListener { _, _ ->
 //            checkBox.isChecked = checkBox.isChecked

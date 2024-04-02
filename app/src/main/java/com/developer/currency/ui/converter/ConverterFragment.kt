@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.currency.R
 import com.developer.currency.core.base.BaseAdapter
 import com.developer.currency.core.common.FAVORITE_CONVERTER
+import com.developer.currency.core.utils.launchAndCollectIn
 import com.developer.currency.databinding.FragmentConverterBinding
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.core.utils.launchAndCollectIn
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -67,7 +65,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     }
 
     private fun setupViewModel() {
-        viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner) { getAllValuteSuccess(it) }
+        viewModel.getAllConverterLocalValutes().launchAndCollectIn(viewLifecycleOwner) { setValutes(it) }
         viewModel.foreignValuteState.launchAndCollectIn(viewLifecycleOwner) { items ->
             converterAdapter.submitList(items.toList())
         }
@@ -76,7 +74,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         }
     }
 
-    private fun getAllValuteSuccess(valute: List<Valute>) {
+    private fun setValutes(valute: List<Valute>) {
         this.valutes.clear()
         this.valutes.addAll(valute)
         converterAdapter.submitList(valutes.toList())

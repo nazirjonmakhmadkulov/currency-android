@@ -76,10 +76,7 @@ class ValuteApp : Application() {
             Timber.tag(YANDEX_MOBILE_ADS_TAG).d("SDK initialized")
         }
 
-        if (appSettings.theme) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
+        if (appSettings.theme) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }

@@ -3,13 +3,14 @@ package com.developer.currency.ui.widget
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.developer.currency.R
 import com.developer.currency.core.base.BaseViewHolder
 import com.developer.currency.core.base.Item
 import com.developer.currency.core.base.ItemBase
+import com.developer.currency.core.utils.getImageRes
 import com.developer.currency.databinding.DialogItemBinding
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.core.utils.ImageResource
 
 class ValDialogAdapter(private val onItemValuteClick: (Valute) -> Unit) : ItemBase<DialogItemBinding, Valute> {
     override fun isRelativeItem(item: Item): Boolean = item is Valute
@@ -28,12 +29,17 @@ class ValDialogAdapter(private val onItemValuteClick: (Valute) -> Unit) : ItemBa
 
     inner class ValuteViewHolder(binding: DialogItemBinding, val onItemValuteClick: (Valute) -> Unit) :
         BaseViewHolder<DialogItemBinding, Valute>(binding) {
+        init {
+            binding.itemDialog.setOnClickListener {
+                if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
+                onItemValuteClick(item)
+            }
+        }
         override fun onBind(item: Valute) = with(binding) {
             super.onBind(item)
-            val bt = ImageResource.getImageRes(binding.root.context, item.charCode)
-            this.imgFlag.setImageDrawable(bt)
+            val drawable = root.context.getImageRes(item.charCode)
+            this.imgFlag.setImageDrawable(drawable)
             nameCurrency.text = item.charCode
-            itemDialog.setOnClickListener { onItemValuteClick(item) }
         }
     }
 }

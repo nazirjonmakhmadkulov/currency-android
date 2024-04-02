@@ -9,8 +9,8 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.developer.currency.R
+import com.developer.currency.core.utils.getImageRes
 import com.developer.currency.domain.entities.Valute
-import com.developer.currency.core.utils.ImageResource
 
 class DialogAdapter(
     private val context: Context,
@@ -27,8 +27,8 @@ class DialogAdapter(
         val view = inflater.inflate(R.layout.dialog_item, viewGroup, false)
         val icon = view.findViewById<ImageView>(R.id.img_flag)
         val txName = view.findViewById<TextView>(R.id.name_currency)
-        val bt = ImageResource.getImageRes(context, valutes[i].charCode)
-        icon.setImageDrawable(bt)
+        val drawable = context.getImageRes(valutes[i].charCode)
+        icon.setImageDrawable(drawable)
         txName.text = valutes[i].name
         return view
     }

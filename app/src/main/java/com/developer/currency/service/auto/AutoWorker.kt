@@ -8,10 +8,10 @@ import com.developer.currency.R
 import com.developer.currency.core.common.PATH_EXP
 import com.developer.currency.core.dispatcher.launchIO
 import com.developer.currency.core.dispatcher.withMain
-import com.developer.currency.domain.entities.Valute
-import com.developer.currency.domain.repository.ValuteRemoteRepository
 import com.developer.currency.core.utils.Notification
 import com.developer.currency.core.utils.Utils
+import com.developer.currency.domain.entities.Valute
+import com.developer.currency.domain.repository.ValuteRemoteRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import org.koin.core.component.KoinComponent
@@ -42,12 +42,8 @@ class AutoWorker(appContext: Context, workerParams: WorkerParameters) :
     }
 
     private fun showNotify(data: List<Valute>) {
-        var info = ""
-        data.forEach {
-            if (it.valId == 840 || it.valId == 978 || it.valId == 810) {
-                info += "${it.charCode} ${it.value}  "
-            }
-        }
+        val info = data.filter { it.favoritesValute == 1 }
+            .joinToString(" ") { "${it.charCode} ${it.value}" }
         Notification.showNotification(applicationContext, applicationContext.getString(R.string.app_name), info)
     }
 }

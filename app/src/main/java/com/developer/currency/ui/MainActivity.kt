@@ -19,14 +19,14 @@ import com.developer.currency.R
 import com.developer.currency.core.common.PATH_EXP
 import com.developer.currency.core.network.NetworkStatus
 import com.developer.currency.core.network.NetworkStatusViewModel
-import com.developer.currency.databinding.ActivityMainBinding
-import com.developer.currency.di.ValuteApp
 import com.developer.currency.core.utils.Utils
 import com.developer.currency.core.utils.Utils.setStatusBar
 import com.developer.currency.core.utils.getActionBarHeight
 import com.developer.currency.core.utils.getScreenWidth
 import com.developer.currency.core.utils.getStatusBarHeight
 import com.developer.currency.core.utils.launchAndCollectIn
+import com.developer.currency.databinding.ActivityMainBinding
+import com.developer.currency.di.ValuteApp
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.yandex.mobile.ads.banner.BannerAdSize
@@ -114,10 +114,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun setupViewModel() {
         viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
-        viewModel.getRemoteValutes.launchAndCollectIn(this, Lifecycle.State.STARTED) {
+        viewModel.getRemoteValutes.launchAndCollectIn(this) {
             Timber.d("RemoteValutes $it")
         }
-        networkStatusViewModel.state.launchAndCollectIn(this, Lifecycle.State.STARTED) {
+        networkStatusViewModel.state.launchAndCollectIn(this) {
             when (it) {
                 NetworkStatus.Available -> snackBarNetwork?.dismiss()
                 NetworkStatus.Unavailable -> snackBarNetwork?.show()
