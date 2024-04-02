@@ -43,7 +43,6 @@ android {
 }
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.22")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
@@ -80,9 +79,9 @@ dependencies {
     ksp("androidx.room:room-compiler:2.6.1")
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:converter-simplexml:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.retrofit2:converter-simplexml:2.11.0")
 
     // Koin main features for Android
     implementation("io.insert-koin:koin-android:3.5.3")
@@ -98,9 +97,9 @@ dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:6.4.0")
+    implementation("com.yandex.android:mobileads:6.4.1")
 
-    implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.6.2")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.5.1")
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.6.3")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.6.1")
 }
