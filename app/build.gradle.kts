@@ -42,7 +42,7 @@ android {
     namespace = "com.developer.currency"
 }
 dependencies {
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
@@ -65,7 +65,7 @@ dependencies {
     api("com.jakewharton.timber:timber:5.0.1")
 
     // Fragment
-    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.fragment:fragment-ktx:1.7.0")
 
     // Kotlin + coroutines
     implementation("androidx.work:work-runtime-ktx:2.9.0")
@@ -84,22 +84,22 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-simplexml:2.11.0")
 
     // Koin main features for Android
-    implementation("io.insert-koin:koin-android:3.5.3")
+    implementation("io.insert-koin:koin-android:3.5.6")
     // Jetpack WorkManager
-    implementation("io.insert-koin:koin-androidx-workmanager:3.5.3")
+    implementation("io.insert-koin:koin-androidx-workmanager:3.5.6")
 
     // Okhttp logging
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.12")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.12")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.14")
 
     // Widget
     implementation("io.github.pilgr:paperdb:2.7.2")
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:6.4.1")
+    implementation("com.yandex.android:mobileads:7.0.1")
 
-    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.6.3")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.6.1")
+    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.6.4")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.6.2")
 }
