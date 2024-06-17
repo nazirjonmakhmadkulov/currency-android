@@ -65,7 +65,7 @@ dependencies {
     api("com.jakewharton.timber:timber:5.0.1")
 
     // Fragment
-    implementation("androidx.fragment:fragment-ktx:1.7.1")
+    implementation("androidx.fragment:fragment-ktx:1.8.0")
 
     // Kotlin + coroutines
     implementation("androidx.work:work-runtime-ktx:2.9.0")
