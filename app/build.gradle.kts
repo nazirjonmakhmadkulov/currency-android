@@ -58,20 +58,20 @@ dependencies {
 
     implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.1")
 
     // Logging:
     api("com.jakewharton.timber:timber:5.0.1")
 
     // Fragment
-    implementation("androidx.fragment:fragment-ktx:1.8.2")
+    implementation("androidx.fragment:fragment-ktx:1.8.3")
 
     // Kotlin + coroutines
     implementation("androidx.work:work-runtime-ktx:2.9.1")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 
     // Room
     implementation("androidx.room:room-ktx:2.6.1")
@@ -84,9 +84,9 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-simplexml:2.11.0")
 
     // Koin main features for Android
-    implementation("io.insert-koin:koin-android:3.5.6")
+    implementation("io.insert-koin:koin-android:4.0.0")
     // Jetpack WorkManager
-    implementation("io.insert-koin:koin-androidx-workmanager:3.5.6")
+    implementation("io.insert-koin:koin-androidx-workmanager:4.0.0")
 
     // Okhttp logging
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14")
@@ -99,7 +99,7 @@ dependencies {
 
     implementation("com.yandex.android:mobileads:7.4.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx:19.0.3")
+    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx:19.1.0")
     implementation("com.google.firebase:firebase-analytics-ktx:22.1.0")
 }
