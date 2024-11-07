@@ -7,13 +7,8 @@
     android:fitsSystemWindows="false"
     android:orientation="vertical">
 
-    <com.developer.currency.ui.SeatGridView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_main"
-        android:visibility="gone"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
