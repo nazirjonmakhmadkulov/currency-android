@@ -12,6 +12,10 @@
 .externalNativeBuild
 /.idea
 
+
+### Store key ###
+*.jks
+
 ### Android ###
 # Built application files
 *.apk
