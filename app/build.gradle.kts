@@ -1,3 +1,8 @@
+
+import java.io.FileInputStream
+import java.util.Properties
+import kotlin.apply
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -14,12 +19,24 @@ android {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
         targetSdk = 34
-        versionCode = 20
-        versionName = "2.5.9"
+        versionCode = 21
+        versionName = "2.6.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }
+
+    val prop = Properties().apply {
+        load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+    }
+
+    signingConfigs.create("release") {
+        storeFile = file("store_key.jks")
+        storePassword = prop.getProperty("KEYSTORE_PASSWORD")
+        keyAlias = prop.getProperty("KEY_ALIAS")
+        keyPassword = prop.getProperty("KEY_PASSWORD")
+    }
+
     buildTypes {
         debug {
             isMinifyEnabled = false
@@ -28,7 +45,54 @@ android {
         }
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+
+    val googlePlay = "https://play.google.com/store/apps/dev?id=5402022606902660683"
+    val appGallery =
+        "https://appgallery.huawei.ru/#/tab/appdetailCommon%7CC109579467%7Cautomore%7Cdoublecolumncardwithstar%7C903547"
+    val ruStore = "https://www.rustore.ru/catalog/developer/ktgto9"
+
+    sourceSets {
+        named("main") {
+            java.srcDir("src/main/java")
+            java.srcDir("src/huawei/java")
+            java.srcDir("src/rustore/java")
+        }
+        create("google").manifest.srcFile("src/google/AndroidManifest.xml")
+        create("huawei").manifest.srcFile("src/huawei/AndroidManifest.xml")
+        create("rustore").manifest.srcFile("src/rustore/AndroidManifest.xml")
+    }
+
+    flavorDimensions += listOf("bundle", "type", "store")
+
+    productFlavors {
+        // Bundles:
+        create("currency") {
+            dimension = "bundle"
+            applicationId = "com.developer.valyutaapp"
+        }
+
+        // Types:
+        create("prod") {
+            dimension = "type"
+        }
+
+        create("google") {
+            dimension = "store"
+            buildConfigField("String", "MARKET_URL", "\"$googlePlay\"")
+        }
+        create("huawei") {
+            versionNameSuffix = ".hms"
+            dimension = "store"
+            buildConfigField("String", "MARKET_URL", "\"$appGallery\"")
+        }
+        create("rustore") {
+            versionNameSuffix = ".ru"
+            dimension = "store"
+            buildConfigField("String", "MARKET_URL", "\"$ruStore\"")
         }
     }
 
@@ -58,8 +122,8 @@ dependencies {
 
     implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.3")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.4")
 
     // Logging:
     api("com.jakewharton.timber:timber:5.0.1")
@@ -97,9 +161,9 @@ dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:7.6.0")
+    implementation("com.yandex.android:mobileads:7.7.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-crashlytics-ktx:19.2.1")
     implementation("com.google.firebase:firebase-analytics-ktx:22.1.2")
 }

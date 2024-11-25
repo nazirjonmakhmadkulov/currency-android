@@ -37,21 +37,21 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
 
 val viewModelModule = module {
-    viewModel { MainViewModel(get()) }
-    viewModel { HomeViewModel(get()) }
-    viewModel { ConverterViewModel(get()) }
-    viewModel { AllValutesViewModel(get()) }
-    viewModel { NetworkStatusViewModel() }
-    viewModel { ChartViewModel(get(), get()) }
-    viewModel { WidgetViewModel(get()) }
-    viewModel { SettingsViewModel() }
+    viewModelOf(::MainViewModel)
+    viewModelOf(::HomeViewModel)
+    viewModelOf(::ConverterViewModel)
+    viewModelOf(::AllValutesViewModel)
+    viewModelOf(::NetworkStatusViewModel)
+    viewModelOf(::ChartViewModel)
+    viewModelOf(::WidgetViewModel)
+    viewModelOf(::SettingsViewModel)
 }
 
 val sharedPreference = module {
