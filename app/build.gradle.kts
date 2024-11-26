@@ -19,8 +19,8 @@ android {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
         targetSdk = 34
-        versionCode = 21
-        versionName = "2.6.0"
+        versionCode = 22
+        versionName = "2.6.1"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
@@ -44,7 +44,8 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
@@ -125,19 +126,18 @@ dependencies {
 
     implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9")
 
+    // Fragment
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.4")
     implementation("androidx.navigation:navigation-ui-ktx:2.8.4")
 
     // Logging:
     api("com.jakewharton.timber:timber:5.0.1")
 
-    // Fragment
-    implementation("androidx.fragment:fragment-ktx:1.8.5")
-
-    // Kotlin + coroutines
+    // Jetpack WorkManager
     implementation("androidx.work:work-runtime-ktx:2.10.0")
+    implementation("io.insert-koin:koin-androidx-workmanager:4.0.0")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 
     // Room
@@ -152,8 +152,6 @@ dependencies {
 
     // Koin main features for Android
     implementation("io.insert-koin:koin-android:4.0.0")
-    // Jetpack WorkManager
-    implementation("io.insert-koin:koin-androidx-workmanager:4.0.0")
 
     // Okhttp logging
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14")
