@@ -1,12 +1,14 @@
 package com.developer.currency.ui.setting
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.net.toUri
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -19,6 +21,7 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.currency.BuildConfig
+import com.developer.currency.BuildConfig.MARKET_URL
 import com.developer.currency.R
 import com.developer.currency.core.common.FAVORITE_VALUTE
 import com.developer.currency.databinding.FragmentSettingBinding
@@ -26,6 +29,7 @@ import com.developer.currency.di.ValuteApp
 import com.developer.currency.service.auto.AutoWorker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
+import kotlin.getValue
 
 class SettingsFragment : PreferenceFragmentCompat() {
     private val viewBinding by viewBinding(FragmentSettingBinding::bind)
@@ -55,8 +59,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun shareDialog() {
-        val app = "Google Play - https://play.google.com/store/apps/details?id=com.developer.valyutaapp" +
-            "\n\n AppGallery - https://appgallery.huawei.ru/#/app/C109625991"
+        val app = "RuStore - https://www.rustore.ru/catalog/app/com.developer.valyutaapp" +
+            "\n\nGoogle Play - https://play.google.com/store/apps/details?id=com.developer.valyutaapp" +
+            "\n\nAppGallery - https://appgallery.huawei.ru/#/app/C109625991"
         val shareIntent = Intent(Intent.ACTION_SEND).apply {
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             action = Intent.ACTION_SEND
@@ -67,12 +72,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun goToAppMarket() {
-        startActivity(
-            Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/dev?id=5402022606902660683")
-            )
-        )
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, MARKET_URL.toUri()))
+        } catch (_: ActivityNotFoundException) {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_URL)))
+        }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -100,12 +104,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         autoUpdate?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            if (autoUpdate?.isChecked == true) {
+            if (autoUpdate.isChecked == true) {
                 autoUpdate.isChecked = true
                 viewModel.authUpdate = "1"
                 workerInit()
             } else {
-                autoUpdate?.isChecked = false
+                autoUpdate.isChecked = false
                 viewModel.authUpdate = "0"
                 workerCancel()
             }
@@ -123,11 +127,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     AppCompatDelegate.MODE_NIGHT_YES
                 )
             }
-            if (themeApp?.isChecked == true) {
+            if (themeApp.isChecked == true) {
                 themeApp.isChecked = true
                 viewModel.theme = true
             } else {
-                themeApp?.isChecked = false
+                themeApp.isChecked = false
                 viewModel.theme = false
             }
             false
@@ -138,7 +142,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 val index = preference.findIndexOfValue(newValue.toString())
                 // val entry = preference.entries[index]
                 val charSequence = preference.entryValues[index]
-                viewModel.language = charSequence.toString()
+                viewModel.appSettings.language = charSequence.toString()
                 ValuteApp.localeManager.setNewLocale(requireActivity(), charSequence.toString())
                 requireActivity().recreate()
             }
