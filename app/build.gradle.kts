@@ -1,4 +1,3 @@
-
 import java.io.FileInputStream
 import java.util.Properties
 import kotlin.apply
@@ -128,8 +127,8 @@ dependencies {
 
     // Fragment
     implementation("androidx.fragment:fragment-ktx:1.8.5")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.8.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.4")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.5")
 
     // Logging:
     api("com.jakewharton.timber:timber:5.0.1")
@@ -162,9 +161,9 @@ dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:7.7.0")
+    implementation("com.yandex.android:mobileads:7.8.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx:19.2.1")
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx:19.3.0")
     implementation("com.google.firebase:firebase-analytics-ktx:22.1.2")
 }
