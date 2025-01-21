@@ -1,6 +1,6 @@
+
 import java.io.FileInputStream
 import java.util.Properties
-import kotlin.apply
 
 plugins {
     id("com.android.application")
@@ -137,7 +137,7 @@ dependencies {
     implementation("androidx.work:work-runtime-ktx:2.10.0")
     implementation("io.insert-koin:koin-androidx-workmanager:4.0.0")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
 
     // Room
     implementation("androidx.room:room-ktx:2.6.1")
@@ -150,7 +150,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-simplexml:2.11.0")
 
     // Koin main features for Android
-    implementation("io.insert-koin:koin-android:4.0.0")
+    implementation("io.insert-koin:koin-android:4.0.1")
 
     // Okhttp logging
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14")
@@ -161,9 +161,9 @@ dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:7.8.0")
+    implementation("com.yandex.android:mobileads:7.9.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx:19.3.0")
-    implementation("com.google.firebase:firebase-analytics-ktx:22.1.2")
+    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx:19.4.0")
+    implementation("com.google.firebase:firebase-analytics-ktx:22.2.0")
 }
