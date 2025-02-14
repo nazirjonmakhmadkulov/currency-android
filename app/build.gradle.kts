@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 22
         versionName = "2.6.1"
         vectorDrawables.useSupportLibrary = true
@@ -126,9 +126,9 @@ dependencies {
     implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9")
 
     // Fragment
-    implementation("androidx.fragment:fragment-ktx:1.8.5")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.8.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.5")
+    implementation("androidx.fragment:fragment-ktx:1.8.6")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.7")
 
     // Logging:
     api("com.jakewharton.timber:timber:5.0.1")
@@ -161,9 +161,9 @@ dependencies {
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    implementation("com.yandex.android:mobileads:7.9.0")
+    implementation("com.yandex.android:mobileads:7.10.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
     implementation("com.google.firebase:firebase-crashlytics-ktx:19.4.0")
     implementation("com.google.firebase:firebase-analytics-ktx:22.2.0")
 }
