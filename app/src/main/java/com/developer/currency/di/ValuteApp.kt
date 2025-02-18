@@ -1,9 +1,10 @@
 package com.developer.currency.di
 
+import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.multidex.MultiDexApplication
+import androidx.multidex.MultiDex
 import com.developer.currency.BuildConfig
 import com.developer.currency.core.utils.LocaleManager
 import com.developer.currency.di.modules.apiModules
@@ -25,7 +26,7 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import timber.log.Timber
 
-class ValuteApp : MultiDexApplication() {
+class ValuteApp : Application() {
 
     companion object {
         lateinit var localeManager: LocaleManager
@@ -37,6 +38,7 @@ class ValuteApp : MultiDexApplication() {
     override fun attachBaseContext(base: Context) {
         localeManager = LocaleManager(base)
         super.attachBaseContext(localeManager.setLocale(base))
+        MultiDex.install(this)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

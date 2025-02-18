@@ -17,8 +17,8 @@ android {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
         targetSdk = 35
-        versionCode = 22
-        versionName = "2.6.1"
+        versionCode = 23
+        versionName = "2.6.2"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
@@ -42,8 +42,8 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         release {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }

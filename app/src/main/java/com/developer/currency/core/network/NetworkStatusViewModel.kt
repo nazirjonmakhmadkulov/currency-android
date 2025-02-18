@@ -10,7 +10,7 @@ import org.koin.core.component.KoinComponent
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class NetworkStatusViewModel : ViewModel(), KoinComponent {
-    val context by lazy { getKoin().get<Context>() }
+    private val context by lazy { getKoin().get<Context>() }
     private val networkStatusTracker = NetworkStatusTracker(context)
 
     @OptIn(FlowPreview::class)
