@@ -14,7 +14,7 @@ class NetworkStatusViewModel : ViewModel(), KoinComponent {
     private val networkStatusTracker = NetworkStatusTracker(context)
 
     @OptIn(FlowPreview::class)
-    val state = networkStatusTracker.networkStatus.map(
+    val state = this.networkStatusTracker.networkStatus.map(
         onAvailable = { NetworkStatus.Available },
         onUnavailable = { NetworkStatus.Unavailable }
     ).flowOn(Dispatchers.IO)
