@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
+import android.os.Build
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.awaitClose
@@ -24,6 +25,9 @@ class NetworkStatusTracker(context: Context) {
         }
         val request = NetworkRequest.Builder().addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET).build()
         connectivityManager.registerNetworkCallback(request, networkStatusCallback)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            connectivityManager.requestNetwork(request, networkStatusCallback, 1000)
+        }
         awaitClose { connectivityManager.unregisterNetworkCallback(networkStatusCallback) }
     }.distinctUntilChanged()
 }

@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val viewBinding by viewBinding(ActivityMainBinding::bind, R.id.container)
     private val viewModel by viewModel<MainViewModel>()
     private val networkStatusViewModel by viewModel<NetworkStatusViewModel>()
-    private var snackBarNetwork: Snackbar? = null
+    private var snackBar: Snackbar? = null
 
     companion object {
         const val UNIT_ID1 = "R-M-2277119-1"
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         mBannerAdView.loadAd(adRequest)
     }
 
-    private fun setupSnackBar(): Snackbar {
+    private fun setupSnackBar() {
         val snackBarNetwork = Snackbar
             .make(this.viewBinding.root, getString(R.string.not_connected), Snackbar.LENGTH_INDEFINITE)
             .setBackgroundTint(ContextCompat.getColor(this@MainActivity, R.color.peach))
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         params.gravity = Gravity.TOP
         view.translationY = getStatusBarHeight().toFloat() + getActionBarHeight().toFloat()
         view.layoutParams = params
-        return snackBarNetwork
+        snackBar = snackBarNetwork
     }
 
     private fun checkStatusPostNotification() {
@@ -118,8 +118,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
         networkStatusViewModel.state.launchAndCollectIn(this) {
             when (it) {
-                NetworkStatus.Available -> snackBarNetwork?.dismiss()
-                NetworkStatus.Unavailable -> snackBarNetwork?.show()
+                NetworkStatus.Available -> snackBar?.dismiss()
+                NetworkStatus.Unavailable -> snackBar?.show()
             }
         }
     }
