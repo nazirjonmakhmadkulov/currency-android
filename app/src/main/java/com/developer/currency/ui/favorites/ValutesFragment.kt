@@ -34,7 +34,7 @@ class ValutesFragment : Fragment(R.layout.fragment_valutes) {
     }
 
     private fun setupViewModel() {
-        viewModel.getLocalValutes().launchAndCollectIn(viewLifecycleOwner) {setValutes(it) }
+        viewModel.getLocalValutes().launchAndCollectIn(viewLifecycleOwner) { setValutes(it) }
     }
 
     private fun setValutes(valutes: List<Valute>) {

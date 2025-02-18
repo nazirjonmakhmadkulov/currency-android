@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.developer.currency.di.modules
 
 import android.app.Application
@@ -29,9 +31,6 @@ import com.developer.currency.ui.home.HomeViewModel
 import com.developer.currency.ui.setting.SettingsViewModel
 import com.developer.currency.ui.valutes.AllValutesViewModel
 import com.developer.currency.ui.widget.WidgetViewModel
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -100,10 +99,6 @@ val netModule = module {
         return okHttpClientBuilder.build()
     }
 
-    fun provideGson(): Gson {
-        return GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).setLenient().create()
-    }
-
     @Suppress("DEPRECATION")
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -115,13 +110,13 @@ val netModule = module {
 
     single { provideCache(androidApplication()) }
     single { provideHttpClient(get()) }
-    single { provideGson() }
     single { provideRetrofit(get()) }
 }
 
 val databaseModule = module {
     fun provideDatabase(application: Application): AppDatabase {
-        return Room.databaseBuilder(application, AppDatabase::class.java, DB_NAME).build()
+        return Room.databaseBuilder(application, AppDatabase::class.java, DB_NAME)
+            .build()
     }
 
     fun provideValuteDao(database: AppDatabase): ValuteDao {

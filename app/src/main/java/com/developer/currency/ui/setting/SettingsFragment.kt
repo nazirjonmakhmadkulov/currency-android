@@ -29,7 +29,6 @@ import com.developer.currency.di.ValuteApp
 import com.developer.currency.service.auto.AutoWorker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
-import kotlin.getValue
 
 class SettingsFragment : PreferenceFragmentCompat() {
     private val viewBinding by viewBinding(FragmentSettingBinding::bind)
@@ -104,12 +103,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         autoUpdate?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            if (autoUpdate.isChecked == true) {
+            if (autoUpdate?.isChecked == true) {
                 autoUpdate.isChecked = true
                 viewModel.authUpdate = "1"
                 workerInit()
             } else {
-                autoUpdate.isChecked = false
+                autoUpdate?.isChecked = false
                 viewModel.authUpdate = "0"
                 workerCancel()
             }
@@ -127,11 +126,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     AppCompatDelegate.MODE_NIGHT_YES
                 )
             }
-            if (themeApp.isChecked == true) {
+            if (themeApp?.isChecked == true) {
                 themeApp.isChecked = true
                 viewModel.theme = true
             } else {
-                themeApp.isChecked = false
+                themeApp?.isChecked = false
                 viewModel.theme = false
             }
             false

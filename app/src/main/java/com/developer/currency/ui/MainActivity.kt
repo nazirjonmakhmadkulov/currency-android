@@ -11,7 +11,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -41,8 +40,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private var snackBarNetwork: Snackbar? = null
 
     companion object {
-        const val unitId1 = "R-M-2277119-1"
-        const val unitId2 = "R-M-2277119-2"
+        const val UNIT_ID1 = "R-M-2277119-1"
+        const val UNIT_ID2 = "R-M-2277119-2"
     }
 
     private val pushNotificationPermissionLauncher =
@@ -67,15 +66,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         navController?.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.navigation_home, R.id.navigation_valutes -> setupAds(unitId1)
-                R.id.navigation_converter, R.id.navigation_settings -> setupAds(unitId2)
+                R.id.navigation_home, R.id.navigation_valutes -> setupAds(UNIT_ID1)
+                R.id.navigation_converter, R.id.navigation_settings -> setupAds(UNIT_ID2)
             }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        setupAds(unitId1)
+        setupAds(UNIT_ID1)
     }
 
     private fun setupAds(unitId: String) {
