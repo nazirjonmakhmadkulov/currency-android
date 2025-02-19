@@ -26,6 +26,7 @@
             app:icon="@drawable/baseline_language"
             app:key="key_language"
             app:title="@string/language"
+            app:defaultValue="ru"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
