@@ -2,15 +2,16 @@ package com.developer.currency.core.network
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.flowOn
-import org.koin.core.component.KoinComponent
-
+import javax.inject.Inject
+@HiltViewModel
 @OptIn(ExperimentalCoroutinesApi::class)
-class NetworkStatusViewModel : ViewModel(), KoinComponent {
-    private val context by lazy { getKoin().get<Context>() }
+class NetworkStatusViewModel @Inject constructor(@ApplicationContext context: Context) : ViewModel() {
     private val networkStatusTracker = NetworkStatusTracker(context)
 
     @OptIn(FlowPreview::class)

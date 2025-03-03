@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/main_navigation" />
+        app:navGraph="@navigation/navigation" />
 
     <com.yandex.mobile.ads.banner.BannerAdView
         android:id="@+id/adView"

@@ -2,13 +2,14 @@ import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
-    id("androidx.navigation.safeargs.kotlin")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
-    id("org.jlleitschuh.gradle.ktlint")
+    alias(libs.plugins.currency.android.application)
+    alias(libs.plugins.currency.android.application.compose)
+    alias(libs.plugins.currency.android.application.flavors)
+    alias(libs.plugins.currency.android.application.firebase)
+    alias(libs.plugins.android.navigation.safeargs)
+    alias(libs.plugins.currency.hilt)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ktlint)
 }
 
 android {
@@ -54,46 +55,46 @@ android {
         "https://appgallery.huawei.ru/#/tab/appdetailCommon%7CC109579467%7Cautomore%7Cdoublecolumncardwithstar%7C903547"
     val ruStore = "https://www.rustore.ru/catalog/developer/ktgto9"
 
-    sourceSets {
-        named("main") {
-            java.srcDir("src/main/java")
-            java.srcDir("src/huawei/java")
-            java.srcDir("src/rustore/java")
-        }
-        create("google").manifest.srcFile("src/google/AndroidManifest.xml")
-        create("huawei").manifest.srcFile("src/huawei/AndroidManifest.xml")
-        create("rustore").manifest.srcFile("src/rustore/AndroidManifest.xml")
-    }
+//    sourceSets {
+//        named("main") {
+//            java.srcDir("src/main/java")
+//            java.srcDir("src/huawei/java")
+//            java.srcDir("src/rustore/java")
+//        }
+//        create("google").manifest.srcFile("src/google/AndroidManifest.xml")
+//        create("huawei").manifest.srcFile("src/huawei/AndroidManifest.xml")
+//        create("rustore").manifest.srcFile("src/rustore/AndroidManifest.xml")
+//    }
 
-    flavorDimensions += listOf("bundle", "type", "store")
-
-    productFlavors {
-        // Bundles:
-        create("currency") {
-            dimension = "bundle"
-            applicationId = "com.developer.valyutaapp"
-        }
-
-        // Types:
-        create("prod") {
-            dimension = "type"
-        }
-
-        create("google") {
-            dimension = "store"
-            buildConfigField("String", "MARKET_URL", "\"$googlePlay\"")
-        }
-        create("huawei") {
-            versionNameSuffix = ".hms"
-            dimension = "store"
-            buildConfigField("String", "MARKET_URL", "\"$appGallery\"")
-        }
-        create("rustore") {
-            versionNameSuffix = ".ru"
-            dimension = "store"
-            buildConfigField("String", "MARKET_URL", "\"$ruStore\"")
-        }
-    }
+//    flavorDimensions += listOf("bundle", "type", "store")
+//
+//    productFlavors {
+//        // Bundles:
+//        create("currency") {
+//            dimension = "bundle"
+//            applicationId = "com.developer.valyutaapp"
+//        }
+//
+////         Types:
+//        create("prod") {
+//            dimension = "type"
+//        }
+//
+//        create("google") {
+//            dimension = "store"
+//            buildConfigField("String", "MARKET_URL", "\"$googlePlay\"")
+//        }
+//        create("huawei") {
+//            versionNameSuffix = ".hms"
+//            dimension = "store"
+//            buildConfigField("String", "MARKET_URL", "\"$appGallery\"")
+//        }
+//        create("rustore") {
+//            versionNameSuffix = ".ru"
+//            dimension = "store"
+//            buildConfigField("String", "MARKET_URL", "\"$ruStore\"")
+//        }
+//    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_19
@@ -108,60 +109,45 @@ android {
     namespace = "com.developer.currency"
 }
 dependencies {
-    implementation("androidx.core:core-ktx:1.15.0")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.2.0")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("androidx.preference:preference-ktx:1.2.1")
-    implementation("androidx.annotation:annotation:1.9.1")
+    implementation(projects.feature.home)
+    implementation(projects.feature.favorite)
+    implementation(projects.feature.converter)
+    implementation(projects.feature.currencies)
+    implementation(projects.feature.setting)
+    implementation(projects.feature.chart)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    implementation(projects.core.common)
+    implementation(projects.core.designsystem)
+    implementation(projects.core.data)
+    implementation(projects.core.domain)
+    implementation(projects.core.navigation)
 
-    implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.multidex:multidex:2.0.1")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.multidex)
+    implementation(libs.androidx.preference.ktx)
 
-    implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9")
+    implementation(libs.viewbinding.noreflection)
 
     // Fragment
-    implementation("androidx.fragment:fragment-ktx:1.8.6")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.8.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.7")
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    implementation(libs.androidx.work.ktx)
+    implementation(libs.koin.androidx.workmanager)
+    implementation(libs.hilt.ext.work)
 
     // Logging:
-    api("com.jakewharton.timber:timber:5.0.1")
+    api(libs.timber)
 
-    // Jetpack WorkManager
-    implementation("androidx.work:work-runtime-ktx:2.10.0")
-    implementation("io.insert-koin:koin-androidx-workmanager:4.0.0")
-
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
-
-    // Room
-    implementation("androidx.room:room-ktx:2.6.1")
-    implementation("androidx.room:room-runtime:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
-
-    // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-simplexml:2.11.0")
-
-    // Koin main features for Android
-    implementation("io.insert-koin:koin-android:4.0.1")
-
-    // Okhttp logging
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.14")
+    implementation(libs.kotlinx.coroutines.android)
 
     // Widget
     implementation("io.github.pilgr:paperdb:2.7.2")
 
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation(libs.mobileads)
 
-    implementation("com.yandex.android:mobileads:7.10.1")
-
-    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx:19.4.0")
-    implementation("com.google.firebase:firebase-analytics-ktx:22.2.0")
+    // Shimmer
+    implementation(libs.shimmer)
 }
