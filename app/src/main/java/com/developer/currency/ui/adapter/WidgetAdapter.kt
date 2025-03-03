@@ -10,17 +10,17 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.developer.currency.R
-import com.developer.currency.core.utils.getImageRes
-import com.developer.currency.domain.entities.Valute
+import com.developer.designsystem.icons.getImageRes
+import com.developer.domain.model.Currency
 
 class WidgetAdapter(
     private val context: Context,
-    private val valutes: MutableList<Valute>,
-    private val onItemValuteClick: (Valute, Int) -> Unit
+    private val currencies: MutableList<Currency>,
+    private val onItemValuteClick: (Currency, Int) -> Unit
 ) : BaseAdapter() {
-    override fun getCount(): Int = valutes.size
-    override fun getItem(i: Int): Any = valutes[i]
-    override fun getItemId(i: Int): Long = valutes[i].id.toLong()
+    override fun getCount(): Int = currencies.size
+    override fun getItem(i: Int): Any = currencies[i]
+    override fun getItemId(i: Int): Long = currencies[i].id.toLong()
 
     @SuppressLint("MissingInflatedId", "ViewHolder")
     override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {
@@ -30,13 +30,13 @@ class WidgetAdapter(
         // val listView = v.findViewById<View>(R.id.list_dialog) as ListView
         val icon = v.findViewById<View>(R.id.img_flag) as ImageView
         val tvName = v.findViewById<View>(R.id.name_currency) as TextView
-        val drawable = context.getImageRes(valutes[i].charCode)
+        val drawable = context.getImageRes(currencies[i].charCode)
         icon.setImageDrawable(drawable)
-        tvName.text = valutes[i].name
+        tvName.text = currencies[i].name
 //        checkBox.setOnCheckedChangeListener { _, _ ->
 //            checkBox.isChecked = checkBox.isChecked
 //        }
-        linearLayout.setOnClickListener { onItemValuteClick(valutes[i], i) }
+        linearLayout.setOnClickListener { onItemValuteClick(currencies[i], i) }
         return v
     }
 }

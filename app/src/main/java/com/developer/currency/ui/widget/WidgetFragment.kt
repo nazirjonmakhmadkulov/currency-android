@@ -5,32 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.developer.common.Item
+import com.developer.common.Utils
 import com.developer.currency.R
-import com.developer.currency.core.base.BaseAdapter
-import com.developer.currency.core.base.Item
-import com.developer.currency.core.utils.Utils
-import com.developer.currency.core.utils.launchAndCollectIn
+import com.developer.designsystem.base.BaseAdapter
 import com.developer.currency.databinding.FragmentWidgetBinding
-import com.developer.currency.domain.entities.Valute
+import com.developer.domain.model.Currency
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.paperdb.Paper
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.DecimalFormat
 
 class WidgetFragment : Fragment(R.layout.fragment_widget) {
     private val viewBinding by viewBinding(FragmentWidgetBinding::bind)
-    private val viewModel by viewModel<WidgetViewModel>()
+//    private val viewModel by viewModel<WidgetViewModel>()
 
     private var dialog: AlertDialog? = null
 
-    private var valutes: MutableList<Valute> = mutableListOf()
+    private var currencies: MutableList<Currency> = mutableListOf()
     private val valuteList: MutableList<Item> by lazy(LazyThreadSafetyMode.NONE) {
-        MutableList(valutes.size) { valutes[it] }
+        MutableList(currencies.size) { currencies[it] }
     }
     private val valCursAdapter: BaseAdapter = BaseAdapter(listOf(ValDialogAdapter(::onItemValute)))
 
@@ -46,14 +43,14 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
     }
 
     private fun setupViewModel() {
-        viewModel.getLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { valutes ->
-            getAllValuteSuccess(valutes)
-        }
+//        viewModel.getLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { valutes ->
+//            getAllValuteSuccess(valutes)
+//        }
     }
 
-    private fun getAllValuteSuccess(valutes: List<Valute>) {
-        this.valutes.clear()
-        this.valutes.addAll(valutes.toMutableList())
+    private fun getAllValuteSuccess(currencies: List<Currency>) {
+        this.currencies.clear()
+        this.currencies.addAll(currencies.toMutableList())
     }
 
     private fun setWidgetData() = with(viewBinding) {
@@ -86,7 +83,7 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
         dialog?.show()
     }
 
-    private fun onItemValute(item: Valute) {
+    private fun onItemValute(item: Currency) {
         dialog?.dismiss()
     }
 }

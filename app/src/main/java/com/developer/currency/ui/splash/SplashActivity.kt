@@ -8,9 +8,11 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.developer.currency.core.utils.Utils.setStatusBar
-import com.developer.currency.ui.MainActivity
+import com.developer.common.Utils.setStatusBar
+import com.developer.currency.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

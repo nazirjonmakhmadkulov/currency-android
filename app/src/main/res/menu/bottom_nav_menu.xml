@@ -14,7 +14,7 @@
         android:title="@string/converter" />
 
     <item
-        android:id="@+id/navigation_valutes"
+        android:id="@+id/navigation_currencies"
         android:icon="@drawable/ic_all"
         android:title="@string/valutes" />
 

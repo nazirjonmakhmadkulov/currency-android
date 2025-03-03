@@ -7,11 +7,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
-        android:name=".di.ValuteApp"
+        android:name=".CurrencyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -34,16 +33,28 @@
         </activity>
 
         <activity
-            android:name=".ui.MainActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:name=".MainActivity"
+            android:configChanges="uiMode"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="www.valyutaapp.developer.com" />
+            </intent-filter>
+        </activity>
 
         <service
-            android:name=".service.widget.WidgetService"
+            android:name=".core.widget.WidgetService"
             android:enabled="true"
             android:exported="false" />
 
         <receiver
-            android:name=".service.widget.AppWidget"
+            android:name=".core.widget.AppWidget"
             android:exported="true"
             tools:ignore="Instantiatable,MissingClass">
             <intent-filter>
