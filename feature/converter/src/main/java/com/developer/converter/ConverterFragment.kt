@@ -15,6 +15,7 @@ import com.developer.designsystem.base.BaseAdapter
 import com.developer.designsystem.launchAndCollectIn
 import com.developer.domain.model.Currency
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -52,10 +53,10 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         }
         viewBinding.convert.moneyConvert.doOnTextChanged { text, _, _, _ ->
             try {
-                if (text.isNullOrEmpty()) viewModel.submitConverterInput(0, 0.0, 0.0)
-                else viewModel.submitConverterInput(0, text.toString().toDouble(), 0.0)
+                if (text.isNullOrEmpty()) viewModel.submitConverterInput(0, 0.0, 1, 0.0)
+                else viewModel.submitConverterInput(0, text.toString().toDouble(), 1, 0.0)
             } catch (e: NumberFormatException) {
-//                Timber.e("NumberFormatException $e")
+                Timber.e("NumberFormatException $e")
             }
         }
         viewBinding.convert.moneyConvert.setOnFocusChangeListener { _, hasFocus ->
@@ -83,8 +84,8 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         viewBinding.convert.cardId.isVisible = currencies.isNotEmpty()
     }
 
-    private fun onItemChange(id: Int, query: String, value: String) {
-        if (query.isEmpty()) viewModel.submitConverterInput(id, 0.0, 0.0)
-        else viewModel.submitConverterInput(id, query.toDouble(), value.toDouble())
+    private fun onItemChange(id: Int, amount: String, nominal: Int, value: String) {
+        if (amount.isEmpty()) viewModel.submitConverterInput(id, 0.0, 0, 0.0)
+        else viewModel.submitConverterInput(id, amount.toDouble(), nominal, value.toDouble())
     }
 }

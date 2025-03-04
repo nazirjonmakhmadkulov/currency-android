@@ -4,7 +4,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.currency.android.application)
     alias(libs.plugins.currency.android.application.compose)
-    alias(libs.plugins.currency.android.application.flavors)
+//    alias(libs.plugins.currency.android.application.flavors)
     alias(libs.plugins.currency.android.application.firebase)
     alias(libs.plugins.android.navigation.safeargs)
     alias(libs.plugins.currency.hilt)
@@ -18,8 +18,8 @@ android {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
         targetSdk = 35
-        versionCode = 23
-        versionName = "2.6.2"
+        versionCode = 24
+        versionName = "2.6.3"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
@@ -55,46 +55,46 @@ android {
         "https://appgallery.huawei.ru/#/tab/appdetailCommon%7CC109579467%7Cautomore%7Cdoublecolumncardwithstar%7C903547"
     val ruStore = "https://www.rustore.ru/catalog/developer/ktgto9"
 
-//    sourceSets {
-//        named("main") {
-//            java.srcDir("src/main/java")
-//            java.srcDir("src/huawei/java")
-//            java.srcDir("src/rustore/java")
-//        }
-//        create("google").manifest.srcFile("src/google/AndroidManifest.xml")
-//        create("huawei").manifest.srcFile("src/huawei/AndroidManifest.xml")
-//        create("rustore").manifest.srcFile("src/rustore/AndroidManifest.xml")
-//    }
+    sourceSets {
+        named("main") {
+            java.srcDir("src/main/java")
+            java.srcDir("src/huawei/java")
+            java.srcDir("src/rustore/java")
+        }
+        create("google").manifest.srcFile("src/google/AndroidManifest.xml")
+        create("huawei").manifest.srcFile("src/huawei/AndroidManifest.xml")
+        create("rustore").manifest.srcFile("src/rustore/AndroidManifest.xml")
+    }
 
-//    flavorDimensions += listOf("bundle", "type", "store")
-//
-//    productFlavors {
-//        // Bundles:
-//        create("currency") {
-//            dimension = "bundle"
-//            applicationId = "com.developer.valyutaapp"
-//        }
-//
-////         Types:
-//        create("prod") {
-//            dimension = "type"
-//        }
-//
-//        create("google") {
-//            dimension = "store"
-//            buildConfigField("String", "MARKET_URL", "\"$googlePlay\"")
-//        }
-//        create("huawei") {
-//            versionNameSuffix = ".hms"
-//            dimension = "store"
-//            buildConfigField("String", "MARKET_URL", "\"$appGallery\"")
-//        }
-//        create("rustore") {
-//            versionNameSuffix = ".ru"
-//            dimension = "store"
-//            buildConfigField("String", "MARKET_URL", "\"$ruStore\"")
-//        }
-//    }
+    flavorDimensions += listOf("bundle", "type", "store")
+
+    productFlavors {
+        // Bundles:
+        create("currency") {
+            dimension = "bundle"
+            applicationId = "com.developer.valyutaapp"
+        }
+
+//         Types:
+        create("prod") {
+            dimension = "type"
+        }
+
+        create("google") {
+            dimension = "store"
+            buildConfigField("String", "MARKET_URL", "\"$googlePlay\"")
+        }
+        create("huawei") {
+            versionNameSuffix = ".hms"
+            dimension = "store"
+            buildConfigField("String", "MARKET_URL", "\"$appGallery\"")
+        }
+        create("rustore") {
+            versionNameSuffix = ".ru"
+            dimension = "store"
+            buildConfigField("String", "MARKET_URL", "\"$ruStore\"")
+        }
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_19
@@ -118,6 +118,7 @@ dependencies {
 
     implementation(projects.core.common)
     implementation(projects.core.designsystem)
+    implementation(projects.core.ui)
     implementation(projects.core.data)
     implementation(projects.core.domain)
     implementation(projects.core.navigation)
@@ -150,4 +151,5 @@ dependencies {
 
     // Shimmer
     implementation(libs.shimmer)
+    androidTestImplementation(libs.junit.junit)
 }

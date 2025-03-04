@@ -2,6 +2,7 @@ package com.developer.data.datasource
 
 import com.developer.common.LANGUAGE_RUSSIAN
 import com.developer.domain.AppSettings
+import com.developer.network.RemoteDataSource
 import com.developer.network.model.CurrencyDto
 import com.developer.network.model.HistoryDto
 import com.developer.network.retrofit.CurrencyService
@@ -10,7 +11,7 @@ import javax.inject.Inject
 class CurrencyRemoteDataSource @Inject constructor(
     private val currencyService: CurrencyService,
     private val preference: AppSettings
-) {
+) : RemoteDataSource() {
     private val lang
         get() = preference.language ?: LANGUAGE_RUSSIAN
 

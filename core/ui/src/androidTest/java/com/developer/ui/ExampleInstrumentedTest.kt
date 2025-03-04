@@ -1,4 +1,4 @@
-package com.developer.home
+package com.developer.ui
 
 import org.junit.Test
 
@@ -13,6 +13,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
 //        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-//        assertEquals("com.developer.home.test", appContext.packageName)
+//        assertEquals("com.developer.ui.test", appContext.packageName)
     }
 }

@@ -1,4 +1,4 @@
-package com.developer.currency.core.network
+package com.developer.ui.network
 
 sealed class NetworkStatus {
     data object Available : NetworkStatus()

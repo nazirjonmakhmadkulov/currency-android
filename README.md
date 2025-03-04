@@ -1,9 +1,15 @@
-<img src="/docs/1.png" width=18% height=18%> <img src="/docs/2.png" width=18% height=18%>
-<img src="/docs/3.png" width=18% height=18%> <img src="/docs/4.png" width=18% height=18%>
-<img src="/docs/5.png" width=18% height=18%>
+<img src="/docs/1.png" width=16% height=16%> <img src="/docs/2.png" width=16% height=16%>
+<img src="/docs/6.png" width=16% height=16%><img src="/docs/3.png" width=16% height=16%>
+<img src="/docs/4.png" width=16% height=16%><img src="/docs/5.png" width=16% height=16%>
 
-<a href="https://play.google.com/store/apps/details?id=com.developer.currency">
-<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70"></a>
+<p>
+    <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
+    <img height="45" style="margin: 0 0 5px 20px; float: right;" src="/docs/play-market.svg"></a>
+    <a href="https://appgallery.huawei.ru/#/app/C109625991">
+    <img height="45" style="margin: 0 0 5px 20px; float: right;" src="/docs/app-gallery.svg"></a>
+    <a href="https://www.rustore.ru/catalog/app/com.developer.valyutaapp">
+    <img height="45" style="margin: 0 0 5px 20px; float: right; background-color:white;" src="/docs/rustore.svg" ></a>
+</p>
 
 ## Курсы валют Таджикистана
 

@@ -1,4 +1,4 @@
-package com.developer.currency.core.network
+package com.developer.ui.network
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

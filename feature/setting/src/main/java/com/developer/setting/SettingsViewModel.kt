@@ -3,6 +3,7 @@ package com.developer.setting
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import com.developer.common.AppVersion
+import com.developer.common.MarketUrl
 import com.developer.datastore.boolean
 import com.developer.datastore.string
 import com.developer.domain.AppSettings
@@ -13,7 +14,8 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     private val preference: SharedPreferences,
     private val appSettings: AppSettings,
-    @AppVersion val appVersion: String
+    @AppVersion val appVersion: String,
+    @MarketUrl val marketUrl: String
 ) : ViewModel() {
     var authUpdate by preference.string()
     var theme by preference.boolean()

@@ -14,3 +14,12 @@ sealed interface Result<out T> {
 fun <T> Flow<T>.asResult(): Flow<Result<T>> = map<T, Result<T>> { Result.Success(it) }
     .onStart { emit(Result.Loading) }
     .catch { emit(Result.Error(it)) }
+
+enum class HttpResult {
+    NO_CONNECTION,
+    TIMEOUT,
+    CLIENT_ERROR,
+    BAD_RESPONSE,
+    SERVER_ERROR,
+    NOT_DEFINED,
+}

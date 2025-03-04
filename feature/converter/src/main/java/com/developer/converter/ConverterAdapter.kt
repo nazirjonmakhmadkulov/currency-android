@@ -10,8 +10,9 @@ import com.developer.designsystem.base.ItemBase
 import com.developer.designsystem.databinding.ItemConverterBinding
 import com.developer.designsystem.icons.getImageRes
 import com.developer.domain.model.Currency
+import timber.log.Timber
 
-class ConverterAdapter(private val onItemChange: (Int, String, String) -> Unit) :
+class ConverterAdapter(private val onItemChange: (Int, String, Int, String) -> Unit) :
     ItemBase<ItemConverterBinding, Currency> {
     override fun isRelativeItem(item: Item): Boolean = item is Currency
     override fun getLayoutId() = R.layout.item_converter
@@ -33,19 +34,19 @@ class ConverterAdapter(private val onItemChange: (Int, String, String) -> Unit) 
 
     inner class FavoriteViewHolder(
         binding: ItemConverterBinding,
-        private val onItemChange: (Int, String, String) -> Unit
+        private val onItemChange: (Int, String, Int, String) -> Unit
     ) : BaseViewHolder<ItemConverterBinding, Currency>(binding) {
         override fun onBind(item: Currency) = with(binding) {
             super.onBind(item)
             moneyConvert.doOnTextChanged { text, _, _, _ ->
                 try {
-                    onItemChange(item.id, text.toString(), item.value)
+                    onItemChange(item.id, text.toString(), item.nominal, item.value)
                 } catch (e: NumberFormatException) {
-//                    Timber.e("NumberFormatException $e")
+                    Timber.e("NumberFormatException $e")
                 }
             }
-            moneyConvert.setOnFocusChangeListener { v, hasFocus ->
-                if (hasFocus) onItemChange(item.id, "0.0", "0.0")
+            moneyConvert.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) onItemChange(item.id, "0.0", 0, "0.0")
                 else {
                     binding.moneyConvert.setText("")
                     binding.moneyConvert.hint = "0.0"

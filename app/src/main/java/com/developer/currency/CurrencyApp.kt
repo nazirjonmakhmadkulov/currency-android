@@ -3,6 +3,7 @@ package com.developer.currency
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
+import android.provider.Settings
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import com.developer.domain.AppSettings

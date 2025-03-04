@@ -1,11 +1,14 @@
 package com.developer.setting
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
@@ -59,11 +62,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun goToAppMarket() {
-//        try {
-//            startActivity(Intent(Intent.ACTION_VIEW, MARKET_URL.toUri()))
-//        } catch (_: ActivityNotFoundException) {
-//            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_URL)))
-//        }
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, viewModel.marketUrl.toUri()))
+        } catch (_: ActivityNotFoundException) {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.marketUrl)))
+        }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

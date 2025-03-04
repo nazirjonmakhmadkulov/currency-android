@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Gravity
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,13 +19,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.common.PATH_EXP
 import com.developer.common.Utils
 import com.developer.common.Utils.setStatusBar
-import com.developer.currency.core.network.NetworkStatus
-import com.developer.currency.core.network.NetworkStatusViewModel
 import com.developer.currency.databinding.ActivityMainBinding
 import com.developer.designsystem.getActionBarHeight
 import com.developer.designsystem.getScreenWidth
 import com.developer.designsystem.getStatusBarHeight
 import com.developer.designsystem.launchAndCollectIn
+import com.developer.ui.network.NetworkStatus
+import com.developer.ui.network.NetworkStatusViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.yandex.mobile.ads.banner.BannerAdSize
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         const val UNIT_ID1 = "R-M-2277119-1"
         const val UNIT_ID2 = "R-M-2277119-2"
     }
+
 
     private val pushNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->

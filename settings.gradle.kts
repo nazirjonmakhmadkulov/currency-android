@@ -39,6 +39,7 @@ include(":core:network")
 include(":core:designsystem")
 include(":core:navigation")
 include(":core:notification")
+include(":core:ui")
 
 include(":feature:home")
 include(":feature:favorite")
