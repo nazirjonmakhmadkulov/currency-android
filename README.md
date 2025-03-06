@@ -4,9 +4,11 @@
 
 <p>
     <a href="https://play.google.com/store/apps/details?id=com.developer.valyutaapp">
-    <img height="45" style="margin: 0 0 5px 20px; float: right;" src="/docs/play-market.png"></a>   
+    <img height="45" style="margin: 0 0 5px 20px; float: right;" src="/docs/play-market.svg"></a>
     <a href="https://appgallery.huawei.ru/#/app/C109625991">
-    <img height="45" style="margin: 0 0 5px 20px; float: right;" src="/docs/app-gallery.png"></a>
+    <img height="45" style="margin: 0 0 5px 20px; float: right;" src="/docs/app-gallery.svg"></a>
+    <a href="https://www.rustore.ru/catalog/app/com.developer.valyutaapp">
+    <img height="45" style="margin: 0 0 5px 20px; float: right; background-color:white;" src="/docs/rustore.svg" ></a>
 </p>
 
 ## Курсы валют Таджикистана

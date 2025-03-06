@@ -9,16 +9,16 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.developer.currency.R
-import com.developer.currency.core.utils.getImageRes
-import com.developer.currency.domain.entities.Valute
+import com.developer.designsystem.icons.getImageRes
+import com.developer.domain.model.Currency
 
 class DialogAdapter(
     private val context: Context,
-    private val valutes: MutableList<Valute>
+    private val currencies: MutableList<Currency>
 ) : BaseAdapter() {
-    override fun getCount(): Int = valutes.size
-    override fun getItem(i: Int): Any = valutes[i]
-    override fun getItemId(i: Int): Long = valutes[i].id.toLong()
+    override fun getCount(): Int = currencies.size
+    override fun getItem(i: Int): Any = currencies[i]
+    override fun getItemId(i: Int): Long = currencies[i].id.toLong()
 
     @Suppress("NAME_SHADOWING")
     @SuppressLint("ViewHolder")
@@ -27,9 +27,9 @@ class DialogAdapter(
         val view = inflater.inflate(R.layout.dialog_item, viewGroup, false)
         val icon = view.findViewById<ImageView>(R.id.img_flag)
         val txName = view.findViewById<TextView>(R.id.name_currency)
-        val drawable = context.getImageRes(valutes[i].charCode)
+        val drawable = context.getImageRes(currencies[i].charCode)
         icon.setImageDrawable(drawable)
-        txName.text = valutes[i].name
+        txName.text = currencies[i].name
         return view
     }
 }

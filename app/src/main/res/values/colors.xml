@@ -13,21 +13,4 @@
 
     <color name="teal_20">#802196F3</color>
     <color name="teal_70">#80018786</color>
-
-    <color name="surface_color">#CC333333</color>
-    <color name="black">#E8545B61</color>
-    <color name="white">#FFFFFFFF</color>
-
-    <color name="black_second">#B1B1B1</color>
-
-    <color name="color_back">#E2CBDCEA</color>
-    <color name="text">#404040</color>
-
-    <color name="peach">#FFEB4F5A</color>
-
-    <color name="btn_change">#71358dc4</color>
-    <color name="btn_clean">#71c43548</color>
-    <color name="btn_nbt">#79121111</color>
-    <color name="background_dark">#80008AE6</color>
-    <color name="background_light">#E6008AE6</color>
 </resources>

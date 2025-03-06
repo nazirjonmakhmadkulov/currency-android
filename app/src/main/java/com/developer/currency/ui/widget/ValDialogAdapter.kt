@@ -4,38 +4,38 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.developer.common.Item
 import com.developer.currency.R
-import com.developer.currency.core.base.BaseViewHolder
-import com.developer.currency.core.base.Item
-import com.developer.currency.core.base.ItemBase
-import com.developer.currency.core.utils.getImageRes
 import com.developer.currency.databinding.DialogItemBinding
-import com.developer.currency.domain.entities.Valute
+import com.developer.designsystem.base.BaseViewHolder
+import com.developer.designsystem.base.ItemBase
+import com.developer.designsystem.icons.getImageRes
+import com.developer.domain.model.Currency
 
-class ValDialogAdapter(private val onItemValuteClick: (Valute) -> Unit) : ItemBase<DialogItemBinding, Valute> {
-    override fun isRelativeItem(item: Item): Boolean = item is Valute
+class ValDialogAdapter(private val onItemValuteClick: (Currency) -> Unit) : ItemBase<DialogItemBinding, Currency> {
+    override fun isRelativeItem(item: Item): Boolean = item is Currency
     override fun getLayoutId() = R.layout.item_valute
     override fun getViewHolder(layoutInflater: LayoutInflater, parent: ViewGroup):
-        BaseViewHolder<DialogItemBinding, Valute> {
+        BaseViewHolder<DialogItemBinding, Currency> {
         val binding = DialogItemBinding.inflate(layoutInflater, parent, false)
         return ValuteViewHolder(binding, onItemValuteClick)
     }
 
     override fun getDiffUtil() = diffUtil
-    private val diffUtil = object : DiffUtil.ItemCallback<Valute>() {
-        override fun areItemsTheSame(oldItem: Valute, newItem: Valute) = oldItem.id == newItem.id
-        override fun areContentsTheSame(oldItem: Valute, newItem: Valute) = oldItem == newItem
+    private val diffUtil = object : DiffUtil.ItemCallback<Currency>() {
+        override fun areItemsTheSame(oldItem: Currency, newItem: Currency) = oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: Currency, newItem: Currency) = oldItem == newItem
     }
 
-    inner class ValuteViewHolder(binding: DialogItemBinding, val onItemValuteClick: (Valute) -> Unit) :
-        BaseViewHolder<DialogItemBinding, Valute>(binding) {
+    inner class ValuteViewHolder(binding: DialogItemBinding, val onItemValuteClick: (Currency) -> Unit) :
+        BaseViewHolder<DialogItemBinding, Currency>(binding) {
         init {
             binding.itemDialog.setOnClickListener {
-                if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
+                if (layoutPosition == RecyclerView.NO_POSITION) return@setOnClickListener
                 onItemValuteClick(item)
             }
         }
-        override fun onBind(item: Valute) = with(binding) {
+        override fun onBind(item: Currency) = with(binding) {
             super.onBind(item)
             val drawable = root.context.getImageRes(item.charCode)
             this.imgFlag.setImageDrawable(drawable)
