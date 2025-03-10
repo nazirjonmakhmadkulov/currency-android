@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Gravity
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -114,7 +113,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun setupViewModel() {
-        viewModel.getRemoteValutes(Utils.getDate(), PATH_EXP)
+        viewModel.getRemoteCurrencies(Utils.getDate(), PATH_EXP)
         networkStatusViewModel.state.launchAndCollectIn(this) {
             when (it) {
                 NetworkStatus.Available -> snackBar?.dismiss()

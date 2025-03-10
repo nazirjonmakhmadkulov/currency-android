@@ -22,28 +22,32 @@ class CurrencyRemoteRepositoryImpl @Inject constructor(
 ) : CurrencyRemoteRepository {
 
     override suspend fun getCurrencies(date: String, exp: String): List<Currency> {
-        val result = currencyRemoteDataSource.getRemoteValutes(date, exp)
-        result.second.forEach { insertAndUpdateValute(result.first, it.toEntity()) }
-        return currencyDao.getFavoritesCurrencies().map { it.map { it.toModel() } }.first()
+        return try {
+            val result = currencyRemoteDataSource.getRemoteValutes(date, exp)
+            result.second.forEach { insertAndUpdateCurrency(result.first, it.toEntity()) }
+            currencyDao.getFavoritesCurrencies().map { it.map { it.toModel() } }.first()
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 
-    private suspend fun insertAndUpdateValute(dates: String, valute: CurrencyEntity) {
-        valute.dates = getDateFormat(dates)
-        if (currencyDao.isCurrencyExist(valute.valId)) {
+    private suspend fun insertAndUpdateCurrency(dates: String, currencyEntity: CurrencyEntity) {
+        currencyEntity.dates = getDateFormat(dates)
+        if (currencyDao.isCurrencyExist(currencyEntity.valId)) {
             currencyDao.updateCurrency(
-                valute.charCode,
-                valute.nominal,
-                valute.name,
-                valute.value,
-                valute.dates,
-                valute.valId
+                currencyEntity.charCode,
+                currencyEntity.nominal,
+                currencyEntity.name,
+                currencyEntity.value,
+                currencyEntity.dates,
+                currencyEntity.valId
             )
         } else {
-            if (valute.valId == 840 || valute.valId == 978 || valute.valId == 810) {
-                valute.favoritesValute = 1
-                valute.favoritesConverter = 1
+            if (currencyEntity.valId == 840 || currencyEntity.valId == 978 || currencyEntity.valId == 810) {
+                currencyEntity.favoritesValute = 1
+                currencyEntity.favoritesConverter = 1
             }
-            currencyDao.insertCurrency(valute)
+            currencyDao.insertCurrency(currencyEntity)
         }
     }
 
