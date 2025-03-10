@@ -10,7 +10,7 @@ class CurrencyUseCase @Inject constructor(
     private val currencyLocalRepository: CurrencyLocalRepository
 ) {
     // remote
-    suspend fun getRemoteValutes(date: String, exp: String) = currencyRemoteRepository.getCurrencies(date, exp)
+    suspend fun getRemoteCurrencies(date: String, exp: String) = currencyRemoteRepository.getCurrencies(date, exp)
 
     // local
     fun getLocalCurrencies() = currencyLocalRepository.getLocalCurrencies()
