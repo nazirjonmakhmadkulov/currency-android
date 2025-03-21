@@ -151,5 +151,4 @@ dependencies {
 
     // Shimmer
     implementation(libs.shimmer)
-    androidTestImplementation(libs.junit.junit)
 }
