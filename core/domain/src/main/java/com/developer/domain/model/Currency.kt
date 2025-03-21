@@ -10,6 +10,6 @@ data class Currency(
     val name: String = "",
     val value: String = "",
     val dates: String = "",
-    var favoritesValute: Int = 0,
-    var favoritesConverter: Int = 0
+    var favorite: Int = 0,
+    var converter: Int = 0
 ): Item

@@ -8,8 +8,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val currencyUseCase: CurrencyUseCase) : ViewModel() {
-    fun getRemoteCurrencies(date: String, exp: String) = viewModelScope.launch {
-        currencyUseCase.getRemoteCurrencies(date, exp)
+class MainViewModel
+    @Inject
+    constructor(
+        private val currencyUseCase: CurrencyUseCase,
+    ) : ViewModel() {
+        fun getRemoteCurrencies(
+            date: String,
+            exp: String,
+        ) = viewModelScope.launch {
+            currencyUseCase.getRemoteCurrencies(date, exp)
+        }
     }
-}

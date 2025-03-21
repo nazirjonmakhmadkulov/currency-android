@@ -41,15 +41,15 @@ class FavoriteAdapter(
             val drawable = root.context.getImageRes(item.charCode)
             iconValute.setImageDrawable(drawable)
             if (type == FAVORITE_CONVERTER) {
-                favorite.setFavorites(item.favoritesConverter)
+                favorite.setFavorites(item.converter)
                 favorite.setOnClickListener {
-                    item.favoritesConverter = if (item.favoritesConverter == 1) 0 else 1
+                    item.converter = if (item.converter == 1) 0 else 1
                     onItemCurrencyClick(item, layoutPosition)
                 }
             } else {
-                favorite.setFavorites(item.favoritesValute)
+                favorite.setFavorites(item.favorite)
                 favorite.setOnClickListener {
-                    item.favoritesValute = if (item.favoritesValute == 1) 0 else 1
+                    item.favorite = if (item.favorite == 1) 0 else 1
                     onItemCurrencyClick(item, layoutPosition)
                 }
             }

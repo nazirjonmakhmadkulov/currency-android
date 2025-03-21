@@ -25,9 +25,10 @@ android {
         multiDexEnabled = true
     }
 
-    val prop = Properties().apply {
-        load(FileInputStream(File(rootProject.rootDir, "local.properties")))
-    }
+    val prop =
+        Properties().apply {
+            load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+        }
 
     signingConfigs.create("release") {
         storeFile = file("store_key.jks")

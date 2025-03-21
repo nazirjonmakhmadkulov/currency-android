@@ -1,11 +1,11 @@
 package com.developer.data.mapping
 
-import com.developer.database.entities.HistoryEntity
 import com.developer.database.entities.CurrencyEntity
-import com.developer.domain.model.History
+import com.developer.database.entities.HistoryEntity
 import com.developer.domain.model.Currency
-import com.developer.network.model.HistoryDto
+import com.developer.domain.model.History
 import com.developer.network.model.CurrencyDto
+import com.developer.network.model.HistoryDto
 
 fun HistoryDto.toEntity() = HistoryEntity(
     dates = this.dates,
@@ -48,8 +48,8 @@ fun CurrencyEntity.toModel() = Currency(
     name = this.name,
     value = this.value,
     dates = this.dates,
-    favoritesValute = this.favoritesValute,
-    favoritesConverter = this.favoritesConverter,
+    favorite = this.favoritesValute,
+    converter = this.favoritesConverter,
 )
 
 fun Currency.toEntity() = CurrencyEntity(
@@ -60,6 +60,6 @@ fun Currency.toEntity() = CurrencyEntity(
     name = this.name,
     value = this.value,
     dates = this.dates,
-    favoritesValute = this.favoritesValute,
-    favoritesConverter = this.favoritesConverter,
+    favoritesValute = this.favorite,
+    favoritesConverter = this.converter,
 )

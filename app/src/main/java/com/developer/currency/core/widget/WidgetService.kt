@@ -13,13 +13,18 @@ import timber.log.Timber
 
 class WidgetService : Service() {
     private var pendingIntent: PendingIntent? = null
+
     override fun onBind(intent: Intent): IBinder? {
         return null
     }
 
     override fun onCreate() {}
 
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+    override fun onStartCommand(
+        intent: Intent,
+        flags: Int,
+        startId: Int,
+    ): Int {
         Paper.init(this)
         val charCode = Paper.book().read<String>("charcode")
         val charCode2 = Paper.book().read<String>("charcode2")

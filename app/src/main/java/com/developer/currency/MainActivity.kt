@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         const val UNIT_ID2 = "R-M-2277119-2"
     }
 
-
     private val pushNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             Timber.d("Permission POST_NOTIFICATION isGranted:$granted")
@@ -87,9 +86,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun setupSnackBar() {
-        val snackBarNetwork = Snackbar
-            .make(this.viewBinding.root, getString(R.string.not_connected), Snackbar.LENGTH_INDEFINITE)
-            .setBackgroundTint(ContextCompat.getColor(this@MainActivity, R.color.peach))
+        val snackBarNetwork =
+            Snackbar
+                .make(this.viewBinding.root, getString(R.string.not_connected), Snackbar.LENGTH_INDEFINITE)
+                .setBackgroundTint(ContextCompat.getColor(this@MainActivity, R.color.peach))
         val view: View = snackBarNetwork.view
         val params: CoordinatorLayout.LayoutParams = view.layoutParams as CoordinatorLayout.LayoutParams
         params.gravity = Gravity.TOP

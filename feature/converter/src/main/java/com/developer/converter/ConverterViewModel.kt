@@ -27,7 +27,6 @@ class ConverterViewModel @Inject constructor(private val currencyUseCase: Curren
         currencyUseCase.getConverterLocalCurrencies()
             .onEach { _currencies.value = it }
 
-
     fun submitConverterInput(id: Int = 0, amount: Double,nominal: Int, value: Double) = viewModelScope.launch {
         val currentCurrencies = currencies.value
         if (currentCurrencies.isEmpty()) return@launch
