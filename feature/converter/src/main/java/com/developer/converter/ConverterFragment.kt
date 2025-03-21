@@ -72,7 +72,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         viewModel.foreignCurrencyState.launchAndCollectIn(viewLifecycleOwner) { items ->
             converterAdapter.submitList(items.toList())
         }
-        viewModel.nationalValuteState.launchAndCollectIn(viewLifecycleOwner) { items ->
+        viewModel.nationalCurrencyState.launchAndCollectIn(viewLifecycleOwner) { items ->
             viewBinding.convert.moneyConvert.hint = items
         }
     }
