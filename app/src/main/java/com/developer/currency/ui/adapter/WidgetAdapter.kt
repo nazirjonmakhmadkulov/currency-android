@@ -16,14 +16,20 @@ import com.developer.domain.model.Currency
 class WidgetAdapter(
     private val context: Context,
     private val currencies: MutableList<Currency>,
-    private val onItemValuteClick: (Currency, Int) -> Unit
+    private val onItemValuteClick: (Currency, Int) -> Unit,
 ) : BaseAdapter() {
     override fun getCount(): Int = currencies.size
+
     override fun getItem(i: Int): Any = currencies[i]
+
     override fun getItemId(i: Int): Long = currencies[i].id.toLong()
 
     @SuppressLint("MissingInflatedId", "ViewHolder")
-    override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {
+    override fun getView(
+        i: Int,
+        view: View,
+        viewGroup: ViewGroup,
+    ): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val v = inflater.inflate(R.layout.favorites_item, viewGroup, false)
         val linearLayout = v.findViewById<View>(R.id.item_dialog) as LinearLayout

@@ -14,15 +14,21 @@ import com.developer.domain.model.Currency
 
 class DialogAdapter(
     private val context: Context,
-    private val currencies: MutableList<Currency>
+    private val currencies: MutableList<Currency>,
 ) : BaseAdapter() {
     override fun getCount(): Int = currencies.size
+
     override fun getItem(i: Int): Any = currencies[i]
+
     override fun getItemId(i: Int): Long = currencies[i].id.toLong()
 
     @Suppress("NAME_SHADOWING")
     @SuppressLint("ViewHolder")
-    override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {
+    override fun getView(
+        i: Int,
+        view: View,
+        viewGroup: ViewGroup,
+    ): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.dialog_item, viewGroup, false)
         val icon = view.findViewById<ImageView>(R.id.img_flag)

@@ -12,13 +12,19 @@ import com.developer.currency.R
 
 open class AppWidget : AppWidgetProvider() {
     private var pendingIntent: PendingIntent? = null
-    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+
+    override fun onUpdate(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray,
+    ) {
         val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, WidgetService::class.java)
         if (pendingIntent == null) {
-            pendingIntent = PendingIntent.getService(
-                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
+            pendingIntent =
+                PendingIntent.getService(
+                    context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                )
         }
         pendingIntent?.let {
             manager.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), 60000, it)
@@ -34,7 +40,10 @@ open class AppWidget : AppWidgetProvider() {
         return PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_MUTABLE)
     }
 
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(
+        context: Context,
+        intent: Intent,
+    ) {
         super.onReceive(context, intent)
     }
 

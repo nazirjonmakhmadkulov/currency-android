@@ -11,9 +11,11 @@ android {
 dependencies {
     implementation(projects.sync)
     implementation(libs.androidx.preference.ktx)
+
     // Jetpack WorkManager
-    ksp(libs.hilt.ext.compiler)
     implementation(libs.androidx.work.ktx)
     implementation(libs.hilt.ext.work)
+    ksp(libs.hilt.ext.compiler)
+
     implementation(libs.koin.androidx.workmanager)
 }

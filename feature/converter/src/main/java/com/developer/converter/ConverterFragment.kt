@@ -22,7 +22,7 @@ import timber.log.Timber
 class ConverterFragment : Fragment(R.layout.fragment_converter) {
     private val viewBinding by viewBinding(FragmentConverterBinding::bind)
     private val viewModel: ConverterViewModel by viewModels()
-    private var currencies: MutableList<Currency> = mutableListOf()
+    private val currencies: MutableList<Currency> = mutableListOf()
     private val converterAdapter: BaseAdapter = BaseAdapter(listOf(ConverterAdapter(::onItemChange)))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,7 +72,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         viewModel.foreignCurrencyState.launchAndCollectIn(viewLifecycleOwner) { items ->
             converterAdapter.submitList(items.toList())
         }
-        viewModel.nationalValuteState.launchAndCollectIn(viewLifecycleOwner) { items ->
+        viewModel.nationalCurrencyState.launchAndCollectIn(viewLifecycleOwner) { items ->
             viewBinding.convert.moneyConvert.hint = items
         }
     }

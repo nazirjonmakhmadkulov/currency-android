@@ -15,7 +15,7 @@ import com.developer.favorite.databinding.FavoritesItemBinding
 
 class FavoriteAdapter(
     private val type: String?,
-    private val onItemValuteClick: (Currency, Int) -> Unit
+    private val onItemCurrencyClick: (Currency, Int) -> Unit
 ) : ItemBase<FavoritesItemBinding, Currency> {
     override fun isRelativeItem(item: Item): Boolean = item is Currency
     override fun getLayoutId() = R.layout.item_valute
@@ -23,7 +23,7 @@ class FavoriteAdapter(
         layoutInflater: LayoutInflater, parent: ViewGroup
     ): BaseViewHolder<FavoritesItemBinding, Currency> {
         val binding = FavoritesItemBinding.inflate(layoutInflater, parent, false)
-        return FavoriteViewHolder(binding, onItemValuteClick)
+        return FavoriteViewHolder(binding, onItemCurrencyClick)
     }
 
     override fun getDiffUtil() = diffUtil
@@ -34,24 +34,23 @@ class FavoriteAdapter(
 
     inner class FavoriteViewHolder(
         binding: FavoritesItemBinding,
-        val onItemValuteClick: (Currency, Int) -> Unit
+        val onItemCurrencyClick: (Currency, Int) -> Unit
     ) : BaseViewHolder<FavoritesItemBinding, Currency>(binding) {
         override fun onBind(item: Currency) = with(binding) {
             super.onBind(item)
             val drawable = root.context.getImageRes(item.charCode)
             iconValute.setImageDrawable(drawable)
             if (type == FAVORITE_CONVERTER) {
-                favorite.setFavorites(item.favoritesConverter)
+                favorite.setFavorites(item.converter)
                 favorite.setOnClickListener {
-                    item.favoritesConverter = if (item.favoritesConverter == 1) 0 else 1
-                    onItemValuteClick(item, layoutPosition)
+                    item.converter = if (item.converter == 1) 0 else 1
+                    onItemCurrencyClick(item, layoutPosition)
                 }
             } else {
-                favorite.setFavorites(item.favoritesValute)
+                favorite.setFavorites(item.favorite)
                 favorite.setOnClickListener {
-                    item.favoritesValute = if (item.favoritesValute == 1) 0 else 1
-                    onItemValuteClick(item, layoutPosition)
-                    println("onItemValuteClick $item, $layoutPosition")
+                    item.favorite = if (item.favorite == 1) 0 else 1
+                    onItemCurrencyClick(item, layoutPosition)
                 }
             }
             nameValute.text = item.name

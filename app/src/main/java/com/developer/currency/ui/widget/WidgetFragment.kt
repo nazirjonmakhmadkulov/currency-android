@@ -12,8 +12,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.common.Item
 import com.developer.common.Utils
 import com.developer.currency.R
-import com.developer.designsystem.base.BaseAdapter
 import com.developer.currency.databinding.FragmentWidgetBinding
+import com.developer.designsystem.base.BaseAdapter
 import com.developer.domain.model.Currency
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.paperdb.Paper
@@ -31,16 +31,20 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
     }
     private val valCursAdapter: BaseAdapter = BaseAdapter(listOf(ValDialogAdapter(::onItemValute)))
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
         setupViewModel()
         viewBinding.iconValute1.setOnClickListener { dialogValutes() }
     }
 
-    private fun setupToolbar() = with(viewBinding) {
-        toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-    }
+    private fun setupToolbar() =
+        with(viewBinding) {
+            toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        }
 
     private fun setupViewModel() {
 //        viewModel.getLocalValutes().launchAndCollectIn(viewLifecycleOwner, Lifecycle.State.STARTED) { valutes ->
@@ -53,21 +57,23 @@ class WidgetFragment : Fragment(R.layout.fragment_widget) {
         this.currencies.addAll(currencies.toMutableList())
     }
 
-    private fun setWidgetData() = with(viewBinding) {
-        val decimalFormat = DecimalFormat("#.####")
-        val decimal = decimalFormat.format(tvValue.text.toString().toDouble())
-        val value = if (tvNominal.text.toString().length < 3) {
-            decimalFormat.format(tvNominal.text.toString().toDouble())
-        } else {
-            tvNominal.text.toString()
+    private fun setWidgetData() =
+        with(viewBinding) {
+            val decimalFormat = DecimalFormat("#.####")
+            val decimal = decimalFormat.format(tvValue.text.toString().toDouble())
+            val value =
+                if (tvNominal.text.toString().length < 3) {
+                    decimalFormat.format(tvNominal.text.toString().toDouble())
+                } else {
+                    tvNominal.text.toString()
+                }
+            Paper.init(requireContext())
+            Paper.book().write("charcode", name1.text)
+            Paper.book().write("charcode2", name2.text)
+            Paper.book().write("nominal", value)
+            Paper.book().write("value", decimal.toString())
+            Paper.book().write("dat", Utils.getDate())
         }
-        Paper.init(requireContext())
-        Paper.book().write("charcode", name1.text)
-        Paper.book().write("charcode2", name2.text)
-        Paper.book().write("nominal", value)
-        Paper.book().write("value", decimal.toString())
-        Paper.book().write("dat", Utils.getDate())
-    }
 
     private fun dialogValutes() {
         val materialAlertDialogBuilder = MaterialAlertDialogBuilder(requireContext())
