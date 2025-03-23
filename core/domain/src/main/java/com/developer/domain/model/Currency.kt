@@ -9,6 +9,7 @@ data class Currency(
     val nominal: Int = 0,
     val name: String = "",
     val value: String = "",
+    val value2: String = "",
     val dates: String = "",
     var favorite: Int = 0,
     var converter: Int = 0

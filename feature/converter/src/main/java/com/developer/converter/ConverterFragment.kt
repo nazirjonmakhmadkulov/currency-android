@@ -22,7 +22,6 @@ import timber.log.Timber
 class ConverterFragment : Fragment(R.layout.fragment_converter) {
     private val viewBinding by viewBinding(FragmentConverterBinding::bind)
     private val viewModel: ConverterViewModel by viewModels()
-    private val currencies: MutableList<Currency> = mutableListOf()
     private val converterAdapter: BaseAdapter = BaseAdapter(listOf(ConverterAdapter(::onItemChange)))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +52,7 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
         }
         viewBinding.convert.moneyConvert.doOnTextChanged { text, _, _, _ ->
             try {
-                if (text.isNullOrEmpty()) viewModel.submitConverterInput(0, 0.0, 1, 0.0)
+                if (text.isNullOrEmpty()) viewModel.submitConverterInput(0, 0.0, 0, 0.0)
                 else viewModel.submitConverterInput(0, text.toString().toDouble(), 1, 0.0)
             } catch (e: NumberFormatException) {
                 Timber.e("NumberFormatException $e")
@@ -68,18 +67,17 @@ class ConverterFragment : Fragment(R.layout.fragment_converter) {
     }
 
     private fun setupViewModel() {
-        viewModel.getConverterLocalCurrencies().launchAndCollectIn(viewLifecycleOwner) { setCurrencies(it) }
+        viewModel.currencies.launchAndCollectIn(viewLifecycleOwner) { setCurrencies(it) }
         viewModel.foreignCurrencyState.launchAndCollectIn(viewLifecycleOwner) { items ->
             converterAdapter.submitList(items.toList())
         }
-        viewModel.nationalCurrencyState.launchAndCollectIn(viewLifecycleOwner) { items ->
-            viewBinding.convert.moneyConvert.hint = items
+        viewModel.nationalCurrencyState.launchAndCollectIn(viewLifecycleOwner) { item ->
+            viewBinding.convert.moneyConvert.text?.clear()
+            viewBinding.convert.moneyConvert.hint = item
         }
     }
 
-    private fun setCurrencies(currency: List<Currency>) {
-        this.currencies.clear()
-        this.currencies.addAll(currency)
+    private fun setCurrencies(currencies: List<Currency>) {
         converterAdapter.submitList(currencies.toList())
         viewBinding.convert.cardId.isVisible = currencies.isNotEmpty()
     }

@@ -47,6 +47,7 @@ fun CurrencyEntity.toModel() = Currency(
     nominal = this.nominal,
     name = this.name,
     value = this.value,
+    value2 = this.value,
     dates = this.dates,
     favorite = this.favoritesValute,
     converter = this.favoritesConverter,
