@@ -40,7 +40,7 @@ class ConverterAdapter(private val onItemChange: (Int, String, Int, String) -> U
             super.onBind(item)
             moneyConvert.doOnTextChanged { text, _, _, _ ->
                 try {
-                    onItemChange(item.id, text.toString(), item.nominal, item.value)
+                    onItemChange(item.id, text.toString(), item.nominal, item.value2)
                 } catch (e: NumberFormatException) {
                     Timber.e("NumberFormatException $e")
                 }

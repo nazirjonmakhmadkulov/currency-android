@@ -41,12 +41,6 @@ object Utils {
         return parser.format(formatter.parse(date)!!)
     }
 
-    fun decFormat(cost: Double): String {
-        val dec = DecimalFormat("#.###")
-        dec.roundingMode = RoundingMode.CEILING
-        return dec.format(cost)
-    }
-
     @Suppress("DEPRECATION")
     fun setStatusBar(window: Window) {
         setWindowFlag(window, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
@@ -58,4 +52,10 @@ object Utils {
         winParams.flags = if (on) winParams.flags or bits else winParams.flags and bits.inv()
         window.attributes = winParams
     }
+}
+
+fun Double.format(): String {
+    val dec = DecimalFormat("#.####")
+    dec.roundingMode = RoundingMode.CEILING
+    return dec.format(this)
 }
