@@ -18,17 +18,16 @@ android {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
         targetSdk = 35
-        versionCode = 25
-        versionName = "2.6.4"
+        versionCode = 26
+        versionName = "2.6.5"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }
 
-    val prop =
-        Properties().apply {
-            load(FileInputStream(File(rootProject.rootDir, "local.properties")))
-        }
+    val prop = Properties().apply {
+        load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+    }
 
     signingConfigs.create("release") {
         storeFile = file("store_key.jks")
