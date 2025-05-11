@@ -12,6 +12,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -39,10 +42,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val networkStatusViewModel: NetworkStatusViewModel by viewModels()
     private var snackBar: Snackbar? = null
 
-    companion object {
-        const val UNIT_ID1 = "R-M-2277119-1"
-        const val UNIT_ID2 = "R-M-2277119-2"
-    }
+    private val unitId1 = "R-M-2277119-1"
+    private val unitId2 = "R-M-2277119-2"
 
     private val pushNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -56,6 +57,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar(window)
+        ViewCompat.setOnApplyWindowInsetsListener(viewBinding.container) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
+            insets
+        }
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_main)
         val navController = navHostFragment?.findNavController()
         val bottomNavView: BottomNavigationView = viewBinding.bottomNavigation
@@ -64,17 +70,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setupSnackBar()
         setupViewModel()
 
-        navController?.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.navigation_home, R.id.navigation_currencies -> setupAds(UNIT_ID1)
-                R.id.navigation_converter, R.id.navigation_settings -> setupAds(UNIT_ID2)
-            }
+        viewModel.startMinuteTicker()
+        viewModel.minuteChannel.launchAndCollectIn(this, Lifecycle.State.RESUMED) {
+            if (it) setupAds(unitId1) else setupAds(unitId2)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setupAds(UNIT_ID1)
     }
 
     private fun setupAds(unitId: String) {
