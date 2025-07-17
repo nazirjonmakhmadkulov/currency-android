@@ -13,20 +13,24 @@ plugins {
 }
 
 android {
-    compileSdk = 35
+    val prop = Properties().apply {
+        load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+    }
+    val unitId1 = prop["unitId1"] as? String ?: ""
+    val unitId2 = prop["unitId2"] as? String ?: ""
+
+    compileSdk = 36
     defaultConfig {
         applicationId = "com.developer.valyutaapp"
         minSdk = 21
-        targetSdk = 35
-        versionCode = 27
-        versionName = "2.6.6"
+        targetSdk = 36
+        versionCode = 28
+        versionName = "2.6.7"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
-    }
-
-    val prop = Properties().apply {
-        load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+        buildConfigField("String", "UNIT_ID1", unitId1)
+        buildConfigField("String", "UNIT_ID2", unitId2)
     }
 
     signingConfigs.create("release") {

@@ -9,6 +9,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -26,7 +27,8 @@ class MainViewModel @Inject constructor(
         while (true) {
             isCorrect = !isCorrect
             _minuteChannel.send(isCorrect)
-            delay(45_000L)
+            val randomDelay = Random.nextLong(30_000L, 60_000L)
+            delay(randomDelay)
         }
     }
 }

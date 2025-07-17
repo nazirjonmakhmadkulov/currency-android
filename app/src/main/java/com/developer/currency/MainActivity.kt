@@ -42,9 +42,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val networkStatusViewModel: NetworkStatusViewModel by viewModels()
     private var snackBar: Snackbar? = null
 
-    private val unitId1 = "R-M-2277119-1"
-    private val unitId2 = "R-M-2277119-2"
-
     private val pushNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             Timber.d("Permission POST_NOTIFICATION isGranted:$granted")
@@ -72,7 +69,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         viewModel.startMinuteTicker()
         viewModel.minuteChannel.launchAndCollectIn(this, Lifecycle.State.RESUMED) {
-            if (it) setupAds(unitId1) else setupAds(unitId2)
+            if (it) setupAds(BuildConfig.UNIT_ID1) else setupAds(BuildConfig.UNIT_ID2)
         }
     }
 
