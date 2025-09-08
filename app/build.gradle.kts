@@ -22,7 +22,7 @@ android {
     compileSdk = 36
     defaultConfig {
         applicationId = "com.developer.valyutaapp"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 36
         versionCode = 28
         versionName = "2.6.7"
@@ -128,6 +128,7 @@ dependencies {
     implementation(projects.core.navigation)
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.multidex)
     implementation(libs.androidx.preference.ktx)
