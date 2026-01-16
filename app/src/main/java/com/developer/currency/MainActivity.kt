@@ -13,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -56,11 +54,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setStatusBar(window)
-        ViewCompat.setOnApplyWindowInsetsListener(viewBinding.container) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
-            insets
-        }
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_main)
         val navController = navHostFragment?.findNavController()
         val bottomNavView: BottomNavigationView = viewBinding.bottomNavigation

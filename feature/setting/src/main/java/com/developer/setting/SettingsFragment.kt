@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.res.Configuration
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
@@ -65,7 +64,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         try {
             startActivity(Intent(Intent.ACTION_VIEW, viewModel.marketUrl.toUri()))
         } catch (_: ActivityNotFoundException) {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.marketUrl)))
+            startActivity(Intent(Intent.ACTION_VIEW, viewModel.marketUrl.toUri()))
         }
     }
 
@@ -94,12 +93,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         autoUpdate?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            if (autoUpdate?.isChecked == true) {
+            if (autoUpdate.isChecked) {
                 autoUpdate.isChecked = true
                 viewModel.authUpdate = "1"
                 Sync.initialize(requireContext())
             } else {
-                autoUpdate?.isChecked = false
+                autoUpdate.isChecked = false
                 viewModel.authUpdate = "0"
                 Sync.workerCancel(requireContext())
             }
@@ -117,11 +116,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     AppCompatDelegate.MODE_NIGHT_YES
                 )
             }
-            if (themeApp?.isChecked == true) {
+            if (themeApp.isChecked) {
                 themeApp.isChecked = true
                 viewModel.theme = true
             } else {
-                themeApp?.isChecked = false
+                themeApp.isChecked = false
                 viewModel.theme = false
             }
             requireActivity().recreate()

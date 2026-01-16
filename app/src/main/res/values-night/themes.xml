@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.Valute" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Valute" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/purple_50</item>
         <item name="colorPrimaryVariant">@color/purple_70</item>
         <item name="colorOnPrimary">@color/purple_70</item>
@@ -7,6 +7,7 @@
         <item name="colorSecondaryVariant">@color/teal_70</item>
         <item name="colorOnSecondary">@color/black</item>
         <item name="colorSurface">@color/surface_color</item>
+
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
@@ -14,6 +15,15 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="preferenceTheme">@style/Theme.PreferenceThemeOverlay</item>
         <item name="appBarLayoutStyle">@style/appBarLayout</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.SplashScreen">
+        <item name="postSplashScreenTheme">@style/Theme.Valute</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
+        <item name="windowSplashScreenBackground">@color/purple_700</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
     <style name="roundedImageViewRounded">
@@ -25,19 +35,11 @@
         <item name="android:background">@color/background_dark</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.SplashScreen">
-        <item name="postSplashScreenTheme">@style/Theme.Valute</item>
-        <item name="android:statusBarColor">@color/purple_700</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
-        <item name="windowSplashScreenAnimationDuration">1000</item>
-        <item name="windowSplashScreenBackground">@color/purple_700</item>
-        <item name="windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:navigationBarColor">@color/purple_700</item>
-    </style>
-
     <style name="Theme.PreferenceThemeOverlay" parent="PreferenceThemeOverlay">
         <item name="android:layout">@layout/fragment_setting</item>
+    </style>
+
+    <style name="bottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@android:color/background_dark</item>
     </style>
 </resources>
