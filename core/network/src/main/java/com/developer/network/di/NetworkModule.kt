@@ -25,9 +25,9 @@ internal object NetworkModule {
         httpInterceptor.level = HttpLoggingInterceptor.Level.BODY
         val okHttpClientBuilder = OkHttpClient.Builder()
             .addInterceptor(httpInterceptor).apply {
-                readTimeout(30, TimeUnit.SECONDS)
-                writeTimeout(30, TimeUnit.SECONDS)
-                connectTimeout(30, TimeUnit.SECONDS)
+                readTimeout(60, TimeUnit.SECONDS)
+                writeTimeout(60, TimeUnit.SECONDS)
+                connectTimeout(60, TimeUnit.SECONDS)
                 retryOnConnectionFailure(true)
             }
         return okHttpClientBuilder.build()

@@ -22,7 +22,6 @@ import com.developer.common.Utils
 import com.developer.common.Utils.setStatusBar
 import com.developer.currency.databinding.ActivityMainBinding
 import com.developer.designsystem.getActionBarHeight
-import com.developer.designsystem.getScreenWidth
 import com.developer.designsystem.getStatusBarHeight
 import com.developer.designsystem.launchAndCollectIn
 import com.developer.ui.network.NetworkStatus
@@ -33,6 +32,7 @@ import com.yandex.mobile.ads.banner.BannerAdSize
 import com.yandex.mobile.ads.common.AdRequest
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -40,6 +40,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val viewModel: MainViewModel by viewModels()
     private val networkStatusViewModel: NetworkStatusViewModel by viewModels()
     private var snackBar: Snackbar? = null
+
+    private val adSize: BannerAdSize
+        get() {
+            var adWidthPixels = viewBinding.adView.width
+            if (adWidthPixels == 0) adWidthPixels = resources.displayMetrics.widthPixels
+            val adWidth = (adWidthPixels / resources.displayMetrics.density).roundToInt()
+            return BannerAdSize.sticky(this, adWidth)
+        }
 
     private val pushNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -69,11 +77,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun setupAds(unitId: String) {
-        val mBannerAdView = viewBinding.adView
-        val adRequest: AdRequest = AdRequest.Builder().build()
-        mBannerAdView.setAdUnitId(unitId)
-        mBannerAdView.setAdSize(BannerAdSize.inlineSize(this, getScreenWidth(), 60))
-        mBannerAdView.loadAd(adRequest)
+        val adRequest: AdRequest = AdRequest.Builder(unitId).build()
+        viewBinding.adView.setAdSize(adSize)
+        viewBinding.adView.loadAd(adRequest)
     }
 
     private fun setupSnackBar() {
@@ -93,12 +99,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             when {
                 ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-                    == PackageManager.PERMISSION_GRANTED -> Timber.d("Permission POST_NOTIFICATION GRANTED")
+                    == PackageManager.PERMISSION_GRANTED -> {
+                    Timber.d("Permission POST_NOTIFICATION GRANTED")
+                }
 
-                shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) ->
+                shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
                     Timber.d("Permission POST_NOTIFICATION blocked")
+                }
 
-                else -> pushNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                else -> {
+                    pushNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
             }
         }
     }

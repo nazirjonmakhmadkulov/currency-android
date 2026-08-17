@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import com.developer.common.Item
 import com.developer.designsystem.base.BaseViewHolder
 import com.developer.designsystem.base.ItemBase
-import com.developer.designsystem.databinding.ItemConverterBinding
 import com.developer.designsystem.icons.getImageRes
 import com.developer.domain.model.Currency
+import com.developer.ui.databinding.ItemConverterBinding
 import timber.log.Timber
 
 class ConverterAdapter(private val onItemChange: (Int, String, Int, String) -> Unit) :

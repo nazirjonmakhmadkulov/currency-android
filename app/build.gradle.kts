@@ -13,17 +13,18 @@ plugins {
 }
 
 android {
-    val prop = Properties().apply {
-        load(FileInputStream(File(rootProject.rootDir, "local.properties")))
-    }
+    val prop =
+        Properties().apply {
+            load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+        }
     val unitId1 = prop["unitId1"] as? String ?: ""
     val unitId2 = prop["unitId2"] as? String ?: ""
 
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig {
         applicationId = "com.developer.valyutaapp"
         minSdk = 23
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 28
         versionName = "2.6.7"
         vectorDrawables.useSupportLibrary = true
@@ -101,12 +102,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_19
-        targetCompatibility = JavaVersion.VERSION_19
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlin.jvmToolchain(19)
-    kotlinOptions.jvmTarget = "19"
+    kotlin.jvmToolchain(17)
 
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
@@ -130,7 +130,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.multidex)
     implementation(libs.androidx.preference.ktx)
 
     implementation(libs.viewbinding.noreflection)

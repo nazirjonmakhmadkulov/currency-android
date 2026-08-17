@@ -10,25 +10,32 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.milliseconds
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    private val currencyUseCase: CurrencyUseCase,
-) : ViewModel() {
-    fun getRemoteCurrencies(date: String, exp: String) = viewModelScope.launch {
-        currencyUseCase.getRemoteCurrencies(date, exp)
-    }
-
-    private val _minuteChannel = Channel<Boolean>(Channel.CONFLATED)
-    val minuteChannel = _minuteChannel.receiveAsFlow()
-    private var isCorrect = false
-
-    fun startMinuteTicker() = viewModelScope.launch {
-        while (true) {
-            isCorrect = !isCorrect
-            _minuteChannel.send(isCorrect)
-            val randomDelay = Random.nextLong(30_000L, 60_000L)
-            delay(randomDelay)
+class MainViewModel
+    @Inject
+    constructor(
+        private val currencyUseCase: CurrencyUseCase,
+    ) : ViewModel() {
+        fun getRemoteCurrencies(
+            date: String,
+            exp: String,
+        ) = viewModelScope.launch {
+            currencyUseCase.getRemoteCurrencies(date, exp)
         }
+
+        private val _minuteChannel = Channel<Boolean>(Channel.CONFLATED)
+        val minuteChannel = _minuteChannel.receiveAsFlow()
+        private var isCorrect = false
+
+        fun startMinuteTicker() =
+            viewModelScope.launch {
+                while (true) {
+                    isCorrect = !isCorrect
+                    _minuteChannel.send(isCorrect)
+                    val randomDelay = Random.nextLong(30_000L, 60_000L)
+                    delay(randomDelay.milliseconds)
+                }
+            }
     }
-}

@@ -42,5 +42,6 @@ fun Context.getImageRes(img: String): Drawable? = when (img) {
     "MYR" -> ContextCompat.getDrawable(this, R.drawable.malaysia)
     "THB" -> ContextCompat.getDrawable(this, R.drawable.thailand)
     "MXN" -> ContextCompat.getDrawable(this, R.drawable.mexica)
+    "KRW" -> ContextCompat.getDrawable(this, R.drawable.south_korea)
     else -> ContextCompat.getDrawable(this, R.drawable.tajikistan)
 }

@@ -1,10 +1,8 @@
-import com.android.build.gradle.LibraryExtension
-import com.developer.currency.configureGradleManagedDevices
+
 import com.developer.currency.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 
 class AndroidFeatureConventionPlugin : Plugin<Project> {
@@ -13,11 +11,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             apply(plugin = "currency.android.library")
             apply(plugin = "currency.hilt")
             apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
-
-            extensions.configure<LibraryExtension> {
-                testOptions.animationsDisabled = true
-                configureGradleManagedDevices(this)
-            }
 
             dependencies {
                 "implementation"(project(":core:common"))

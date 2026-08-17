@@ -26,7 +26,7 @@ class CurrencyRemoteRepositoryImpl @Inject constructor(
             val result = currencyRemoteDataSource.getRemoteValutes(date, exp)
             result.second.forEach { insertAndUpdateCurrency(result.first, it.toEntity()) }
             currencyDao.getFavoritesCurrencies().map { it.map { it.toModel() } }.first()
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             emptyList()
         }
     }
@@ -52,8 +52,11 @@ class CurrencyRemoteRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getHistories(d1: String, d2: String, cn: Int, cs: String, exp: String) {
-        val result = currencyRemoteDataSource.getRemoteHistories(d1, d2, cn, cs, exp)
-        result.forEach { insertHistory(it.toEntity()) }
+        try {
+            val result = currencyRemoteDataSource.getRemoteHistories(d1, d2, cn, cs, exp)
+            result.forEach { insertHistory(it.toEntity()) }
+        } catch (_: Exception) {
+        }
     }
 
     private suspend fun insertHistory(history: HistoryEntity) {

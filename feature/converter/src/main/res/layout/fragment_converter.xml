@@ -44,15 +44,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingBottom="60dp"
+            android:paddingBottom="100dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </LinearLayout>
 
-<!--    <include-->
-<!--        android:id="@+id/shimmer_layout"-->
-<!--        layout="@layout/shimmer_layout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:visibility="gone" />-->
+    <!--    <include-->
+    <!--        android:id="@+id/shimmer_layout"-->
+    <!--        layout="@layout/shimmer_layout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:visibility="gone" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

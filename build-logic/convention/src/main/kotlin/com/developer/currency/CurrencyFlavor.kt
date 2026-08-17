@@ -4,6 +4,7 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.ApplicationProductFlavor
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.ProductFlavor
+import org.gradle.kotlin.dsl.invoke
 
 @Suppress("EnumEntryName")
 enum class FlavorDimension {
@@ -21,16 +22,16 @@ enum class CurrencyFlavor(val dimension: FlavorDimension, val applicationIdSuffi
 }
 
 fun configureFlavors(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
+    commonExtension: CommonExtension,
     flavorConfigurationBlock: ProductFlavor.(flavor: CurrencyFlavor) -> Unit = {},
 ) {
     commonExtension.apply {
-        FlavorDimension.values().forEach { flavorDimension ->
+        FlavorDimension.entries.forEach { flavorDimension ->
             flavorDimensions += flavorDimension.name
         }
 
         productFlavors {
-            CurrencyFlavor.values().forEach { currencyFlavor ->
+            CurrencyFlavor.entries.forEach { currencyFlavor ->
                 register(currencyFlavor.name) {
                     dimension = currencyFlavor.dimension.name
                     flavorConfigurationBlock(this, currencyFlavor)

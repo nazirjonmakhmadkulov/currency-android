@@ -8,6 +8,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.developer.common.Item
+import com.developer.common.PATH_EXP
+import com.developer.common.Utils
 import com.developer.currencies.databinding.FragmentCurrenciesBinding
 import com.developer.designsystem.base.BaseAdapter
 import com.developer.designsystem.launchAndCollectIn
@@ -35,6 +37,7 @@ class CurrenciesFragment : Fragment(R.layout.fragment_currencies) {
     private fun swipeRefresh() = with(viewBinding) {
         swipe.setColorSchemeResources(R.color.black_second)
         swipe.setOnRefreshListener {
+            viewModel.getRemoteCurrencies(Utils.getDate(), PATH_EXP)
             swipe.isRefreshing = false
         }
     }

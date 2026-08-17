@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.developer.designsystem"
+    namespace = "com.developer.ui"
     testOptions {
         unitTests {
             isIncludeAndroidResources = true

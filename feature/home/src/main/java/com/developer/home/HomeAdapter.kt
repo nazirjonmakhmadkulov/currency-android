@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.developer.common.Item
 import com.developer.designsystem.base.BaseViewHolder
 import com.developer.designsystem.base.ItemBase
-import com.developer.designsystem.databinding.ItemValuteBinding
 import com.developer.designsystem.icons.getImageRes
 import com.developer.domain.model.Currency
+import com.developer.ui.databinding.ItemValuteBinding
 
 class HomeAdapter(private val onItemValuteClick: (Currency) -> Unit) : ItemBase<ItemValuteBinding, Currency> {
     override fun isRelativeItem(item: Item): Boolean = item is Currency

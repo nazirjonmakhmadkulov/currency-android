@@ -11,12 +11,10 @@ import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginE
  * Configure Compose-specific options
  */
 internal fun Project.configureAndroidCompose(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
+    commonExtension: CommonExtension,
 ) {
     commonExtension.apply {
-        buildFeatures {
-            compose = true
-        }
+        buildFeatures.compose = true
 
         dependencies {
             val bom = libs.findLibrary("androidx-compose-bom").get()
@@ -25,18 +23,12 @@ internal fun Project.configureAndroidCompose(
             "implementation"(libs.findLibrary("androidx-compose-ui-tooling-preview").get())
             "debugImplementation"(libs.findLibrary("androidx-compose-ui-tooling").get())
         }
-
-        testOptions {
-            unitTests {
-                // For Robolectric
-                isIncludeAndroidResources = true
-            }
-        }
     }
 
     extensions.configure<ComposeCompilerGradlePluginExtension> {
         fun Provider<String>.onlyIfTrue() = flatMap { provider { it.takeIf(String::toBoolean) } }
         fun Provider<*>.relativeToRootProject(dir: String) = map {
+            @Suppress("UnstableApiUsage")
             isolated.rootProject.projectDirectory
                 .dir("build")
                 .dir(projectDir.toRelativeString(rootDir))
@@ -50,6 +42,7 @@ internal fun Project.configureAndroidCompose(
             .relativeToRootProject("compose-reports")
             .let(reportsDestination::set)
 
+        @Suppress("UnstableApiUsage")
         stabilityConfigurationFiles
             .add(isolated.rootProject.projectDirectory.file("compose_compiler_config.conf"))
     }
