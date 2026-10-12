@@ -23,7 +23,7 @@ android {
     compileSdk = 37
     defaultConfig {
         applicationId = "com.developer.valyutaapp"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 37
         versionCode = 31
         versionName = "2.6.9"

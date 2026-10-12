@@ -1,6 +1,5 @@
 package com.developer.setting
 
-import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.res.Configuration
@@ -30,11 +29,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
     @Inject
     lateinit var localeManager: LocaleManager
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
-        viewBinding.version.text = "Версия ${viewModel.appVersion}"
+        viewBinding.version.text = getString(R.string.version, viewModel.appVersion)
     }
 
     private fun setupToolbar() {

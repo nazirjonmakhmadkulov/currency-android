@@ -47,4 +47,6 @@
 
     <string name="share">Share</string>
     <string name="other">Other</string>
+
+    <string name="version">Version %1$s</string>
 </resources>

@@ -45,4 +45,6 @@
 
     <string name="share">Поделиться</string>
     <string name="other">Другие</string>
+
+    <string name="version">Версия %1$s</string>
 </resources>
