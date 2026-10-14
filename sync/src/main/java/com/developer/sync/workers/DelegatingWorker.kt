@@ -30,14 +30,12 @@ class DelegatingWorker(
     workerParams: WorkerParameters,
 ) : CoroutineWorker(appContext, workerParams) {
 
-    private val workerClassName =
-        workerParams.inputData.getString(WORKER_CLASS_NAME) ?: ""
+    private val workerClassName = workerParams.inputData.getString(WORKER_CLASS_NAME) ?: ""
 
-    private val delegateWorker =
-        EntryPointAccessors.fromApplication<HiltWorkerFactoryEntryPoint>(appContext)
-            .hiltWorkerFactory()
-            .createWorker(appContext, workerClassName, workerParams) as? CoroutineWorker
-            ?: throw IllegalArgumentException("Unable to find appropriate worker")
+    private val delegateWorker = EntryPointAccessors.fromApplication<HiltWorkerFactoryEntryPoint>(appContext)
+        .hiltWorkerFactory()
+        .createWorker(appContext, workerClassName, workerParams) as? CoroutineWorker
+        ?: throw IllegalArgumentException("Unable to find appropriate worker")
 
     override suspend fun getForegroundInfo(): ForegroundInfo = delegateWorker.getForegroundInfo()
 

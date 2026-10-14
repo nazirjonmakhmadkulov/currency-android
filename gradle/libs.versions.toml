@@ -43,6 +43,7 @@ ksp = "2.3.6"
 mobileads = "8.6.0"
 mpandroidchart = "v3.1.0"
 okhttp = "5.5.0"
+paperdb = "2.7.2"
 preferenceKtx = "1.2.1"
 protobuf = "4.36.2"
 retrofit = "3.0.0"
@@ -131,6 +132,7 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 mobileads = { module = "com.yandex.android:mobileads", version.ref = "mobileads" }
 mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+paperdb = { module = "io.github.pilgr:paperdb", version.ref = "paperdb" }
 protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }

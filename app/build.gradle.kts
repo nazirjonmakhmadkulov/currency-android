@@ -80,7 +80,7 @@ android {
             applicationId = "com.developer.valyutaapp"
         }
 
-//         Types:
+        // Types:
         create("prod") {
             dimension = "type"
         }
@@ -149,7 +149,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     // Widget
-    implementation("io.github.pilgr:paperdb:2.7.2")
+    implementation(libs.paperdb)
 
     implementation(libs.mobileads)
 

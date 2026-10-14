@@ -1,9 +1,6 @@
 
 import com.android.build.api.dsl.LibraryExtension
-import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.developer.currency.configureKotlinAndroid
-import com.developer.currency.configurePrintApksTask
-import com.developer.currency.disableUnnecessaryAndroidTests
 import com.developer.currency.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -27,10 +24,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 resourcePrefix =
                     path.split("""\W""".toRegex()).drop(1).distinct().joinToString(separator = "_")
                         .lowercase() + "_"
-            }
-            extensions.configure<LibraryAndroidComponentsExtension> {
-                configurePrintApksTask(this)
-                disableUnnecessaryAndroidTests(target)
             }
             dependencies {
                 "androidTestImplementation"(libs.findLibrary("kotlin.test").get())
